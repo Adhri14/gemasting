@@ -5,8 +5,8 @@ import {TextInput, Link, Button, Gap} from '../../components';
 
 const SignIn = ({label}) => {
   return (
-    <ScrollView>
-      <View style={styles.page}>
+    <View style={styles.page}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <ILLogo />
         <Text style={styles.title}>Masuk Akun</Text>
         <TextInput label="EmailAddress" />
@@ -18,8 +18,8 @@ const SignIn = ({label}) => {
         <Button text="SignIn" />
         <Gap height={30} />
         <Link title="Create New Account" size={16} align="center" />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
