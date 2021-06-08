@@ -28,7 +28,7 @@ const AppIntro = ({navigation}) => {
     {
       key: 3,
       title: 'Dummy Text',
-      text: 'Tidak hanya posyandu, kami juga\nmenyediakan berbagai fitur\nuntuk sang buah hati.',
+      text: 'Selain itu, kami menyediakan\nberbagai fitur untuk \nsang buah hati.',
       image: <ImageIntro3 style={styles.image} width={350} height={300} />,
     },
     {
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     fontSize: 45,
     fontWeight: 'bold',
     marginBottom: 20,
+    fontFamily: 'Nunito-Medium',
   },
   text: {
     fontSize: 20,
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
   indicatorContainer: {
     position: 'absolute',
     flexDirection: 'row',
-    bottom: '15%',
+    bottom: '5%',
     left: '8%',
     width: '40%',
     justifyContent: 'space-between',
@@ -172,9 +173,10 @@ const styles = StyleSheet.create({
     zIndex: 999,
     marginTop: 30,
     letterSpacing: 1,
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '700',
     textDecorationLine: 'underline',
+    fontFamily: 'Nunito-Regular',
   },
   btnBig: {
     width: 60,
@@ -183,7 +185,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 999,
     backgroundColor: 'white',
-    bottom: '12%',
+    bottom: '5%',
     justifyContent: 'center',
     alignItems: 'center',
     right: '8%',
