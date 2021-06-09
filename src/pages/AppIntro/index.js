@@ -1,5 +1,4 @@
-import React from 'react';
-import {useState, useRef} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   Dimensions,
   FlatList,
@@ -8,42 +7,81 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
-import {ImageIntro1, ImageIntro2, ImageIntro3} from '../../assets/Image';
+import {ImageIntro1, ImageIntro2, ImageIntro3, ImageIntro4} from '../../assets';
 
+const slides = [
+  {
+    key: 1,
+    title: 'Dummy Text',
+    text: 'Geser ke kiri untuk mengenal\nkami lebih lanjut',
+    image: (
+      <ImageIntro1
+        style={{
+          position: 'absolute',
+          top: '60%',
+        }}
+        width={350}
+        height={300}
+      />
+    ),
+  },
+  {
+    key: 2,
+    title: 'Dummy Text',
+    text: 'Kami adalah aplikasi posyandu\nterlengkap di Indonesia.',
+    image: (
+      <ImageIntro2
+        style={{
+          position: 'absolute',
+          top: '60%',
+        }}
+        width={350}
+        height={300}
+      />
+    ),
+  },
+  {
+    key: 3,
+    title: 'Dummy Text',
+    text: 'Selain itu, kami menyediakan\nberbagai fitur untuk \nsang buah hati.',
+    image: (
+      <ImageIntro3
+        style={{
+          position: 'absolute',
+          top: '60%',
+        }}
+        width={350}
+        height={300}
+      />
+    ),
+  },
+];
 const AppIntro = ({navigation}) => {
-  const slides = [
-    {
-      key: 1,
-      title: 'Dummy Text',
-      text: 'Geser ke kiri untuk mengenal\nkami lebih lanjut',
-      image: <ImageIntro1 style={styles.image} width={350} height={300} />,
-    },
-    {
-      key: 2,
-      title: 'Dummy Text',
-      text: 'Kami adalah aplikasi posyandu\nterlengkap di Indonesia.',
-      image: <ImageIntro2 style={styles.image} width={350} height={300} />,
-    },
-    {
-      key: 3,
-      title: 'Dummy Text',
-      text: 'Selain itu, kami menyediakan\nberbagai fitur untuk \nsang buah hati.',
-      image: <ImageIntro3 style={styles.image} width={350} height={300} />,
-    },
-    {
-      key: 4,
-      title: 'Dummy Text',
-      text: 'Aplikasi parenting milennial dengan\nkomunitas dari seluruh Indonesia.',
-      image: <ImageIntro3 style={styles.image} width={350} height={300} />,
-    },
-  ];
   const [currentSlide, setCurrentSlide] = useState(0);
   const onViewableItemsChanged = useRef(item => {
-    const index = item.viewableItems[0].item;
-    console.log(index);
+    const index = item.viewableItems[0].index;
     setCurrentSlide(index);
   });
+  const flatListRef = useRef();
+
+  const handleSkip = () => {
+    flatListRef.current.scrollToEnd({animated: true});
+  };
+
+  const handlePrev = () => {
+    if (currentSlide === 0) {
+      return false;
+    }
+    // console.log(currentSlide >= slides.length - 1);
+    flatListRef.current.scrollToIndex({index: currentSlide - 1});
+  };
+
+  const handleOnDone = () => {
+    Alert.alert('Ok bang Selesai');
+  };
+
   return (
     <>
       <StatusBar
@@ -51,11 +89,19 @@ const AppIntro = ({navigation}) => {
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-      <TouchableOpacity style={styles.btn}>
-        <Text style={styles.textBtn}>Prev</Text>
-      </TouchableOpacity>
-      <Text style={styles.skip}>Lewati</Text>
+      {currentSlide >= 1 && (
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={handlePrev}
+          style={styles.btn}>
+          <Text style={styles.textBtn}>Prev</Text>
+        </TouchableOpacity>
+      )}
+      <Text onPress={handleSkip} style={styles.skip}>
+        Lewati
+      </Text>
       <FlatList
+        ref={flatListRef}
         data={slides}
         horizontal
         pagingEnabled
@@ -82,9 +128,11 @@ const AppIntro = ({navigation}) => {
           />
         ))}
       </View>
-      <TouchableOpacity style={styles.btnBig}>
-        <Text style={styles.done}>Done</Text>
-      </TouchableOpacity>
+      {currentSlide >= 2 && (
+        <TouchableOpacity style={styles.btnBig} onPress={handleOnDone}>
+          <Text style={styles.done}>Done</Text>
+        </TouchableOpacity>
+      )}
     </>
   );
 };
@@ -116,10 +164,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  image: {
-    position: 'absolute',
-    top: '60%',
-  },
   title: {
     fontSize: 45,
     fontWeight: 'bold',
@@ -142,13 +186,14 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 20,
-    borderWidth: 1,
+    borderWidth: 2,
+    borderColor: '#fff',
   },
   indicatorActive: {
     width: 30,
     height: 10,
     borderRadius: 20,
-    borderWidth: 1,
+    backgroundColor: '#fff',
   },
   btn: {
     backgroundColor: 'grey',
@@ -185,7 +230,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 999,
     backgroundColor: 'white',
-    bottom: '5%',
+    bottom: '2%',
     justifyContent: 'center',
     alignItems: 'center',
     right: '8%',
