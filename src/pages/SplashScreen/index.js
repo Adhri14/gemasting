@@ -5,7 +5,7 @@ import {ILLogo} from '../../assets';
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('AppIntro');
+      navigation.replace('SignUp');
     }, 3000);
   }, []);
   return (
