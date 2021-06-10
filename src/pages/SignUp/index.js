@@ -1,7 +1,7 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button, Gap, Header, TextInput} from '../../components';
-import {colors} from '../../utils';
+import {colors, fonts} from '../../utils';
 
 const SignUp = () => {
   return (
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontFamily: 'Nunito-Medium',
+    fontFamily: fonts.primary[600],
     color: '#112340',
     marginTop: 40,
     marginBottom: 40,

@@ -2,6 +2,7 @@ import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {ILLogo} from '../../assets';
 import {TextInput, Link, Button, Gap} from '../../components';
+import {fonts} from '../../utils';
 
 const SignIn = ({label}) => {
   return (
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontFamily: 'Nunito-Medium',
+    fontFamily: fonts.primary[600],
     color: '#112340',
     marginTop: 40,
     marginBottom: 40,
