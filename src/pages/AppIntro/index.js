@@ -9,12 +9,8 @@ import {
   View,
   Alert,
 } from 'react-native';
-import {
-  ImageIntro1,
-  ImageIntro2,
-  ImageIntro3,
-  ImageIntro4,
-} from '../../assets/Image';
+import {ImageIntro1, ImageIntro2, ImageIntro3, ImageIntro4} from '../../assets';
+import {fonts} from '../../utils/fonts';
 
 const slides = [
   {
@@ -194,7 +190,7 @@ const styles = StyleSheet.create({
     fontSize: 45,
     fontWeight: 'bold',
     marginBottom: 20,
-    fontFamily: 'Nunito-Medium',
+    fontFamily: fonts.primary[600],
   },
   text: {
     fontSize: 20,
@@ -247,7 +243,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
     textDecorationLine: 'underline',
-    fontFamily: 'Nunito-Regular',
+    fontFamily: fonts.primary.normal,
   },
   btnBig: {
     width: 60,
