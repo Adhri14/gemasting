@@ -9,7 +9,12 @@ import {
   View,
   Alert,
 } from 'react-native';
-import {ImageIntro1, ImageIntro2, ImageIntro3, ImageIntro4} from '../../assets';
+import {
+  ImageIntro1,
+  ImageIntro2,
+  ImageIntro3,
+  ImageIntro4,
+} from '../../assets/Image';
 
 const slides = [
   {
@@ -57,14 +62,31 @@ const slides = [
       />
     ),
   },
+  // {
+  //   key: 4,
+  //   title: 'Dummy Text',
+  //   text: 'Selain itu, kami menyediakan\nberbagai fitur untuk \nsang buah hati.',
+  //   image: (
+  //     <ImageIntro4
+  //       style={{
+  //         position: 'absolute',
+  //         top: '60%',
+  //       }}
+  //       width={350}
+  //       height={300}
+  //     />
+  //   ),
+  // },
 ];
 const AppIntro = ({navigation}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const onViewableItemsChanged = useRef(item => {
-    const index = item.viewableItems[0].index;
+
+  const onViewableItemsChanged = useRef(({viewableItems}) => {
+    const index = viewableItems[0].index;
     setCurrentSlide(index);
-  });
-  const flatListRef = useRef();
+  }).current;
+
+  const flatListRef = useRef(null);
 
   const handleSkip = () => {
     flatListRef.current.scrollToEnd({animated: true});
@@ -97,15 +119,19 @@ const AppIntro = ({navigation}) => {
           <Text style={styles.textBtn}>Prev</Text>
         </TouchableOpacity>
       )}
-      <Text onPress={handleSkip} style={styles.skip}>
-        Lewati
-      </Text>
+      {currentSlide === 2 ? (
+        <Text style={styles.skip}>{''}</Text>
+      ) : (
+        <Text onPress={handleSkip} style={styles.skip}>
+          Lewati
+        </Text>
+      )}
       <FlatList
         ref={flatListRef}
         data={slides}
         horizontal
         pagingEnabled
-        onViewableItemsChanged={onViewableItemsChanged.current}
+        onViewableItemsChanged={onViewableItemsChanged}
         showsHorizontalScrollIndicator={false}
         keyExtractor={item => item.key.toString()}
         renderItem={({item}) => (
