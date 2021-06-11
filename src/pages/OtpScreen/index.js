@@ -1,10 +1,14 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Header} from '../../components';
 
 const OtpScreen = () => {
   return (
     <View>
-      <Text>Otp Screen</Text>
+      <ScrollView>
+        <Header />
+        <View>Kode Verifikasi</View>
+      </ScrollView>
     </View>
   );
 };

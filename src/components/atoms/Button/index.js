@@ -1,14 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {color} from 'react-native-reanimated';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import IconOnly from './IconOnly';
 
-const Button = ({text, color = '#0BCAD4', textColor = 'white', onPress}) => {
+const Button = ({type, title, onPress, icon}) => {
+  if (type === 'icon-only') {
+    return <IconOnly icon={icon} onPress={onPress} />;
+  }
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      style={styles.container(color)}
+      style={styles.container(type)}
       onPress={onPress}>
-      <Text style={styles.text(textColor)}>{text}</Text>
+      <Text style={styles.text(type)}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -16,16 +19,16 @@ const Button = ({text, color = '#0BCAD4', textColor = 'white', onPress}) => {
 export default Button;
 
 const styles = StyleSheet.create({
-  container: color => ({
-    backgroundColor: color,
+  container: type => ({
+    backgroundColor: type === 'secondary' ? 'white' : '#0BCAD4',
     paddingVertical: 10,
     borderRadius: 10,
   }),
-  text: color => ({
+  text: type => ({
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
-    color: color,
+    color: type === 'secondary' ? '#112340' : 'white',
     fontFamily: 'Nunito',
   }),
 });

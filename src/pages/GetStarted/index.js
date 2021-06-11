@@ -3,6 +3,7 @@ import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import {ILGetStarted, ILLogo} from '../../assets';
 import Button from '../../components/atoms/Button';
 import Gap from '../../components/atoms/Gap';
+import {colors} from '../../utils';
 import {fonts} from '../../utils/fonts';
 
 const GetStarted = ({navigation}) => {
@@ -13,16 +14,12 @@ const GetStarted = ({navigation}) => {
         <Text style={styles.title}>Bergabung dan Bermanfaat Bagi Sekitar</Text>
       </View>
       <View>
-        <Button text="Gabung Sebagai User" onPress={() => alert('Hello')} />
+        <Button title="Sign In" onPress={() => navigation.navigate('SignIn')} />
         <Gap height={12} />
         <Button
-          text="Gabung Sebagai Partner"
+          type="secondary"
+          title="Sign Up"
           onPress={() => navigation.navigate('SignUp')}
-        />
-        <Gap height={12} />
-        <Button
-          text="Gabung dengan Lembaga"
-          onPress={() => navigation.navigate('SignIn')}
         />
       </View>
     </ImageBackground>
@@ -35,7 +32,7 @@ const styles = StyleSheet.create({
   page: {
     padding: 35,
     justifyContent: 'space-between',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     flex: 1,
   },
   title: {
@@ -43,6 +40,6 @@ const styles = StyleSheet.create({
     color: 'black',
     marginTop: 91,
     fontFamily: fonts.primary[600],
-    color: 'white',
+    color: colors.white,
   },
 });

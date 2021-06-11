@@ -3,11 +3,11 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button, Gap, Header, TextInput} from '../../components';
 import {colors, fonts} from '../../utils';
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Header />
+        <Header onPress={() => navigation.goBack()} title="Daftar Akun" />
         <View style={styles.content}>
           <TextInput label="Email" />
           <Gap height={10} />
@@ -17,9 +17,9 @@ const SignUp = () => {
           <Gap height={10} />
           <TextInput label="Password" />
           <Gap height={24} />
-          <Button text="Daftar Akun" />
+          <Button title="Daftar Akun" />
           <Gap height={10} />
-          <Button text="Daftar Akun dengan Google" />
+          <Button title="Daftar Akun dengan Google" />
           <Gap height={30} />
         </View>
       </ScrollView>
@@ -31,19 +31,19 @@ export default SignUp;
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     flex: 1,
   },
   content: {
     padding: 40,
     paddingTop: 0,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     flex: 1,
   },
   title: {
     fontSize: 20,
     fontFamily: fonts.primary[600],
-    color: '#112340',
+    color: colors.text.primary,
     marginTop: 40,
     marginBottom: 40,
   },

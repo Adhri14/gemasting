@@ -1,6 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {AppIntro, GetStarted, SignIn, SignUp, SplashScreen} from '../pages';
+import OtpScreen from '../pages/OtpScreen';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,11 @@ const Router = () => {
       <Stack.Screen
         name="SignIn"
         component={SignIn}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="OtpScreen"
+        component={OtpScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {ILLogo} from '../../assets';
 import {TextInput, Link, Button, Gap} from '../../components';
-import {fonts} from '../../utils';
+import {colors, fonts} from '../../utils';
 
 const SignIn = ({label}) => {
   return (
@@ -16,7 +16,7 @@ const SignIn = ({label}) => {
         <Gap height={10} />
         <Link title="Forgot My Password" size={12} />
         <Gap height={40} />
-        <Button text="SignIn" />
+        <Button title="SignIn" />
         <Gap height={30} />
         <Link title="Create New Account" size={16} align="center" />
       </ScrollView>
@@ -29,13 +29,13 @@ export default SignIn;
 const styles = StyleSheet.create({
   page: {
     padding: 40,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     flex: 1,
   },
   title: {
     fontSize: 20,
     fontFamily: fonts.primary[600],
-    color: '#112340',
+    color: colors.text.primary,
     marginTop: 40,
     marginBottom: 40,
   },
