@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
-import {Header} from '../../components';
+import {Header, Button} from '../../components';
 import {colors, fonts} from '../../utils';
 
 const OtpScreen = ({navigation}) => {
@@ -11,7 +11,7 @@ const OtpScreen = ({navigation}) => {
   }, []);
   return (
     <View style={styles.page}>
-      <ScrollView>
+      <ScrollView style={{flexGrow: 1}}>
         <Header onPress={() => navigation.goBack()} />
         <View style={styles.container}>
           <Text style={styles.title}>Kode Verifikasi</Text>
@@ -28,6 +28,9 @@ const OtpScreen = ({navigation}) => {
           </View>
         </View>
       </ScrollView>
+      <View style={styles.button}>
+        <Button title="Kirimkan" />
+      </View>
     </View>
   );
 };
@@ -37,7 +40,7 @@ export default OtpScreen;
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: '#ffff',
+    backgroundColor: colors.white,
   },
   container: {
     flex: 1,
@@ -80,5 +83,12 @@ const styles = StyleSheet.create({
   bold: {
     fontFamily: fonts.primary[700],
     color: colors.text.primary,
+  },
+  button: {
+    paddingHorizontal: 20,
+    position: 'absolute',
+    bottom: 50,
+    alignSelf: 'center',
+    width: '100%',
   },
 });
