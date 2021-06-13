@@ -17,7 +17,10 @@ const SignUp = ({navigation}) => {
           <Gap height={10} />
           <TextInput label="Password" />
           <Gap height={24} />
-          <Button title="Daftar Akun" />
+          <Button
+            title="Daftar Akun"
+            onPress={() => navigation.navigate('OtpScreen')}
+          />
           <Gap height={10} />
           <Button title="Daftar Akun dengan Google" />
           <Gap height={30} />
