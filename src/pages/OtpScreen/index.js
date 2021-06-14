@@ -4,14 +4,15 @@ import {Header, Button} from '../../components';
 import {colors, fonts} from '../../utils';
 
 const OtpScreen = ({navigation}) => {
-  const [codeLength, setCodeLengt] = useState(false);
+  // const [codeLength, setCodeLengt] = useState(false);
 
-  useEffect(() => {
-    setCodeLengt(!codeLength);
-  }, []);
+  // useEffect(() => {
+  //   setCodeLengt(!codeLength);
+  // }, []);
+
   return (
     <View style={styles.page}>
-      <ScrollView style={{flexGrow: 1}}>
+      <ScrollView>
         <Header onPress={() => navigation.goBack()} />
         <View style={styles.container}>
           <Text style={styles.title}>Kode Verifikasi</Text>
