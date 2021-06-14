@@ -4,11 +4,12 @@ import {Header, Button} from '../../components';
 import {colors, fonts} from '../../utils';
 
 const OtpScreen = ({navigation}) => {
-  // const [codeLength, setCodeLengt] = useState(false);
-
-  // useEffect(() => {
-  //   setCodeLengt(!codeLength);
-  // }, []);
+  const [codeOtp, setCodeOtp] = useState('');
+  // const [displayButton, setDisplayButton] = useState('flex');
+  const [codeLength, setCodeLength] = useState({
+    type: 'secondary',
+    disabled: true,
+  });
 
   return (
     <View style={styles.page}>
@@ -22,15 +23,47 @@ const OtpScreen = ({navigation}) => {
           </Text>
           <Text style={styles.link}>Bukan milik anda?</Text>
           <View>
-            <TextInput style={styles.input} keyboardType="number-pad" />
+            <TextInput
+              style={styles.input}
+              keyboardType="number-pad"
+              value={codeOtp}
+              onChangeText={val => {
+                setCodeOtp(val);
+
+                if (val.length >= 3 && !isNaN(val)) {
+                  if (val.length < 7) {
+                    setCodeLength({
+                      disabled: false,
+                    });
+                    return true;
+                  }
+                  setCodeLength({
+                    type: '#0BCAD4',
+                    disabled: true,
+                  });
+                  return true;
+                } else {
+                  setCodeLength({
+                    type: 'secondary',
+                    disabled: true,
+                  });
+                }
+              }}
+            />
             <Text style={styles.sendCode}>
               Belum menerima kode? <Text style={styles.bold}>Kirim ulang</Text>
             </Text>
           </View>
         </View>
       </ScrollView>
-      <View style={styles.button}>
-        <Button title="Kirimkan" />
+      <View style={[styles.button]}>
+        <Button
+          type={codeLength.type}
+          // display={displayButton}
+          title="Kirimkan"
+          disabled={codeLength.disabled}
+          onPress={() => navigation.replace('AppIntro')}
+        />
       </View>
     </View>
   );
@@ -88,7 +121,7 @@ const styles = StyleSheet.create({
   button: {
     paddingHorizontal: 20,
     position: 'absolute',
-    bottom: 50,
+    bottom: 20,
     alignSelf: 'center',
     width: '100%',
   },
