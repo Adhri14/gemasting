@@ -97,7 +97,7 @@ const AppIntro = ({navigation}) => {
   };
 
   const handleOnDone = () => {
-    Alert.alert('Ok bang Selesai');
+    navigation.navigate('GetStarted');
   };
 
   return (
