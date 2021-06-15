@@ -4,8 +4,6 @@ import {Button, Gap, Header, TextInput} from '../../components';
 import {colors, fonts} from '../../utils';
 
 const SignUp = ({navigation}) => {
-  const 
-
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
