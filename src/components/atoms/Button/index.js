@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {colors} from '../../../utils';
 import IconOnly from './IconOnly';
 
 const Button = ({type, title, onPress, icon, display, ...props}) => {
@@ -22,6 +23,8 @@ export default Button;
 const styles = StyleSheet.create({
   container: (type, display) => ({
     backgroundColor: type === 'secondary' ? 'white' : '#0BCAD4',
+    borderWidth: type === 'secondary' ? 1 : 0,
+    borderColor: type === 'secondary' ? '#112340' : '#0BCAD4',
     paddingVertical: 10,
     borderRadius: 10,
     display,
