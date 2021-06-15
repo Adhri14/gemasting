@@ -7,7 +7,7 @@ import {fonts} from '../../utils/fonts';
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('GetStarted');
+      navigation.replace('AppIntro');
     }, 3000);
   }, []);
   return (
