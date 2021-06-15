@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     fontSize: size,
     color: colors.text.secondary,
     fontFamily: fonts.primary.normal,
+    fontFamily: 'Nunito-Regular',
     textDecorationLine: 'underline',
     textAlign: align,
   }),
