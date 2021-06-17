@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {colors} from '../../../utils';
+import {colors, fonts} from '../../../utils';
 import IconOnly from './IconOnly';
 
 const Button = ({type, title, onPress, icon, display, ...props}) => {
@@ -31,9 +31,8 @@ const styles = StyleSheet.create({
   }),
   text: type => ({
     fontSize: 16,
-    fontWeight: '600',
     textAlign: 'center',
     color: type === 'secondary' ? '#112340' : 'white',
-    fontFamily: 'Nunito',
+    fontFamily: fonts.primary[600],
   }),
 });

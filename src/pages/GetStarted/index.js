@@ -10,15 +10,21 @@ const GetStarted = ({navigation}) => {
   return (
     <ImageBackground source={ILGetStarted} style={styles.page}>
       <View>
-        <ILLogo />
         <Text style={styles.title}>Bergabung dan Bermanfaat Bagi Sekitar</Text>
       </View>
       <View>
-        <Button title="Sign In" onPress={() => navigation.navigate('SignIn')} />
+        <Button
+          title="Gabung Sebagai User"
+          onPress={() => navigation.navigate('SignIn')}
+        />
         <Gap height={12} />
         <Button
-          type="secondary"
-          title="Sign Up"
+          title="Gabung Sebagai Pakar"
+          onPress={() => navigation.navigate('SignUp')}
+        />
+        <Gap height={12} />
+        <Button
+          title="Gabung Sebagai Lembaga"
           onPress={() => navigation.navigate('SignUp')}
         />
       </View>

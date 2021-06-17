@@ -15,7 +15,7 @@ import {fonts} from '../../utils/fonts';
 const slides = [
   {
     key: 1,
-    title: 'Dummy Text',
+    title: 'Selamat Datang di \nGEMASTING',
     text: 'Geser ke kiri untuk mengenal\nkami lebih lanjut',
     image: (
       <ImageIntro1
@@ -30,8 +30,8 @@ const slides = [
   },
   {
     key: 2,
-    title: 'Dummy Text',
-    text: 'Kami adalah aplikasi posyandu\nterlengkap di Indonesia.',
+    title: 'Gerakan Masyarakat \nSadar Stunting',
+    text: 'Aplikasi yang dikembangkan untuk\npermasalahan stunting',
     image: (
       <ImageIntro2
         style={{
@@ -45,8 +45,8 @@ const slides = [
   },
   {
     key: 3,
-    title: 'Dummy Text',
-    text: 'Selain itu, kami menyediakan\nberbagai fitur untuk \nsang buah hati.',
+    title: 'Konsultasi Masalah\nKesehatan Anda',
+    text: 'Konsultasi kesehatan anda\ndengan pakar kami yang terverifikasi',
     image: (
       <ImageIntro3
         style={{
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 45,
+    fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 20,
     fontFamily: fonts.primary[600],

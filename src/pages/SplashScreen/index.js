@@ -13,7 +13,7 @@ const SplashScreen = ({navigation}) => {
   return (
     <View style={styles.page}>
       <ILLogo />
-      <Text style={styles.title}>Gemasting</Text>
+      <Text style={styles.title}>GEMASTING</Text>
     </View>
   );
 };
