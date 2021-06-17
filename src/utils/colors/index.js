@@ -1,28 +1,31 @@
-const mainColors = {
-  green1: '#0BCAD4',
-  dark1: '#112340',
-  grey1: '#7D8797',
-  grey2: '#E9E9E9',
+export const mainColors = {
+  salmon: '#FE6675',
+  lime: '#9CD161',
+  teal: '#1FA0BD',
+  ocean: '#D9F4FF',
+  smoke: '#DFDFDF',
+  lightSmoke: '#999999',
+  white: '#FFFFFF',
+  black: '#404040',
 };
 
 export const colors = {
-  primary: mainColors.green1,
-  secondary: mainColors.dark1,
-  white: 'white',
-  black: 'black',
+  primary: mainColors.lime,
+  secondary: mainColors.smoke,
   text: {
-    primary: mainColors.dark1,
-    secondary: mainColors.grey1,
+    primary1: mainColors.black,
+    secondary1: mainColors.smoke,
   },
   button: {
     primary: {
-      background: mainColors.green1,
-      text: 'white',
+      background: mainColors.lime,
+      text: mainColors.white,
+      border: mainColors.lime,
     },
     secondary: {
-      background: 'white',
-      text: mainColors.dark1,
+      background: 'transparent',
+      text: mainColors.black,
+      border: mainColors.lime,
     },
   },
-  border: mainColors.grey2,
 };
