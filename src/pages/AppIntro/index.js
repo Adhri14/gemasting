@@ -117,7 +117,7 @@ const AppIntro = ({navigation}) => {
           <Icon name="arrow-left" size={20} color={mainColors.lightSmoke} />
         </TouchableOpacity>
       )}
-      {currentSlide === 2 ? (
+      {currentSlide === 3 ? (
         <Text style={styles.skip}>{''}</Text>
       ) : (
         <Text onPress={handleSkip} style={styles.skip}>
@@ -152,7 +152,7 @@ const AppIntro = ({navigation}) => {
           />
         ))}
       </View>
-      {currentSlide >= 2 && (
+      {currentSlide >= 3 && (
         <TouchableOpacity style={styles.btnBig} onPress={handleOnDone}>
           <Icon name="arrow-right" size={20} color={mainColors.white} />
         </TouchableOpacity>
@@ -178,11 +178,10 @@ const styles = StyleSheet.create({
     height,
     backgroundColor: mainColors.white,
     width,
-    padding: 30,
+    padding: 20,
   },
   header: {
     height: height / 0.9,
-    // backgroundColor: 'blueviolet',
     width,
     position: 'relative',
     justifyContent: 'center',
@@ -190,7 +189,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    marginBottom: 20,
+    marginBottom: 10,
     fontFamily: fonts.primary[700],
     color: colors.text.primary1,
   },
@@ -204,7 +203,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     flexDirection: 'row',
     bottom: '5%',
-    left: '8%',
+    left: '5.5%',
     width: '30%',
     justifyContent: 'space-between',
   },
@@ -222,7 +221,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     position: 'absolute',
-    left: '8%',
+    left: '5.5%',
     width: 50,
     height: 50,
     zIndex: 999,
@@ -237,7 +236,7 @@ const styles = StyleSheet.create({
   },
   skip: {
     position: 'absolute',
-    right: '8%',
+    right: '5.5%',
     zIndex: 999,
     marginTop: 30,
     letterSpacing: 1,
@@ -255,6 +254,6 @@ const styles = StyleSheet.create({
     bottom: '2%',
     justifyContent: 'center',
     alignItems: 'center',
-    right: '8%',
+    right: '5.5%',
   },
 });
