@@ -10,7 +10,9 @@ import {
   Alert,
 } from 'react-native';
 import {ImageIntro1, ImageIntro2, ImageIntro3, ImageIntro4} from '../../assets';
+import {colors, mainColors} from '../../utils';
 import {fonts} from '../../utils/fonts';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const slides = [
   {
@@ -58,21 +60,21 @@ const slides = [
       />
     ),
   },
-  // {
-  //   key: 4,
-  //   title: 'Dummy Text',
-  //   text: 'Selain itu, kami menyediakan\nberbagai fitur untuk \nsang buah hati.',
-  //   image: (
-  //     <ImageIntro4
-  //       style={{
-  //         position: 'absolute',
-  //         top: '60%',
-  //       }}
-  //       width={350}
-  //       height={300}
-  //     />
-  //   ),
-  // },
+  {
+    key: 4,
+    title: 'Berbagi dan Terhubung\nDengan Pengguna Lain',
+    text: 'Platform dengan komunitas pengguna\ndari seluruh Indonesia',
+    image: (
+      <ImageIntro4
+        style={{
+          position: 'absolute',
+          top: '60%',
+        }}
+        width={350}
+        height={300}
+      />
+    ),
+  },
 ];
 const AppIntro = ({navigation}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -112,10 +114,10 @@ const AppIntro = ({navigation}) => {
           activeOpacity={1}
           onPress={handlePrev}
           style={styles.btn}>
-          <Text style={styles.textBtn}>Prev</Text>
+          <Icon name="arrow-left" size={20} color={mainColors.lightSmoke} />
         </TouchableOpacity>
       )}
-      {currentSlide === 2 ? (
+      {currentSlide === 3 ? (
         <Text style={styles.skip}>{''}</Text>
       ) : (
         <Text onPress={handleSkip} style={styles.skip}>
@@ -150,9 +152,9 @@ const AppIntro = ({navigation}) => {
           />
         ))}
       </View>
-      {currentSlide >= 2 && (
+      {currentSlide >= 3 && (
         <TouchableOpacity style={styles.btnBig} onPress={handleOnDone}>
-          <Text style={styles.done}>Done</Text>
+          <Icon name="arrow-right" size={20} color={mainColors.white} />
         </TouchableOpacity>
       )}
     </>
@@ -161,7 +163,7 @@ const AppIntro = ({navigation}) => {
 
 export default AppIntro;
 
-const {width, height} = Dimensions.get('screen');
+const {width, height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   slide: {
@@ -170,17 +172,16 @@ const styles = StyleSheet.create({
     height,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: mainColors.white,
   },
   body: {
     height,
-    backgroundColor: 'grey',
+    backgroundColor: mainColors.white,
     width,
-    padding: 30,
+    padding: 20,
   },
   header: {
     height: height / 0.9,
-    // backgroundColor: 'blueviolet',
     width,
     position: 'relative',
     justifyContent: 'center',
@@ -188,46 +189,45 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    fontFamily: fonts.primary[600],
+    marginBottom: 10,
+    fontFamily: fonts.primary[700],
+    color: colors.text.primary1,
   },
   text: {
     fontSize: 20,
     lineHeight: 30,
+    fontFamily: fonts.primary[300],
+    color: mainColors.lightSmoke,
   },
   indicatorContainer: {
     position: 'absolute',
     flexDirection: 'row',
     bottom: '5%',
-    left: '8%',
-    width: '40%',
+    left: '5.5%',
+    width: '30%',
     justifyContent: 'space-between',
   },
   indicator: {
-    width: 10,
-    height: 10,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: '#fff',
+    width: 15,
+    height: 15,
+    borderRadius: 15,
+    backgroundColor: mainColors.smoke,
   },
   indicatorActive: {
     width: 30,
-    height: 10,
+    height: 15,
     borderRadius: 20,
-    backgroundColor: '#fff',
+    backgroundColor: mainColors.teal,
   },
   btn: {
-    backgroundColor: 'grey',
     position: 'absolute',
-    left: '8%',
+    left: '5.5%',
     width: 50,
     height: 50,
-    borderRadius: 25,
     zIndex: 999,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 14,
   },
   textBtn: {
     letterSpacing: 1,
@@ -236,14 +236,13 @@ const styles = StyleSheet.create({
   },
   skip: {
     position: 'absolute',
-    right: '8%',
+    right: '5.5%',
     zIndex: 999,
     marginTop: 30,
     letterSpacing: 1,
     fontSize: 15,
-    fontWeight: '700',
     textDecorationLine: 'underline',
-    fontFamily: fonts.primary.normal,
+    fontFamily: fonts.primary[300],
   },
   btnBig: {
     width: 60,
@@ -251,10 +250,10 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     position: 'absolute',
     zIndex: 999,
-    backgroundColor: 'white',
+    backgroundColor: colors.button.primary.background,
     bottom: '2%',
     justifyContent: 'center',
     alignItems: 'center',
-    right: '8%',
+    right: '5.5%',
   },
 });

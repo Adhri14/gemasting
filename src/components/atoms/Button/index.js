@@ -1,9 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {IconGoogle} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 import IconOnly from './IconOnly';
 
-const Button = ({type, title, onPress, icon, display, ...props}) => {
+const Button = ({type, title, onPress, google, icon, display, ...props}) => {
   if (type === 'icon-only') {
     return <IconOnly icon={icon} onPress={onPress} />;
   }
@@ -13,6 +14,8 @@ const Button = ({type, title, onPress, icon, display, ...props}) => {
       style={styles.container(type, display)}
       onPress={onPress}
       {...props}>
+      {/* {google ? <IconGoogle /> : <Text style={styles.text(type)}>{title}</Text>} */}
+      {google && <IconGoogle style={styles.google} />}
       <Text style={styles.text(type)}>{title}</Text>
     </TouchableOpacity>
   );
@@ -28,17 +31,22 @@ const styles = StyleSheet.create({
         : colors.button.primary.background,
     borderWidth: type === 'secondary' ? 1 : 0,
     borderColor: colors.button.primary.border,
-    paddingVertical: 10,
+    paddingVertical: 15,
     borderRadius: 10,
     display,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   }),
   text: type => ({
     fontSize: 16,
-    textAlign: 'center',
     color:
       type === 'secondary'
         ? colors.button.secondary.text
         : colors.button.primary.text,
     fontFamily: fonts.primary[600],
   }),
+  google: {
+    marginRight: 20,
+  },
 });
