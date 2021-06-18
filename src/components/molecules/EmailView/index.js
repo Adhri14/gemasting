@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Gap, Button, Link, TextInput} from '../../atoms';
-import {colors, fonts} from '../../../utils';
+import {fonts, mainColors} from '../../../utils';
+import {Button, Gap, Link, Radio, TextInput} from '../../atoms';
 
 const EmailView = () => {
   return (
@@ -10,21 +10,18 @@ const EmailView = () => {
       <Gap height={24} />
       <TextInput label="Password" />
       <Gap height={40} />
-      <Button title="SignIn" />
+      <Button title="Masuk Akun" />
       <Gap height={10} />
-      <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 16,
-          color: colors.text.primary,
-          fontFamily: fonts.primary.normal,
-        }}>
-        Atau
-      </Text>
+      <Text style={styles.or}>Atau</Text>
       <Gap height={10} />
-      <Button type="secondary" title="Masuk dengan Akun Google" />
+      <Button google type="secondary" title="Masuk dengan Google" />
       <Gap height={30} />
-      <Link title="Create New Account" size={16} align="center" />
+      <Link
+        title="Belum punya akun?"
+        action="Daftar"
+        size={16}
+        align="center"
+      />
     </View>
   );
 };
@@ -33,4 +30,11 @@ export default EmailView;
 
 const styles = StyleSheet.create({
   container: {padding: 20},
+  // radio: {flexDirection: 'row'},
+  or: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: mainColors.lightSmoke,
+    fontFamily: fonts.primary.normal,
+  },
 });

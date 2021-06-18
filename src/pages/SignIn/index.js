@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 import {EmailView, Header, TelephoneView} from '../../components';
-import {colors, fonts} from '../../utils';
+import {colors, fonts, mainColors} from '../../utils';
 
 const renderTabBar = props => {
   return (
@@ -20,9 +20,10 @@ const renderTabBar = props => {
       renderLabel={({route, focused}) => (
         <Text
           style={{
-            color: focused ? colors.white : colors.text.secondary,
+            color: focused ? mainColors.white : colors.text.primary1,
             fontSize: 14,
             fontFamily: fonts.primary.normal,
+            textAlign: 'center',
           }}>
           {route.title}
         </Text>
@@ -37,7 +38,7 @@ const SignIn = ({navigation}) => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {key: 'Email', title: 'Login Dengan Email'},
-    {key: 'Telephone', title: 'Login Dengan No. Telepon'},
+    {key: 'Telephone', title: 'Login Dengan Nomor Telepon'},
   ]);
 
   const renderScene = SceneMap({
@@ -71,24 +72,22 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 45,
-    fontFamily: fonts.primary[600],
+    fontFamily: fonts.primary[700],
     color: colors.text.primary,
     paddingHorizontal: 20,
     marginBottom: 30,
   },
   indicator: {
-    backgroundColor: colors.primary,
-    height: 48,
+    backgroundColor: mainColors.teal,
+    height: 55,
     zIndex: -1,
   },
   wrapper: {
-    backgroundColor: colors.white,
+    backgroundColor: mainColors.ocean,
     elevation: 0,
-    borderWidth: 0.5,
-    borderColor: colors.secondary,
     marginHorizontal: 20,
     overflow: 'hidden',
-    borderRadius: 5,
+    borderRadius: 30,
     resizeMode: 'cover',
   },
 });

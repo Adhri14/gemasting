@@ -1,18 +1,19 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
-import {ILGetStarted, ILLogo} from '../../assets';
+import {StyleSheet, View} from 'react-native';
+import {Welcome} from '../../assets';
 import Button from '../../components/atoms/Button';
 import Gap from '../../components/atoms/Gap';
-import {colors} from '../../utils';
+import {colors, mainColors} from '../../utils';
 import {fonts} from '../../utils/fonts';
 
 const GetStarted = ({navigation}) => {
   return (
-    <ImageBackground source={ILGetStarted} style={styles.page}>
+    // <ImageBackground source={ILGetStarted} style={styles.page}>
+    <View style={styles.page}>
       <View>
-        <Text style={styles.title}>Bergabung dan Bermanfaat Bagi Sekitar</Text>
+        <Welcome />
       </View>
-      <View>
+      <View style={styles.container}>
         <Button
           title="Gabung Sebagai User"
           onPress={() => navigation.navigate('SignIn')}
@@ -28,7 +29,8 @@ const GetStarted = ({navigation}) => {
           onPress={() => navigation.navigate('SignUp')}
         />
       </View>
-    </ImageBackground>
+    </View>
+    // </ImageBackground>
   );
 };
 
@@ -38,14 +40,11 @@ const styles = StyleSheet.create({
   page: {
     padding: 35,
     justifyContent: 'space-between',
-    backgroundColor: colors.white,
+    backgroundColor: mainColors.white,
     flex: 1,
+    alignItems: 'center',
   },
-  title: {
-    fontSize: 25,
-    color: 'black',
-    marginTop: 91,
-    fontFamily: fonts.primary[600],
-    color: colors.white,
+  container: {
+    width: '100%',
   },
 });

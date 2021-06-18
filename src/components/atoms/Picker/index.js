@@ -1,28 +1,29 @@
 import React from 'react';
-import {StyleSheet, TextInput as TextInputRN, View, Text} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {Picker as PickerRN} from '@react-native-picker/picker';
 import {colors, fonts, mainColors} from '../../../utils';
 
-const TextInput = ({label}) => {
+const Picker = ({label}) => {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
-      <TextInputRN style={styles.input} />
+      <View style={styles.container}>
+        <PickerRN />
+      </View>
     </View>
   );
 };
 
-export default TextInput;
+export default Picker;
 
 const styles = StyleSheet.create({
-  input: {
-    borderRadius: 10,
-    padding: 12,
+  container: {
     backgroundColor: mainColors.smoke,
-    color: colors.text.primary1,
+    borderRadius: 10,
   },
   label: {
-    fontSize: 16,
     color: colors.text.primary1,
+    fontSize: 16,
     marginBottom: 6,
     fontFamily: fonts.primary.normal,
   },
