@@ -176,13 +176,13 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
   },
   title: {
-    fontSize: 30,
+    fontSize: 25,
     marginBottom: 10,
     fontFamily: fonts.primary[700],
     color: colors.text.primary1,
   },
   text: {
-    fontSize: 20,
+    fontSize: 16,
     lineHeight: 30,
     fontFamily: fonts.primary[300],
     color: mainColors.lightSmoke,
@@ -254,6 +254,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: mainColors.white,
     paddingHorizontal: 20,
-    paddingVertical: 30,
+    paddingBottom: 30,
   },
 });
