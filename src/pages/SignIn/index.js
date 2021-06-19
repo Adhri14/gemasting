@@ -21,7 +21,7 @@ const renderTabBar = props => {
         <Text
           style={{
             color: focused ? mainColors.white : colors.text.primary1,
-            fontSize: 14,
+            fontSize: 13,
             fontFamily: fonts.primary.normal,
             textAlign: 'center',
           }}>
@@ -38,7 +38,7 @@ const SignIn = ({navigation}) => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {key: 'Email', title: 'Login Dengan Email'},
-    {key: 'Telephone', title: 'Login Dengan Nomor Telepon'},
+    {key: 'Telephone', title: 'Login Dengan No. Telepon'},
   ]);
 
   const renderScene = SceneMap({
