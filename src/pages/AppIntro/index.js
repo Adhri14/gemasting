@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Dimensions,
   FlatList,
@@ -7,73 +7,37 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Alert,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {ImageIntro1, ImageIntro2, ImageIntro3, ImageIntro4} from '../../assets';
+import {Gap} from '../../components';
 import {colors, mainColors} from '../../utils';
 import {fonts} from '../../utils/fonts';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const slides = [
   {
     key: 1,
     title: 'Selamat Datang di \nGEMASTING',
     text: 'Geser ke kiri untuk mengenal\nkami lebih lanjut',
-    image: (
-      <ImageIntro1
-        style={{
-          position: 'absolute',
-          top: '60%',
-        }}
-        width={350}
-        height={300}
-      />
-    ),
+    image: <ImageIntro1 width="100%" height="100%" />,
   },
   {
     key: 2,
     title: 'Gerakan Masyarakat \nSadar Stunting',
     text: 'Aplikasi yang dikembangkan untuk\npermasalahan stunting',
-    image: (
-      <ImageIntro2
-        style={{
-          position: 'absolute',
-          top: '60%',
-        }}
-        width={350}
-        height={300}
-      />
-    ),
+    image: <ImageIntro2 width="100%" height="100%" />,
   },
   {
     key: 3,
     title: 'Konsultasi Masalah\nKesehatan Anda',
     text: 'Konsultasi kesehatan anda\ndengan pakar kami yang terverifikasi',
-    image: (
-      <ImageIntro3
-        style={{
-          position: 'absolute',
-          top: '60%',
-        }}
-        width={350}
-        height={300}
-      />
-    ),
+    image: <ImageIntro3 width="100%" height="100%" />,
   },
   {
     key: 4,
     title: 'Berbagi dan Terhubung\nDengan Pengguna Lain',
     text: 'Platform dengan komunitas pengguna\ndari seluruh Indonesia',
-    image: (
-      <ImageIntro4
-        style={{
-          position: 'absolute',
-          top: '60%',
-        }}
-        width={350}
-        height={300}
-      />
-    ),
+    image: <ImageIntro4 width="100%" height="100%" />,
   },
 ];
 const AppIntro = ({navigation}) => {
@@ -99,7 +63,7 @@ const AppIntro = ({navigation}) => {
   };
 
   const handleOnDone = () => {
-    navigation.navigate('GetStarted');
+    navigation.replace('GetStarted');
   };
 
   return (
@@ -109,24 +73,37 @@ const AppIntro = ({navigation}) => {
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-      {currentSlide >= 1 && (
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={handlePrev}
-          style={styles.btn}>
-          <Icon name="arrow-left" size={20} color={mainColors.lightSmoke} />
-        </TouchableOpacity>
-      )}
-      {currentSlide === 3 ? (
-        <Text style={styles.skip}>{''}</Text>
-      ) : (
-        <Text onPress={handleSkip} style={styles.skip}>
-          Lewati
-        </Text>
-      )}
+
+      <View style={styles.header}>
+        {/* Previouse */}
+        {currentSlide >= 1 && (
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={handlePrev}
+            style={styles.btn}>
+            <Icon name="arrow-left" size={20} color={mainColors.lightSmoke} />
+          </TouchableOpacity>
+        )}
+
+        <Gap width="9%" />
+
+        {/* Skip */}
+        <View style={styles.wrapper}>
+          {currentSlide === 3 ? (
+            <Text style={styles.skip}>{''}</Text>
+          ) : (
+            <Text onPress={handleSkip} style={styles.skip}>
+              Lewati
+            </Text>
+          )}
+        </View>
+      </View>
+
+      {/* Content Slider */}
       <FlatList
         ref={flatListRef}
         data={slides}
+        style={styles.page}
         horizontal
         pagingEnabled
         onViewableItemsChanged={onViewableItemsChanged}
@@ -134,29 +111,37 @@ const AppIntro = ({navigation}) => {
         keyExtractor={item => item.key.toString()}
         renderItem={({item}) => (
           <View style={styles.slide}>
-            <View style={styles.header}>{item.image}</View>
-            <View style={styles.body}>
+            <View style={styles.image}>{item.image}</View>
+            <View style={styles.content}>
               <Text style={styles.title}>{item.title}</Text>
               <Text style={styles.text}>{item.text}</Text>
             </View>
           </View>
         )}
       />
-      <View style={styles.indicatorContainer}>
-        {slides.map((item, index) => (
-          <View
-            key={item.key.toString()}
-            style={
-              index === currentSlide ? styles.indicatorActive : styles.indicator
-            }
-          />
-        ))}
+
+      <View style={styles.footer}>
+        {/* Indicator */}
+        <View style={styles.indicatorContainer}>
+          {slides.map((item, index) => (
+            <View
+              key={item.key.toString()}
+              style={
+                index === currentSlide
+                  ? styles.indicatorActive
+                  : styles.indicator
+              }
+            />
+          ))}
+        </View>
+
+        {/* Button Done */}
+        {currentSlide >= 3 && (
+          <TouchableOpacity style={styles.btnBig} onPress={handleOnDone}>
+            <Icon name="arrow-right" size={20} color={mainColors.white} />
+          </TouchableOpacity>
+        )}
       </View>
-      {currentSlide >= 3 && (
-        <TouchableOpacity style={styles.btnBig} onPress={handleOnDone}>
-          <Icon name="arrow-right" size={20} color={mainColors.white} />
-        </TouchableOpacity>
-      )}
     </>
   );
 };
@@ -166,26 +151,29 @@ export default AppIntro;
 const {width, height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+    backgroundColor: mainColors.white,
+  },
   slide: {
+    width,
+    height,
+    alignItems: 'center',
+  },
+  image: {
+    alignSelf: 'center',
+    marginTop: -10,
+    marginBottom: 20,
+    width: width - 40,
+    height: height * 0.4,
+  },
+  content: {
+    alignSelf: 'flex-start',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
     flex: 1,
     width,
-    height,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: mainColors.white,
-  },
-  body: {
-    height,
-    backgroundColor: mainColors.white,
-    width,
-    padding: 20,
-  },
-  header: {
-    height: height / 0.9,
-    width,
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   title: {
     fontSize: 30,
@@ -200,12 +188,11 @@ const styles = StyleSheet.create({
     color: mainColors.lightSmoke,
   },
   indicatorContainer: {
-    position: 'absolute',
     flexDirection: 'row',
-    bottom: '5%',
-    left: '5.5%',
-    width: '30%',
+    width: '35%',
     justifyContent: 'space-between',
+    height: 50,
+    alignItems: 'center',
   },
   indicator: {
     width: 15,
@@ -219,15 +206,26 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: mainColors.teal,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    backgroundColor: mainColors.white,
+    paddingVertical: 10,
+  },
+  wrapper: {
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 5,
+  },
   btn: {
-    position: 'absolute',
-    left: '5.5%',
     width: 50,
     height: 50,
     zIndex: 999,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 14,
   },
   textBtn: {
     letterSpacing: 1,
@@ -235,25 +233,27 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   skip: {
-    position: 'absolute',
-    right: '5.5%',
     zIndex: 999,
-    marginTop: 30,
     letterSpacing: 1,
     fontSize: 15,
     textDecorationLine: 'underline',
     fontFamily: fonts.primary[300],
   },
   btnBig: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     borderRadius: 30,
-    position: 'absolute',
     zIndex: 999,
     backgroundColor: colors.button.primary.background,
-    bottom: '2%',
     justifyContent: 'center',
     alignItems: 'center',
-    right: '5.5%',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: mainColors.white,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
   },
 });
