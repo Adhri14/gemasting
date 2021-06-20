@@ -1,8 +1,21 @@
-import SplashScreen from './SplashScreen';
 import AppIntro from './AppIntro';
-import SignIn from './SignIn';
+import SplashScreen from './SplashScreen';
 import GetStarted from './GetStarted';
-import SignUp from './SignUp';
 import OtpScreen from './OtpScreen';
+import SignIn from './SignIn';
+import SignInCustomer from './SignInCustomer';
+import SignUpCustomer from './SignUpCustomer';
+import SignUpPakar from './SignUpPakar';
+import SignUpLembaga from './SignUpLembaga';
 
-export {SplashScreen, AppIntro, SignIn, GetStarted, SignUp, OtpScreen};
+export {
+  SplashScreen,
+  AppIntro,
+  SignIn,
+  GetStarted,
+  SignUpCustomer,
+  OtpScreen,
+  SignUpPakar,
+  SignUpLembaga,
+  SignInCustomer,
+};

@@ -30,7 +30,6 @@ export default EmailView;
 
 const styles = StyleSheet.create({
   container: {padding: 20},
-  // radio: {flexDirection: 'row'},
   or: {
     textAlign: 'center',
     fontSize: 16,

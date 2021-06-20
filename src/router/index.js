@@ -1,6 +1,15 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {AppIntro, GetStarted, SignIn, SignUp, SplashScreen} from '../pages';
+import {
+  AppIntro,
+  GetStarted,
+  SignIn,
+  SignInCustomer,
+  SignUpCustomer,
+  SignUpLembaga,
+  SignUpPakar,
+  SplashScreen,
+} from '../pages';
 import OtpScreen from '../pages/OtpScreen';
 
 const Stack = createStackNavigator();
@@ -24,13 +33,28 @@ const Router = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="SignUp"
-        component={SignUp}
+        name="SignUpCustomer"
+        component={SignUpCustomer}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignUpPakar"
+        component={SignUpPakar}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignUpLembaga"
+        component={SignUpLembaga}
         options={{headerShown: false}}
       />
       <Stack.Screen
         name="SignIn"
         component={SignIn}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignInCustomer"
+        component={SignInCustomer}
         options={{headerShown: false}}
       />
       <Stack.Screen

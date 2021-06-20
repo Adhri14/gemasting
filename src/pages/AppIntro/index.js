@@ -11,8 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {ImageIntro1, ImageIntro2, ImageIntro3, ImageIntro4} from '../../assets';
 import {Gap} from '../../components';
-import {colors, mainColors} from '../../utils';
-import {fonts} from '../../utils/fonts';
+import {colors, mainColors, fonts} from '../../utils';
 
 const slides = [
   {
