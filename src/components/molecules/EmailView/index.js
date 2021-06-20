@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {fonts, mainColors} from '../../../utils';
-import {Button, Gap, Link, Radio, TextInput} from '../../atoms';
+import {Button, Gap, Link, Radio, TextInput, InputPassword} from '../../atoms';
 
 const EmailView = () => {
   return (
     <View style={styles.container}>
       <TextInput label="Email" />
       <Gap height={24} />
-      <TextInput label="Password" />
+      <InputPassword label="Password" />
       <Gap height={40} />
       <Button title="Masuk Akun" />
       <Gap height={10} />

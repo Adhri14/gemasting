@@ -9,10 +9,27 @@ import {
   SignUpLembaga,
   SignUpPakar,
   SplashScreen,
+  HomeCustomer,
+  Inbox,
+  Chat,
+  Profile,
 } from '../pages';
 import OtpScreen from '../pages/OtpScreen';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const MainApp = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeCustomer} />
+      <Tab.Screen name="Inbox" component={Inbox} />
+      <Tab.Screen name="Chat" component={Chat} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
+  );
+};
 
 const Router = () => {
   return (
