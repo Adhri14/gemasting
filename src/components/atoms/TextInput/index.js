@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     padding: 12,
     backgroundColor: mainColors.smoke,
     color: colors.text.primary1,
+    // flex: 1,
   },
   label: {
     fontSize: 16,

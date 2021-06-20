@@ -15,17 +15,17 @@ const GetStarted = ({navigation}) => {
       <View style={styles.container}>
         <Button
           title="Gabung Sebagai User"
-          onPress={() => navigation.navigate('SignIn')}
+          onPress={() => navigation.navigate('SignUpCustomer')}
         />
         <Gap height={12} />
         <Button
           title="Gabung Sebagai Pakar"
-          onPress={() => navigation.navigate('SignUp')}
+          onPress={() => navigation.navigate('SignUpPakar')}
         />
         <Gap height={12} />
         <Button
           title="Gabung Sebagai Lembaga"
-          onPress={() => navigation.navigate('SignUp')}
+          onPress={() => navigation.navigate('SignUpLembaga')}
         />
       </View>
     </View>
