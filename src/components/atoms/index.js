@@ -6,5 +6,16 @@ import Checkbox from './Checkbox';
 import Picker from './Picker';
 import Radio from './Radio';
 import InputPassword from './InputPassword';
+import TabItem from './TabItem';
 
-export {Button, Gap, TextInput, Link, Checkbox, Picker, Radio, InputPassword};
+export {
+  Button,
+  Gap,
+  TextInput,
+  Link,
+  Checkbox,
+  Picker,
+  Radio,
+  InputPassword,
+  TabItem,
+};

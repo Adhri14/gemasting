@@ -22,7 +22,10 @@ const SignInCustomer = ({navigation}) => {
           <Gap height={24} />
           <InputPassword label="Password" />
           <Gap height={40} />
-          <Button title="Masuk Akun" />
+          <Button
+            title="Masuk Akun"
+            onPress={() => navigation.replace('MainApp')}
+          />
           <Gap height={10} />
           <Text style={styles.or}>Atau</Text>
           <Gap height={10} />
