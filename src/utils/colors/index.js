@@ -16,6 +16,7 @@ export const colors = {
   text: {
     primary1: mainColors.black,
     secondary1: mainColors.smoke,
+    secondary2: mainColors.teal,
   },
   button: {
     primary: {

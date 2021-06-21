@@ -1,12 +1,19 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {IconHome, IconInbox, IconProfile, IconChat} from '../../../assets';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  IconHome,
+  IconHomeActive,
+  IconInbox,
+  IconProfile,
+  IconProfileActive,
+  IconChat,
+} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const TabItem = ({title}) => {
+const TabItem = ({title, active, onPress, onLongPress}) => {
   const Icon = () => {
     if (title === 'Home') {
-      return <IconHome />;
+      return active ? <IconHomeActive /> : <IconHome />;
     }
     if (title === 'Inbox') {
       return <IconInbox />;
@@ -15,16 +22,19 @@ const TabItem = ({title}) => {
       return <IconChat />;
     }
     if (title === 'Profile') {
-      return <IconProfile />;
+      return active ? <IconProfileActive /> : <IconProfile />;
     }
     return <IconHome />;
   };
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+      onLongPress={onLongPress}>
       <Icon />
-      <Text style={styles.text}>{title}</Text>
-    </View>
+      <Text style={styles.text(active)}>{title}</Text>
+    </TouchableOpacity>
   );
 };
 
@@ -32,10 +42,10 @@ export default TabItem;
 
 const styles = StyleSheet.create({
   container: {alignItems: 'center'},
-  text: {
+  text: active => ({
     fontSize: 11,
-    color: colors.tertiary,
-    fontFamily: fonts.primary[400],
+    color: colors.text.secondary2,
+    fontFamily: active ? fonts.primary[600] : fonts.primary[400],
     marginTop: 4,
-  },
+  }),
 });

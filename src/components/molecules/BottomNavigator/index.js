@@ -37,18 +37,13 @@ const BottomNavigator = ({state, descriptors, navigation}) => {
         };
 
         return (
-          <TabItem type={label} title={label} />
-
-          //   <TouchableOpacity
-          //     accessibilityRole="button"
-          //     accessibilityState={isFocused ? {selected: true} : {}}
-          //     accessibilityLabel={options.tabBarAccessibilityLabel}
-          //     testID={options.tabBarTestID}
-          //     onPress={onPress}
-          //     onLongPress={onLongPress}
-          //     style={{flex: 1}}>
-          //     <Text style={{color: isFocused ? '#673ab7' : '#222'}}>{label}</Text>
-          //   </TouchableOpacity>
+          <TabItem
+            key={index}
+            title={label}
+            active={isFocused}
+            onPress={onPress}
+            onLongPress={onLongPress}
+          />
         );
       })}
     </View>
