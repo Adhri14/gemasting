@@ -7,12 +7,15 @@ export const mainColors = {
   lightSmoke: '#999999',
   white: '#FFFFFF',
   black: '#404040',
+  grey: '#EEEEEE',
 };
 
 export const colors = {
   primary: mainColors.lime,
   secondary: mainColors.smoke,
   tertiary: mainColors.teal,
+  border: mainColors.grey,
+  white: mainColors.white,
   text: {
     primary1: mainColors.black,
     secondary1: mainColors.smoke,

@@ -6,6 +6,10 @@ import IconInbox from './ic-inbox.svg';
 import IconChat from './ic-chat.svg';
 import IconProfile from './ic-profile.svg';
 import IconProfileActive from './ic-profile-active.svg';
+import IconNext from './ic-next.svg';
+import IconHelp from './ic-help.svg';
+import IconHistory from './ic-history.svg';
+import IconSetting from './ic-setting.svg';
 
 export {
   IconBackDark,
@@ -16,4 +20,8 @@ export {
   IconChat,
   IconProfile,
   IconProfileActive,
+  IconNext,
+  IconHelp,
+  IconHistory,
+  IconSetting,
 };
