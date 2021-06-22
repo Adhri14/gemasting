@@ -8,6 +8,7 @@ export const mainColors = {
   white: '#FFFFFF',
   black: '#404040',
   grey: '#EEEEEE',
+  grey1: '#858585',
 };
 
 export const colors = {
@@ -18,6 +19,7 @@ export const colors = {
   white: mainColors.white,
   text: {
     primary1: mainColors.black,
+    primary2: mainColors.grey1,
     secondary1: mainColors.smoke,
     secondary2: mainColors.teal,
   },

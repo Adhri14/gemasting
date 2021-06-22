@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {IconProfile} from '../../assets';
 import {ProfilePhoto, List} from '../../components';
 import {colors} from '../../utils';
 
@@ -11,13 +10,13 @@ const Profile = () => {
       <List
         icon="edit-profile"
         name="Data Pribadi"
-        desc="Edit Pengguna Anda"
+        desc="Edit Profile Anda"
         type="next"
       />
       <List
         icon="edit-riwayat"
         name="Riwayat Transaksi"
-        desc="Edit Pengguna Anda"
+        desc="Lihat Daftar Transaksi"
         type="next"
       />
       <List
@@ -40,7 +39,8 @@ export default Profile;
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: colors.white,
     flex: 1,
+    marginTop: 40,
+    backgroundColor: colors.white,
   },
 });

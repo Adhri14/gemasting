@@ -1,3 +1,3 @@
-import DummyPhoto from './doctor1.png';
+import DummyUser from './dummyuser.png';
 
-export {DummyPhoto};
+export {DummyUser};

@@ -11,6 +11,7 @@ import HomeCustomer from './HomeCustomer';
 import Inbox from './Inbox';
 import Chat from './Chat';
 import Profile from './Profile';
+import UpdateProfile from './UpdateProfile';
 
 export {
   SplashScreen,
@@ -26,4 +27,5 @@ export {
   Inbox,
   Chat,
   Profile,
+  UpdateProfile,
 };
