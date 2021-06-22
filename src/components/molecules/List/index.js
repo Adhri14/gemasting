@@ -8,6 +8,7 @@ import {
   IconHistory,
   IconSetting,
   IconHelp,
+  IconProfile,
 } from '../../../assets';
 
 const List = ({profile, type, icon, name, desc, onPress}) => {
@@ -31,7 +32,7 @@ const List = ({profile, type, icon, name, desc, onPress}) => {
       {icon ? <Icon /> : <Image source={profile} style={styles.avatar} />}
       <View style={styles.content}>
         <Text style={styles.name}>{name}</Text>
-        <Text style={styles.desc}>{desc}</Text>
+        {/* <Text style={styles.desc}>{desc}</Text> */}
       </View>
       {type === 'next' && <IconNext />}
     </TouchableOpacity>
@@ -45,11 +46,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    borderBottomColor: '#FAFAFA',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  content: {flex: 1, marginLeft: 16},
+  content: {flex: 1, marginLeft: 16, justifyContent: 'center'},
   avatar: {
     width: 46,
     height: 46,
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontFamily: fonts.primary[400],
-    color: colors.text.primary1,
+    color: '#939393',
   },
   desc: {
     fontSize: 12,

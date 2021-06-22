@@ -24,7 +24,7 @@ const Button = ({type, title, onPress, google, icon, display, ...props}) => {
 export default Button;
 
 const styles = StyleSheet.create({
-  container: (type, display) => ({
+  container: (type, display, backgroundColor) => ({
     backgroundColor:
       type === 'secondary'
         ? colors.button.secondary.background

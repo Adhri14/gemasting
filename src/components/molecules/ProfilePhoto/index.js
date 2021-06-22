@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     color: colors.text.primary1,
     fontFamily: fonts.primary[400],
     marginTop: 20,
+    textAlign: 'center',
   },
   nomorId: {
     fontSize: 16,
@@ -52,5 +53,6 @@ const styles = StyleSheet.create({
     color: colors.text.primary2,
     marginTop: 2,
     alignItems: 'center',
+    textAlign: 'center',
   },
 });
