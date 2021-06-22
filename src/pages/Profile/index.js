@@ -3,15 +3,16 @@ import {StyleSheet, Text, View} from 'react-native';
 import {ProfilePhoto, List} from '../../components';
 import {colors} from '../../utils';
 
-const Profile = () => {
+const Profile = ({navigation}) => {
   return (
     <View style={styles.page}>
-      <ProfilePhoto />
+      <ProfilePhoto name="Nama Pengguna" desc="3578102110030001" />
       <List
         icon="edit-profile"
         name="Data Pribadi"
         desc="Edit Profile Anda"
         type="next"
+        onPress={() => navigation.navigate('UpdateProfile')}
       />
       <List
         icon="edit-riwayat"

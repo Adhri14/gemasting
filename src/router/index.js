@@ -13,6 +13,7 @@ import {
   Inbox,
   Chat,
   Profile,
+  UpdateProfile,
 } from '../pages';
 import OtpScreen from '../pages/OtpScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -83,6 +84,11 @@ const Router = () => {
       <Stack.Screen
         name="MainApp"
         component={MainApp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UpdateProfile"
+        component={UpdateProfile}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

@@ -3,14 +3,18 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import {DummyUser} from '../../../assets/Dummy';
 import {colors, fonts} from '../../../utils';
 
-const ProfilePhoto = () => {
+const ProfilePhoto = ({name, desc}) => {
   return (
     <View style={styles.container}>
       <View style={styles.borderProfile}>
         <Image source={DummyUser} style={styles.avatar} />
       </View>
-      <Text style={styles.name}>Profile Component</Text>
-      <Text style={styles.nomorId}>3578102110030001</Text>
+      {name && (
+        <View>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.nomorId}>{desc}</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -47,5 +51,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary[400],
     color: colors.text.primary2,
     marginTop: 2,
+    alignItems: 'center',
   },
 });
