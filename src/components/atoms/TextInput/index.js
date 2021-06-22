@@ -2,11 +2,11 @@ import React from 'react';
 import {StyleSheet, TextInput as TextInputRN, View, Text} from 'react-native';
 import {colors, fonts, mainColors} from '../../../utils';
 
-const TextInput = ({label, placeholder}) => {
+const TextInput = ({label, placeholder, type}) => {
   return (
     <View>
-      <Text style={styles.label}>{label}</Text>
-      <TextInputRN style={styles.input} placeholder={placeholder} />
+      <Text style={styles.label(type)}>{label}</Text>
+      <TextInputRN style={styles.input(type)} placeholder={placeholder} />
     </View>
   );
 };
@@ -14,17 +14,17 @@ const TextInput = ({label, placeholder}) => {
 export default TextInput;
 
 const styles = StyleSheet.create({
-  input: {
+  input: type => ({
     borderRadius: 10,
     padding: 12,
-    backgroundColor: mainColors.smoke,
+    backgroundColor: type === 'secondary' ? '#F3F3F3' : mainColors.smoke,
     color: colors.text.primary1,
     // flex: 1,
-  },
-  label: {
+  }),
+  label: type => ({
     fontSize: 16,
-    color: colors.text.primary1,
+    color: type === 'secondary' ? '#B0B0B0' : colors.text.primary1,
     marginBottom: 6,
     fontFamily: fonts.primary.normal,
-  },
+  }),
 });

@@ -13,7 +13,7 @@ import {colors, fonts, mainColors} from '../../utils';
 const SignInCustomer = ({navigation}) => {
   return (
     <View style={styles.page}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Header onPress={() => navigation.goBack()} />
         <View style={styles.container}>
           <Gap height={10} />

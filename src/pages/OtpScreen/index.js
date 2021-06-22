@@ -13,7 +13,7 @@ const OtpScreen = ({navigation}) => {
 
   return (
     <View style={styles.page}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Header onPress={() => navigation.goBack()} />
         <View style={styles.container}>
           <Text style={styles.title}>Kode Verifikasi</Text>
