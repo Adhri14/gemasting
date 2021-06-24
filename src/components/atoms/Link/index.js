@@ -20,7 +20,7 @@ export default Link;
 const styles = StyleSheet.create({
   link: (size, align) => ({
     fontSize: size,
-    color: mainColors.lightSmoke,
+    color: mainColors.grey,
     fontFamily: fonts.primary.normal,
     textAlign: align,
   }),

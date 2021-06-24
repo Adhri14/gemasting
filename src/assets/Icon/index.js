@@ -10,6 +10,8 @@ import IconNext from './ic-next.svg';
 import IconHelp from './ic-help.svg';
 import IconHistory from './ic-history.svg';
 import IconSetting from './ic-setting.svg';
+import IconCamera from './ic-camera.svg';
+import IconUpload from './ic-upload.svg';
 
 export {
   IconBackDark,
@@ -24,4 +26,6 @@ export {
   IconHelp,
   IconHistory,
   IconSetting,
+  IconCamera,
+  IconUpload,
 };

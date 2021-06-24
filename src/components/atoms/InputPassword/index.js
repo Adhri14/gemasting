@@ -60,9 +60,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   label: {
-    fontSize: 16,
+    fontSize: 18,
     color: colors.text.primary1,
-    marginBottom: 6,
-    fontFamily: fonts.primary.normal,
+    marginBottom: 10,
+    fontFamily: fonts.primary[600],
   },
 });

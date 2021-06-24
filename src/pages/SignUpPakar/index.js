@@ -16,6 +16,7 @@ import {
   Picker,
   Checkbox,
   Link,
+  DatePicker,
 } from '../../components';
 import {colors, fonts, mainColors} from '../../utils';
 
@@ -46,7 +47,7 @@ const SignUpPakar = ({navigation}) => {
             <Text style={styles.label}>Tempat, Tanggal Lahir</Text>
             <View style={styles.row}>
               <TextInputRN style={styles.input} />
-              <TextInputRN style={styles.input} />
+              <DatePicker />
             </View>
           </View>
           <Gap height={25} />
@@ -115,10 +116,10 @@ const styles = StyleSheet.create({
     width: '48%',
   },
   label: {
-    fontSize: 16,
+    fontSize: 18,
     color: colors.text.primary1,
-    marginBottom: 6,
-    fontFamily: fonts.primary.normal,
+    marginBottom: 10,
+    fontFamily: fonts.primary[600],
   },
   or: {
     textAlign: 'center',

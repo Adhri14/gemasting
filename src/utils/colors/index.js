@@ -3,11 +3,12 @@ export const mainColors = {
   lime: '#9CD161',
   teal: '#1FA0BD',
   ocean: '#D9F4FF',
-  smoke: '#DFDFDF',
-  lightSmoke: '#999999',
+  grey: '#999999',
+  darkSmoke: '#DFDFDF',
+  smoke: '#F3F3F3',
+  lightSmoke: '#FEFEFF',
   white: '#FFFFFF',
   black: '#404040',
-  grey: '#EEEEEE',
   grey1: '#858585',
 };
 
@@ -15,7 +16,7 @@ export const colors = {
   primary: mainColors.lime,
   secondary: mainColors.smoke,
   tertiary: mainColors.teal,
-  border: mainColors.grey,
+  border: mainColors.darkSmoke,
   white: mainColors.white,
   text: {
     primary1: mainColors.black,

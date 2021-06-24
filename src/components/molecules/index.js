@@ -6,6 +6,7 @@ import ProfilePhoto from './ProfilePhoto';
 import List from './List';
 import InputCustomer from './InputCustomer';
 import InputPakar from './InputPakar';
+import InputHomeBabySpa from './InputHomeBabySpa';
 
 export {
   Header,
@@ -16,4 +17,5 @@ export {
   List,
   InputCustomer,
   InputPakar,
+  InputHomeBabySpa,
 };

@@ -1,15 +1,15 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {ProfilePhoto} from '..';
-import {Button, Gap, TextInput} from '../../atoms';
+import {Button, FileUpload, Gap, TextInput} from '../../atoms';
 
 const InputPakar = () => {
   return (
     <View>
-      <ProfilePhoto />
+      <ProfilePhoto type="camera" />
       <TextInput type="secondary" label="Nama" />
       <Gap height={35} />
-      <TextInput type="secondary" label="Nomor STR" />
+      <FileUpload label="Upload STR" />
       <Gap height={35} />
       <TextInput
         type="secondary"
