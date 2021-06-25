@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {Header, InputCustomer, InputPakar, InputHomeBabySpa} from '../../components';
+import {Header, InputCustomer, InputPakar, InputHomeBabySpa, InputPosyandu} from '../../components';
 import {colors} from '../../utils';
 
 const UpdateProfile = ({navigation}) => {
@@ -11,7 +11,8 @@ const UpdateProfile = ({navigation}) => {
         <View style={styles.content}>
           {/* <InputCustomer /> */}
           {/* <InputPakar /> */}
-          <InputHomeBabySpa />
+          {/* <InputHomeBabySpa /> */}
+          <InputPosyandu />
         </View>
       </ScrollView>
     </View>
