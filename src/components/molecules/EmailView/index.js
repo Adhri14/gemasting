@@ -2,15 +2,20 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {fonts, mainColors} from '../../../utils';
 import {Button, Gap, Link, Radio, TextInput, InputPassword} from '../../atoms';
+import {useNavigation} from '@react-navigation/native';
 
 const EmailView = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <TextInput label="Email" />
       <Gap height={24} />
       <InputPassword label="Password" />
       <Gap height={40} />
-      <Button title="Masuk Akun" />
+      <Button
+        title="Masuk Akun"
+        onPress={() => navigation.navigate('MainApp')}
+      />
       <Gap height={10} />
       <Text style={styles.or}>Atau</Text>
       <Gap height={10} />

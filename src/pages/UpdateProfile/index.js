@@ -1,6 +1,12 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {Header, InputCustomer, InputPakar, InputHomeBabySpa, InputPosyandu} from '../../components';
+import {
+  Header,
+  InputCustomer,
+  InputPakar,
+  InputHomeBabySpa,
+  InputPosyandu,
+} from '../../components';
 import {colors} from '../../utils';
 
 const UpdateProfile = ({navigation}) => {

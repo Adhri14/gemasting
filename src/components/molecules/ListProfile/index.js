@@ -1,33 +1,35 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import ProfilePhoto from '../ProfilePhoto';
 import List from '../List';
-import { fonts, mainColors } from '../../../utils';
-import { Gap } from '../../atoms';
+import {fonts, mainColors} from '../../../utils';
+import {Gap} from '../../atoms';
+import {useNavigation} from '@react-navigation/native';
 
 const ListProfile = () => {
-  return(
+  const navigation = useNavigation();
+  return (
     <View>
       <ProfilePhoto name="Nama Pengguna" desc="3578102110030001" />
-        <View style={styles.container}>
-          <List
-            icon="edit-profile"
-            name="Data Pribadi"
-            type="next"
-            onPress={() => navigation.navigate('UpdateProfile')}
-          />
-          <List icon="edit-riwayat" name="Riwayat Transaksi" type="next" />
-          <List icon="edit-pengaturan" name="Pengaturan" type="next" />
-          <List icon="edit-bantuan" name="Bantuan" type="next" />
-        </View>
-        <Gap height={30} />
-        <View style={{paddingHorizontal: 20}}>
-          {/* <Button title="Keluar" /> */}
-          <TouchableOpacity style={styles.button} activeOpacity={0.8}>
-            <Text style={styles.textButton}>Keluar</Text>
-          </TouchableOpacity>
-        </View>
-        <Gap height={15} />
+      <View style={styles.container}>
+        <List
+          icon="edit-profile"
+          name="Data Pribadi"
+          type="next"
+          onPress={() => navigation.navigate('UpdateProfile')}
+        />
+        <List icon="edit-riwayat" name="Riwayat Transaksi" type="next" />
+        <List icon="edit-pengaturan" name="Pengaturan" type="next" />
+        <List icon="edit-bantuan" name="Bantuan" type="next" />
+      </View>
+      <Gap height={30} />
+      <View style={{paddingHorizontal: 20}}>
+        {/* <Button title="Keluar" /> */}
+        <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+          <Text style={styles.textButton}>Keluar</Text>
+        </TouchableOpacity>
+      </View>
+      <Gap height={15} />
     </View>
   );
 };
@@ -49,4 +51,4 @@ const styles = StyleSheet.create({
     color: mainColors.white,
   },
   container: {paddingTop: 40},
-})
+});

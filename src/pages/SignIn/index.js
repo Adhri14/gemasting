@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   indicator: {
     backgroundColor: mainColors.teal,
-    height: 55,
+    height: 70,
     zIndex: -1,
   },
   wrapper: {
