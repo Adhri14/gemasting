@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
   },
   label: {
     color: colors.text.primary1,
-    fontSize: 16,
-    marginBottom: 6,
-    fontFamily: fonts.primary.normal,
+    fontSize: 18,
+    marginBottom: 10,
+    fontFamily: fonts.primary[600],
   },
 });

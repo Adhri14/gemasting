@@ -6,12 +6,12 @@ import {Button, Gap, TextInput} from '../../atoms';
 const InputCustomer = () => {
   return (
     <View>
-      <ProfilePhoto />
-      <TextInput type="secondary" label="Nama Anda" />
+      <ProfilePhoto type="camera" />
+      <TextInput label="Nama Anda" />
       <Gap height={35} />
-      <TextInput type="secondary" label="NIK" />
+      <TextInput label="NIK" />
       <Gap height={35} />
-      <TextInput type="secondary" label="Tempat Tanggal Lahir" />
+      <TextInput label="Tempat Tanggal Lahir" />
       <Gap height={50} />
       <Button title="Simpan" />
     </View>

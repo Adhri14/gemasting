@@ -33,10 +33,10 @@ export default Radio;
 
 const styles = StyleSheet.create({
   radio: {flexDirection: 'row', marginLeft: -24},
-  label: {color: mainColors.lightSmoke},
+  label: {color: mainColors.grey},
   title: {
-    fontSize: 16,
+    fontSize: 18,
     color: colors.text.primary1,
-    fontFamily: fonts.primary.normal,
+    fontFamily: fonts.primary[600],
   },
 });

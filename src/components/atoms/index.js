@@ -7,6 +7,8 @@ import Picker from './Picker';
 import Radio from './Radio';
 import InputPassword from './InputPassword';
 import TabItem from './TabItem';
+import FileUpload from './FileUpload';
+import DatePicker from './DatePicker';
 
 export {
   Button,
@@ -18,4 +20,6 @@ export {
   Radio,
   InputPassword,
   TabItem,
+  FileUpload,
+  DatePicker,
 };

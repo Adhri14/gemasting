@@ -1,13 +1,18 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
-import {DummyUser} from '../../../assets/Dummy';
-import {colors, fonts} from '../../../utils';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import { IconCamera,DummyUser } from '../../../assets';
+import {colors, fonts, mainColors} from '../../../utils';
 
-const ProfilePhoto = ({name, desc}) => {
+const ProfilePhoto = ({name, desc, type, onPress}) => {
   return (
     <View style={styles.container}>
       <View style={styles.borderProfile}>
         <Image source={DummyUser} style={styles.avatar} />
+        {type === 'camera' && (
+          <TouchableOpacity activeOpacity={1} onPress={onPress} style={styles.buttonCamera}>
+            <IconCamera />
+          </TouchableOpacity>
+        )}
       </View>
       {name && (
         <View>
@@ -41,18 +46,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   name: {
-    fontSize: 22,
+    fontSize: 25,
     color: colors.text.primary1,
-    fontFamily: fonts.primary[400],
+    fontFamily: fonts.primary[600],
     marginTop: 20,
     textAlign: 'center',
   },
   nomorId: {
-    fontSize: 16,
-    fontFamily: fonts.primary[400],
+    fontSize: 18,
+    fontFamily: fonts.primary[500],
     color: colors.text.primary2,
     marginTop: 2,
     alignItems: 'center',
     textAlign: 'center',
   },
+  buttonCamera: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: mainColors.teal,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    right: -5,
+    bottom: -5
+  }
 });

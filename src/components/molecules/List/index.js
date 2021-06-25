@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {DummyPhoto} from '../../../assets/Dummy';
-import {colors, fonts} from '../../../utils';
+import {colors, fonts, mainColors} from '../../../utils';
 import {
   IconNext,
   IconProfileActive,
@@ -44,13 +44,13 @@ export default List;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    padding: 16,
+    paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#FAFAFA',
+    borderBottomColor: mainColors.smoke,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  content: {flex: 1, marginLeft: 16, justifyContent: 'center'},
+  content: {flex: 1, marginLeft: 16, justifyContent: 'center',},
   avatar: {
     width: 46,
     height: 46,

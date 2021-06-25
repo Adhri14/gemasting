@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {Header, InputCustomer, InputPakar} from '../../components';
+import {Header, InputCustomer, InputPakar, InputHomeBabySpa, InputPosyandu} from '../../components';
 import {colors} from '../../utils';
 
 const UpdateProfile = ({navigation}) => {
@@ -9,8 +9,10 @@ const UpdateProfile = ({navigation}) => {
       <Header title="Data Pribadi" onPress={() => navigation.goBack()} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
-          <InputCustomer />
+          {/* <InputCustomer /> */}
           {/* <InputPakar /> */}
+          {/* <InputHomeBabySpa /> */}
+          <InputPosyandu />
         </View>
       </ScrollView>
     </View>
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    padding: 25,
+    padding: 20,
     paddingTop: 0,
   },
 });

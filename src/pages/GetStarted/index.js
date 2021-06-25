@@ -38,7 +38,7 @@ export default GetStarted;
 const styles = StyleSheet.create({
   page: {
     padding: 20,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     backgroundColor: mainColors.white,
     flex: 1,
     alignItems: 'center',
