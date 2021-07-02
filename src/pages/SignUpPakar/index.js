@@ -30,36 +30,41 @@ const SignUpPakar = ({navigation}) => {
           <Gap height={10} />
           <Text style={styles.title}>Daftar Akun</Text>
           <Gap height={15} />
-          <TextInput label="Email" />
-          <Gap height={25} />
-          <TextInput label="No Telepon" />
-          <Gap height={25} />
-          <TextInput label="Nama" />
-          <Gap height={25} />
+          <TextInput placeholder="Email" label="Email" />
+          <Gap height={20} />
+          <TextInput placeholder="+62" label="No Telepon" />
+          <Gap height={20} />
+          <TextInput placeholder="Nama" label="Nama" />
+          <Gap height={20} />
           <Radio
-            valueItem1="laki-laki"
-            valueItem2="perempuan"
+            valueItem1="L"
+            valueItem2="P"
             valueGroup={radio}
             onValueChange={val => setRadio(val)}
           />
           <Gap height={10} />
-          <View>
-            <Text style={styles.label}>Tempat, Tanggal Lahir</Text>
-            <View style={styles.row}>
-              <TextInputRN style={styles.input} />
-              <DatePicker />
-            </View>
-          </View>
-          <Gap height={25} />
+          <DatePicker placeholder="dd-mm-yyyy" label="Tanggal Lahir" />
+          <Gap height={20} />
           <Picker label="Spesialisasi" />
-          <Gap height={25} />
-          <TextInput label="Pendidikan" />
-          <Gap height={25} />
-          <TextInput label="Alamat Praktek" />
-          <Gap height={25} />
-          <InputPassword label="Password" />
-          <Gap height={25} />
-          <InputPassword label="Ketik Ulang Password" />
+          <Gap height={20} />
+          <TextInput
+            placeholder="Pendidikan terakhir anda"
+            label="Pendidikan"
+          />
+          <Gap height={20} />
+          <TextInput
+            isTextArea
+            placeholder="Alamat praktek anda"
+            label="Alamat Praktek"
+          />
+          <Gap height={20} />
+          <TextInput isPassword label="Password" placeholder="Password" />
+          <Gap height={20} />
+          <TextInput
+            isPassword
+            label="Ulangi Password"
+            placeholder="Ketik ulang password"
+          />
           <Gap height={10} />
           <Checkbox />
           <Gap height={20} />
@@ -88,7 +93,7 @@ export default SignUpPakar;
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: mainColors.white,
+    backgroundColor: mainColors.lightSmoke,
     flex: 1,
   },
   content: {
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 40,
+    fontSize: 25,
     fontFamily: fonts.primary[700],
     color: colors.text.primary,
   },
