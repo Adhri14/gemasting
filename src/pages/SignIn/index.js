@@ -15,13 +15,14 @@ const renderTabBar = props => {
     <TabBar
       {...props}
       indicatorStyle={styles.indicator}
+      indicatorContainerStyle={styles.container}
       style={styles.wrapper}
       tabStyle={styles.tab}
       renderLabel={({route, focused}) => (
         <Text
           style={{
-            color: focused ? mainColors.white : colors.text.primary1,
-            fontSize: 13,
+            color: focused ? mainColors.black : colors.text.primary2,
+            fontSize: 16,
             fontFamily: fonts.primary.normal,
             textAlign: 'center',
           }}>
@@ -37,8 +38,8 @@ const SignIn = ({navigation}) => {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'Email', title: 'Login Dengan Email'},
-    {key: 'Telephone', title: 'Login Dengan No. Telepon'},
+    {key: 'Email', title: 'Email'},
+    {key: 'Telephone', title: 'Nomor Telepon'},
   ]);
 
   const renderScene = SceneMap({
@@ -67,7 +68,7 @@ export default SignIn;
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: colors.white,
+    backgroundColor: mainColors.lightSmoke,
     flex: 1,
   },
   title: {
@@ -77,17 +78,32 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 30,
   },
+  // container: {
+  //   padding: 10,
+  //   borderWidth: 1,
+  //   backgroundColor: 'yellow',
+  // },
   indicator: {
-    backgroundColor: mainColors.teal,
-    height: 70,
+    backgroundColor: mainColors.white,
+    padding: 24,
     zIndex: -1,
+    position: 'absolute',
+    bottom: 10,
+    alignSelf: 'center',
+    borderRadius: 15,
+    left: 8,
+    width: '45%',
   },
   wrapper: {
-    backgroundColor: mainColors.ocean,
+    backgroundColor: mainColors.smoke,
     elevation: 0,
     marginHorizontal: 20,
     overflow: 'hidden',
-    borderRadius: 30,
+    borderRadius: 15,
     resizeMode: 'cover',
+    padding: 10,
+    paddingHorizontal: 0,
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });

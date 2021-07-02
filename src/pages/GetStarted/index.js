@@ -1,9 +1,10 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Welcome} from '../../assets';
+import {CardButton} from '../../components';
 import Button from '../../components/atoms/Button';
 import Gap from '../../components/atoms/Gap';
-import {mainColors} from '../../utils';
+import {colors, fonts, mainColors} from '../../utils';
 
 const GetStarted = ({navigation}) => {
   return (
@@ -13,20 +14,21 @@ const GetStarted = ({navigation}) => {
         <Welcome />
       </View>
       <View style={styles.container}>
-        <Button
-          title="Gabung Sebagai User"
-          onPress={() => navigation.navigate('SignUpCustomer')}
-        />
-        <Gap height={12} />
-        <Button
-          title="Gabung Sebagai Pakar"
-          onPress={() => navigation.navigate('SignUpPakar')}
-        />
-        <Gap height={12} />
-        <Button
-          title="Gabung Sebagai Lembaga"
-          onPress={() => navigation.navigate('SignUpLembaga')}
-        />
+        <Text style={styles.title}>Bergabung Sebagai</Text>
+        <View style={styles.row}>
+          <CardButton
+            label="Pakar"
+            onPress={() => navigation.navigate('SignUpPakar')}
+          />
+          <CardButton
+            label="User"
+            onPress={() => navigation.navigate('SignUpCustomer')}
+          />
+          <CardButton
+            label="Lembaga"
+            onPress={() => navigation.navigate('SignUpLembaga')}
+          />
+        </View>
       </View>
     </View>
     // </ImageBackground>
@@ -38,12 +40,24 @@ export default GetStarted;
 const styles = StyleSheet.create({
   page: {
     padding: 20,
-    justifyContent: 'space-around',
-    backgroundColor: mainColors.white,
+    justifyContent: 'space-evenly',
+    backgroundColor: mainColors.lightSmoke,
     flex: 1,
     alignItems: 'center',
   },
   container: {
     width: '100%',
+  },
+  title: {
+    fontSize: 25,
+    fontFamily: fonts.primary[600],
+    textAlign: 'center',
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 20,
   },
 });

@@ -62,7 +62,7 @@ export default SignUpLembaga;
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: colors.white,
+    backgroundColor: mainColors.lightSmoke,
     flex: 1,
   },
   title: {

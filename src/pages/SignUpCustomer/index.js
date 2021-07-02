@@ -20,13 +20,19 @@ const SignUpCustomer = ({navigation}) => {
           <Gap height={10} />
           <Text style={styles.title}>Daftar Akun</Text>
           <Gap height={15} />
-          <TextInput label="Email" />
+          <TextInput placeholder="Email" label="Email" />
           <Gap height={25} />
-          <TextInput label="Email Pemulihan" />
+          <TextInput placeholder="Email pemulihan" label="Email Pemulihan" />
           <Gap height={25} />
-          <InputPassword label="Password" />
+          <TextInput placeholder="+62" label="No. Telepon" />
           <Gap height={25} />
-          <InputPassword label="Ketik Ulang Password" />
+          <TextInput isPassword placeholder="Password" label="Password" />
+          <Gap height={25} />
+          <TextInput
+            isPassword
+            placeholder="Ketik ulang password"
+            label="Ulangi Password"
+          />
           <Gap height={10} />
           <Checkbox />
           <Gap height={20} />
@@ -55,7 +61,7 @@ export default SignUpCustomer;
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: colors.white,
+    backgroundColor: mainColors.lightSmoke,
     flex: 1,
   },
   title: {

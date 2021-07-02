@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import {Header, Button} from '../../components';
-import {colors, fonts} from '../../utils';
+import {colors, fonts, mainColors} from '../../utils';
 
 const OtpScreen = ({navigation}) => {
   const [codeOtp, setCodeOtp] = useState('');
@@ -74,7 +74,7 @@ export default OtpScreen;
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: mainColors.lightSmoke,
   },
   container: {
     flex: 1,

@@ -8,10 +8,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import {ImageIntro1, ImageIntro2, ImageIntro3, ImageIntro4} from '../../assets';
+import {
+  IconBackGreen,
+  ImageIntro1,
+  ImageIntro2,
+  ImageIntro3,
+  ImageIntro4,
+} from '../../assets';
 import {Gap} from '../../components';
-import {colors, mainColors, fonts} from '../../utils';
+import {colors, fonts, mainColors} from '../../utils';
 
 const slides = [
   {
@@ -50,6 +55,7 @@ const AppIntro = ({navigation}) => {
   const flatListRef = useRef(null);
 
   const handleSkip = () => {
+    // console.log('Tes press skip');
     flatListRef.current.scrollToEnd({animated: true});
   };
 
@@ -57,8 +63,8 @@ const AppIntro = ({navigation}) => {
     if (currentSlide === 0) {
       return false;
     }
-    // console.log(currentSlide >= slides.length - 1);
     flatListRef.current.scrollToIndex({index: currentSlide - 1});
+    // console.log('Tes press');
   };
 
   const handleOnDone = () => {
@@ -66,7 +72,7 @@ const AppIntro = ({navigation}) => {
   };
 
   return (
-    <>
+    <View style={styles.page}>
       <StatusBar
         translucent={false}
         backgroundColor="transparent"
@@ -79,16 +85,16 @@ const AppIntro = ({navigation}) => {
           <TouchableOpacity
             activeOpacity={1}
             onPress={handlePrev}
-            style={styles.btn}>
-            <Icon name="arrow-left" size={20} color={mainColors.lightSmoke} />
+            style={styles.buttonBack}>
+            <IconBackGreen style={styles.icon} />
           </TouchableOpacity>
         )}
 
-        <Gap width="9%" />
+        <Gap width="10%" height={50} />
 
         {/* Skip */}
         <View style={styles.wrapper}>
-          {currentSlide === 3 ? (
+          {currentSlide === 2 ? (
             <Text style={styles.skip}>{''}</Text>
           ) : (
             <Text onPress={handleSkip} style={styles.skip}>
@@ -102,7 +108,6 @@ const AppIntro = ({navigation}) => {
       <FlatList
         ref={flatListRef}
         data={slides}
-        style={styles.page}
         horizontal
         pagingEnabled
         onViewableItemsChanged={onViewableItemsChanged}
@@ -111,10 +116,9 @@ const AppIntro = ({navigation}) => {
         renderItem={({item}) => (
           <View style={styles.slide}>
             <View style={styles.image}>{item.image}</View>
-            <View style={styles.content}>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.text}>{item.text}</Text>
-            </View>
+            <Gap height={50} />
+            <Text style={styles.title}>{item.title}</Text>
+            <Text style={styles.text}>{item.text}</Text>
           </View>
         )}
       />
@@ -134,14 +138,16 @@ const AppIntro = ({navigation}) => {
           ))}
         </View>
 
+        <Gap height={10} />
+
         {/* Button Done */}
-        {currentSlide >= 3 && (
-          <TouchableOpacity style={styles.btnBig} onPress={handleOnDone}>
-            <Icon name="arrow-right" size={20} color={mainColors.white} />
+        {currentSlide >= 2 && (
+          <TouchableOpacity style={styles.buttonDone} onPress={handleOnDone}>
+            <Text style={styles.textButton}>Mulai</Text>
           </TouchableOpacity>
         )}
       </View>
-    </>
+    </View>
   );
 };
 
@@ -152,107 +158,92 @@ const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: mainColors.white,
+    backgroundColor: mainColors.lightSmoke,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   slide: {
     width,
     height,
     alignItems: 'center',
+    paddingTop: 10,
   },
   image: {
-    alignSelf: 'center',
-    marginTop: -10,
-    marginBottom: 20,
-    width: width - 40,
-    height: height * 0.4,
-  },
-  content: {
-    alignSelf: 'flex-start',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    flex: 1,
-    width,
-    // alignItems: 'center',
-  },
-  title: {
-    fontSize: 25,
-    marginBottom: 10,
-    fontFamily: fonts.primary[700],
-    color: colors.text.primary1,
-  },
-  text: {
-    fontSize: 16,
-    lineHeight: 30,
-    fontFamily: fonts.primary[300],
-    color: mainColors.lightSmoke,
-  },
-  indicatorContainer: {
-    flexDirection: 'row',
-    width: '35%',
-    justifyContent: 'space-between',
-    height: 50,
-    alignItems: 'center',
-  },
-  indicator: {
-    width: 15,
-    height: 15,
-    borderRadius: 15,
-    backgroundColor: mainColors.smoke,
-  },
-  indicatorActive: {
-    width: 30,
-    height: 15,
-    borderRadius: 20,
-    backgroundColor: mainColors.teal,
+    width: width - 70,
+    height: width - 110,
   },
   header: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    backgroundColor: mainColors.white,
-    paddingVertical: 10,
-  },
-  wrapper: {
-    height: 50,
-    justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 5,
+    width,
+    paddingHorizontal: 30,
+    marginTop: 15,
+    zIndex: 99,
   },
-  btn: {
+  buttonBack: {
+    backgroundColor: '#EAFAF3',
     width: 50,
     height: 50,
-    zIndex: 999,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  textBtn: {
-    letterSpacing: 1,
-    fontSize: 14,
-    color: 'white',
+    alignSelf: 'center',
   },
   skip: {
-    zIndex: 999,
-    letterSpacing: 1,
-    fontSize: 15,
-    textDecorationLine: 'underline',
-    fontFamily: fonts.primary[300],
+    fontSize: 16,
+    fontFamily: fonts.primary[600],
+    color: mainColors.lime,
   },
-  btnBig: {
-    width: 50,
-    height: 50,
-    borderRadius: 30,
-    zIndex: 999,
-    backgroundColor: colors.button.primary.background,
-    justifyContent: 'center',
-    alignItems: 'center',
+  title: {
+    fontSize: 25,
+    fontFamily: fonts.primary[600],
+    textAlign: 'center',
+    color: colors.text.primary1,
+    marginTop: -40,
+  },
+  text: {
+    fontSize: 18,
+    fontFamily: fonts.primary[500],
+    textAlign: 'center',
+    color: colors.text.primary2,
+    marginTop: 5,
   },
   footer: {
-    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 30,
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: mainColors.white,
-    paddingHorizontal: 20,
-    paddingBottom: 30,
+    height: 100,
+  },
+  indicatorContainer: {
+    width: 90,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  indicator: {
+    width: 8,
+    height: 8,
+    backgroundColor: mainColors.ocean,
+    borderRadius: 15,
+  },
+  indicatorActive: {
+    width: 24,
+    height: 8,
+    backgroundColor: mainColors.teal,
+    borderRadius: 15,
+  },
+  buttonDone: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: mainColors.lime,
+    borderRadius: 10,
+  },
+  textButton: {
+    fontSize: 18,
+    fontFamily: fonts.primary[600],
+    paddingVertical: 21,
+    paddingHorizontal: 53,
+    color: colors.white,
   },
 });
