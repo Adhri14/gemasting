@@ -5,7 +5,6 @@ import {
   Checkbox,
   Gap,
   Header,
-  InputPassword,
   Link,
   Picker,
   TextInput,
@@ -21,19 +20,27 @@ const SignUpLembaga = ({navigation}) => {
           <Gap height={10} />
           <Text style={styles.title}>Daftar Akun</Text>
           <Gap height={15} />
-          <TextInput label="Email" />
+          <TextInput placeholder="Email" label="Email" />
           <Gap height={25} />
-          <TextInput label="No. Telepon" />
+          <TextInput placeholder="+62" label="No. Telepon" />
           <Gap height={25} />
-          <TextInput label="Nama Kantor" />
+          <TextInput placeholder="Nama kantor" label="Nama Kantor" />
           <Gap height={25} />
-          <TextInput label="Alamat Kantor" />
+          <TextInput
+            placeholder="Alamat kantor anda"
+            isTextArea
+            label="Alamat Kantor"
+          />
           <Gap height={25} />
           <Picker label="Kategori Lembaga" />
           <Gap height={25} />
-          <InputPassword label="Password" />
+          <TextInput placeholder="Pasword" label="Password" isPassword />
           <Gap height={25} />
-          <InputPassword label="Ketik Ulang Password" />
+          <TextInput
+            placeholder="Ketik ulang password"
+            label="Ulangi Password"
+            isPassword
+          />
           <Gap height={10} />
           <Checkbox />
           <Gap height={20} />
@@ -66,7 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 40,
+    fontSize: 25,
     fontFamily: fonts.primary[700],
     color: colors.text.primary,
   },
