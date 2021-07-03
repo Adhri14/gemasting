@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import {
-  IconBackGreen,
+  IconBackPink,
   ImageIntro1,
   ImageIntro2,
   ImageIntro3,
@@ -86,7 +86,7 @@ const AppIntro = ({navigation}) => {
             activeOpacity={1}
             onPress={handlePrev}
             style={styles.buttonBack}>
-            <IconBackGreen style={styles.icon} />
+            <IconBackPink style={styles.icon} />
           </TouchableOpacity>
         )}
 
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     zIndex: 99,
   },
   buttonBack: {
-    backgroundColor: '#EAFAF3',
+    backgroundColor: mainColors.lightPink,
     width: 50,
     height: 50,
     borderRadius: 10,
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   skip: {
     fontSize: 16,
     fontFamily: fonts.primary[600],
-    color: mainColors.lime,
+    color: mainColors.pink,
   },
   title: {
     fontSize: 25,
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
   buttonDone: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: mainColors.lime,
+    backgroundColor: mainColors.pink,
     borderRadius: 10,
   },
   textButton: {

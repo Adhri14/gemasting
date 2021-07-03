@@ -1,14 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {IconBackDark, IconBackGreen} from '../../../assets';
+import {IconBackDark, IconBackPink} from '../../../assets';
+import {mainColors} from '../../../utils';
 
 const IconOnly = ({onPress, icon}) => {
   const Icon = () => {
     if (icon === 'back-dark') {
       return <IconBackDark />;
     }
-    if (icon === 'back-green') {
-      return <IconBackGreen />;
+    if (icon === 'back-pink') {
+      return <IconBackPink />;
     }
     return <IconBackDark />;
   };
@@ -31,6 +32,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#EAFAF3',
+    backgroundColor: mainColors.lightPink,
   },
 });

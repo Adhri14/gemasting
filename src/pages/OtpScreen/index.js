@@ -1,15 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
-import {Header, Button} from '../../components';
+import {Header, Button, Gap} from '../../components';
 import {colors, fonts, mainColors} from '../../utils';
 
 const OtpScreen = ({navigation}) => {
+  let textInput = useRef(null);
+  const lengthInput = 4;
   const [codeOtp, setCodeOtp] = useState('');
-  // const [displayButton, setDisplayButton] = useState('flex');
-  const [codeLength, setCodeLength] = useState({
-    type: 'secondary',
-    disabled: true,
-  });
+  const [displayButton, setDisplayButton] = useState('flex');
+  const [colorInput, setColorInput] = useState(mainColors.lightPink);
+
+  useEffect(() => {
+    textInput.focus();
+  }, []);
 
   return (
     <View style={styles.page}>
@@ -22,34 +25,46 @@ const OtpScreen = ({navigation}) => {
             telepon anda.
           </Text>
           <Text style={styles.link}>Bukan milik anda?</Text>
+          <Gap height={60} />
           <View>
             <TextInput
-              style={styles.input}
+              ref={input => (textInput = input)}
+              style={[styles.input, {borderBottomColor: colorInput}]}
               keyboardType="number-pad"
+              maxLength={lengthInput}
               value={codeOtp}
-              onChangeText={val => {
-                setCodeOtp(val);
-
-                if (val.length >= 3 && !isNaN(val)) {
-                  if (val.length < 7) {
-                    setCodeLength({
-                      disabled: false,
-                    });
-                    return true;
-                  }
-                  setCodeLength({
-                    type: '#0BCAD4',
-                    disabled: true,
-                  });
-                  return true;
-                } else {
-                  setCodeLength({
-                    type: 'secondary',
-                    disabled: true,
-                  });
-                }
+              onFocus={() => {
+                setDisplayButton('none');
+                setColorInput(mainColors.pink);
               }}
+              onBlur={() => {
+                setDisplayButton('flex');
+                setColorInput(mainColors.lightPink);
+              }}
+              onChangeText={val => setCodeOtp(val)}
             />
+            <View style={styles.containerInput}>
+              {Array(lengthInput)
+                .fill()
+                .map((data, index) => (
+                  <View
+                    key={index}
+                    style={[
+                      styles.cellView,
+                      {
+                        borderBottomColor:
+                          index === codeOtp.length
+                            ? mainColors.pink
+                            : mainColors.lightPink,
+                      },
+                    ]}>
+                    <Text style={styles.cellText}>
+                      {codeOtp && codeOtp.length > 0 ? codeOtp[index] : ''}
+                    </Text>
+                  </View>
+                ))}
+            </View>
+            <Gap height={29} />
             <Text style={styles.sendCode}>
               Belum menerima kode? <Text style={styles.bold}>Kirim ulang</Text>
             </Text>
@@ -58,11 +73,11 @@ const OtpScreen = ({navigation}) => {
       </ScrollView>
       <View style={[styles.button]}>
         <Button
-          type={codeLength.type}
-          // display={displayButton}
+          // type={codeLength.type}
+          display={displayButton}
           title="Kirimkan"
-          disabled={codeLength.disabled}
-          onPress={() => navigation.replace('AppIntro')}
+          // disabled={codeLength.disabled}
+          onPress={() => navigation.replace('MainApp')}
         />
       </View>
     </View>
@@ -82,8 +97,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 50,
-    fontFamily: fonts.primary[800],
+    fontSize: 25,
+    fontFamily: fonts.primary[600],
     marginBottom: 10,
     color: colors.text.primary,
   },
@@ -93,30 +108,28 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary[400],
     marginBottom: 20,
     lineHeight: 20,
-    paddingHorizontal: 72,
-    color: colors.text.secondary,
+    paddingHorizontal: 50,
+    color: '#B0B0B0',
   },
   link: {
     fontSize: 15,
     fontFamily: fonts.primary[400],
-    color: colors.text.secondary,
+    color: colors.text.primary1,
+    textDecorationLine: 'underline',
   },
   input: {
-    borderBottomWidth: 1,
-    borderBottomColor: colors.secondary,
-    marginTop: 50,
-    marginBottom: 30,
-    textAlign: 'center',
+    width: 0,
+    height: 0,
   },
   sendCode: {
     fontSize: 15,
     fontFamily: fonts.primary[400],
-    color: colors.text.secondary,
+    color: colors.text.secondary1,
     textAlign: 'center',
   },
   bold: {
     fontFamily: fonts.primary[700],
-    color: colors.text.primary,
+    color: colors.text.primary1,
   },
   button: {
     paddingHorizontal: 20,
@@ -124,5 +137,22 @@ const styles = StyleSheet.create({
     bottom: 20,
     alignSelf: 'center',
     width: '100%',
+  },
+  containerInput: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cellView: {
+    paddingVertical: 11,
+    width: 57,
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+  },
+  cellText: {
+    textAlign: 'center',
+    fontSize: 16,
   },
 });

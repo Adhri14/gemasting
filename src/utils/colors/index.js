@@ -10,6 +10,9 @@ export const mainColors = {
   white: '#FFFFFF',
   black: '#404040',
   grey1: '#858585',
+  pink: '#EC4794',
+  pink2: '#EC4794',
+  lightPink: '#FFE6E8',
 };
 
 export const colors = {
@@ -21,14 +24,14 @@ export const colors = {
   text: {
     primary1: mainColors.black,
     primary2: mainColors.grey1,
-    secondary1: mainColors.smoke,
+    secondary1: mainColors.grey,
     secondary2: mainColors.teal,
   },
   button: {
     primary: {
-      background: mainColors.lime,
+      background: mainColors.pink,
       text: mainColors.white,
-      border: mainColors.lime,
+      border: mainColors.pink,
     },
     secondary: {
       background: 'transparent',

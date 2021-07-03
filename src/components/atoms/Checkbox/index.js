@@ -15,8 +15,8 @@ const Checkbox = () => {
         }}
         position="leading"
         style={styles.content}
-        uncheckedColor={mainColors.smoke}
-        color={mainColors.salmon}
+        uncheckedColor={mainColors.darkSmoke}
+        color={mainColors.pink}
       />
       <Text onPress={() => setChecked(!checked)} style={styles.label}>
         Dengan klik daftar, berarti anda telah menyetujui{' '}
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontFamily: fonts.primary[700],
-    color: mainColors.lime,
+    color: mainColors.pink,
   },
 });

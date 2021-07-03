@@ -1,0 +1,23 @@
+const [codeLength, setCodeLength] = useState({
+    type: 'secondary',
+    disabled: true,
+  });
+
+if (val.length >= 3 && !isNaN(val)) {
+                  if (val.length < 7) {
+                    setCodeLength({
+                      disabled: false,
+                    });
+                    return true;
+                  }
+                  setCodeLength({
+                    type: '#0BCAD4',
+                    disabled: true,
+                  });
+                  return true;
+                } else {
+                  setCodeLength({
+                    type: 'secondary',
+                    disabled: true,
+                  });
+                }

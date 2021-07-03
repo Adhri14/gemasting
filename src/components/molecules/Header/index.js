@@ -7,7 +7,7 @@ import {Button, Gap} from '../../atoms';
 const Header = ({onPress, title}) => {
   return (
     <View style={styles.container}>
-      <Button type="icon-only" icon="back-green" onPress={onPress} />
+      <Button type="icon-only" icon="back-pink" onPress={onPress} />
       <Text style={styles.text}>{title}</Text>
       <Gap width={24} />
     </View>
