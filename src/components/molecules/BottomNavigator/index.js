@@ -56,8 +56,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 25,
-    paddingVertical: 12,
+    padding: 27,
     backgroundColor: colors.white,
     shadowColor: '#000',
     shadowOffset: {
@@ -66,7 +65,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 15,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
   },
 });

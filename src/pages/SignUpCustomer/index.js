@@ -6,6 +6,7 @@ import {
   Gap,
   Header,
   InputPassword,
+  Line,
   Link,
   TextInput,
 } from '../../components';
@@ -40,9 +41,9 @@ const SignUpCustomer = ({navigation}) => {
             title="Daftar Akun"
             onPress={() => navigation.navigate('OtpScreen')}
           />
-          <Gap height={10} />
-          <Text style={styles.or}>Atau</Text>
-          <Gap height={10} />
+          <Gap height={20} />
+          <Line />
+          <Gap height={20} />
           <Button type="secondary" google title="Daftar dengan Google" />
           <Gap height={20} />
           <Link
@@ -74,11 +75,5 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     backgroundColor: colors.white,
     flex: 1,
-  },
-  or: {
-    textAlign: 'center',
-    fontSize: 16,
-    color: mainColors.lightSmoke,
-    fontFamily: fonts.primary.normal,
   },
 });
