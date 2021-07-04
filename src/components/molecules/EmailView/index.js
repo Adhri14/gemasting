@@ -1,24 +1,32 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {fonts, mainColors} from '../../../utils';
-import {Button, Gap, Link, Radio, TextInput, InputPassword} from '../../atoms';
+import {
+  Button,
+  Gap,
+  Link,
+  Radio,
+  TextInput,
+  InputPassword,
+  Line,
+} from '../../atoms';
 import {useNavigation} from '@react-navigation/native';
 
 const EmailView = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <TextInput label="Email" />
-      <Gap height={24} />
-      <InputPassword label="Password" />
+      <TextInput label="Email" placeholder="Email" />
+      <Gap height={20} />
+      <TextInput label="Password" placeholder="Password" isPassword />
       <Gap height={40} />
       <Button
         title="Masuk Akun"
         onPress={() => navigation.navigate('MainApp')}
       />
-      <Gap height={10} />
-      <Text style={styles.or}>Atau</Text>
-      <Gap height={10} />
+      <Gap height={20} />
+      <Line />
+      <Gap height={20} />
       <Button google type="secondary" title="Masuk dengan Google" />
       <Gap height={30} />
       <Link
@@ -35,10 +43,4 @@ export default EmailView;
 
 const styles = StyleSheet.create({
   container: {padding: 20},
-  or: {
-    textAlign: 'center',
-    fontSize: 16,
-    color: mainColors.lightSmoke,
-    fontFamily: fonts.primary.normal,
-  },
 });

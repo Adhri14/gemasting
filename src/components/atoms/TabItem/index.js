@@ -8,7 +8,7 @@ import {
   IconProfileActive,
   IconChat,
 } from '../../../assets';
-import {colors, fonts} from '../../../utils';
+import {colors, fonts, mainColors} from '../../../utils';
 
 const TabItem = ({title, active, onPress, onLongPress}) => {
   const Icon = () => {
@@ -31,7 +31,9 @@ const TabItem = ({title, active, onPress, onLongPress}) => {
     <TouchableOpacity
       style={styles.container}
       onPress={onPress}
-      onLongPress={onLongPress}>
+      onLongPress={onLongPress}
+      activeOpacity={0.8}>
+      {active && <View style={styles.line} />}
       <Icon />
       <Text style={styles.text(active)}>{title}</Text>
     </TouchableOpacity>
@@ -41,11 +43,20 @@ const TabItem = ({title, active, onPress, onLongPress}) => {
 export default TabItem;
 
 const styles = StyleSheet.create({
-  container: {alignItems: 'center'},
+  container: {alignItems: 'center', flex: 1},
   text: active => ({
     fontSize: 11,
     color: colors.text.secondary2,
     fontFamily: active ? fonts.primary[600] : fonts.primary[400],
     marginTop: 4,
   }),
+  line: {
+    width: 30,
+    height: 5,
+    borderRadius: 10,
+    backgroundColor: mainColors.teal,
+    alignSelf: 'center',
+    position: 'absolute',
+    top: -28,
+  },
 });

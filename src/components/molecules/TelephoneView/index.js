@@ -1,27 +1,19 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {fonts, mainColors} from '../../../utils';
-import {Button, Gap, Link, TextInput, InputPassword} from '../../atoms';
+import {Button, Gap, Link, TextInput, InputPassword, Line} from '../../atoms';
 
 const TelephoneView = () => {
   return (
     <View style={styles.container}>
-      <TextInput label="Telepon" />
-      <Gap height={24} />
-      <InputPassword label="Password" />
+      <TextInput label="Telepon" placeholder="+62" />
+      <Gap height={20} />
+      <TextInput label="Pin" placeholder="Pin" />
       <Gap height={40} />
       <Button title="Masuk Akun" />
-      <Gap height={10} />
-      <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 16,
-          color: mainColors.lightSmoke,
-          fontFamily: fonts.primary.normal,
-        }}>
-        Atau
-      </Text>
-      <Gap height={10} />
+      <Gap height={20} />
+      <Line />
+      <Gap height={20} />
       <Button google type="secondary" title="Masuk dengan Google" />
       <Gap height={30} />
       <Link

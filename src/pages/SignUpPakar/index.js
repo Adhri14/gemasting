@@ -1,22 +1,16 @@
 import React, {useState} from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  TextInput as TextInputRN,
-} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {
   Button,
+  Checkbox,
+  DatePicker,
   Gap,
   Header,
-  TextInput,
-  InputPassword,
-  Radio,
-  Picker,
-  Checkbox,
+  Line,
   Link,
-  DatePicker,
+  Picker,
+  Radio,
+  TextInput,
 } from '../../components';
 import {colors, fonts, mainColors} from '../../utils';
 
@@ -72,9 +66,9 @@ const SignUpPakar = ({navigation}) => {
             title="Daftar Akun"
             onPress={() => navigation.navigate('OtpScreen')}
           />
-          <Gap height={10} />
-          <Text style={styles.or}>Atau</Text>
-          <Gap height={10} />
+          <Gap height={20} />
+          <Line />
+          <Gap height={20} />
           <Button type="secondary" google title="Daftar dengan Google" />
           <Gap height={20} />
           <Link
@@ -125,11 +119,5 @@ const styles = StyleSheet.create({
     color: colors.text.primary1,
     marginBottom: 10,
     fontFamily: fonts.primary[600],
-  },
-  or: {
-    textAlign: 'center',
-    fontSize: 16,
-    color: mainColors.lightSmoke,
-    fontFamily: fonts.primary.normal,
   },
 });

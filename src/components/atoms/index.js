@@ -9,6 +9,7 @@ import TabItem from './TabItem';
 import FileUpload from './FileUpload';
 import DatePicker from './DatePicker';
 import CardButton from './CardButton';
+import Line from './Line';
 
 export {
   Button,
@@ -22,4 +23,5 @@ export {
   FileUpload,
   DatePicker,
   CardButton,
+  Line,
 };

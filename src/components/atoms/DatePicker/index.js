@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {fonts, mainColors} from '../../../utils';
 
 const DatePicker = ({placeholder, label}) => {
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
@@ -14,7 +14,7 @@ const DatePicker = ({placeholder, label}) => {
   };
 
   const showMode = currentMode => {
-    setShow(!show);
+    setShow();
     setMode(currentMode);
   };
 
@@ -29,9 +29,8 @@ const DatePicker = ({placeholder, label}) => {
         <Text style={styles.placeholder}>{placeholder}</Text>
         {show && (
           <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={mode}
+            value={new Date()}
+            mode="date"
             display="default"
             onChange={onChange}
           />
