@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     // marginTop: 40,
-    backgroundColor: mainColors.lightSmokes,
+    backgroundColor: mainColors.lightSmoke,
   },
   container: {paddingHorizontal: 20, paddingTop: 60},
 });

@@ -14,6 +14,11 @@ const OtpScreen = ({navigation}) => {
     textInput.focus();
   }, []);
 
+  const onSubmit = () => {
+    navigation.replace('MainApp');
+    console.log(codeOtp);
+  };
+
   return (
     <View style={styles.page}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -77,7 +82,7 @@ const OtpScreen = ({navigation}) => {
           display={displayButton}
           title="Kirimkan"
           // disabled={codeLength.disabled}
-          onPress={() => navigation.replace('MainApp')}
+          onPress={onSubmit}
         />
       </View>
     </View>

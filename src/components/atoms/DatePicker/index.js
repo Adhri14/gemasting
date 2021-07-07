@@ -10,11 +10,12 @@ const DatePicker = ({placeholder, label}) => {
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
     setDate(currentDate);
   };
 
   const showMode = currentMode => {
-    setShow();
+    setShow(true);
     setMode(currentMode);
   };
 
@@ -26,11 +27,11 @@ const DatePicker = ({placeholder, label}) => {
     <View>
       <Text style={styles.label}>{label}</Text>
       <TouchableOpacity style={styles.container} onPress={showDatepicker}>
-        <Text style={styles.placeholder}>{placeholder}</Text>
+        <Text style={styles.placeholder}>{`${date}`}</Text>
         {show && (
           <DateTimePicker
-            value={new Date()}
-            mode="date"
+            value={date}
+            mode={mode}
             display="default"
             onChange={onChange}
           />

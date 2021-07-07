@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {IconBackDark} from '../../../assets';
-import {colors} from '../../../utils';
+import {colors, fonts} from '../../../utils';
 import {Button, Gap} from '../../atoms';
 
 const Header = ({onPress, title}) => {
@@ -19,16 +18,17 @@ export default Header;
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
-    paddingVertical: 30,
+    paddingVertical: 20,
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',
+    // justifyContent: 'space-between',
   },
   text: {
     textAlign: 'center',
     flex: 1,
-    fontSize: 20,
-    fontFamily: 'Nunito-Semibold',
+    fontSize: 25,
+    fontFamily: fonts.primary[600],
     color: colors.text.primary,
   },
 });

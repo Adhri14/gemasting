@@ -9,23 +9,41 @@ import {
   IconSetting,
   IconHelp,
   IconProfile,
+  IconShield,
+  IconInfo,
 } from '../../../assets';
 
 const List = ({profile, type, icon, name, desc, onPress}) => {
   const Icon = () => {
-    if (icon === 'edit-profile') {
-      return <IconProfileActive />;
+    switch (icon) {
+      case 'edit-profile':
+        return <IconProfileActive />;
+      case 'edit-riwayat':
+        return <IconHistory />;
+      case 'edit-pengaturan':
+        return <IconSetting />;
+      case 'edit-bantuan':
+        return <IconHelp />;
+      case 'edit-privasi':
+        return <IconShield />;
+      case 'edit-info':
+        return <IconInfo />;
+      default:
+        return <IconProfile />;
     }
-    if (icon === 'edit-riwayat') {
-      return <IconHistory />;
-    }
-    if (icon === 'edit-pengaturan') {
-      return <IconSetting />;
-    }
-    if (icon === 'edit-bantuan') {
-      return <IconHelp />;
-    }
-    return <IconProfile />;
+    // if (icon === 'edit-profile') {
+    //   return <IconProfileActive />;
+    // }
+    // if (icon === 'edit-riwayat') {
+    //   return <IconHistory />;
+    // }
+    // if (icon === 'edit-pengaturan') {
+    //   return <IconSetting />;
+    // }
+    // if (icon === 'edit-bantuan') {
+    //   return <IconHelp />;
+    // }
+    // return <IconProfile />;
   };
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
@@ -50,7 +68,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  content: {flex: 1, marginLeft: 16, justifyContent: 'center',},
+  content: {flex: 1, marginLeft: 16, justifyContent: 'center'},
   avatar: {
     width: 46,
     height: 46,
