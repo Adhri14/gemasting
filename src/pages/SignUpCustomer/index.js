@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {
   Button,
   Checkbox,
@@ -15,6 +15,7 @@ import {colors, fonts, mainColors} from '../../utils';
 const SignUpCustomer = ({navigation}) => {
   return (
     <View style={styles.page}>
+      <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header onPress={() => navigation.goBack()} />
         <View style={styles.content}>
@@ -47,7 +48,7 @@ const SignUpCustomer = ({navigation}) => {
           <Button type="secondary" google title="Daftar dengan Google" />
           <Gap height={20} />
           <Link
-            onPress={() => navigation.navigate('SignInCustomer')}
+            onPress={() => navigation.navigate('SignIn')}
             title="Sudah punya akun?"
             action="Masuk"
             align="center"

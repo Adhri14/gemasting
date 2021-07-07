@@ -17,6 +17,7 @@ import IconActivityActive from './ic-activity-primary.svg';
 import IconActivity from './ic-activity-secondary.svg';
 import IconShield from './ic-shield.svg';
 import IconInfo from './ic-info.svg';
+import IconCalender from './ic-calender.svg';
 
 export {
   IconBackDark,
@@ -38,4 +39,5 @@ export {
   IconActivityActive,
   IconShield,
   IconInfo,
+  IconCalender,
 };

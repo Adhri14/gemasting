@@ -62,7 +62,7 @@ export default List;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingVertical: 20,
+    paddingVertical: 30,
     borderBottomWidth: 1,
     borderBottomColor: mainColors.smoke,
     alignItems: 'center',
@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    fontFamily: fonts.primary[400],
-    color: '#939393',
+    fontFamily: fonts.primary[500],
+    color: mainColors.grey1,
   },
   desc: {
     fontSize: 12,

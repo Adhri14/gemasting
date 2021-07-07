@@ -9,7 +9,7 @@ export const mainColors = {
   lightSmoke: '#FEFEFF',
   white: '#FFFFFF',
   black: '#404040',
-  grey1: '#858585',
+  grey1: '#B0B0B0',
   pink: '#EC4794',
   pink2: '#EC4794',
   lightPink: '#FFE6E8',

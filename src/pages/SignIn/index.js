@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   useWindowDimensions,
@@ -48,6 +49,7 @@ const SignIn = ({navigation}) => {
   });
   return (
     <View style={styles.page}>
+      <StatusBar backgroundColor={mainColors.smoke} />
       <Header onPress={() => navigation.goBack()} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>Masuk Akun</Text>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {
   Button,
   Checkbox,
@@ -18,6 +18,7 @@ const SignUpPakar = ({navigation}) => {
   const [radio, setRadio] = useState('');
   return (
     <View style={styles.page}>
+      <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header onPress={() => navigation.goBack()} />
         <View style={styles.content}>

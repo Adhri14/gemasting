@@ -54,6 +54,8 @@ export default BottomNavigator;
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    bottom: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 27,

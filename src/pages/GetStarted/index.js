@@ -1,5 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Welcome} from '../../assets';
 import {CardButton} from '../../components';
 import Button from '../../components/atoms/Button';
@@ -10,6 +16,7 @@ const GetStarted = ({navigation}) => {
   return (
     // <ImageBackground source={ILGetStarted} style={styles.page}>
     <View style={styles.page}>
+      <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
       <View>
         <Welcome />
       </View>

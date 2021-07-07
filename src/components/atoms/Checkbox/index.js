@@ -19,7 +19,7 @@ const Checkbox = () => {
         color={mainColors.pink}
       />
       <Text onPress={() => setChecked(!checked)} style={styles.label}>
-        Dengan klik daftar, berarti anda telah menyetujui{' '}
+        Dengan klik daftar, berarti anda telah menyetujui{'\n'}
         <Text style={styles.bold}>Syarat & Ketentuan Gemasting.</Text>
       </Text>
     </View>

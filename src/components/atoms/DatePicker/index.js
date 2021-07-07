@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {fonts, mainColors} from '../../../utils';
+import moment from 'moment';
+import {IconCalender} from '../../../assets';
 
 const DatePicker = ({placeholder, label}) => {
   const [date, setDate] = useState(new Date());
@@ -27,7 +29,12 @@ const DatePicker = ({placeholder, label}) => {
     <View>
       <Text style={styles.label}>{label}</Text>
       <TouchableOpacity style={styles.container} onPress={showDatepicker}>
-        <Text style={styles.placeholder}>{`${date}`}</Text>
+        <View style={styles.row}>
+          <Text style={styles.placeholder}>
+            {moment(date).format('DD-MM-YYYY')}
+          </Text>
+          <IconCalender />
+        </View>
         {show && (
           <DateTimePicker
             value={date}
@@ -59,7 +66,12 @@ const styles = StyleSheet.create({
   placeholder: {
     fontSize: 16,
     fontFamily: fonts.primary[300],
-    paddingLeft: 20,
     color: mainColors.grey,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
 });
