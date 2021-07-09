@@ -6,9 +6,9 @@ import {Button, Gap, Link, TextInput, InputPassword, Line} from '../../atoms';
 const TelephoneView = () => {
   return (
     <View style={styles.container}>
-      <TextInput label="Telepon" placeholder="+62" />
+      <TextInput label="Telepon" keyboardType="number-pad" placeholder="+62" />
       <Gap height={20} />
-      <TextInput label="Pin" placeholder="Pin" />
+      <TextInput label="Pin" keyboardType="number-pad" placeholder="Pin" />
       <Gap height={40} />
       <Button title="Masuk Akun" />
       <Gap height={20} />

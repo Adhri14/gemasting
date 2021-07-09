@@ -9,7 +9,14 @@ import {
 import {colors, fonts, mainColors} from '../../../utils';
 import Icon from 'react-native-vector-icons/Feather';
 
-const TextInput = ({label, placeholder, type, isTextArea, isPassword}) => {
+const TextInput = ({
+  label,
+  placeholder,
+  type,
+  isTextArea,
+  isPassword,
+  ...props
+}) => {
   const [data, setData] = useState({
     secureTextEntry: true,
   });
@@ -25,6 +32,7 @@ const TextInput = ({label, placeholder, type, isTextArea, isPassword}) => {
       <View>
         <Text style={styles.label}>{label}</Text>
         <TextInputRN
+          {...props}
           numberOfLines={5}
           style={styles.textArea}
           multiline={true}
@@ -38,6 +46,7 @@ const TextInput = ({label, placeholder, type, isTextArea, isPassword}) => {
         <Text style={styles.label}>{label}</Text>
         <View style={styles.row}>
           <TextInputRN
+            {...props}
             style={styles.password}
             secureTextEntry={data.secureTextEntry ? true : false}
             placeholder={placeholder}
@@ -56,7 +65,7 @@ const TextInput = ({label, placeholder, type, isTextArea, isPassword}) => {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
-      <TextInputRN style={styles.input} placeholder={placeholder} />
+      <TextInputRN style={styles.input} {...props} placeholder={placeholder} />
     </View>
   );
 };

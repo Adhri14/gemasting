@@ -25,11 +25,19 @@ const SignUpPakar = ({navigation}) => {
           <Gap height={10} />
           <Text style={styles.title}>Daftar Akun</Text>
           <Gap height={15} />
-          <TextInput placeholder="Email" label="Email" />
+          <TextInput
+            placeholder="Email"
+            keyboardType="email-address"
+            label="Email"
+          />
           <Gap height={20} />
-          <TextInput placeholder="+62" label="No Telepon" />
+          <TextInput
+            placeholder="+62"
+            keyboardType="number-pad"
+            label="No Telepon"
+          />
           <Gap height={20} />
-          <TextInput placeholder="Nama" label="Nama" />
+          <TextInput placeholder="Nama" keyboardType="default" label="Nama" />
           <Gap height={20} />
           <Radio
             valueItem1="L"
@@ -44,21 +52,29 @@ const SignUpPakar = ({navigation}) => {
           <Gap height={20} />
           <TextInput
             placeholder="Pendidikan terakhir anda"
+            keyboardType="default"
             label="Pendidikan"
           />
           <Gap height={20} />
           <TextInput
             isTextArea
             placeholder="Alamat praktek anda"
+            keyboardType="default"
             label="Alamat Praktek"
           />
           <Gap height={20} />
-          <TextInput isPassword label="Password" placeholder="Password" />
+          <TextInput
+            isPassword
+            label="Password"
+            keyboardType="default"
+            placeholder="Password"
+          />
           <Gap height={20} />
           <TextInput
             isPassword
             label="Ulangi Password"
             placeholder="Ketik ulang password"
+            keyboardType="default"
           />
           <Gap height={10} />
           <Checkbox />

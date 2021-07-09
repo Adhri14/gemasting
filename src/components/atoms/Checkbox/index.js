@@ -3,22 +3,20 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Checkbox as CheckboxPaper} from 'react-native-paper';
 import {colors, fonts, mainColors} from '../../../utils';
 
-const Checkbox = () => {
-  const [checked, setChecked] = useState(false);
+const Checkbox = ({checked, onPress}) => {
+  // const [checked, setChecked] = useState(false);
 
   return (
     <View style={styles.checkbox}>
       <CheckboxPaper.Item
-        status={checked ? 'checked' : 'unchecked'}
-        onPress={() => {
-          setChecked(!checked);
-        }}
+        status={checked}
+        onPress={onPress}
         position="leading"
         style={styles.content}
         uncheckedColor={mainColors.darkSmoke}
         color={mainColors.pink}
       />
-      <Text onPress={() => setChecked(!checked)} style={styles.label}>
+      <Text onPress={onPress} style={styles.label}>
         Dengan klik daftar, berarti anda telah menyetujui{'\n'}
         <Text style={styles.bold}>Syarat & Ketentuan Gemasting.</Text>
       </Text>

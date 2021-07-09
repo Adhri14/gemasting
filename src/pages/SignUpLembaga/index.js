@@ -22,25 +22,44 @@ const SignUpLembaga = ({navigation}) => {
           <Gap height={10} />
           <Text style={styles.title}>Daftar Akun</Text>
           <Gap height={15} />
-          <TextInput placeholder="Email" label="Email" />
+          <TextInput
+            placeholder="Email"
+            keyboardType="email-address"
+            label="Email"
+          />
           <Gap height={25} />
-          <TextInput placeholder="+62" label="No. Telepon" />
+          <TextInput
+            placeholder="+62"
+            keyboardType="number-pad"
+            label="No. Telepon"
+          />
           <Gap height={25} />
-          <TextInput placeholder="Nama kantor" label="Nama Kantor" />
+          <TextInput
+            placeholder="Nama kantor"
+            keyboardType="default"
+            label="Nama Kantor"
+          />
           <Gap height={25} />
           <TextInput
             placeholder="Alamat kantor anda"
             isTextArea
+            keyboardType="default"
             label="Alamat Kantor"
           />
           <Gap height={25} />
           <Picker label="Kategori Lembaga" />
           <Gap height={25} />
-          <TextInput placeholder="Pasword" label="Password" isPassword />
+          <TextInput
+            placeholder="Pasword"
+            keyboardType="default"
+            label="Password"
+            isPassword
+          />
           <Gap height={25} />
           <TextInput
             placeholder="Ketik ulang password"
             label="Ulangi Password"
+            keyboardType="default"
             isPassword
           />
           <Gap height={10} />
