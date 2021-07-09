@@ -16,9 +16,9 @@ const UpdateProfile = ({navigation}) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
           {/* <InputCustomer /> */}
-          {/* <InputPakar /> */}
+          <InputPakar />
           {/* <InputHomeBabySpa /> */}
-          <InputPosyandu />
+          {/* <InputPosyandu /> */}
         </View>
       </ScrollView>
     </View>

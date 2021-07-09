@@ -1,5 +1,12 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import {Header, Button, Gap} from '../../components';
 import {colors, fonts, mainColors} from '../../utils';
 
@@ -14,8 +21,14 @@ const OtpScreen = ({navigation}) => {
     textInput.focus();
   }, []);
 
+  const onSubmit = () => {
+    navigation.replace('MainApp');
+    console.log(codeOtp);
+  };
+
   return (
     <View style={styles.page}>
+      <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header onPress={() => navigation.goBack()} />
         <View style={styles.container}>
@@ -77,7 +90,7 @@ const OtpScreen = ({navigation}) => {
           display={displayButton}
           title="Kirimkan"
           // disabled={codeLength.disabled}
-          onPress={() => navigation.replace('MainApp')}
+          onPress={onSubmit}
         />
       </View>
     </View>

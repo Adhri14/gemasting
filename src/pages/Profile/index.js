@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -12,9 +13,12 @@ import {colors, fonts, mainColors} from '../../utils';
 const Profile = ({navigation}) => {
   return (
     <View style={styles.page}>
+      <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Gap height={20} />
+        <Gap height={50} />
         <View style={styles.container}>
+          <Text style={styles.title}>Profile</Text>
+          <Gap height={30} />
           <ListProfile />
         </View>
       </ScrollView>
@@ -28,7 +32,11 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     // marginTop: 40,
-    backgroundColor: mainColors.lightSmokes,
+    backgroundColor: mainColors.lightSmoke,
   },
-  container: {paddingHorizontal: 20, paddingTop: 60},
+  container: {paddingHorizontal: 20, marginBottom: 150},
+  title: {
+    fontSize: 25,
+    fontFamily: fonts.primary[600],
+  },
 });

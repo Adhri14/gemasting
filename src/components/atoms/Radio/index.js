@@ -13,16 +13,16 @@ const Radio = ({valueGroup, valueItem1, valueItem2, onValueChange}) => {
           label="laki-laki"
           value={valueItem1}
           labelStyle={styles.label}
-          color={mainColors.teal}
-          uncheckedColor="#999"
+          color={mainColors.pink}
+          uncheckedColor={mainColors.grey}
         />
         <RadioButton.Item
           position="leading"
           label="perempuan"
           value={valueItem2}
           labelStyle={styles.label}
-          color={mainColors.teal}
-          uncheckedColor="#999"
+          color={mainColors.pink}
+          uncheckedColor={mainColors.grey}
         />
       </View>
     </RadioButton.Group>

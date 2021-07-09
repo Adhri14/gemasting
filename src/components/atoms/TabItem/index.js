@@ -7,6 +7,8 @@ import {
   IconProfile,
   IconProfileActive,
   IconChat,
+  IconActivity,
+  IconActivityActive,
 } from '../../../assets';
 import {colors, fonts, mainColors} from '../../../utils';
 
@@ -15,8 +17,8 @@ const TabItem = ({title, active, onPress, onLongPress}) => {
     if (title === 'Home') {
       return active ? <IconHomeActive /> : <IconHome />;
     }
-    if (title === 'Inbox') {
-      return <IconInbox />;
+    if (title === 'Activity') {
+      return active ? <IconActivityActive /> : <IconActivity />;
     }
     if (title === 'Chat') {
       return <IconChat />;
@@ -46,8 +48,8 @@ const styles = StyleSheet.create({
   container: {alignItems: 'center', flex: 1},
   text: active => ({
     fontSize: 11,
-    color: colors.text.secondary2,
-    fontFamily: active ? fonts.primary[600] : fonts.primary[400],
+    color: active ? colors.text.secondary2 : '#b0b0b0',
+    fontFamily: fonts.primary[400],
     marginTop: 4,
   }),
   line: {

@@ -2,16 +2,16 @@ import React from 'react';
 import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import {mainColors} from '../../utils';
 
-const Chat = () => {
+const Activity = () => {
   return (
     <View style={styles.page}>
       <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
-      <Text>Chat Page</Text>
+      <Text>Activity Page</Text>
     </View>
   );
 };
 
-export default Chat;
+export default Activity;
 
 const styles = StyleSheet.create({
   page: {

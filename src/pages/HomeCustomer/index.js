@@ -1,10 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {mainColors} from '../../utils';
 import {CardButton} from '../../components';
 
 const HomeCustomer = () => {
   return (
-    <View>
+    <View style={styles.page}>
+      <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
       <Text>Home Customer</Text>
     </View>
   );
@@ -12,4 +14,9 @@ const HomeCustomer = () => {
 
 export default HomeCustomer;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+    backgroundColor: mainColors.lightSmoke,
+  },
+});

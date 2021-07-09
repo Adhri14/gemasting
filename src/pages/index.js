@@ -8,7 +8,7 @@ import SignUpCustomer from './SignUpCustomer';
 import SignUpPakar from './SignUpPakar';
 import SignUpLembaga from './SignUpLembaga';
 import HomeCustomer from './HomeCustomer';
-import Aktivitas from './Aktivitas';
+import Activity from './Activity';
 import Chat from './Chat';
 import Profile from './Profile';
 import UpdateProfile from './UpdateProfile';
@@ -24,7 +24,7 @@ export {
   SignUpLembaga,
   SignInCustomer,
   HomeCustomer,
-  Aktivitas,
+  Activity,
   Chat,
   Profile,
   UpdateProfile,

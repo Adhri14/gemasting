@@ -1,12 +1,23 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {IconGoogle} from '../../../assets';
-import {colors, fonts} from '../../../utils';
+import {colors, fonts, mainColors} from '../../../utils';
 import IconOnly from './IconOnly';
 
 const Button = ({type, title, onPress, google, icon, display, ...props}) => {
   if (type === 'icon-only') {
     return <IconOnly icon={icon} onPress={onPress} />;
+  }
+
+  if (type === 'button-danger') {
+    return (
+      <TouchableOpacity
+        style={styles.button}
+        activeOpacity={0.8}
+        onPress={onPress}>
+        <Text style={styles.textButton}>{title}</Text>
+      </TouchableOpacity>
+    );
   }
   return (
     <TouchableOpacity
@@ -48,5 +59,18 @@ const styles = StyleSheet.create({
   }),
   google: {
     marginRight: 20,
+  },
+  button: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: mainColors.salmon,
+    paddingVertical: 20,
+    borderRadius: 15,
+  },
+  textButton: {
+    fontFamily: fonts.primary[600],
+    fontSize: 16,
+    color: mainColors.white,
   },
 });

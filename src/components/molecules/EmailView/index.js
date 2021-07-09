@@ -16,9 +16,18 @@ const EmailView = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <TextInput label="Email" placeholder="Email" />
+      <TextInput
+        label="Email"
+        keyboardType="email-address"
+        placeholder="Email"
+      />
       <Gap height={20} />
-      <TextInput label="Password" placeholder="Password" isPassword />
+      <TextInput
+        label="Password"
+        keyboardType="default"
+        placeholder="Password"
+        isPassword
+      />
       <Gap height={40} />
       <Button
         title="Masuk Akun"

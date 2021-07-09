@@ -7,7 +7,7 @@ const InputPakar = () => {
   return (
     <View>
       <ProfilePhoto type="camera" />
-      <TextInput type="secondary" label="Nama" />
+      <TextInput type="secondary" label="Nama" placeholder="Nama" />
       <Gap height={35} />
       <FileUpload label="Upload STR" />
       <Gap height={35} />
