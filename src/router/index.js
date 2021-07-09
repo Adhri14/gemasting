@@ -11,6 +11,7 @@ import {
   SplashScreen,
   HomeCustomer,
   Activity,
+  Aktivitas,
   Chat,
   Profile,
   UpdateProfile,
