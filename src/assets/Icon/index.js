@@ -13,6 +13,7 @@ import IconSetting from './ic-setting.svg';
 import IconCamera from './ic-camera.svg';
 import IconUpload from './ic-upload.svg';
 import IconBackPink from './icon-back-pink.svg';
+import IconAktivitas from './ic-aktivitas.svg';
 
 export {
   IconBackDark,
@@ -30,4 +31,5 @@ export {
   IconCamera,
   IconUpload,
   IconBackPink,
+  IconAktivitas,
 };

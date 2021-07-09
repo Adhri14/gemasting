@@ -12,7 +12,11 @@ const Picker = ({label, placeholder}) => {
       <Text style={styles.label}>{label}</Text>
       <View style={styles.container}>
         <PickerRN>
-          <PickerRN.Item label="Dokter Spesialis Anak" />
+          <PickerRN.Item label="Ahli Gizi" />
+          <PickerRN.Item label="Dokter Umum" />
+          <PickerRN.Item label="Dokter Kandungan" />
+          <PickerRN.Item label="Dokter Anak" />
+          <PickerRN.Item label="Bidan Umum" />
         </PickerRN>
       </View>
     </View>

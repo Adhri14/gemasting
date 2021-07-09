@@ -10,7 +10,7 @@ import {
   SignUpPakar,
   SplashScreen,
   HomeCustomer,
-  Inbox,
+  Aktivitas,
   Chat,
   Profile,
   UpdateProfile,
@@ -26,7 +26,7 @@ const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={HomeCustomer} />
-      <Tab.Screen name="Inbox" component={Inbox} />
+      <Tab.Screen name="Aktivitas" component={Aktivitas} />
       <Tab.Screen name="Chat" component={Chat} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
