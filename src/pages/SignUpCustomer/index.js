@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React from 'react';
 import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {
@@ -5,13 +6,11 @@ import {
   Checkbox,
   Gap,
   Header,
-  InputPassword,
   Line,
   Link,
   TextInput,
 } from '../../components';
 import {colors, fonts, mainColors, useForm} from '../../utils';
-import Axios from 'axios';
 
 const SignUpCustomer = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -26,11 +25,15 @@ const SignUpCustomer = ({navigation}) => {
 
   const onSubmit = () => {
     Axios.post('https://api.gemasting.com/public/api/customer/register', form)
-      .then(res => console.log(res.data.data))
-      .catch(e => console.log(e));
-    console.log('form', form);
-    // navigation.navigate('OtpScreen')
+      .then(res => {
+        console.log(res.data.data);
+        navigation.navigate('OtpScreen', form);
+      })
+      .catch(e => console.log(e.message));
+    // navigation.navigate('OtpScreen', form);
   };
+
+  const onSubmitGoogle = () => {};
 
   return (
     <View style={styles.page}>
@@ -55,6 +58,14 @@ const SignUpCustomer = ({navigation}) => {
             placeholder="Email pemulihan"
             keyboardType="email-address"
             label="Email Pemulihan"
+          />
+          <Gap height={25} />
+          <TextInput
+            value={form.name}
+            onChangeText={val => setForm('name', val)}
+            placeholder="Nama"
+            keyboardType="default"
+            label="Nama"
           />
           <Gap height={25} />
           <TextInput
@@ -91,7 +102,12 @@ const SignUpCustomer = ({navigation}) => {
           <Gap height={20} />
           <Line />
           <Gap height={20} />
-          <Button type="secondary" google title="Daftar dengan Google" />
+          <Button
+            type="secondary"
+            google
+            title="Daftar dengan Google"
+            onPress={onSubmitGoogle}
+          />
           <Gap height={20} />
           <Link
             onPress={() => navigation.navigate('SignIn')}

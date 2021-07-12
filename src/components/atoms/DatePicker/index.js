@@ -65,8 +65,9 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     fontSize: 16,
-    fontFamily: fonts.primary[300],
-    color: mainColors.grey,
+    fontFamily: fonts.primary[500],
+    color: mainColors.black,
+    zIndex: 1,
   },
   row: {
     flexDirection: 'row',
