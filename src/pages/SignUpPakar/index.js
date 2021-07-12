@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, {useState} from 'react';
 import {
   Alert,
@@ -37,6 +38,17 @@ const SignUpPakar = ({navigation}) => {
     checked: false,
     placeholder: '',
   });
+
+  const onSubmit = () => {
+    Axios.post('https://api.gemasting.com/public/api/pakar/register', form)
+      .then(res => {
+        console.log(res.data.data);
+        navigation.navigate('OtpScreen', form);
+      })
+      .catch(e => console.log(e.message));
+  };
+
+  const onSubmitGoogle = () => {};
 
   return (
     <View style={styles.page}>
@@ -112,7 +124,7 @@ const SignUpPakar = ({navigation}) => {
             placeholder="Ketik ulang password"
             keyboardType="default"
             value={form.password_confirmation}
-            onChangeText={val => setForm('phone_number', val)}
+            onChangeText={val => setForm('password_confirmation', val)}
           />
           <Gap height={10} />
           <Checkbox
@@ -120,14 +132,16 @@ const SignUpPakar = ({navigation}) => {
             onPress={val => setForm('checked', !form.checked)}
           />
           <Gap height={20} />
-          <Button
-            title="Daftar Akun"
-            onPress={() => navigation.navigate('OtpScreen')}
-          />
+          <Button title="Daftar Akun" onPress={onSubmit} />
           <Gap height={20} />
           <Line />
           <Gap height={20} />
-          <Button type="secondary" google title="Daftar dengan Google" />
+          <Button
+            type="secondary"
+            google
+            title="Daftar dengan Google"
+            onPress={onSubmitGoogle}
+          />
           <Gap height={20} />
           <Link
             onPress={() => navigation.navigate('SignIn')}
