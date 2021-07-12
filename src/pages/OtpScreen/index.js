@@ -9,21 +9,41 @@ import {
 } from 'react-native';
 import {Header, Button, Gap} from '../../components';
 import {colors, fonts, mainColors} from '../../utils';
+import Axios from 'axios';
 
-const OtpScreen = ({navigation}) => {
+const OtpScreen = ({navigation, route}) => {
   let textInput = useRef(null);
   const lengthInput = 4;
-  const [codeOtp, setCodeOtp] = useState('');
+  const [otp, setOtp] = useState('');
   const [displayButton, setDisplayButton] = useState('flex');
   const [colorInput, setColorInput] = useState(mainColors.lightPink);
+  const {email} = route.params;
+
+  const data = {
+    email: email,
+    otp: otp,
+  };
 
   useEffect(() => {
     textInput.focus();
   }, []);
 
   const onSubmit = () => {
-    navigation.replace('MainApp');
-    console.log(codeOtp);
+    Axios.put('https://api.gemasting.com/public/api/otp-verification', data)
+      .then(res => {
+        console.log(res.data.data);
+        navigation.replace('MainApp');
+      })
+      .catch(e => console.log(e.message));
+  };
+
+  const resendOtp = () => {
+    console.log(email);
+    Axios.post('https://api.gemasting.com/public/api/resend-otp', {email})
+      .then(res => {
+        console.log(res.data.data);
+      })
+      .catch(e => console.log(e.message));
   };
 
   return (
@@ -44,8 +64,9 @@ const OtpScreen = ({navigation}) => {
               ref={input => (textInput = input)}
               style={[styles.input, {borderBottomColor: colorInput}]}
               keyboardType="number-pad"
+              placeholder="2"
               maxLength={lengthInput}
-              value={codeOtp}
+              value={otp}
               onFocus={() => {
                 setDisplayButton('none');
                 setColorInput(mainColors.pink);
@@ -54,7 +75,7 @@ const OtpScreen = ({navigation}) => {
                 setDisplayButton('flex');
                 setColorInput(mainColors.lightPink);
               }}
-              onChangeText={val => setCodeOtp(val)}
+              onChangeText={val => setOtp(val)}
             />
             <View style={styles.containerInput}>
               {Array(lengthInput)
@@ -66,20 +87,28 @@ const OtpScreen = ({navigation}) => {
                       styles.cellView,
                       {
                         borderBottomColor:
-                          index === codeOtp.length
+                          index === otp.length
                             ? mainColors.pink
                             : mainColors.lightPink,
                       },
                     ]}>
                     <Text style={styles.cellText}>
-                      {codeOtp && codeOtp.length > 0 ? codeOtp[index] : ''}
+                      {otp && otp.length > 0 ? otp[index] : ''}
                     </Text>
                   </View>
                 ))}
             </View>
+            {/* <TextInput
+              placeholder="Number OTP"
+              value={otp}
+              onChangeText={val => setOtp(val)}
+            /> */}
             <Gap height={29} />
             <Text style={styles.sendCode}>
-              Belum menerima kode? <Text style={styles.bold}>Kirim ulang</Text>
+              Belum menerima kode?{' '}
+              <Text style={styles.bold} onPress={resendOtp}>
+                Kirim ulang
+              </Text>
             </Text>
           </View>
         </View>
@@ -131,8 +160,15 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   input: {
-    width: 0,
-    height: 0,
+    width: 57,
+    height: 50,
+    borderWidth: 1,
+    opacity: 0,
+    position: 'absolute',
+    left: 9,
+    // top: 20,
+    textAlign: 'center',
+    zIndex: 999,
   },
   sendCode: {
     fontSize: 15,

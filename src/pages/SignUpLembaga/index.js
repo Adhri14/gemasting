@@ -47,7 +47,7 @@ const SignUpLembaga = ({navigation}) => {
             label="Alamat Kantor"
           />
           <Gap height={25} />
-          <Picker label="Kategori Lembaga" />
+          <Picker label="Kategori Lembaga" type="lembaga" />
           <Gap height={25} />
           <TextInput
             placeholder="Pasword"

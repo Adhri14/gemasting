@@ -5,7 +5,9 @@ import {colors, fonts, mainColors} from '../../../utils';
 
 const Radio = ({valueGroup, valueItem1, valueItem2, onValueChange}) => {
   return (
-    <RadioButton.Group onValueChange={onValueChange} value={valueGroup}>
+    <RadioButton.Group
+      onValueChange={val => onValueChange(val)}
+      value={valueGroup}>
       <Text style={styles.title}>Jenis kelamin</Text>
       <View style={styles.radio}>
         <RadioButton.Item

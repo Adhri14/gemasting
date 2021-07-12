@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {
+  Alert,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {
   Button,
   Checkbox,
@@ -12,10 +19,25 @@ import {
   Radio,
   TextInput,
 } from '../../components';
-import {colors, fonts, mainColors} from '../../utils';
+import {colors, fonts, mainColors, useForm} from '../../utils';
 
 const SignUpPakar = ({navigation}) => {
-  const [radio, setRadio] = useState('');
+  const [form, setForm] = useForm({
+    role: 3,
+    name: '',
+    email: '',
+    phone_number: '',
+    gender: '',
+    address: '',
+    education: '',
+    birth: '',
+    sub_role: 1,
+    password: '',
+    password_confirmation: '',
+    checked: false,
+    placeholder: '',
+  });
+
   return (
     <View style={styles.page}>
       <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
@@ -29,12 +51,16 @@ const SignUpPakar = ({navigation}) => {
             placeholder="Email"
             keyboardType="email-address"
             label="Email"
+            value={form.email}
+            onChangeText={val => setForm('email', val)}
           />
           <Gap height={20} />
           <TextInput
             placeholder="+62"
             keyboardType="number-pad"
             label="No Telepon"
+            value={form.phone_number}
+            onChangeText={val => setForm('phone_number', val)}
           />
           <Gap height={20} />
           <TextInput placeholder="Nama" keyboardType="default" label="Nama" />
@@ -42,18 +68,24 @@ const SignUpPakar = ({navigation}) => {
           <Radio
             valueItem1="L"
             valueItem2="P"
-            valueGroup={radio}
-            onValueChange={val => setRadio(val)}
+            valueGroup={form.gender}
+            onValueChange={val => setForm('gender', val)}
           />
           <Gap height={10} />
-          <DatePicker placeholder="dd-mm-yyyy" label="Tanggal Lahir" />
+          <DatePicker label="Tanggal Lahir" />
           <Gap height={20} />
-          <Picker label="Spesialisasi" />
+          <Picker
+            label="Spesialisasi"
+            value={form.sub_role}
+            onValueChange={val => setForm('sub_role', val)}
+          />
           <Gap height={20} />
           <TextInput
             placeholder="Pendidikan terakhir anda"
             keyboardType="default"
             label="Pendidikan"
+            value={form.education}
+            onChangeText={val => setForm('education', val)}
           />
           <Gap height={20} />
           <TextInput
@@ -61,6 +93,8 @@ const SignUpPakar = ({navigation}) => {
             placeholder="Alamat praktek anda"
             keyboardType="default"
             label="Alamat Praktek"
+            value={form.address}
+            onChangeText={val => setForm('address', val)}
           />
           <Gap height={20} />
           <TextInput
@@ -68,6 +102,8 @@ const SignUpPakar = ({navigation}) => {
             label="Password"
             keyboardType="default"
             placeholder="Password"
+            value={form.password}
+            onChangeText={val => setForm('password', val)}
           />
           <Gap height={20} />
           <TextInput
@@ -75,9 +111,14 @@ const SignUpPakar = ({navigation}) => {
             label="Ulangi Password"
             placeholder="Ketik ulang password"
             keyboardType="default"
+            value={form.password_confirmation}
+            onChangeText={val => setForm('phone_number', val)}
           />
           <Gap height={10} />
-          <Checkbox />
+          <Checkbox
+            checked={form.checked ? 'checked' : 'unchecked'}
+            onPress={val => setForm('checked', !form.checked)}
+          />
           <Gap height={20} />
           <Button
             title="Daftar Akun"
