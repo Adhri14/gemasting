@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React from 'react';
 import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {useDispatch} from 'react-redux';
 import {
   Button,
   Checkbox,
@@ -10,7 +11,7 @@ import {
   Link,
   TextInput,
 } from '../../components';
-import {colors, fonts, mainColors, useForm} from '../../utils';
+import {colors, fonts, mainColors, useForm, showMessage} from '../../utils';
 
 const SignUpCustomer = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -22,15 +23,23 @@ const SignUpCustomer = ({navigation}) => {
     phone_number: '',
     checked: false,
   });
+  const dispatch = useDispatch();
 
   const onSubmit = () => {
+    dispatch({type: 'SET_REGISTER_CUSTOMER', value: form});
+
+    // console.log(data);
     Axios.post('https://api.gemasting.com/public/api/customer/register', form)
       .then(res => {
         console.log(res.data.data);
-        navigation.navigate('OtpScreen', form);
+        navigation.navigate('OtpScreen');
       })
-      .catch(e => console.log(e.message));
-    // navigation.navigate('OtpScreen', form);
+      .catch(e => {
+        showMessage({
+          message: e.data.meta.message,
+          type: 'danger',
+        });
+      });
   };
 
   const onSubmitGoogle = () => {};

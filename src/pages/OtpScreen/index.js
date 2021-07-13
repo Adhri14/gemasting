@@ -8,19 +8,21 @@ import {
   View,
 } from 'react-native';
 import {Header, Button, Gap} from '../../components';
-import {colors, fonts, mainColors} from '../../utils';
+import {colors, fonts, mainColors, showMessage} from '../../utils';
 import Axios from 'axios';
+import {useSelector} from 'react-redux';
 
-const OtpScreen = ({navigation, route}) => {
+const OtpScreen = ({navigation}) => {
   let textInput = useRef(null);
   const lengthInput = 4;
   const [otp, setOtp] = useState('');
   const [displayButton, setDisplayButton] = useState('flex');
   const [colorInput, setColorInput] = useState(mainColors.lightPink);
-  const {email} = route.params;
+
+  const {registerReducer} = useSelector(state => state);
 
   const data = {
-    email: email,
+    email: registerReducer.email,
     otp: otp,
   };
 
@@ -32,18 +34,29 @@ const OtpScreen = ({navigation, route}) => {
     Axios.put('https://api.gemasting.com/public/api/otp-verification', data)
       .then(res => {
         console.log(res.data.data);
-        navigation.replace('MainApp');
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'MainApp'}],
+        });
       })
       .catch(e => console.log(e.message));
   };
 
   const resendOtp = () => {
-    console.log(email);
-    Axios.post('https://api.gemasting.com/public/api/resend-otp', {email})
+    Axios.post('https://api.gemasting.com/public/api/resend-otp', {
+      email: registerReducer.email,
+    })
       .then(res => {
-        console.log(res.data.data);
+        showMessage({
+          message: `${registerReducer.email} ${res.data.data}`,
+          type: 'success',
+        });
       })
-      .catch(e => console.log(e.message));
+      .catch(e => {
+        showMessage({
+          message: e.message,
+        });
+      });
   };
 
   return (
