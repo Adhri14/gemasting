@@ -24,7 +24,6 @@ import {colors, fonts, mainColors, useForm} from '../../utils';
 
 const SignUpPakar = ({navigation}) => {
   const [form, setForm] = useForm({
-    role: 3,
     name: '',
     email: '',
     phone_number: '',
@@ -36,7 +35,6 @@ const SignUpPakar = ({navigation}) => {
     password: '',
     password_confirmation: '',
     checked: false,
-    placeholder: '',
   });
 
   const onSubmit = () => {
