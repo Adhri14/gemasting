@@ -9,8 +9,7 @@ const initStateRegister = {
   birth: '',
   education: '',
   address: '',
-  role_id: 2,
-  sub_role: 1,
+  pakar: 1,
 };
 
 export const registerReducer = (state = initStateRegister, action) => {
@@ -33,8 +32,7 @@ export const registerReducer = (state = initStateRegister, action) => {
       name: action.value.name,
       gender: action.value.gender,
       birth: action.value.birth,
-      role_id: action.value.role_id,
-      sub_role: action.value.sub_role,
+      pakar: action.value.pakar,
       password: action.value.password,
       password_confirmation: action.value.password_confirmation,
     };
