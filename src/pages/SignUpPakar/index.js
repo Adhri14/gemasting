@@ -1,17 +1,20 @@
+import DateTimePicker from '@react-native-community/datetimepicker';
 import Axios from 'axios';
+import moment from 'moment';
 import React, {useState} from 'react';
 import {
-  Alert,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
+  Platform,
 } from 'react-native';
+import {IconCalender} from '../../assets';
 import {
   Button,
   Checkbox,
-  DatePicker,
   Gap,
   Header,
   Line,
@@ -21,8 +24,10 @@ import {
   TextInput,
 } from '../../components';
 import {colors, fonts, mainColors, useForm} from '../../utils';
+import {useDispatch} from 'react-redux';
 
 const SignUpPakar = ({navigation}) => {
+  // Pengelola data dari state form
   const [form, setForm] = useForm({
     name: '',
     email: '',
@@ -30,20 +35,62 @@ const SignUpPakar = ({navigation}) => {
     gender: '',
     address: '',
     education: '',
-    birth: '',
-    sub_role: 1,
+    // birth: '',
+    pakar: 1,
     password: '',
     password_confirmation: '',
     checked: false,
   });
 
+  // Pengelola data dari state tanggal lahir
+  const [birthPlace, setBirthPlace] = useState('');
+
+  // Pengelola data dari state tanggal lahir
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  // Fungsi untuk merubah value lama menjadi value baru
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+    // setForm('birth', currentDate);
+  };
+
+  // Fungsi untuk merubah mode ui dan menculkan dan menghide popup
+  const showMode = currentMode => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  // Fungsi untuk memunculkan mode ui berupa tanggal
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const dispatch = useDispatch();
+
+  // Fungsi untuk mengirimkan data ke API
   const onSubmit = () => {
-    Axios.post('https://api.gemasting.com/public/api/pakar/register', form)
-      .then(res => {
-        console.log(res.data.data);
-        navigation.navigate('OtpScreen', form);
-      })
-      .catch(e => console.log(e.message));
+    // mengkombinasikan data variabel tempat lahir dan tanggal lahir menjadi sebuah objek
+    const combine = {
+      birth: `${birthPlace}, ${date}`,
+    };
+
+    // mengkombinasikan data objek dari variabel form dan combine
+    const data = {
+      ...form,
+      ...combine,
+    };
+    dispatch({type: 'SET_REGISTER_PAKAR', value: data});
+    // Axios.post('https://api.gemasting.com/public/api/pakar/register', form)
+    //   .then(res => {
+    //     console.log(res.data.data);
+    //     navigation.navigate('OtpScreen', form);
+    //   })
+    //   .catch(e => console.log(e.message));
+    // console.log(result);
   };
 
   const onSubmitGoogle = () => {};
@@ -73,7 +120,13 @@ const SignUpPakar = ({navigation}) => {
             onChangeText={val => setForm('phone_number', val)}
           />
           <Gap height={20} />
-          <TextInput placeholder="Nama" keyboardType="default" label="Nama" />
+          <TextInput
+            placeholder="Nama"
+            keyboardType="default"
+            label="Nama"
+            value={form.name}
+            onChangeText={val => setForm('name', val)}
+          />
           <Gap height={20} />
           <Radio
             valueItem1="L"
@@ -82,12 +135,41 @@ const SignUpPakar = ({navigation}) => {
             onValueChange={val => setForm('gender', val)}
           />
           <Gap height={10} />
-          <DatePicker label="Tanggal Lahir" />
+          <TextInput
+            placeholder="Tempat lahir"
+            keyboardType="default"
+            label="Tempat lahir"
+            value={birthPlace}
+            onChangeText={val => {
+              setBirthPlace(val);
+              // setForm('birth', val);
+            }}
+          />
+          <Gap height={20} />
+          <View>
+            <Text style={styles.name}>Tanggal Lahir</Text>
+            <TouchableOpacity style={styles.container} onPress={showDatepicker}>
+              <View style={styles.rowDate}>
+                <Text style={styles.placeholder}>
+                  {moment(date).format('DD-MM-YYYY')}
+                </Text>
+                <IconCalender />
+              </View>
+              {show && (
+                <DateTimePicker
+                  value={date}
+                  mode={mode}
+                  display="default"
+                  onChange={onChange}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
           <Gap height={20} />
           <Picker
             label="Spesialisasi"
-            value={form.sub_role}
-            onValueChange={val => setForm('sub_role', val)}
+            value={form.pakar}
+            onValueChange={val => setForm('pakar', val)}
           />
           <Gap height={20} />
           <TextInput
@@ -189,5 +271,29 @@ const styles = StyleSheet.create({
     color: colors.text.primary1,
     marginBottom: 10,
     fontFamily: fonts.primary[600],
+  },
+  container: {
+    backgroundColor: mainColors.smoke,
+    height: 65,
+    borderRadius: 15,
+    justifyContent: 'center',
+  },
+  name: {
+    fontSize: 16,
+    color: mainColors.black,
+    marginBottom: 10,
+    fontFamily: fonts.primary[600],
+  },
+  placeholder: {
+    fontSize: 16,
+    fontFamily: fonts.primary[500],
+    color: mainColors.black,
+    zIndex: 1,
+  },
+  rowDate: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
 });
