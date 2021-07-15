@@ -11,6 +11,7 @@ import InputPakar from './InputPakar';
 import InputHomeBabySpa from './InputHomeBabySpa';
 import InputPosyandu from './InputPosyandu';
 import ListProfile from './ListProfile';
+import HeaderHome from './HeaderHome';
 
 export {
   Header,
@@ -26,4 +27,8 @@ export {
   InputHomeBabySpa,
   InputPosyandu,
   ListProfile,
+<<<<<<< HEAD
+=======
+  HeaderHome,
+>>>>>>> origin/main
 };

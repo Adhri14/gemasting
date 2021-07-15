@@ -23,9 +23,9 @@ export const colors = {
   white: mainColors.white,
   text: {
     primary1: mainColors.black,
-    primary2: mainColors.grey1,
+    primary2: mainColors.pink,
     secondary1: mainColors.grey,
-    secondary2: mainColors.teal,
+    secondary2: mainColors.grey1,
   },
   button: {
     primary: {

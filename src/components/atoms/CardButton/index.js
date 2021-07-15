@@ -21,7 +21,7 @@ const CardButton = ({label, onPress}) => {
 export default CardButton;
 
 const styles = StyleSheet.create({
-  container: {justifyContent: 'center', alignItems: 'center'},
+  container: {justifyContent: 'center', alignItems: 'center', marginBottom: 20},
   button: {
     width: 100,
     height: 100,

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {ProfilePhoto} from '..';
+import ProfilePhoto from '../ProfilePhoto';
 import {Button, Gap, TextInput} from '../../atoms';
 
 const InputCustomer = () => {
