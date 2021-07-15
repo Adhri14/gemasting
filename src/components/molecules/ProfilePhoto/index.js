@@ -66,6 +66,8 @@ const styles = StyleSheet.create({
   borderProfile: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'lightgreen',
+    borderRadius: 100,
   },
   name: {
     fontSize: 25,
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
   nomorIdProfile: {
     fontSize: 14,
     fontFamily: fonts.primary[400],
-    color: colors.text.primary2,
+    color: colors.text.secondary2,
     marginTop: 2,
     alignItems: 'center',
   },

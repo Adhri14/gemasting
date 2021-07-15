@@ -12,6 +12,8 @@ import {
   TextInput,
 } from '../../components';
 import {colors, fonts, mainColors, useForm, showMessage} from '../../utils';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
 const SignUpCustomer = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -36,13 +38,49 @@ const SignUpCustomer = ({navigation}) => {
       })
       .catch(e => {
         showMessage({
-          message: e.data.meta.message,
+          message: e.message,
           type: 'danger',
         });
       });
   };
 
-  const onSubmitGoogle = () => {};
+  const onSubmitGoogle = async () => {
+    // Get the users ID token
+    const {idToken} = await GoogleSignin.signIn();
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // Sign-in the user with the credential
+    auth()
+      .signInWithCredential(googleCredential)
+      .then(res => {
+        const data = {
+          name: res.user.displayName,
+          email: res.user.email,
+          phone_number: res.user.phoneNumber,
+          uid: res.user.uid,
+        };
+
+        Axios.post(
+          'https://api.gemasting.com/public/api/customer/registerByGmail',
+          data,
+        )
+          .then(res => {
+            console.log(res.data.data);
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'MainApp'}],
+            });
+          })
+          .catch(e => console.log(e.message));
+      })
+      .catch(e =>
+        showMessage({
+          message: e,
+        }),
+      );
+  };
 
   return (
     <View style={styles.page}>

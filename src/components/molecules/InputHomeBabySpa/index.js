@@ -1,7 +1,7 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import ProfilePhoto from '../ProfilePhoto'
-import { Button, FileUpload, Gap, TextInput } from '../../atoms'
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import ProfilePhoto from '../ProfilePhoto';
+import {Button, FileUpload, Gap, TextInput} from '../../atoms';
 
 const InputHomeBabySpa = () => {
   return (
@@ -12,16 +12,13 @@ const InputHomeBabySpa = () => {
       <Gap height={35} />
       <FileUpload label="Upload Surat LSP" />
       <Gap height={35} />
-      <TextInput
-        type="secondary"
-        label="Alamat HomeBaby Spa"
-      />
+      <TextInput type="secondary" label="Alamat HomeBaby Spa" />
       <Gap height={50} />
       <Button title="Simpan" />
     </View>
-  )
-}
+  );
+};
 
-export default InputHomeBabySpa
+export default InputHomeBabySpa;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

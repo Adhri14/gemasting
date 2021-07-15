@@ -9,6 +9,7 @@ import InputPakar from './InputPakar';
 import InputHomeBabySpa from './InputHomeBabySpa';
 import InputPosyandu from './InputPosyandu';
 import ListProfile from './ListProfile';
+import HeaderHome from './HeaderHome';
 
 export {
   Header,
@@ -21,5 +22,6 @@ export {
   InputPakar,
   InputHomeBabySpa,
   InputPosyandu,
-  ListProfile
+  ListProfile,
+  HeaderHome,
 };

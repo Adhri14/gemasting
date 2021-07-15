@@ -41,17 +41,6 @@ const EmailView = () => {
       />
       <Gap height={40} />
       <Button title="Masuk Akun" onPress={onSubmit} />
-      <Gap height={20} />
-      <Line />
-      <Gap height={20} />
-      <Button google type="secondary" title="Masuk dengan Google" />
-      <Gap height={30} />
-      <Link
-        title="Belum punya akun?"
-        action="Daftar"
-        size={16}
-        align="center"
-      />
     </View>
   );
 };
