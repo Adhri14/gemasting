@@ -28,6 +28,7 @@ export const registerReducer = (state = initStateRegister, action) => {
     return {
       ...state,
       email: action.value.email,
+      email_recovery: action.value.email_recovery,
       phone_number: action.value.phone_number,
       name: action.value.name,
       gender: action.value.gender,

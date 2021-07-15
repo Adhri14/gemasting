@@ -1,6 +1,5 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Axios from 'axios';
-import moment from 'moment';
 import React, {useState} from 'react';
 import {
   ScrollView,
@@ -25,17 +24,19 @@ import {
 } from '../../components';
 import {colors, fonts, mainColors, useForm} from '../../utils';
 import {useDispatch} from 'react-redux';
+import moment from 'moment';
 
 const SignUpPakar = ({navigation}) => {
   // Pengelola data dari state form
   const [form, setForm] = useForm({
     name: '',
     email: '',
+    email_recovery: '',
     phone_number: '',
     gender: '',
     address: '',
     education: '',
-    // birth: '',
+    photo: 'default.png',
     pakar: 1,
     password: '',
     password_confirmation: '',
@@ -75,7 +76,7 @@ const SignUpPakar = ({navigation}) => {
   const onSubmit = () => {
     // mengkombinasikan data variabel tempat lahir dan tanggal lahir menjadi sebuah objek
     const combine = {
-      birth: `${birthPlace}, ${date}`,
+      birth: `${birthPlace}, ${moment(date).format('DD MMMM YYYY')}`,
     };
 
     // mengkombinasikan data objek dari variabel form dan combine
@@ -84,13 +85,12 @@ const SignUpPakar = ({navigation}) => {
       ...combine,
     };
     dispatch({type: 'SET_REGISTER_PAKAR', value: data});
-    // Axios.post('https://api.gemasting.com/public/api/pakar/register', form)
-    //   .then(res => {
-    //     console.log(res.data.data);
-    //     navigation.navigate('OtpScreen', form);
-    //   })
-    //   .catch(e => console.log(e.message));
-    // console.log(result);
+    Axios.post('https://api.gemasting.com/public/api/pakar/register', data)
+      .then(res => {
+        console.log(res.data.data);
+        navigation.navigate('OtpScreen');
+      })
+      .catch(e => console.log(e.message));
   };
 
   const onSubmitGoogle = () => {};
@@ -110,6 +110,14 @@ const SignUpPakar = ({navigation}) => {
             label="Email"
             value={form.email}
             onChangeText={val => setForm('email', val)}
+          />
+          <Gap height={20} />
+          <TextInput
+            placeholder="Email Recovery"
+            keyboardType="email-address"
+            label="Email Recovery"
+            value={form.email_recovery}
+            onChangeText={val => setForm('email_recovery', val)}
           />
           <Gap height={20} />
           <TextInput

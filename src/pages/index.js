@@ -3,6 +3,7 @@ import SplashScreen from './SplashScreen';
 import GetStarted from './GetStarted';
 import OtpScreen from './OtpScreen';
 import SignIn from './SignIn';
+import SignInPakar from './SignInPakar';
 import SignInCustomer from './SignInCustomer';
 import SignUpCustomer from './SignUpCustomer';
 import SignUpPakar from './SignUpPakar';
@@ -28,4 +29,5 @@ export {
   Chat,
   Profile,
   UpdateProfile,
+  SignInPakar,
 };
