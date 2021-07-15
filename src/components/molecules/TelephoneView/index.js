@@ -11,17 +11,6 @@ const TelephoneView = () => {
       <TextInput label="Pin" keyboardType="number-pad" placeholder="Pin" />
       <Gap height={40} />
       <Button title="Masuk Akun" />
-      <Gap height={20} />
-      <Line />
-      <Gap height={20} />
-      <Button google type="secondary" title="Masuk dengan Google" />
-      <Gap height={30} />
-      <Link
-        title="Belum punya akun?"
-        action="Daftar"
-        size={16}
-        align="center"
-      />
     </View>
   );
 };

@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   container: {alignItems: 'center', flex: 1},
   text: active => ({
     fontSize: 11,
-    color: active ? colors.text.secondary2 : '#b0b0b0',
+    color: active ? colors.text.primary2 : '#b0b0b0',
     fontFamily: fonts.primary[400],
     marginTop: 4,
   }),
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 5,
     borderRadius: 10,
-    backgroundColor: mainColors.teal,
+    backgroundColor: mainColors.pink,
     alignSelf: 'center',
     position: 'absolute',
     top: -28,

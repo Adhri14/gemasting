@@ -21,3 +21,32 @@ if (val.length >= 3 && !isNaN(val)) {
                     disabled: true,
                   });
                 }
+
+
+// COMPONENT TAB CATEGORI
+const [selectedCategory, setSelectedCategory] = useState(0);
+const categories = ['Chairs', 'Tables', 'Sofa', 'Wardrobes'];
+
+<ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{maxHeight: 30}}
+            // contentContainerStyle={{paddingLeft: theme.appDims.boundary}}
+          >
+            {categories.map((item, index) => {
+              return (
+                <TouchableOpacity onPress={() => setSelectedCategory(index)}>
+                  <Text
+                    // key={index}
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 'bold',
+                      marginRight: 20,
+                      opacity: index == selectedCategory ? 1 : 0.2,
+                    }}>
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>

@@ -8,8 +8,19 @@ import {
   View,
 } from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
-import {EmailView, Header, TelephoneView} from '../../components';
-import {colors, fonts, mainColors} from '../../utils';
+import {
+  EmailView,
+  Header,
+  TelephoneView,
+  Gap,
+  Line,
+  Button,
+  Link,
+} from '../../components';
+import {colors, fonts, mainColors, showMessage} from '../../utils';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
+import Axios from 'axios';
 
 const renderTabBar = props => {
   return (
@@ -20,15 +31,7 @@ const renderTabBar = props => {
       style={styles.wrapper}
       tabStyle={styles.tab}
       renderLabel={({route, focused}) => (
-        <Text
-          style={{
-            color: focused ? mainColors.black : colors.text.primary2,
-            fontSize: 16,
-            fontFamily: fonts.primary.normal,
-            textAlign: 'center',
-          }}>
-          {route.title}
-        </Text>
+        <Text style={styles.textIndicator(focused)}>{route.title}</Text>
       )}
     />
   );
@@ -47,6 +50,46 @@ const SignIn = ({navigation}) => {
     Email: EmailView,
     Telephone: TelephoneView,
   });
+
+  const onSubmitGoogle = async () => {
+    // Get the users ID token
+    const {idToken} = await GoogleSignin.signIn();
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // Sign-in the user with the credential
+    auth()
+      .signInWithCredential(googleCredential)
+      .then(res => {
+        const data = {
+          email: res.user.email,
+        };
+
+        Axios.post(
+          'https://api.gemasting.com/public/api/customer/loginByGmail',
+          data,
+        )
+          .then(res => {
+            console.log(res.data.data);
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'MainApp'}],
+            });
+          })
+          .catch(e => {
+            showMessage({
+              message: e.message,
+            });
+          });
+      })
+      .catch(e =>
+        showMessage({
+          message: e,
+        }),
+      );
+  };
+
   return (
     <View style={styles.page}>
       <StatusBar backgroundColor={mainColors.smoke} />
@@ -61,6 +104,24 @@ const SignIn = ({navigation}) => {
           initialLayout={{width: layout.width}}
           swipeEnabled={false}
         />
+        <View style={styles.content}>
+          <Line />
+          <Gap height={20} />
+          <Button
+            google
+            type="secondary"
+            title="Masuk dengan Google"
+            onPress={onSubmitGoogle}
+          />
+          <Gap height={30} />
+          <Link
+            title="Belum punya akun?"
+            action="Daftar"
+            size={16}
+            align="center"
+            onPress={() => navigation.goBack()}
+          />
+        </View>
       </ScrollView>
     </View>
   );
@@ -80,11 +141,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 30,
   },
-  // container: {
-  //   padding: 10,
-  //   borderWidth: 1,
-  //   backgroundColor: 'yellow',
-  // },
+  content: {
+    paddingHorizontal: 20,
+  },
   indicator: {
     backgroundColor: mainColors.white,
     padding: 24,
@@ -93,7 +152,7 @@ const styles = StyleSheet.create({
     bottom: 10,
     alignSelf: 'center',
     borderRadius: 15,
-    left: 8,
+    left: 10,
     width: '45%',
   },
   wrapper: {
@@ -108,4 +167,10 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center',
   },
+  textIndicator: focused => ({
+    color: focused ? mainColors.black : colors.text.primary2,
+    fontSize: 16,
+    fontFamily: fonts.primary.normal,
+    textAlign: 'center',
+  }),
 });

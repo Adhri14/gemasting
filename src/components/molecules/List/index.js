@@ -4,7 +4,7 @@ import {DummyPhoto} from '../../../assets/Dummy';
 import {colors, fonts, mainColors} from '../../../utils';
 import {
   IconNext,
-  IconProfileActive,
+  IconProfileSecond,
   IconHistory,
   IconSetting,
   IconHelp,
@@ -17,7 +17,7 @@ const List = ({profile, type, icon, name, desc, onPress}) => {
   const Icon = () => {
     switch (icon) {
       case 'edit-profile':
-        return <IconProfileActive />;
+        return <IconProfileSecond />;
       case 'edit-riwayat':
         return <IconHistory />;
       case 'edit-pengaturan':
