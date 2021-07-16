@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   ScrollView,
   StatusBar,
@@ -7,11 +7,34 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {fonts, mainColors, useForm} from '../../utils';
+import {fonts, getData, mainColors, useForm} from '../../utils';
 import {CardButton, Gap, HeaderHome} from '../../components';
 import {IconImage} from '../../assets';
+import Axios from 'axios';
+// import Axios from './'
 
 const HomeCustomer = () => {
+  const [token, setToken] = useState('');
+
+  const [dataProfile, setDataProfile] = useState({
+    profile: '',
+  });
+
+  useEffect(() => {
+    getData('token').then(res => {
+      setToken(res);
+    });
+    getProfile();
+  }, []);
+
+  const getProfile = () => {
+    Axios.get('https://api.gemasting.com/public/api/profile', {
+      headers: {Authorization: `Bearer ${token}`},
+    }).then(res => {
+      console.log(res.data.data);
+    });
+  };
+
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
