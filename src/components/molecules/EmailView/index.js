@@ -3,7 +3,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Gap, Line, Link, TextInput} from '../../atoms';
 import Axios from 'axios';
-import {useForm} from '../../../utils';
+import {storeData, useForm, showMessage} from '../../../utils';
 
 const EmailView = () => {
   const navigation = useNavigation();
@@ -16,9 +16,19 @@ const EmailView = () => {
     Axios.post('https://api.gemasting.com/public/api/customer/login', form)
       .then(res => {
         console.log(res.data.data);
-        navigation.navigate('MainApp');
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'MainApp'}],
+        });
       })
-      .catch(e => console.log(e.message));
+      .catch(e => {
+        showMessage({
+          message: e.message,
+        });
+        showMessage({
+          message: e.data.data.message,
+        });
+      });
     // console.log('OK');
   };
   return (

@@ -11,7 +11,14 @@ import {
   Link,
   TextInput,
 } from '../../components';
-import {colors, fonts, mainColors, useForm, showMessage} from '../../utils';
+import {
+  colors,
+  fonts,
+  mainColors,
+  useForm,
+  showMessage,
+  storeData,
+} from '../../utils';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 
@@ -33,13 +40,15 @@ const SignUpCustomer = ({navigation}) => {
     // console.log(data);
     Axios.post('https://api.gemasting.com/public/api/customer/register', form)
       .then(res => {
-        console.log(res.data.data);
+        storeData('token', res.data.data.token);
         navigation.navigate('OtpScreen');
       })
       .catch(e => {
         showMessage({
           message: e.message,
-          type: 'danger',
+        });
+        showMessage({
+          message: e.data.data.message,
         });
       });
   };
@@ -60,20 +69,24 @@ const SignUpCustomer = ({navigation}) => {
           email: res.user.email,
           phone_number: res.user.phoneNumber,
           uid: res.user.uid,
+          photo: res.user.photoURL,
         };
 
         Axios.post(
           'https://api.gemasting.com/public/api/customer/registerByGmail',
           data,
         )
-          .then(res => {
-            console.log(res.data.data);
+          .then(result => {
             navigation.reset({
               index: 0,
               routes: [{name: 'MainApp'}],
             });
           })
-          .catch(e => console.log(e.message));
+          .catch(error => {
+            showMessage({
+              message: error.message,
+            });
+          });
       })
       .catch(e =>
         showMessage({

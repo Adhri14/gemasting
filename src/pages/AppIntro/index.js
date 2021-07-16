@@ -224,13 +224,13 @@ const styles = StyleSheet.create({
   indicator: {
     width: 8,
     height: 8,
-    backgroundColor: mainColors.ocean,
+    backgroundColor: mainColors.lightPink,
     borderRadius: 15,
   },
   indicatorActive: {
     width: 24,
     height: 8,
-    backgroundColor: mainColors.teal,
+    backgroundColor: mainColors.pink,
     borderRadius: 15,
   },
   buttonDone: {

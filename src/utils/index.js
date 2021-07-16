@@ -5,3 +5,4 @@ export {useForm, showMessage};
 
 export * from './colors';
 export * from './fonts';
+export * from './localStorage';
