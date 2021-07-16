@@ -5,6 +5,7 @@ import {
   GetStarted,
   SignIn,
   SignInCustomer,
+  SignInPakar,
   SignUpCustomer,
   SignUpLembaga,
   SignUpPakar,
@@ -75,6 +76,11 @@ const Router = () => {
       <Stack.Screen
         name="SignInCustomer"
         component={SignInCustomer}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignInPakar"
+        component={SignInPakar}
         options={{headerShown: false}}
       />
       <Stack.Screen

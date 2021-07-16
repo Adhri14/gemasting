@@ -119,7 +119,7 @@ const SignIn = ({navigation}) => {
             action="Daftar"
             size={16}
             align="center"
-            onPress={() => navigation.goBack()}
+            onPress={() => navigation.navigate('SignUpCustomer')}
           />
         </View>
       </ScrollView>

@@ -27,8 +27,5 @@ export {
   InputHomeBabySpa,
   InputPosyandu,
   ListProfile,
-<<<<<<< HEAD
-=======
   HeaderHome,
->>>>>>> origin/main
 };

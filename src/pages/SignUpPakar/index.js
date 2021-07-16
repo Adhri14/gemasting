@@ -25,6 +25,8 @@ import {
 import {colors, fonts, mainColors, useForm} from '../../utils';
 import {useDispatch} from 'react-redux';
 import moment from 'moment';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
 const SignUpPakar = ({navigation}) => {
   // Pengelola data dari state form
@@ -93,7 +95,43 @@ const SignUpPakar = ({navigation}) => {
       .catch(e => console.log(e.message));
   };
 
-  const onSubmitGoogle = () => {};
+  const onSubmitGoogle = async () => {
+    // Get the users ID token
+    const {idToken} = await GoogleSignin.signIn();
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // Sign-in the user with the credential
+    auth()
+      .signInWithCredential(googleCredential)
+      .then(res => {
+        const data = {
+          name: res.user.displayName,
+          email: res.user.email,
+          phone_number: res.user.phoneNumber,
+          uid: res.user.uid,
+        };
+
+        Axios.post(
+          'https://api.gemasting.com/public/api/pakar/registerByGmail',
+          data,
+        )
+          .then(res => {
+            console.log(res.data.data);
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'MainApp'}],
+            });
+          })
+          .catch(e => console.log(e.message));
+      })
+      .catch(e =>
+        showMessage({
+          message: e,
+        }),
+      );
+  };
 
   return (
     <View style={styles.page}>
@@ -232,7 +270,7 @@ const SignUpPakar = ({navigation}) => {
           />
           <Gap height={20} />
           <Link
-            onPress={() => navigation.navigate('SignIn')}
+            onPress={() => navigation.navigate('SignInPakar')}
             title="Sudah punya akun?"
             action="Masuk"
             align="center"

@@ -8,8 +8,19 @@ import {
   View,
 } from 'react-native';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
-import {EmailViewPakar, Header, TelephoneViewPakar} from '../../components';
+import {
+  EmailViewPakar,
+  Header,
+  TelephoneViewPakar,
+  Line,
+  Gap,
+  Button,
+  Link,
+} from '../../components';
 import {colors, fonts, mainColors} from '../../utils';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
+import Axios from 'axios';
 
 const renderTabBar = props => {
   return (
@@ -47,6 +58,46 @@ const SignInPakar = ({navigation}) => {
     Email: EmailViewPakar,
     Telephone: TelephoneViewPakar,
   });
+
+  const onSubmitGoogle = async () => {
+    // Get the users ID token
+    const {idToken} = await GoogleSignin.signIn();
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+    // Sign-in the user with the credential
+    auth()
+      .signInWithCredential(googleCredential)
+      .then(res => {
+        const data = {
+          email: res.user.email,
+        };
+
+        Axios.post(
+          'https://api.gemasting.com/public/api/pakar/loginByGmail',
+          data,
+        )
+          .then(res => {
+            console.log(res.data.data);
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'MainApp'}],
+            });
+          })
+          .catch(e => {
+            showMessage({
+              message: e.message,
+            });
+          });
+      })
+      .catch(e =>
+        showMessage({
+          message: e,
+        }),
+      );
+  };
+
   return (
     <View style={styles.page}>
       <StatusBar backgroundColor={mainColors.smoke} />
@@ -61,6 +112,25 @@ const SignInPakar = ({navigation}) => {
           initialLayout={{width: layout.width}}
           swipeEnabled={false}
         />
+        <View style={styles.content}>
+          <Gap height={10} />
+          <Line />
+          <Gap height={20} />
+          <Button
+            google
+            type="secondary"
+            title="Masuk dengan Google"
+            onPress={onSubmitGoogle}
+          />
+          <Gap height={30} />
+          <Link
+            title="Belum punya akun?"
+            action="Daftar"
+            size={16}
+            align="center"
+            onPress={() => navigation.navigate('SignUpPakar')}
+          />
+        </View>
       </ScrollView>
     </View>
   );
@@ -107,5 +177,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     // alignItems: 'center',
     // justifyContent: 'center',
+  },
+  content: {
+    marginHorizontal: 20,
   },
 });
