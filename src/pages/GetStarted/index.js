@@ -24,15 +24,13 @@ const GetStarted = ({navigation}) => {
         <Text style={styles.title}>Bergabung Sebagai</Text>
         <View style={styles.row}>
           <CardButton
-            label="Pakar"
-            onPress={() => navigation.navigate('SignUpPakar')}
-          />
-          <CardButton
             label="User"
+            type="card-big"
             onPress={() => navigation.navigate('SignUpCustomer')}
           />
           <CardButton
-            label="Lembaga"
+            label="Partner"
+            type="card-big"
             onPress={() => navigation.navigate('SignUpLembaga')}
           />
         </View>
