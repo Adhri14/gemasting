@@ -38,5 +38,29 @@ export const registerReducer = (state = initStateRegister, action) => {
       password_confirmation: action.value.password_confirmation,
     };
   }
+  if (action.type === 'SET_REGISTER_POSYANDU') {
+    return {
+      ...state,
+      email: action.value.email,
+      email_recovery: action.value.email_recovery,
+      name: action.value.name,
+      phone_number: action.value.phone_number,
+      address: action.value.address,
+      password: action.value.password,
+      password_confirmation: action.value.password_confirmation,
+    };
+  }
+  if (action.type === 'SET_REGISTER_HBS') {
+    return {
+      ...state,
+      email: action.value.email,
+      email_recovery: action.value.email_recovery,
+      name: action.value.name,
+      phone_number: action.value.phone_number,
+      address: action.value.address,
+      password: action.value.password,
+      password_confirmation: action.value.password_confirmation,
+    };
+  }
   return state;
 };
