@@ -31,7 +31,7 @@ const GetStarted = ({navigation}) => {
           <CardButton
             label="Partner"
             type="card-big"
-            onPress={() => navigation.navigate('SignUpLembaga')}
+            onPress={() => navigation.navigate('SignUpPartner')}
           />
         </View>
       </View>

@@ -7,7 +7,7 @@ import SignInPakar from './SignInPakar';
 import SignInCustomer from './SignInCustomer';
 import SignUpCustomer from './SignUpCustomer';
 import SignUpPakar from './SignUpPakar';
-import SignUpLembaga from './SignUpLembaga';
+import SignUpPartner from './SignUpPartner';
 import HomeCustomer from './HomeCustomer';
 import Activity from './Activity';
 import Chat from './Chat';
@@ -22,7 +22,7 @@ export {
   SignUpCustomer,
   OtpScreen,
   SignUpPakar,
-  SignUpLembaga,
+  SignUpPartner,
   SignInCustomer,
   HomeCustomer,
   Activity,

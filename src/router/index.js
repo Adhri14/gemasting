@@ -7,7 +7,7 @@ import {
   SignInCustomer,
   SignInPakar,
   SignUpCustomer,
-  SignUpLembaga,
+  SignUpPartner,
   SignUpPakar,
   SplashScreen,
   HomeCustomer,
@@ -64,8 +64,8 @@ const Router = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="SignUpLembaga"
-        component={SignUpLembaga}
+        name="SignUpPartner"
+        component={SignUpPartner}
         options={{headerShown: false}}
       />
       <Stack.Screen

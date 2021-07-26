@@ -29,52 +29,63 @@ import moment from 'moment';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 
-const SignUpLembaga = ({navigation}) => {
-  const [form, setForm] = useForm({
-    name: '',
-    email: '',
-    email_recovery: '',
-    phone_number: '',
-    gender: '',
-    address: '',
-    education: '',
-    photo: 'default.png',
-    pakar: null,
-    password: '',
-    password_confirmation: '',
-    checked: false,
-  });
+const SignUpPartner = ({navigation}) => {
+  // const [form, setForm] = useForm({
+  //   name: '',
+  //   email: '',
+  //   email_recovery: '',
+  //   phone_number: '',
+  //   gender: '',
+  //   address: '',
+  //   education: '',
+  //   photo: 'default.png',
+  //   password: '',
+  //   password_confirmation: '',
+  //   checked: false,
+  // });
 
-  const [form2, setForm2] = useForm({
-    name: '',
-    email: '',
-    email_recovery: '',
-    phone_number: '',
-    address: '',
-    photo: 'default.png',
-    pakar: null,
-    password: '',
-    password_confirmation: '',
-    checked: false,
-  });
+  // const [form2, setForm2] = useForm({
+  //   name: '',
+  //   email: '',
+  //   email_recovery: '',
+  //   phone_number: '',
+  //   address: '',
+  //   photo: 'default.png',
+  //   password: '',
+  //   password_confirmation: '',
+  //   checked: false,
+  // });
 
-  const [form3, setForm3] = useForm({
-    name: '',
-    email: '',
-    email_recovery: '',
-    phone_number: '',
-    address: '',
-    photo: 'default.png',
-    pakar: null,
-    password: '',
-    password_confirmation: '',
-    checked: false,
-  });
+  // const [form3, setForm3] = useForm({
+  //   name: '',
+  //   email: '',
+  //   email_recovery: '',
+  //   phone_number: '',
+  //   address: '',
+  //   photo: 'default.png',
+  //   password: '',
+  //   password_confirmation: '',
+  //   checked: false,
+  // });
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [email_recovery, setEmail_recovery] = useState('');
+  const [phone_number, setPhone_number] = useState('');
+  const [address, setAddress] = useState('');
+  const [photo, setPhoto] = useState('default.png');
+  const [password, setPassword] = useState('');
+  const [password_confirmation, setPassword_confirmation] = useState('');
+  const [gender, setGender] = useState('');
+  const [checked, setChecked] = useState(false);
+  const [education, setEducation] = useState('');
 
   const isDisplay = 'none';
 
   // Pengelola data dari state tanggal lahir
   const [birthPlace, setBirthPlace] = useState('');
+
+  const [pakar, setPakar] = useState(null);
 
   // Pengelola data dari state tanggal lahir
   const [date, setDate] = useState(new Date());
@@ -103,7 +114,7 @@ const SignUpLembaga = ({navigation}) => {
   const dispatch = useDispatch();
 
   const onSubmitPakar = () => {
-    const combine = {
+    const form = {
       birth: `${birthPlace}, ${moment(date).format('DD MMMM YYYY')}`,
     };
 
@@ -259,11 +270,11 @@ const SignUpLembaga = ({navigation}) => {
 
   const Input = () => {
     if (
-      form.pakar === 1 ||
-      form.pakar === 2 ||
-      form.pakar === 3 ||
-      form.pakar === 4 ||
-      form.pakar === 5
+      pakar === 1 ||
+      pakar === 2 ||
+      pakar === 3 ||
+      pakar === 4 ||
+      pakar === 5
     ) {
       return (
         <>
@@ -271,39 +282,39 @@ const SignUpLembaga = ({navigation}) => {
             placeholder="Email"
             keyboardType="email-address"
             label="Email"
-            value={form.email}
-            onChangeText={val => setForm('email', val)}
+            value={email}
+            onChangeText={val => setEmail(val)}
           />
           <Gap height={20} />
           <TextInput
             placeholder="Email Recovery"
             keyboardType="email-address"
             label="Email Recovery"
-            value={form.email_recovery}
-            onChangeText={val => setForm('email_recovery', val)}
+            value={email_recovery}
+            onChangeText={val => setEmail_recovery(val)}
           />
           <Gap height={20} />
           <TextInput
             placeholder="+62"
             keyboardType="number-pad"
             label="No Telepon"
-            value={form.phone_number}
-            onChangeText={val => setForm('phone_number', val)}
+            value={phone_number}
+            onChangeText={val => setPhone_number(val)}
           />
           <Gap height={20} />
           <TextInput
             placeholder="Nama"
             keyboardType="default"
             label="Nama"
-            value={form.name}
-            onChangeText={val => setForm('name', val)}
+            value={name}
+            onChangeText={val => setName(val)}
           />
           <Gap height={20} />
           <Radio
             valueItem1="L"
             valueItem2="P"
-            // valueGroup={form.gender}
-            // onValueChange={val => setForm('gender', val)}
+            valueGroup={gender}
+            onValueChange={val => setGender(val)}
           />
           <Gap height={10} />
           <TextInput
@@ -338,8 +349,8 @@ const SignUpLembaga = ({navigation}) => {
             placeholder="Pendidikan terakhir anda"
             keyboardType="default"
             label="Pendidikan"
-            value={form.education}
-            onChangeText={val => setForm('education', val)}
+            value={education}
+            onChangeText={val => setEducation(val)}
           />
           <Gap height={20} />
           <TextInput
@@ -347,8 +358,8 @@ const SignUpLembaga = ({navigation}) => {
             placeholder="Alamat praktek anda"
             keyboardType="default"
             label="Alamat Praktek"
-            value={form.address}
-            onChangeText={val => setForm('address', val)}
+            value={address}
+            onChangeText={val => setAddress(val)}
           />
           <Gap height={20} />
           <TextInput
@@ -356,8 +367,8 @@ const SignUpLembaga = ({navigation}) => {
             label="Password"
             keyboardType="default"
             placeholder="Password"
-            value={form.password}
-            onChangeText={val => setForm('password', val)}
+            value={password}
+            onChangeText={val => setPassword(val)}
           />
           <Gap height={20} />
           <TextInput
@@ -365,13 +376,13 @@ const SignUpLembaga = ({navigation}) => {
             label="Ulangi Password"
             placeholder="Ketik ulang password"
             keyboardType="default"
-            value={form.password_confirmation}
-            onChangeText={val => setForm('password_confirmation', val)}
+            value={password_confirmation}
+            onChangeText={val => setPassword_confirmation(val)}
           />
           <Gap height={10} />
           <Checkbox
-            checked={form.checked ? 'checked' : 'unchecked'}
-            onPress={val => setForm('checked', !form.checked)}
+            checked={checked ? 'checked' : 'unchecked'}
+            onPress={val => setChecked(!checked)}
           />
           <Gap height={20} />
           <Button title="Daftar Akun" onPress={onSubmitPakar} />
@@ -394,39 +405,39 @@ const SignUpLembaga = ({navigation}) => {
         </>
       );
     }
-    if (form.pakar === 6) {
+    if (pakar === 6) {
       return (
         <>
           <TextInput
             placeholder="Email"
             keyboardType="email-address"
             label="Email"
-            value={form2.email}
-            onChangeText={val => setForm2('email', val)}
+            value={email}
+            onChangeText={val => setEmail(val)}
           />
           <Gap height={20} />
           <TextInput
             placeholder="Email Recovery"
             keyboardType="email-address"
             label="Email Recovery"
-            value={form2.email_recovery}
-            onChangeText={val => setForm2('email_recovery', val)}
+            value={email_recovery}
+            onChangeText={val => setEmail_recovery(val)}
           />
           <Gap height={20} />
           <TextInput
             placeholder="+62"
             keyboardType="number-pad"
             label="No. Telepon"
-            value={form2.phone_number}
-            onChangeText={val => setForm2('phone_number', val)}
+            value={phone_number}
+            onChangeText={val => setPhone_number(val)}
           />
           <Gap height={20} />
           <TextInput
             placeholder="Nama kantor"
             keyboardType="default"
             label="Nama Kantor"
-            value={form2.name}
-            onChangeText={val => setForm2('name', val)}
+            value={name}
+            onChangeText={val => setName(val)}
           />
           <Gap height={20} />
           <TextInput
@@ -434,8 +445,8 @@ const SignUpLembaga = ({navigation}) => {
             isTextArea
             keyboardType="default"
             label="Alamat Kantor"
-            value={form2.address}
-            onChangeText={val => setForm2('address', val)}
+            value={address}
+            onChangeText={val => setAddress(val)}
           />
           <Gap height={20} />
           <TextInput
@@ -443,8 +454,8 @@ const SignUpLembaga = ({navigation}) => {
             keyboardType="default"
             label="Password"
             isPassword
-            value={form2.password}
-            onChangeText={val => setForm2('password', val)}
+            value={password}
+            onChangeText={val => setPassword(val)}
           />
           <Gap height={20} />
           <TextInput
@@ -452,13 +463,13 @@ const SignUpLembaga = ({navigation}) => {
             label="Ulangi Password"
             keyboardType="default"
             isPassword
-            value={form2.password_confirmation}
-            onChangeText={val => setForm2('password_confirmation', val)}
+            value={password_confirmation}
+            onChangeText={val => setPassword_confirmation(val)}
           />
           <Gap height={10} />
           <Checkbox
-            checked={form2.checked ? 'checked' : 'unchecked'}
-            onPress={val => setForm2('checked', !form2.checked)}
+            checked={checked ? 'checked' : 'unchecked'}
+            onPress={val => setChecked(!checked)}
           />
           <Gap height={20} />
           <Button title="Daftar Akun" onPress={onSubmitPosyandu} />
@@ -481,39 +492,39 @@ const SignUpLembaga = ({navigation}) => {
         </>
       );
     }
-    if (form.pakar === 7) {
+    if (pakar === 7) {
       return (
         <>
           <TextInput
             placeholder="Email"
             keyboardType="email-address"
             label="Email"
-            value={form3.email}
-            onChangeText={val => setForm3('email', val)}
+            value={email}
+            onChangeText={val => setEmail(val)}
           />
           <Gap height={20} />
           <TextInput
             placeholder="Email Recovery"
             keyboardType="email-address"
             label="Email Recovery"
-            value={form3.email_recovery}
-            onChangeText={val => setForm3('email_recovery', val)}
+            value={email_recovery}
+            onChangeText={val => setEmail_recovery(val)}
           />
           <Gap height={20} />
           <TextInput
             placeholder="+62"
             keyboardType="number-pad"
             label="No. Telepon"
-            value={form3.phone_number}
-            onChangeText={val => setForm3('phone_number', val)}
+            value={phone_number}
+            onChangeText={val => setPhone_number(val)}
           />
           <Gap height={20} />
           <TextInput
             placeholder="Nama kantor"
             keyboardType="default"
             label="Nama Kantor"
-            value={form3.name}
-            onChangeText={val => setForm3('name', val)}
+            value={name}
+            onChangeText={val => setName(val)}
           />
           <Gap height={20} />
           <TextInput
@@ -521,8 +532,8 @@ const SignUpLembaga = ({navigation}) => {
             isTextArea
             keyboardType="default"
             label="Alamat Kantor"
-            value={form3.address}
-            onChangeText={val => setForm3('address', val)}
+            value={address}
+            onChangeText={val => setAddress(val)}
           />
           <Gap height={20} />
           <TextInput
@@ -530,8 +541,8 @@ const SignUpLembaga = ({navigation}) => {
             keyboardType="default"
             label="Password"
             isPassword
-            value={form3.password}
-            onChangeText={val => setForm3('password', val)}
+            value={password}
+            onChangeText={val => setPassword(val)}
           />
           <Gap height={20} />
           <TextInput
@@ -539,13 +550,13 @@ const SignUpLembaga = ({navigation}) => {
             label="Ulangi Password"
             keyboardType="default"
             isPassword
-            value={form3.password_confirmation}
-            onChangeText={val => setForm3('password_confirmation', val)}
+            value={password_confirmation}
+            onChangeText={val => setPassword_confirmation(val)}
           />
           <Gap height={10} />
           <Checkbox
-            checked={form3.checked ? 'checked' : 'unchecked'}
-            onPress={val => setForm3('checked', !form3.checked)}
+            checked={checked ? 'checked' : 'unchecked'}
+            onPress={val => setChecked(!checked)}
           />
           <Gap height={20} />
           <Button title="Daftar Akun" onPress={onSubmitHBS} />
@@ -582,8 +593,8 @@ const SignUpLembaga = ({navigation}) => {
           <Gap height={15} />
           <Picker
             label="Pilih Profesi"
-            value={form.pakar}
-            onValueChange={val => setForm('pakar', val)}
+            value={pakar}
+            onValueChange={val => setPakar(val)}
           />
           <Gap height={30} />
           <View style={styles.line} />
@@ -597,7 +608,7 @@ const SignUpLembaga = ({navigation}) => {
   );
 };
 
-export default SignUpLembaga;
+export default SignUpPartner;
 
 const styles = StyleSheet.create({
   page: {
