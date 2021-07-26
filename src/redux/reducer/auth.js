@@ -18,8 +18,11 @@ export const registerReducer = (state = initStateRegister, action) => {
       ...state,
       email: action.value.email,
       email_recovery: action.value.email_recovery,
-      name: action.value.name,
       phone_number: action.value.phone_number,
+      name: action.value.name,
+      gender: action.value.gender,
+      birth: action.value.birth,
+      address: action.value.address,
       password: action.value.password,
       password_confirmation: action.value.password_confirmation,
     };

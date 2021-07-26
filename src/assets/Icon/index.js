@@ -20,6 +20,7 @@ import IconInfo from './ic-info.svg';
 import IconCalender from './ic-calender.svg';
 import IconImage from './ic-image.svg';
 import IconProfileSecond from './ic-profile-second.svg';
+import IconClose from './close.svg';
 
 export {
   IconBackDark,
@@ -44,4 +45,5 @@ export {
   IconCalender,
   IconImage,
   IconProfileSecond,
+  IconClose,
 };

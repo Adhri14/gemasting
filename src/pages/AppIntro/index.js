@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: fonts.primary[500],
     textAlign: 'center',
-    color: colors.text.primary2,
+    color: colors.text.secondary2,
     marginTop: 5,
   },
   footer: {

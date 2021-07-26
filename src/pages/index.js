@@ -13,6 +13,10 @@ import Activity from './Activity';
 import Chat from './Chat';
 import Profile from './Profile';
 import UpdateProfile from './UpdateProfile';
+import KmsOnline from './KmsOnline';
+import Stunting from './Stunting';
+import KmsOutput from './KmsOutput';
+import AddFamily from './AddFamily';
 
 export {
   SplashScreen,
@@ -30,4 +34,8 @@ export {
   Profile,
   UpdateProfile,
   SignInPakar,
+  KmsOnline,
+  Stunting,
+  KmsOutput,
+  AddFamily,
 };

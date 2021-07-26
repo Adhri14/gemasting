@@ -16,6 +16,10 @@ import {
   Chat,
   Profile,
   UpdateProfile,
+  KmsOnline,
+  Stunting,
+  KmsOutput,
+  AddFamily,
 } from '../pages';
 import OtpScreen from '../pages/OtpScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -37,7 +41,7 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="MainApp">
       <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
@@ -96,6 +100,26 @@ const Router = () => {
       <Stack.Screen
         name="UpdateProfile"
         component={UpdateProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="KmsOnline"
+        component={KmsOnline}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="KmsOutput"
+        component={KmsOutput}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AddFamily"
+        component={AddFamily}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Stunting"
+        component={Stunting}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

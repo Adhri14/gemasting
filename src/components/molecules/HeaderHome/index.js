@@ -3,15 +3,15 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import {DummyUser} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const HeaderHome = () => {
+const HeaderHome = ({img, name}) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.title}>Halo, Jhon</Text>
+        <Text style={styles.title}>{name}</Text>
         <Text style={styles.subtitle}>Selamat Datang</Text>
       </View>
       <View style={styles.image}>
-        <Image style={styles.img} source={DummyUser} />
+        <Image style={styles.img} source={img} />
       </View>
     </View>
   );
