@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Welcome} from '../../assets';
+import {IlPartner, IlPasien, Welcome} from '../../assets';
 import {CardButton} from '../../components';
 import Button from '../../components/atoms/Button';
 import Gap from '../../components/atoms/Gap';
@@ -26,13 +26,15 @@ const GetStarted = ({navigation}) => {
           <CardButton
             label="User"
             type="card-big"
-            onPress={() => navigation.navigate('SignUpCustomer')}
-          />
+            onPress={() => navigation.navigate('SignUpCustomer')}>
+            <IlPasien />
+          </CardButton>
           <CardButton
             label="Partner"
             type="card-big"
-            onPress={() => navigation.navigate('SignUpLembaga')}
-          />
+            onPress={() => navigation.navigate('SignUpLembaga')}>
+            <IlPartner />
+          </CardButton>
         </View>
       </View>
     </View>

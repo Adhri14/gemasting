@@ -1,6 +1,13 @@
 import Axios from 'axios';
-import React from 'react';
-import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {
   Button,
@@ -10,6 +17,7 @@ import {
   Line,
   Link,
   TextInput,
+  Radio,
 } from '../../components';
 import {
   colors,
@@ -21,6 +29,9 @@ import {
 } from '../../utils';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+import moment from 'moment';
+import {IconCalender} from '../../assets';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const SignUpCustomer = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -31,25 +42,67 @@ const SignUpCustomer = ({navigation}) => {
     password_confirmation: '',
     phone_number: '',
     checked: false,
+    gender: '',
+    address: '',
   });
+
+  // Pengelola data dari state tanggal lahir
+  const [birthPlace, setBirthPlace] = useState('');
+
+  // Pengelola data dari state tanggal lahir
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  // Fungsi untuk merubah value lama menjadi value baru
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+    // setForm('birth', currentDate);
+  };
+
+  // Fungsi untuk merubah mode ui dan menculkan dan menghide popup
+  const showMode = currentMode => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  // Fungsi untuk memunculkan mode ui berupa tanggal
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    dispatch({type: 'SET_REGISTER_CUSTOMER', value: form});
+    // mengkombinasikan data variabel tempat lahir dan tanggal lahir menjadi sebuah objek
+    const combine = {
+      birth: `${birthPlace}, ${moment(date).format('DD MMMM YYYY')}`,
+    };
 
-    // console.log(data);
-    Axios.post('https://api.gemasting.com/public/api/customer/register', form)
+    // mengkombinasikan data objek dari variabel form dan combine
+    const data = {
+      ...form,
+      ...combine,
+    };
+
+    dispatch({type: 'SET_REGISTER_CUSTOMER', value: data});
+
+    console.log(data);
+    Axios.post('https://api.gemasting.com/public/api/customer/register', data)
       .then(res => {
         storeData('token', res.data.data.token);
         navigation.navigate('OtpScreen');
       })
       .catch(e => {
-        showMessage({
-          message: e.message,
-        });
-        showMessage({
-          message: e.data.data.message,
-        });
+        console.log(e);
+        // showMessage({
+        //   message: e.data,
+        // });
+        // showMessage({
+        //   message: e.message,
+        // });
       });
   };
 
@@ -121,19 +174,66 @@ const SignUpCustomer = ({navigation}) => {
           />
           <Gap height={25} />
           <TextInput
+            value={form.phone_number}
+            onChangeText={val => setForm('phone_number', val)}
+            placeholder="+62"
+            keyboardType="number-pad"
+            label="No. Telepon"
+          />
+          <Gap height={25} />
+          <TextInput
             value={form.name}
             onChangeText={val => setForm('name', val)}
             placeholder="Nama"
             keyboardType="default"
             label="Nama"
           />
+          <Gap height={20} />
+          <Radio
+            valueItem1="L"
+            valueItem2="P"
+            valueGroup={form.gender}
+            onValueChange={val => setForm('gender', val)}
+          />
+          <Gap height={10} />
+          <TextInput
+            placeholder="Tempat lahir"
+            keyboardType="default"
+            label="Tempat lahir"
+            value={birthPlace}
+            onChangeText={val => {
+              setBirthPlace(val);
+              // setForm('birth', val);
+            }}
+          />
+          <Gap height={25} />
+          <View>
+            <Text style={styles.name}>Tanggal Lahir</Text>
+            <TouchableOpacity style={styles.container} onPress={showDatepicker}>
+              <View style={styles.rowDate}>
+                <Text style={styles.placeholder}>
+                  {moment(date).format('DD-MM-YYYY')}
+                </Text>
+                <IconCalender />
+              </View>
+              {show && (
+                <DateTimePicker
+                  value={date}
+                  mode={mode}
+                  display="default"
+                  onChange={onChange}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
           <Gap height={25} />
           <TextInput
-            value={form.phone_number}
-            onChangeText={val => setForm('phone_number', val)}
-            placeholder="+62"
-            keyboardType="number-pad"
-            label="No. Telepon"
+            isTextArea
+            placeholder="Alamat rumah anda"
+            keyboardType="default"
+            label="Alamat Rumah"
+            value={form.address}
+            onChangeText={val => setForm('address', val)}
           />
           <Gap height={25} />
           <TextInput
@@ -198,5 +298,29 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     backgroundColor: colors.white,
     flex: 1,
+  },
+  container: {
+    backgroundColor: mainColors.smoke,
+    height: 65,
+    borderRadius: 15,
+    justifyContent: 'center',
+  },
+  name: {
+    fontSize: 16,
+    color: mainColors.black,
+    marginBottom: 10,
+    fontFamily: fonts.primary[600],
+  },
+  placeholder: {
+    fontSize: 16,
+    fontFamily: fonts.primary[500],
+    color: mainColors.black,
+    zIndex: 1,
+  },
+  rowDate: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
 });

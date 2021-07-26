@@ -25,9 +25,9 @@ const EmailView = () => {
         showMessage({
           message: e.message,
         });
-        showMessage({
-          message: e.data.data.message,
-        });
+        // showMessage({
+        //   message: e.data.data.message,
+        // });
       });
     // console.log('OK');
   };

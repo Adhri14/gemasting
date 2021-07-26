@@ -17,12 +17,11 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
-    paddingVertical: 20,
+    padding: 20,
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
   },
   text: {
     textAlign: 'center',

@@ -13,6 +13,7 @@ export const mainColors = {
   pink: '#EC4794',
   pink2: '#EC4794',
   lightPink: '#FFE6E8',
+  green: '#00C673',
 };
 
 export const colors = {
