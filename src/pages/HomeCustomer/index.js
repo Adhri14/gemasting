@@ -33,6 +33,7 @@ const HomeCustomer = ({navigation}) => {
   useEffect(() => {
     getData('token').then(res => {
       setToken(res);
+      console.log(res);
     });
     getProfile();
   }, []);

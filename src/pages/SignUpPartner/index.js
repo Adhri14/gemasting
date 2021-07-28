@@ -44,7 +44,7 @@ const SignUpPartner = ({navigation}) => {
       pakar === 4 ||
       pakar === 5
     ) {
-      return <PakarInput />;
+      return <PakarInput pakar={pakar} />;
     }
     if (pakar === 6) {
       return <PosyanduInput />;

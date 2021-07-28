@@ -10,7 +10,13 @@ import {
   Line,
   Picker,
 } from '../../atoms';
-import {useForm, mainColors, fonts, showMessage} from '../../../utils';
+import {
+  useForm,
+  mainColors,
+  fonts,
+  showMessage,
+  storeData,
+} from '../../../utils';
 import {useDispatch} from 'react-redux';
 import moment from 'moment';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -18,8 +24,10 @@ import auth from '@react-native-firebase/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Axios from 'axios';
 import {IconCalender} from '../../../assets';
+import {useNavigation} from '@react-navigation/native';
 
-const PakarInput = () => {
+const PakarInput = ({pakar}) => {
+  const navigation = useNavigation();
   const [form, setForm] = useForm({
     name: '',
     email: '',
@@ -28,7 +36,7 @@ const PakarInput = () => {
     gender: '',
     address: '',
     education: '',
-    pakar: null,
+    pakar: pakar,
     photo: 'default.png',
     password: '',
     password_confirmation: '',
@@ -64,7 +72,7 @@ const PakarInput = () => {
   const dispatch = useDispatch();
 
   const onSubmitPakar = () => {
-    const form = {
+    const combine = {
       birth: `${birthPlace}, ${moment(date).format('DD MMMM YYYY')}`,
     };
 
@@ -78,6 +86,7 @@ const PakarInput = () => {
     Axios.post('https://api.gemasting.com/public/api/pakar/register', data)
       .then(res => {
         console.log(res.data.data);
+        storeData('token', res.data.data.token);
         navigation.navigate('OtpScreen');
       })
       .catch(e => console.log(e.message));
@@ -190,13 +199,6 @@ const PakarInput = () => {
         </TouchableOpacity>
       </View>
       <Gap height={20} />
-      <Picker
-        label="Spesialis"
-        value={form.pakar}
-        onValueChange={val => setForm('pakar', val)}
-        type="pakar"
-      />
-      <Gap height={20} />
       <TextInput
         placeholder="Pendidikan terakhir anda"
         keyboardType="default"
@@ -234,7 +236,7 @@ const PakarInput = () => {
       <Gap height={10} />
       <Checkbox
         checked={form.checked ? 'checked' : 'unchecked'}
-        onPress={val => setForm(!form.checked)}
+        onPress={val => setForm('checked', !form.checked)}
       />
       <Gap height={20} />
       <Button title="Daftar Akun" onPress={onSubmitPakar} />
