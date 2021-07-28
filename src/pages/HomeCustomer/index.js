@@ -59,11 +59,11 @@ const HomeCustomer = ({navigation}) => {
       <View style={styles.page}>
         <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
         <HeaderHome
-          img={
-            dataProfile.profile === null
-              ? DummyUser
-              : {uri: `${dataProfile.profile}`}
-          }
+          // img={
+          //   dataProfile.profile === null
+          //     ? DummyUser
+          //     : {uri: `${dataProfile.profile}`}
+          // }
           name={dataProfile.name}
         />
         <View style={styles.container}>

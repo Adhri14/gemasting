@@ -15,6 +15,7 @@ import {colors, fonts, mainColors} from '../../utils';
 const GetStarted = ({navigation}) => {
   return (
     // <ImageBackground source={ILGetStarted} style={styles.page}>
+
     <View style={styles.page}>
       <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
       <View>

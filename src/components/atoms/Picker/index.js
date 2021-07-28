@@ -3,8 +3,31 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Picker as PickerRN} from '@react-native-picker/picker';
 import {colors, fonts, mainColors} from '../../../utils';
 
+const SelectedValuePicker = '';
+
 const Picker = ({label, placeholder, type, onValueChange, value}) => {
   if (type === 'lembaga') {
+    return (
+      <View>
+        <Text style={styles.label}>{SelectedValuePicker}</Text>
+        <View style={styles.container}>
+          <PickerRN
+            onValueChange={(val => onValueChange(val), console.log(val))}
+            onPickerValueChange={(value, index) => {
+              this.setState({
+                SelectedValuePicker: value,
+              });
+            }}
+            selectedValue={value}>
+            <PickerRN.Item value={6} label="Posyandu" />
+            <PickerRN.Item value={7} label="HomeBaby SPA" />
+          </PickerRN>
+        </View>
+      </View>
+    );
+  }
+
+  if (type === 'pakar') {
     return (
       <View>
         <Text style={styles.label}>{label}</Text>
@@ -12,8 +35,12 @@ const Picker = ({label, placeholder, type, onValueChange, value}) => {
           <PickerRN
             onValueChange={val => onValueChange(val)}
             selectedValue={value}>
-            <PickerRN.Item value={6} label="Posyandu" />
-            <PickerRN.Item value={7} label="HomeBaby SPA" />
+            <PickerRN.Item value={null} label="Pilih Profesi" />
+            <PickerRN.Item value={1} label="Ahli Gizi" />
+            <PickerRN.Item value={2} label="Dokter Umum" />
+            <PickerRN.Item value={3} label="Dokter Anak" />
+            <PickerRN.Item value={4} label="Dokter Kandungan" />
+            <PickerRN.Item value={5} label="Bidan Umum" />
           </PickerRN>
         </View>
       </View>
