@@ -1,13 +1,27 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import {ILLogo} from '../../assets';
-import {colors, mainColors} from '../../utils';
-import {fonts} from '../../utils/fonts';
+import {colors, mainColors, fonts, getData} from '../../utils';
 
 const SplashScreen = ({navigation}) => {
+  const [token, setToken] = useState('');
   useEffect(() => {
+    getData('token').then(res => {
+      setToken(res);
+      console.log(res);
+    });
     setTimeout(() => {
-      navigation.replace('AppIntro');
+      if (token) {
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'MainApp'}],
+        });
+      } else {
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'AppIntro'}],
+        });
+      }
     }, 3000);
   }, []);
   return (

@@ -1,7 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {TextInput, Gap, Button, Radio, Checkbox, Link, Line} from '../../atoms';
-import {useForm, mainColors, fonts, showMessage} from '../../../utils';
+import {
+  useForm,
+  mainColors,
+  fonts,
+  showMessage,
+  storeData,
+} from '../../../utils';
 import {useDispatch} from 'react-redux';
 import moment from 'moment';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -9,8 +15,10 @@ import auth from '@react-native-firebase/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Axios from 'axios';
 import {IconCalender} from '../../../assets';
+import {useNavigation} from '@react-navigation/native';
 
 const HomeBabySpaInput = () => {
+  const navigation = useNavigation();
   const [form, setForm] = useForm({
     name: '',
     email: '',
@@ -135,7 +143,7 @@ const HomeBabySpaInput = () => {
       <Gap height={10} />
       <Checkbox
         checked={form.checked ? 'checked' : 'unchecked'}
-        onPress={val => setForm(!form.checked)}
+        onPress={val => setForm('checked', !form.checked)}
       />
       <Gap height={20} />
       <Button title="Daftar Akun" onPress={onSubmitHbs} />
