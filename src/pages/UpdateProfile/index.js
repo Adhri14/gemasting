@@ -15,8 +15,8 @@ const UpdateProfile = ({navigation}) => {
       <Header title="Data Pribadi" onPress={() => navigation.goBack()} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
-          {/* <InputCustomer /> */}
-          <InputPakar />
+          <InputCustomer />
+          {/* <InputPakar /> */}
           {/* <InputHomeBabySpa /> */}
           {/* <InputPosyandu /> */}
         </View>

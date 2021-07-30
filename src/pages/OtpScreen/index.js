@@ -31,7 +31,11 @@ const OtpScreen = ({navigation}) => {
   }, []);
 
   const onSubmit = () => {
-    Axios.put('https://api.gemasting.com/public/api/otp-verification', data)
+    Axios({
+      url: 'https://api.gemasting.com/public/api/otp-verification',
+      data,
+      method: 'put',
+    })
       .then(res => {
         console.log(res.data.data);
         navigation.reset({

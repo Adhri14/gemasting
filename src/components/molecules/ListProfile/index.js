@@ -23,6 +23,7 @@ const ListProfile = () => {
           name="Data Pribadi"
           onPress={() => navigation.navigate('UpdateProfile')}
         />
+        <List icon="edit-bantuan" name="Anggota Keluarga" />
         <List icon="edit-pengaturan" name="Pengaturan" />
         <Gap height={30} />
         <Text style={styles.title}>Lainnya</Text>

@@ -11,13 +11,14 @@ import {
   IconProfile,
   IconShield,
   IconInfo,
+  IconProfileActive,
 } from '../../../assets';
 
 const List = ({profile, type, icon, name, desc, onPress}) => {
   const Icon = () => {
     switch (icon) {
       case 'edit-profile':
-        return <IconProfileSecond />;
+        return <IconProfileActive />;
       case 'edit-riwayat':
         return <IconHistory />;
       case 'edit-pengaturan':
