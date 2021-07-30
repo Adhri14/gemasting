@@ -31,10 +31,6 @@ const ListProfile = () => {
         <List icon="edit-info" name="Tentang Aplikasi" />
         <List icon="edit-privasi" name="Kebijakan Privasi" />
       </View>
-      <Gap height={30} />
-      <View style={{paddingHorizontal: 20}}>
-        <Button title="Keluar" type="button-danger" />
-      </View>
       <Gap height={15} />
     </View>
   );
