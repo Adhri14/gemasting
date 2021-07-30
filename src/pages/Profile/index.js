@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   ScrollView,
   StatusBar,
@@ -8,9 +8,44 @@ import {
   View,
 } from 'react-native';
 import {ProfilePhoto, List, Gap, Button, ListProfile} from '../../components';
-import {colors, fonts, mainColors} from '../../utils';
+import {
+  colors,
+  fonts,
+  mainColors,
+  getData,
+  removeData,
+  showMessage,
+} from '../../utils';
+import axios from 'axios';
 
 const Profile = ({navigation}) => {
+  const [token, setToken] = useState({
+    tkn: '',
+  });
+  useEffect(() => {
+    getData('token').then(res => {
+      setToken({
+        tkn: res,
+      });
+    });
+  }, []);
+  console.log(token);
+  const onSignOut = () => {
+    axios({
+      url: 'https://api.gemasting.com/public/api/logout',
+      method: 'post',
+      headers: {
+        Authorization: `Bearer ${token.tkn}`,
+      },
+    }).then(() => {
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'AppIntro'}],
+      });
+      removeData('token');
+    });
+  };
+
   return (
     <View style={styles.page}>
       <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
@@ -20,6 +55,9 @@ const Profile = ({navigation}) => {
           <Text style={styles.title}>Profile</Text>
           <Gap height={30} />
           <ListProfile />
+          <View>
+            <Button title="Keluar" type="button-danger" onPress={onSignOut} />
+          </View>
         </View>
       </ScrollView>
     </View>

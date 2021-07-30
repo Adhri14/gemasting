@@ -4,25 +4,22 @@ import {ILLogo} from '../../assets';
 import {colors, mainColors, fonts, getData} from '../../utils';
 
 const SplashScreen = ({navigation}) => {
-  const [token, setToken] = useState('');
   useEffect(() => {
     getData('token').then(res => {
-      setToken(res);
-      console.log(res);
+      setTimeout(() => {
+        if (res) {
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'MainApp'}],
+          });
+        } else {
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'AppIntro'}],
+          });
+        }
+      }, 3000);
     });
-    setTimeout(() => {
-      if (token) {
-        navigation.reset({
-          index: 0,
-          routes: [{name: 'MainApp'}],
-        });
-      } else {
-        navigation.reset({
-          index: 0,
-          routes: [{name: 'AppIntro'}],
-        });
-      }
-    }, 3000);
   }, []);
   return (
     <View style={styles.page}>
