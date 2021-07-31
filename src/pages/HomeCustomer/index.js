@@ -19,8 +19,7 @@ import {
   IlRekamMedis,
   IlStunting,
 } from '../../assets';
-import Axios from 'axios';
-// import Axios from './'
+import axios from 'axios';
 
 const HomeCustomer = ({navigation}) => {
   const [token, setToken] = useState('');
@@ -28,6 +27,7 @@ const HomeCustomer = ({navigation}) => {
   const [dataProfile, setDataProfile] = useState({
     profile: '',
     name: '',
+    role: 0,
   });
 
   useEffect(() => {
@@ -40,20 +40,131 @@ const HomeCustomer = ({navigation}) => {
   console.log(token);
 
   const getProfile = () => {
-    Axios.get('https://api.gemasting.com/public/api/profile', {
-      headers: {Authorization: `Bearer ${token}`},
+    axios({
+      url: 'https://api.gemasting.com/public/api/profile',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      method: 'get',
     })
       .then(res => {
         setDataProfile({
           profile: res.data.data.profile.photo,
-        });
-        setDataProfile({
           name: res.data.data.profile.name,
+          role: res.data.data.role_id,
         });
       })
       .catch(e => console.log(e.message));
   };
 
+  const Role = () => {
+    if (dataProfile.role === 2) {
+      return (
+        <View style={styles.wrapper}>
+          <CardButton label="Chat Pakar">
+            <IlChatPakar />
+          </CardButton>
+          <CardButton label="Buat Janji">
+            <IlJanji />
+          </CardButton>
+          <CardButton
+            label="KMS Online"
+            onPress={() => navigation.navigate('KmsOnline')}>
+            <IlKMS />
+          </CardButton>
+          <CardButton
+            label="Cek Stunting"
+            onPress={() => navigation.navigate('Stunting')}>
+            <IlStunting />
+          </CardButton>
+          <CardButton label="Rekam Medis">
+            <IlRekamMedis />
+          </CardButton>
+          <CardButton label="Komunitas">
+            <IlKomunitas />
+          </CardButton>
+        </View>
+      );
+    }
+    if (dataProfile.role === 3) {
+      return (
+        <View style={styles.wrapper}>
+          <CardButton label="Chat Pakar">
+            <IlChatPakar />
+          </CardButton>
+          <CardButton label="Buat Janji">
+            <IlJanji />
+          </CardButton>
+          <CardButton
+            label="KMS Online"
+            onPress={() => navigation.navigate('KmsOnline')}>
+            <IlKMS />
+          </CardButton>
+        </View>
+      );
+    }
+    if (dataProfile.role === 4) {
+      return (
+        <View style={styles.wrapper}>
+          <CardButton label="Chat Pakar">
+            <IlChatPakar />
+          </CardButton>
+          <CardButton label="Buat Janji">
+            <IlJanji />
+          </CardButton>
+          <CardButton
+            label="KMS Online"
+            onPress={() => navigation.navigate('KmsOnline')}>
+            <IlKMS />
+          </CardButton>
+        </View>
+      );
+    }
+    if (dataProfile.role === 5) {
+      return (
+        <View style={styles.wrapper}>
+          <CardButton label="Chat Pakar">
+            <IlChatPakar />
+          </CardButton>
+          <CardButton label="Buat Janji">
+            <IlJanji />
+          </CardButton>
+          <CardButton
+            label="KMS Online"
+            onPress={() => navigation.navigate('KmsOnline')}>
+            <IlKMS />
+          </CardButton>
+        </View>
+      );
+    }
+
+    return (
+      <View style={styles.wrapper}>
+        <CardButton label="Chat Pakar">
+          <IlChatPakar />
+        </CardButton>
+        <CardButton label="Buat Janji">
+          <IlJanji />
+        </CardButton>
+        <CardButton
+          label="KMS Online"
+          onPress={() => navigation.navigate('KmsOnline')}>
+          <IlKMS />
+        </CardButton>
+        <CardButton
+          label="Cek Stunting"
+          onPress={() => navigation.navigate('Stunting')}>
+          <IlStunting />
+        </CardButton>
+        <CardButton label="Rekam Medis">
+          <IlRekamMedis />
+        </CardButton>
+        <CardButton label="Komunitas">
+          <IlKomunitas />
+        </CardButton>
+      </View>
+    );
+  };
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
@@ -61,11 +172,11 @@ const HomeCustomer = ({navigation}) => {
       <View style={styles.page}>
         <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
         <HeaderHome
-          img={
-            dataProfile.profile === null
-              ? DummyUser
-              : {uri: `${dataProfile.profile}`}
-          }
+          // img={
+          //   dataProfile.profile === null
+          //     ? DummyUser
+          //     : {uri: `${dataProfile.profile}`}
+          // }
           name={dataProfile.name}
         />
         <View style={styles.container}>
@@ -74,29 +185,8 @@ const HomeCustomer = ({navigation}) => {
           </View>
           <View style={styles.content}>
             <Text style={styles.title}>Fitur Kami</Text>
-            <View style={styles.wrapper}>
-              <CardButton label="Chat Pakar">
-                <IlChatPakar />
-              </CardButton>
-              <CardButton label="Buat Janji">
-                <IlJanji />
-              </CardButton>
-              <CardButton
-                label="KMS Online"
-                onPress={() => navigation.navigate('KmsOnline')}>
-                <IlKMS />
-              </CardButton>
-              <CardButton
-                label="Cek Stunting"
-                onPress={() => navigation.navigate('Stunting')}>
-                <IlStunting />
-              </CardButton>
-              <CardButton label="Rekam Medis">
-                <IlRekamMedis />
-              </CardButton>
-              <CardButton label="Komunitas">
-                <IlKomunitas />
-              </CardButton>
+            <View>
+              <Role />
             </View>
           </View>
         </View>

@@ -12,7 +12,10 @@ import HomeCustomer from './HomeCustomer';
 import Activity from './Activity';
 import Chat from './Chat';
 import Profile from './Profile';
-import UpdateProfile from './UpdateProfile';
+import UpdateProfileUser from './UpdateProfileUser';
+import UpdateProfilePakar from './UpdateProfilePakar';
+import UpdateProfilePosyandu from './UpdateProfilePosyandu';
+import UpdateProfileHomeBabySpa from './UpdateProfileHomeBabySpa';
 import KmsOnline from './KmsOnline';
 import Stunting from './Stunting';
 import KmsOutput from './KmsOutput';
@@ -32,7 +35,10 @@ export {
   Activity,
   Chat,
   Profile,
-  UpdateProfile,
+  UpdateProfileUser,
+  UpdateProfilePakar,
+  UpdateProfilePosyandu,
+  UpdateProfileHomeBabySpa,
   SignInPakar,
   KmsOnline,
   Stunting,

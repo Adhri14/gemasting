@@ -15,11 +15,14 @@ import {
   Aktivitas,
   Chat,
   Profile,
-  UpdateProfile,
   KmsOnline,
   Stunting,
   KmsOutput,
   AddFamily,
+  UpdateProfileUser,
+  UpdateProfilePosyandu,
+  UpdateProfileHomeBabySpa,
+  UpdateProfilePakar,
 } from '../pages';
 import OtpScreen from '../pages/OtpScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -41,7 +44,7 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="Profile">
+    <Stack.Navigator>
       <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
@@ -98,8 +101,23 @@ const Router = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="UpdateProfile"
-        component={UpdateProfile}
+        name="UpdateProfileUser"
+        component={UpdateProfileUser}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UpdateProfilePakar"
+        component={UpdateProfilePakar}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UpdateProfilePosyandu"
+        component={UpdateProfilePosyandu}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="UpdateProfileHomeBabySpa"
+        component={UpdateProfileHomeBabySpa}
         options={{headerShown: false}}
       />
       <Stack.Screen

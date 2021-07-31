@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {Header, Button, Gap} from '../../components';
 import {colors, fonts, mainColors, showMessage} from '../../utils';
-import Axios from 'axios';
+import axios from 'axios';
 import {useSelector} from 'react-redux';
 
 const OtpScreen = ({navigation}) => {
@@ -23,18 +23,19 @@ const OtpScreen = ({navigation}) => {
 
   const data = {
     email: registerReducer.email,
-    otp: otp,
+    otp,
   };
 
+  console.log(data);
   useEffect(() => {
     textInput.focus();
   }, []);
 
   const onSubmit = () => {
-    Axios({
+    axios({
       url: 'https://api.gemasting.com/public/api/otp-verification',
       data,
-      method: 'put',
+      method: 'PUT',
     })
       .then(res => {
         console.log(res.data.data);
@@ -43,13 +44,15 @@ const OtpScreen = ({navigation}) => {
           routes: [{name: 'MainApp'}],
         });
       })
+
       .catch(e => console.log(e.message));
   };
 
   const resendOtp = () => {
-    Axios.post('https://api.gemasting.com/public/api/resend-otp', {
-      email: registerReducer.email,
-    })
+    axios
+      .post('https://api.gemasting.com/public/api/resend-otp', {
+        email: registerReducer.email,
+      })
       .then(res => {
         showMessage({
           message: `${registerReducer.email} ${res.data.data}`,
