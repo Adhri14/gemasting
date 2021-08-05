@@ -7,7 +7,14 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {fonts, getData, mainColors, useForm} from '../../utils';
+import {
+  fonts,
+  getData,
+  mainColors,
+  showMessage,
+  storeData,
+  useForm,
+} from '../../utils';
 import {CardButton, Gap, HeaderHome} from '../../components';
 import {
   DummyUser,
@@ -37,24 +44,29 @@ const HomeCustomer = ({navigation}) => {
     getProfile();
   }, []);
 
-  console.log(token);
+  console.log(token.value);
 
   const getProfile = () => {
-    axios({
-      url: 'https://api.gemasting.com/public/api/profile',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      method: 'get',
-    })
+    axios
+      .get('https://api.gemasting.com/public/api/profile', {
+        headers: {
+          Authorization: `${token.value}`,
+          Accept: 'application/json',
+        },
+      })
       .then(res => {
         setDataProfile({
           profile: res.data.data.profile.photo,
           name: res.data.data.profile.name,
           role: res.data.data.role_id,
         });
+        storeData('userProfile', res.data);
       })
-      .catch(e => console.log(e.message));
+      .catch(e =>
+        showMessage({
+          message: e.message,
+        }),
+      );
   };
 
   const Role = () => {
@@ -172,11 +184,11 @@ const HomeCustomer = ({navigation}) => {
       <View style={styles.page}>
         <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
         <HeaderHome
-          // img={
-          //   dataProfile.profile === null
-          //     ? DummyUser
-          //     : {uri: `${dataProfile.profile}`}
-          // }
+          img={
+            dataProfile.profile === null
+              ? DummyUser
+              : {uri: `${dataProfile.profile}`}
+          }
           name={dataProfile.name}
         />
         <View style={styles.container}>

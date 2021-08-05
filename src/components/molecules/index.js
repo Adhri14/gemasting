@@ -15,8 +15,10 @@ import HeaderHome from './HeaderHome';
 import PakarInput from './PakarInput';
 import PosyanduInput from './PosyanduInput';
 import HomeBabySpaInput from './HomeBabySpaInput';
+import InfoStunting from './InfoStunting';
 
 export {
+  InfoStunting,
   Header,
   EmailView,
   EmailViewPakar,

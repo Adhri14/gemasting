@@ -86,7 +86,7 @@ const PakarInput = ({pakar}) => {
     Axios.post('https://api.gemasting.com/public/api/pakar/register', data)
       .then(res => {
         console.log(res.data.data);
-        storeData('token', res.data.data.token);
+        storeData('token', {value: `Bearer ${res.data.data.token}`});
         navigation.navigate('OtpScreen');
       })
       .catch(e => console.log(e.message));

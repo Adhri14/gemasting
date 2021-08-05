@@ -20,6 +20,7 @@ import KmsOnline from './KmsOnline';
 import Stunting from './Stunting';
 import KmsOutput from './KmsOutput';
 import AddFamily from './AddFamily';
+import StuntingOutput from './StuntingOutput';
 
 export {
   SplashScreen,
@@ -44,4 +45,5 @@ export {
   Stunting,
   KmsOutput,
   AddFamily,
+  StuntingOutput,
 };

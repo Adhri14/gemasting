@@ -1,11 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View, StatusBar} from 'react-native';
+import {Header} from '../../components';
+import {mainColors} from '../../utils';
 
 const AddFamily = () => {
   return (
-    <View>
-      <Text>Page Add Family</Text>
-    </View>
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <StatusBar backgroundColor={mainColors.smoke} />
+      <View style={styles.page}>
+        <Header title="Anggota Keluarga" />
+        <Text>Page Add Family</Text>
+      </View>
+    </ScrollView>
   );
 };
 

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: mainColors.smoke,
+    backgroundColor: mainColors.lightPink,
   },
   buttonBig: {
     width: 168,

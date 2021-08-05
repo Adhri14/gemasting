@@ -23,6 +23,7 @@ import {
   UpdateProfilePosyandu,
   UpdateProfileHomeBabySpa,
   UpdateProfilePakar,
+  StuntingOutput,
 } from '../pages';
 import OtpScreen from '../pages/OtpScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -44,7 +45,7 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="HomeCustomer">
       <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
@@ -138,6 +139,11 @@ const Router = () => {
       <Stack.Screen
         name="Stunting"
         component={Stunting}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="StuntingOutput"
+        component={StuntingOutput}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
