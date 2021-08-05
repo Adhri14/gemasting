@@ -30,7 +30,11 @@ const KmsOnline = ({navigation}) => {
               </Text>
               <Gap height={20} />
               <View style={styles.button}>
-                <Button type="secondary" title="Tambah Anggota Keluarga" />
+                <Button
+                  type="button-no-outline"
+                  title="+ Tambah Keluarga"
+                  onPress={() => navigation.navigate('AddFamily')}
+                />
               </View>
             </View>
           </Card>
@@ -55,7 +59,7 @@ export default KmsOnline;
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: mainColors.white,
+    backgroundColor: mainColors.lightSmoke,
   },
   content: {
     padding: 20,

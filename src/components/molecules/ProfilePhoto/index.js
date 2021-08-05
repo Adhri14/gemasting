@@ -3,12 +3,12 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {IconCamera, DummyUser} from '../../../assets';
 import {colors, fonts, mainColors} from '../../../utils';
 
-const ProfilePhoto = ({name, desc, type, onPress}) => {
+const ProfilePhoto = ({name, desc, type, onPress, img}) => {
   if (type === 'profile') {
     return (
       <View style={styles.containerProfile}>
         <View style={styles.borderProfile}>
-          <Image source={DummyUser} style={styles.avatarProfile} />
+          <Image source={img} style={styles.avatarProfile} />
         </View>
         {name && (
           <View style={styles.content}>

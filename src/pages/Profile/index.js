@@ -19,31 +19,35 @@ import {
 import axios from 'axios';
 
 const Profile = ({navigation}) => {
-  const [token, setToken] = useState({
-    tkn: '',
-  });
+  const [token, setToken] = useState('');
+
   useEffect(() => {
     getData('token').then(res => {
-      setToken({
-        tkn: res,
-      });
+      setToken(res);
     });
   }, []);
+
   console.log(token);
+
   const onSignOut = () => {
-    axios({
-      url: 'https://api.gemasting.com/public/api/logout',
-      method: 'post',
-      headers: {
-        Authorization: `Bearer ${token.tkn}`,
-      },
-    }).then(() => {
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'AppIntro'}],
-      });
-      removeData('token');
-    });
+    axios
+      .post('https://api.gemasting.com/public/api/logout', {
+        headers: {
+          Authorization: `${token.value}`,
+        },
+      })
+      .then(() => {
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'AppIntro'}],
+        });
+        removeData('token');
+      })
+      .catch(e =>
+        showMessage({
+          message: e.message,
+        }),
+      );
   };
 
   return (

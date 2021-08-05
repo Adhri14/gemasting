@@ -4,7 +4,16 @@ import {IconGoogle} from '../../../assets';
 import {colors, fonts, mainColors} from '../../../utils';
 import IconOnly from './IconOnly';
 
-const Button = ({type, title, onPress, google, icon, display, ...props}) => {
+const Button = ({
+  type,
+  title,
+  onPress,
+  google,
+  plus,
+  icon,
+  display,
+  ...props
+}) => {
   if (type === 'icon-only') {
     return <IconOnly icon={icon} onPress={onPress} />;
   }
@@ -16,6 +25,17 @@ const Button = ({type, title, onPress, google, icon, display, ...props}) => {
         activeOpacity={0.8}
         onPress={onPress}>
         <Text style={styles.textButton}>{title}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  if (type === 'button-no-outline') {
+    return (
+      <TouchableOpacity
+        style={styles.button2}
+        activeOpacity={0.8}
+        onPress={onPress}>
+        <Text style={styles.textButton2}>{title}</Text>
       </TouchableOpacity>
     );
   }
@@ -68,9 +88,22 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     borderRadius: 15,
   },
+  button2: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    paddingVertical: 20,
+    borderRadius: 15,
+  },
   textButton: {
     fontFamily: fonts.primary[600],
     fontSize: 16,
     color: mainColors.white,
+  },
+  textButton2: {
+    fontFamily: fonts.primary[600],
+    fontSize: 16,
+    color: mainColors.pink,
   },
 });

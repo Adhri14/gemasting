@@ -7,9 +7,20 @@ import {
   View,
   Dimensions,
 } from 'react-native';
-import {Card, Gap, Header} from '../../components';
-import {fonts, mainColors} from '../../utils';
+import {Button, Card, Gap, Header, InfoStunting} from '../../components';
+import {colors, fonts, mainColors} from '../../utils';
 import {LineChart} from 'react-native-chart-kit';
+import {IconDiscover, IconInfo, IconShield} from '../../assets';
+
+const InfoChildren = ({children, label}) => {
+  return (
+    <View style={styles.row}>
+      {children}
+      <Gap width={10} />
+      <Text style={styles.text}>{label}</Text>
+    </View>
+  );
+};
 
 const Info = ({label, type}) => {
   switch (type) {
@@ -77,46 +88,130 @@ const KmsOutput = ({navigation}) => {
               type="success"
             />
           </Card>
-          <View>
-            <Text>Bezier Line Chart</Text>
-            <LineChart
-              // formatXLabel={() => <Text>Testing</Text>}
-              data={{
-                labels: [0, 10, 20, 30, 40, 50, 60],
-                datasets: [
-                  {
-                    data: [20, 45, 28, 80, 99, 43],
+          <Gap height={40} />
+          <View style={styles.container}>
+            <Text style={styles.label2}>Berat Badan Menurut Umur</Text>
+            <View style={styles.wrapper}>
+              <LineChart
+                data={{
+                  labels: [0, 10, 20, 30, 40, 50, 60],
+                  datasets: [
+                    {
+                      data: [20, 45, 28, 80, 99, 43],
+                    },
+                  ],
+                }}
+                width={354} // from react-native
+                height={220}
+                yAxisInterval={1} // optional, defaults to 1
+                chartConfig={{
+                  backgroundGradientFrom: 'white',
+                  backgroundGradientTo: 'white',
+                  decimalPlaces: 2, // optional, defaults to 2dp
+                  color: (opacity = 1) => `rgba(236, 78, 146, 0.2)`,
+                  labelColor: (opacity = 1) => `black`,
+                  style: {
+                    borderRadius: 16,
                   },
-                ],
-              }}
-              width={354} // from react-native
-              height={220}
-              // yAxisLabel="$"
-              // yAxisSuffix="k"
-              yAxisInterval={1} // optional, defaults to 1
-              chartConfig={{
-                backgroundGradientFrom: 'white',
-                backgroundGradientTo: 'white',
-                decimalPlaces: 2, // optional, defaults to 2dp
-                color: (opacity = 1) => `rgba(236, 78, 146, 0.2)`,
-                labelColor: (opacity = 1) => `black`,
-                style: {
+                  propsForDots: {
+                    r: '6',
+                    strokeWidth: '2',
+                    stroke: 'white',
+                    fill: mainColors.pink,
+                  },
+                }}
+                bezier
+                style={{
+                  marginVertical: 8,
                   borderRadius: 16,
-                },
-                propsForDots: {
-                  r: '6',
-                  strokeWidth: '2',
-                  stroke: 'white',
-                  fill: mainColors.pink,
-                },
-              }}
-              bezier
-              style={{
-                marginVertical: 8,
-                borderRadius: 16,
-              }}
-            />
+                }}
+              />
+            </View>
           </View>
+          <Gap height={40} />
+          <View style={styles.container}>
+            <Text style={styles.label2}>Tinggi Badan Menurut Umur</Text>
+            <View style={styles.wrapper}>
+              <LineChart
+                data={{
+                  labels: [0, 10, 20, 30, 40, 50, 60],
+                  datasets: [
+                    {
+                      data: [20, 45, 28, 80, 99, 43],
+                    },
+                  ],
+                }}
+                width={354} // from react-native
+                height={220}
+                yAxisInterval={1} // optional, defaults to 1
+                chartConfig={{
+                  backgroundGradientFrom: 'white',
+                  backgroundGradientTo: 'white',
+                  decimalPlaces: 2, // optional, defaults to 2dp
+                  color: (opacity = 1) => `rgba(236, 78, 146, 0.2)`,
+                  labelColor: (opacity = 1) => `black`,
+                  style: {
+                    borderRadius: 16,
+                  },
+                  propsForDots: {
+                    r: '6',
+                    strokeWidth: '2',
+                    stroke: 'white',
+                    fill: mainColors.pink,
+                  },
+                }}
+                bezier
+                style={{
+                  marginVertical: 8,
+                  borderRadius: 16,
+                }}
+              />
+            </View>
+          </View>
+          <Gap height={40} />
+          {/* Info untuk anak */}
+          <InfoChildren label="Imunisasi Bayi & Baduta">
+            <IconInfo width={34} height={34} />
+          </InfoChildren>
+          <View style={styles.wrapperContent}>
+            <Text style={styles.label}>
+              Lakukan imunisasi DPT/HB/Hib4 dan Campak-Rubella 2 saat memasuki
+              usia 18 bulan sesuai anjuran.
+            </Text>
+          </View>
+          <InfoChildren label="Pemenuhan Gizi Anak">
+            <IconDiscover />
+          </InfoChildren>
+          <View style={styles.wrapperContent}>
+            <Text style={styles.label}>
+              1. Pemberian MP ASI disertai dengan variasi makanan pokok, lauk
+              hewani, lauk nabati, kacang-kacangan, sayur, dan buah-buahan.
+            </Text>
+            <Text style={styles.label}>
+              2. Berikan makanan selingan yang bergizi kepada anak 1-2 kali
+              sehari.
+            </Text>
+            <Text style={styles.label}>
+              3. Sebaiknya tidak memberikan makanan manis sebelum waktu makan.
+            </Text>
+            <Text style={styles.label}>
+              4. Lanjutkan pemberian ASI sebagai minuman dengan frekuensi 3-4
+              kali sehari.
+            </Text>
+          </View>
+          <InfoChildren label="Tips Perkembangan Bayi">
+            <IconShield width={34} height={34} />
+          </InfoChildren>
+          <View style={styles.wrapperContent}>
+            <Text style={styles.label}>
+              1. Ajari berjalan di undakan tangga.
+            </Text>
+            <Text style={styles.label}>2. Ajari menyapu & bersihkan meja.</Text>
+            <Text style={styles.label}>3. Ajak memberesikan mainan.</Text>
+            <Text style={styles.label}>4. Ajari coret-coret di kertas.</Text>
+            <Text style={styles.label}>5. Bacakan cerita anak.</Text>
+          </View>
+          <Button title="Simpan Hasil KMS" />
         </View>
       </View>
     </ScrollView>
@@ -128,7 +223,7 @@ export default KmsOutput;
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: mainColors.white,
+    backgroundColor: mainColors.lightSmoke,
   },
   content: {
     padding: 20,
@@ -176,5 +271,29 @@ const styles = StyleSheet.create({
   line: {
     height: 1,
     backgroundColor: mainColors.darkSmoke,
+  },
+  wrapper: {
+    marginLeft: -15,
+    marginTop: 20,
+  },
+  text: {
+    fontSize: 20,
+    fontFamily: fonts.primary[600],
+    color: mainColors.pink,
+  },
+  wrapperContent: {
+    marginLeft: 44,
+    marginTop: 15,
+    marginBottom: 40,
+  },
+  label: {
+    fontSize: 16,
+    color: colors.text.primary1,
+    fontFamily: fonts.primary[400],
+  },
+  label2: {
+    fontSize: 20,
+    color: colors.text.primary1,
+    fontFamily: fonts.primary[600],
   },
 });

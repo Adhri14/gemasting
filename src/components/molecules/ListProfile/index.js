@@ -1,18 +1,17 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import ProfilePhoto from '../ProfilePhoto';
-import List from '../List';
-import {colors, fonts, mainColors, getData} from '../../../utils';
-import {Button, Gap} from '../../atoms';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {colors, fonts, getData, showMessage} from '../../../utils';
+import {Gap} from '../../atoms';
+import List from '../List';
+import ProfilePhoto from '../ProfilePhoto';
+import {DummyUser} from '../../../assets';
 
 const ListProfile = () => {
   const navigation = useNavigation();
-  const [token, setToken] = useState({
-    tkn: '',
-  });
 
+  const [token, setToken] = useState('');
   const [dataProfile, setDataProfile] = useState({
     profile: '',
     name: '',
@@ -24,37 +23,32 @@ const ListProfile = () => {
     getData('token').then(res => {
       setToken(res);
     });
-    getProfile();
+    getData('userProfile').then(resProfile => {
+      setDataProfile({
+        profile: resProfile.data.photo,
+        role: resProfile.data.role_id,
+        name: resProfile.data.profile.name,
+        nik: resProfile.data.profile.nik,
+      });
+    });
   }, []);
 
-  const getProfile = () => {
-    axios({
-      url: 'https://api.gemasting.com/public/api/profile',
-      headers: {
-        Authorization: `Bearer ${token.tkn}`,
-      },
-      method: 'get',
-    })
-      .then(res => {
-        // setDataProfile(res.data.data);
-        setDataProfile({
-          profile: res.data.data.profile.photo,
-          name: res.data.data.profile.name,
-          role: res.data.data.role_id,
-          nik: res.data.data.profile.nik,
-        });
-      })
-      .catch(e => console.log(e.message));
-  };
+  console.log(token);
+  console.log(dataProfile);
 
   const Role = () => {
     if (dataProfile.role === 2) {
       return (
-        <View>
+        <>
           <ProfilePhoto
             name={dataProfile.name}
             type="profile"
             desc={dataProfile.nik}
+            img={
+              dataProfile.photo === undefined
+                ? DummyUser
+                : {uri: `${dataProfile.photo}`}
+            }
           />
           <View style={styles.container}>
             <Gap height={30} />
@@ -73,16 +67,21 @@ const ListProfile = () => {
             <List icon="edit-privasi" name="Kebijakan Privasi" />
           </View>
           <Gap height={15} />
-        </View>
+        </>
       );
     }
     if (dataProfile.role === 3) {
       return (
-        <View>
+        <>
           <ProfilePhoto
             name={dataProfile.name}
             type="profile"
             desc={dataProfile.nik}
+            img={
+              dataProfile.photo === undefined
+                ? DummyUser
+                : {uri: `${dataProfile.photo}`}
+            }
           />
           <View style={styles.container}>
             <Gap height={30} />
@@ -101,23 +100,28 @@ const ListProfile = () => {
             <List icon="edit-privasi" name="Kebijakan Privasi" />
           </View>
           <Gap height={15} />
-        </View>
+        </>
       );
     }
     if (dataProfile.role === 4) {
       return (
-        <View>
+        <>
           <ProfilePhoto
             name={dataProfile.name}
             type="profile"
             desc={dataProfile.nik}
+            img={
+              dataProfile.photo === undefined
+                ? DummyUser
+                : {uri: `${dataProfile.photo}`}
+            }
           />
           <View style={styles.container}>
             <Gap height={30} />
             <Text style={styles.title}>Akun</Text>
             <List
               icon="edit-profile"
-              name="Data Pribadi"
+              name="Data Posyandu"
               onPress={() => navigation.navigate('UpdateProfilePosyandu')}
             />
             <List icon="edit-bantuan" name="Anggota Keluarga" />
@@ -129,23 +133,28 @@ const ListProfile = () => {
             <List icon="edit-privasi" name="Kebijakan Privasi" />
           </View>
           <Gap height={15} />
-        </View>
+        </>
       );
     }
     if (dataProfile.role === 5) {
       return (
-        <View>
+        <>
           <ProfilePhoto
             name={dataProfile.name}
             type="profile"
             desc={dataProfile.nik}
+            img={
+              dataProfile.photo === undefined
+                ? DummyUser
+                : {uri: `${dataProfile.photo}`}
+            }
           />
           <View style={styles.container}>
             <Gap height={30} />
             <Text style={styles.title}>Akun</Text>
             <List
               icon="edit-profile"
-              name="Data Pribadi"
+              name="Data HomeBaby Spa"
               onPress={() => navigation.navigate('UpdateProfileHomeBabySpa')}
             />
             <List icon="edit-bantuan" name="Anggota Keluarga" />
@@ -157,17 +166,13 @@ const ListProfile = () => {
             <List icon="edit-privasi" name="Kebijakan Privasi" />
           </View>
           <Gap height={15} />
-        </View>
+        </>
       );
     }
     return <View />;
   };
 
-  return (
-    <View>
-      <Role />
-    </View>
-  );
+  return <Role />;
 };
 
 export default ListProfile;

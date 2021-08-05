@@ -92,7 +92,7 @@ const SignUpCustomer = ({navigation}) => {
     console.log(data);
     Axios.post('https://api.gemasting.com/public/api/customer/register', data)
       .then(res => {
-        storeData('token', res.data.data.token);
+        storeData('token', {value: `Bearer ${res.data.data.token}`});
         navigation.navigate('OtpScreen');
       })
       .catch(e => {

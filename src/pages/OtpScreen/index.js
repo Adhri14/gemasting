@@ -32,11 +32,8 @@ const OtpScreen = ({navigation}) => {
   }, []);
 
   const onSubmit = () => {
-    axios({
-      url: 'https://api.gemasting.com/public/api/otp-verification',
-      data,
-      method: 'PUT',
-    })
+    axios
+      .put('https://api.gemasting.com/public/api/otp-verification', data)
       .then(res => {
         console.log(res.data.data);
         navigation.reset({
@@ -44,8 +41,11 @@ const OtpScreen = ({navigation}) => {
           routes: [{name: 'MainApp'}],
         });
       })
-
-      .catch(e => console.log(e.message));
+      .catch(e =>
+        showMessage({
+          message: e.message,
+        }),
+      );
   };
 
   const resendOtp = () => {

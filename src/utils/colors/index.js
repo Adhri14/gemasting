@@ -14,6 +14,7 @@ export const mainColors = {
   pink2: '#EC4794',
   lightPink: '#FFE6E8',
   green: '#00C673',
+  yellow: '#FFC700',
 };
 
 export const colors = {
@@ -36,7 +37,7 @@ export const colors = {
     },
     secondary: {
       background: 'transparent',
-      text: mainColors.black,
+      text: mainColors.pink,
       border: mainColors.lime,
     },
   },

@@ -8,6 +8,10 @@ import IlKMS from './kms-online.svg';
 import IlStunting from './stunting.svg';
 import IlRekamMedis from './rekam-medis.svg';
 import IlKomunitas from './komunitas.svg';
+import IlStuntingBig from './ilstunting.svg';
+import IlNormal from './normal.svg';
+import IlDanger from './parah.svg';
+import IlMax from './tinggi.svg';
 
 export {
   ILLogo,
@@ -20,4 +24,8 @@ export {
   IlStunting,
   IlRekamMedis,
   IlKomunitas,
+  IlStuntingBig,
+  IlDanger,
+  IlNormal,
+  IlMax,
 };

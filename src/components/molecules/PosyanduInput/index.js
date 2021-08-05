@@ -37,7 +37,7 @@ const PosyanduInput = () => {
     dispatch({type: 'SET_REGISTER_POSYANDU', value: form});
     Axios.post('https://api.gemasting.com/public/api/posyandu/register', form)
       .then(successPos => {
-        storeData('token', successPos.data.data.token);
+        storeData('token', {value: `Bearer ${res.data.data.token}`});
         navigation.navigate('OtpScreen');
       })
       .catch(e => console.log(e.message));
