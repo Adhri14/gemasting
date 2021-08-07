@@ -47,20 +47,24 @@ const HomeCustomer = ({navigation}) => {
   console.log(token.value);
 
   const getProfile = () => {
-    axios
-      .get('https://api.gemasting.com/public/api/profile', {
-        headers: {
-          Authorization: `${token.value}`,
-          Accept: 'application/json',
-        },
-      })
+    axios({
+      url: 'https://api.gemasting.com/public/api/profile',
+      method: 'get',
+      headers: {
+        Authorization: token.value,
+      },
+    })
       .then(res => {
         setDataProfile({
           profile: res.data.data.profile.photo,
           name: res.data.data.profile.name,
           role: res.data.data.role_id,
         });
-        storeData('userProfile', res.data);
+        // oke paham bang, ganti res lagi saja ya bang?
+        // Saya coba jalankan ya bang
+        // Ketika berhasil ambil data user dari API kita simpan data user
+        // res.data ini hasil dari respon backend dia mengirimkan data dari res.. tapi kata 'res' ini bisa kita rubah bisa jadi 'berhasil'
+        storeData('userProfile', res.data); // ini data user yg sudah di simpan
       })
       .catch(e =>
         showMessage({

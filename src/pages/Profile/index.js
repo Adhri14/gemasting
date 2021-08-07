@@ -30,24 +30,27 @@ const Profile = ({navigation}) => {
   console.log(token);
 
   const onSignOut = () => {
-    axios
-      .post('https://api.gemasting.com/public/api/logout', {
-        headers: {
-          Authorization: `${token.value}`,
-        },
-      })
+    axios({
+      url: 'https://api.gemasting.com/public/api/logout',
+      method: 'post',
+      headers: {
+        Authorization: token.value,
+      },
+    })
       .then(() => {
         navigation.reset({
           index: 0,
           routes: [{name: 'AppIntro'}],
         });
         removeData('token');
+        removeData('userProfile');
       })
-      .catch(e =>
+      .catch(e => {
+        console.log(e.message);
         showMessage({
           message: e.message,
-        }),
-      );
+        });
+      });
   };
 
   return (
