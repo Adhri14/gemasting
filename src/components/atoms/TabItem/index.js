@@ -11,6 +11,7 @@ import {
   IconActivityActive,
 } from '../../../assets';
 import {colors, fonts, mainColors} from '../../../utils';
+import * as Animatable from 'react-native-animatable';
 
 const TabItem = ({title, active, onPress, onLongPress}) => {
   const Icon = () => {
