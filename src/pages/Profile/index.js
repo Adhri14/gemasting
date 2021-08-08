@@ -17,6 +17,7 @@ import {
   showMessage,
 } from '../../utils';
 import axios from 'axios';
+import {API} from '../../config';
 
 const Profile = ({navigation}) => {
   const [token, setToken] = useState('');
@@ -31,7 +32,7 @@ const Profile = ({navigation}) => {
 
   const onSignOut = () => {
     axios({
-      url: 'https://api.gemasting.com/public/api/logout',
+      url: `${API}logout`,
       method: 'post',
       headers: {
         Authorization: token.value,

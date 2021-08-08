@@ -2,8 +2,9 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Gap, Line, Link, TextInput} from '../../atoms';
-import Axios from 'axios';
+import axios from 'axios';
 import {storeData, useForm, showMessage} from '../../../utils';
+import {API} from '../../../config';
 
 const EmailView = () => {
   const navigation = useNavigation();
@@ -13,23 +14,33 @@ const EmailView = () => {
   });
 
   const onSubmit = () => {
-    Axios.post('https://api.gemasting.com/public/api/customer/login', form)
+    axios
+      .post(`${API}customer/login`, form)
       .then(res => {
-        console.log(res.data.data);
-        navigation.reset({
-          index: 0,
-          routes: [{name: 'MainApp'}],
-        });
+        // console.log(res.data);
+        // showMessage({
+        //   message: res.data.meta.code,
+        // });
+        console.log(res.data);
+        if (res.data.meta.code === 200) {
+          storeData('token', {value: `Bearer ${res.data.data.token}`});
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'MainApp'}],
+          });
+        } else if (res.data.meta.code === 500) {
+          showMessage({
+            message: res.data.meta.message,
+          });
+          return false;
+        } else {
+          console.log(res.data);
+          return true;
+        }
       })
       .catch(e => {
-        showMessage({
-          message: e.message,
-        });
-        // showMessage({
-        //   message: e.data.data.message,
-        // });
+        console.log(e);
       });
-    // console.log('OK');
   };
   return (
     <View style={styles.container}>

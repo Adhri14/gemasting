@@ -21,6 +21,7 @@ import {colors, fonts, mainColors} from '../../utils';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import Axios from 'axios';
+import {API} from '../../config';
 
 const renderTabBar = props => {
   return (
@@ -74,10 +75,7 @@ const SignInPakar = ({navigation}) => {
           email: res.user.email,
         };
 
-        Axios.post(
-          'https://api.gemasting.com/public/api/pakar/loginByGmail',
-          data,
-        )
+        Axios.post(`${API}pakar/loginByGmail`, data)
           .then(res => {
             console.log(res.data.data);
             navigation.reset({
