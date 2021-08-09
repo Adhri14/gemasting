@@ -61,6 +61,7 @@ const HomeCustomer = ({navigation}) => {
           name: res.data.data.profile.name,
           role: res.data.data.role_id,
         });
+
         storeData('userProfile', res.data);
       })
       .catch(e =>
