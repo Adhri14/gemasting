@@ -27,6 +27,7 @@ import {
   IlStunting,
 } from '../../assets';
 import axios from 'axios';
+import {API} from '../../config';
 
 const HomeCustomer = ({navigation}) => {
   const [token, setToken] = useState('');
@@ -48,7 +49,7 @@ const HomeCustomer = ({navigation}) => {
 
   const getProfile = () => {
     axios({
-      url: 'https://api.gemasting.com/public/api/profile',
+      url: `${API}profile`,
       method: 'get',
       headers: {
         Authorization: token.value,

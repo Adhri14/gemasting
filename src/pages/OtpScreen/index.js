@@ -11,6 +11,7 @@ import {Header, Button, Gap} from '../../components';
 import {colors, fonts, mainColors, showMessage} from '../../utils';
 import axios from 'axios';
 import {useSelector} from 'react-redux';
+import {API} from '../../config';
 
 const OtpScreen = ({navigation}) => {
   let textInput = useRef(null);
@@ -33,13 +34,22 @@ const OtpScreen = ({navigation}) => {
 
   const onSubmit = () => {
     axios
-      .put('https://api.gemasting.com/public/api/otp-verification', data)
+      .put(`${API}otp-verification`, data)
       .then(res => {
-        console.log(res.data.data);
-        navigation.reset({
-          index: 0,
-          routes: [{name: 'MainApp'}],
-        });
+        console.log(res.data);
+        if (res.data.meta.code === 200) {
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'MainApp'}],
+          });
+        } else if (res.data.meta.code === 500) {
+          showMessage({
+            message: res.data.meta.message,
+          });
+          return false;
+        } else {
+          return true;
+        }
       })
       .catch(e =>
         showMessage({
@@ -50,7 +60,7 @@ const OtpScreen = ({navigation}) => {
 
   const resendOtp = () => {
     axios
-      .post('https://api.gemasting.com/public/api/resend-otp', {
+      .post(`${API}resend-otp`, {
         email: registerReducer.email,
       })
       .then(res => {

@@ -3,7 +3,8 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button, Gap, Line, Link, TextInput} from '../../atoms';
 import Axios from 'axios';
-import {useForm} from '../../../utils';
+import {showMessage, useForm} from '../../../utils';
+import {API} from '../../../config';
 
 const EmailViewPakar = () => {
   const navigation = useNavigation();
@@ -13,13 +14,21 @@ const EmailViewPakar = () => {
   });
 
   const onSubmit = () => {
-    Axios.post('https://api.gemasting.com/public/api/pakar/login', form)
+    Axios.post(`${API}pakar/login`, form)
       .then(res => {
-        console.log(res.data.data);
-        navigation.reset({
-          index: 0,
-          routes: [{name: 'MainApp'}],
-        });
+        if (res.data.meta.code === 200) {
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'MainApp'}],
+          });
+        } else if (res.data.meta.code === 500) {
+          showMessage({
+            message: res.data.meta.message,
+          });
+          return false;
+        } else {
+          return true;
+        }
       })
       .catch(e => console.log(e.message));
     // console.log('OK');

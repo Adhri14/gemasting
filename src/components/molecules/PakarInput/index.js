@@ -25,6 +25,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Axios from 'axios';
 import {IconCalender} from '../../../assets';
 import {useNavigation} from '@react-navigation/native';
+import {API} from '../../../config';
 
 const PakarInput = ({pakar}) => {
   const navigation = useNavigation();
@@ -83,7 +84,7 @@ const PakarInput = ({pakar}) => {
     };
 
     dispatch({type: 'SET_REGISTER_PAKAR', value: data});
-    Axios.post('https://api.gemasting.com/public/api/pakar/register', data)
+    Axios.post(`${API}pakar/register`, data)
       .then(res => {
         console.log(res.data.data);
         storeData('token', {value: `Bearer ${res.data.data.token}`});
@@ -110,10 +111,7 @@ const PakarInput = ({pakar}) => {
           uid: res.user.uid,
         };
 
-        Axios.post(
-          'https://api.gemasting.com/public/api/pakar/registerByGmail',
-          data,
-        )
+        Axios.post(`${API}pakar/registerByGmail`, data)
           .then(res => {
             console.log(res.data.data);
             navigation.reset({
@@ -251,7 +249,7 @@ const PakarInput = ({pakar}) => {
       />
       <Gap height={20} />
       <Link
-        onPress={() => navigation.navigate('SignIn')}
+        onPress={() => navigation.navigate('SignInPakar')}
         title="Sudah punya akun?"
         action="Masuk"
         align="center"

@@ -5,6 +5,7 @@ import {Gap, TextInput, FileUpload, Button} from '../../atoms';
 import {getData} from '../../../utils';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
+import {API} from '../../../config';
 
 const InputPosyandu = () => {
   const navigation = useNavigation();
@@ -25,7 +26,7 @@ const InputPosyandu = () => {
 
   const getProfile = () => {
     axios({
-      url: 'https://api.gemasting.com/public/api/profile',
+      url: `${API}profile`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

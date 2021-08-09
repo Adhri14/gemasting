@@ -5,7 +5,7 @@ const showMessage = ({message, type}) => {
   showToast({
     message,
     type: type === 'success' ? 'success' : 'danger',
-    backgroundColor: type === 'success' ? mainColors.teal : mainColors.salmon,
+    backgroundColor: type === 'success' ? mainColors.green : mainColors.salmon,
   });
 };
 

@@ -32,6 +32,7 @@ import auth from '@react-native-firebase/auth';
 import moment from 'moment';
 import {IconCalender} from '../../assets';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {API} from '../../config';
 
 const SignUpCustomer = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -90,7 +91,7 @@ const SignUpCustomer = ({navigation}) => {
     dispatch({type: 'SET_REGISTER_CUSTOMER', value: data});
 
     console.log(data);
-    Axios.post('https://api.gemasting.com/public/api/customer/register', data)
+    Axios.post(`${API}customer/register`, data)
       .then(res => {
         storeData('token', {value: `Bearer ${res.data.data.token}`});
         navigation.navigate('OtpScreen');
@@ -125,10 +126,7 @@ const SignUpCustomer = ({navigation}) => {
           photo: res.user.photoURL,
         };
 
-        Axios.post(
-          'https://api.gemasting.com/public/api/customer/registerByGmail',
-          data,
-        )
+        Axios.post(`${API}customer/registerByGmail`, data)
           .then(result => {
             navigation.reset({
               index: 0,

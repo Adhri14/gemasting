@@ -27,6 +27,7 @@ import {useDispatch} from 'react-redux';
 import moment from 'moment';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+import {API} from '../../config';
 
 const SignUpPakar = ({navigation}) => {
   // Pengelola data dari state form
@@ -87,7 +88,7 @@ const SignUpPakar = ({navigation}) => {
       ...combine,
     };
     dispatch({type: 'SET_REGISTER_PAKAR', value: data});
-    Axios.post('https://api.gemasting.com/public/api/pakar/register', data)
+    Axios.post(`${API}pakar/register`, data)
       .then(res => {
         console.log(res.data.data);
         navigation.navigate('OtpScreen');
@@ -113,10 +114,7 @@ const SignUpPakar = ({navigation}) => {
           uid: res.user.uid,
         };
 
-        Axios.post(
-          'https://api.gemasting.com/public/api/pakar/registerByGmail',
-          data,
-        )
+        Axios.post(`${API}pakar/registerByGmail`, data)
           .then(res => {
             console.log(res.data.data);
             navigation.reset({

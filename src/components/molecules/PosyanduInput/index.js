@@ -16,6 +16,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Axios from 'axios';
 import {IconCalender} from '../../../assets';
 import {useNavigation} from '@react-navigation/native';
+import {API} from '../../../config';
 
 const PosyanduInput = () => {
   const navigation = useNavigation();
@@ -35,7 +36,7 @@ const PosyanduInput = () => {
 
   const onSubmitPosyandu = () => {
     dispatch({type: 'SET_REGISTER_POSYANDU', value: form});
-    Axios.post('https://api.gemasting.com/public/api/posyandu/register', form)
+    Axios.post(`${API}posyandu/register`, form)
       .then(successPos => {
         storeData('token', {value: `Bearer ${res.data.data.token}`});
         navigation.navigate('OtpScreen');
@@ -61,10 +62,7 @@ const PosyanduInput = () => {
           uid: res.user.uid,
         };
 
-        Axios.post(
-          'https://api.gemasting.com/public/api/posyandu/registerByGmail',
-          dataPos,
-        )
+        Axios.post(`${API}posyandu/registerByGmail`, dataPos)
           .then(res => {
             console.log(res.data.data);
             navigation.reset({
