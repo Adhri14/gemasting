@@ -60,11 +60,8 @@ const HomeCustomer = ({navigation}) => {
           name: res.data.data.profile.name,
           role: res.data.data.role_id,
         });
-        // oke paham bang, ganti res lagi saja ya bang?
-        // Saya coba jalankan ya bang
-        // Ketika berhasil ambil data user dari API kita simpan data user
-        // res.data ini hasil dari respon backend dia mengirimkan data dari res.. tapi kata 'res' ini bisa kita rubah bisa jadi 'berhasil'
-        storeData('userProfile', res.data); // ini data user yg sudah di simpan
+
+        storeData('userProfile', res.data);
       })
       .catch(e =>
         showMessage({
