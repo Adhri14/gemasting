@@ -1,7 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import {ILLogo} from '../../assets';
-import {colors, mainColors, fonts, getData} from '../../utils';
+import {
+  colors,
+  mainColors,
+  fonts,
+  getData,
+  storeData,
+  removeData,
+} from '../../utils';
 
 const SplashScreen = ({navigation}) => {
   useEffect(() => {

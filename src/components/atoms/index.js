@@ -12,6 +12,7 @@ import CardButton from './CardButton';
 import Line from './Line';
 import Card from './Card';
 import ListName from './ListName';
+import Loading from './Loading';
 
 export {
   Button,
@@ -28,4 +29,5 @@ export {
   Line,
   Card,
   ListName,
+  Loading,
 };

@@ -28,8 +28,6 @@ const Profile = ({navigation}) => {
     });
   }, []);
 
-  console.log(token);
-
   const onSignOut = () => {
     axios({
       url: `${API}logout`,
@@ -47,7 +45,6 @@ const Profile = ({navigation}) => {
         removeData('userProfile');
       })
       .catch(e => {
-        console.log(e.message);
         showMessage({
           message: e.message,
         });

@@ -45,7 +45,7 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="HomeCustomer">
+    <Stack.Navigator initialRouteName="HomeCustomer" mode="modal">
       <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}

@@ -38,10 +38,11 @@ const HomeBabySpaInput = () => {
     dispatch({type: 'SET_REGISTER_HBS', value: form});
     Axios.post(`${API}hbs/register`, form)
       .then(successPos => {
-        storeData('token', {value: `Bearer ${res.data.data.token}`});
+        storeData('token', {value: `Bearer ${successPos.data.data.token}`});
+        storeData('userProfile', successPos.data.data);
         navigation.navigate('OtpScreen');
       })
-      .catch(e => console.log(e.message));
+      .catch(e => showMessage(e.message));
   };
 
   const onSubmitGoogleHbs = async () => {
@@ -64,13 +65,14 @@ const HomeBabySpaInput = () => {
 
         Axios.post(`${API}hbs/registerByGmail`, dataPos)
           .then(res => {
-            console.log(res.data.data);
+            storeData('userProfile', res.data.data);
+            storeData('token', {value: `Bearer ${res.data.data.token}`});
             navigation.reset({
               index: 0,
               routes: [{name: 'MainApp'}],
             });
           })
-          .catch(e => console.log(e.message));
+          .catch(e => showMessage(e.message));
       })
       .catch(e =>
         showMessage({

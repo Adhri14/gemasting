@@ -5,6 +5,7 @@ import {Button, Gap, Line, Link, TextInput} from '../../atoms';
 import axios from 'axios';
 import {storeData, useForm, showMessage} from '../../../utils';
 import {API} from '../../../config';
+import {useDispatch} from 'react-redux';
 
 const EmailView = () => {
   const navigation = useNavigation();
@@ -13,33 +14,33 @@ const EmailView = () => {
     password: '',
   });
 
+  const dispatch = useDispatch();
+
   const onSubmit = () => {
+    dispatch({type: 'SET_LOADING', value: true});
     axios
       .post(`${API}customer/login`, form)
       .then(res => {
-        // console.log(res.data);
-        // showMessage({
-        //   message: res.data.meta.code,
-        // });
-        console.log(res.data);
         if (res.data.meta.code === 200) {
           storeData('token', {value: `Bearer ${res.data.data.token}`});
+          storeData('userProfile', res.data.data);
           navigation.reset({
             index: 0,
             routes: [{name: 'MainApp'}],
           });
+          dispatch({type: 'SET_LOADING', value: false});
         } else if (res.data.meta.code === 500) {
           showMessage({
             message: res.data.meta.message,
           });
-          return false;
+          dispatch({type: 'SET_LOADING', value: false});
         } else {
-          console.log(res.data);
-          return true;
+          dispatch({type: 'SET_LOADING', value: false});
         }
       })
       .catch(e => {
-        console.log(e);
+        showMessage(e);
+        dispatch({type: 'SET_LOADING', value: false});
       });
   };
   return (

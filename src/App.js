@@ -1,10 +1,22 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import Router from './router';
-import {Provider} from 'react-redux';
+import {Provider, useSelector} from 'react-redux';
 import store from './redux/store';
 import FlashMessage from 'react-native-flash-message';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {Loading} from './components';
+
+const MainApp = () => {
+  const {loading} = useSelector(state => state.loadingReducer);
+  return (
+    <NavigationContainer>
+      <Router />
+      <FlashMessage position="top" />
+      {loading && <Loading />}
+    </NavigationContainer>
+  );
+};
 
 const App = () => {
   useEffect(() => {
@@ -15,12 +27,9 @@ const App = () => {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Provider store={store}>
-        <Router />
-        <FlashMessage position="top" />
-      </Provider>
-    </NavigationContainer>
+    <Provider store={store}>
+      <MainApp />
+    </Provider>
   );
 };
 

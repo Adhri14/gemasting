@@ -6,11 +6,13 @@ import {
   Text,
   View,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {
   fonts,
   getData,
   mainColors,
+  removeData,
   showMessage,
   storeData,
   useForm,
@@ -30,8 +32,6 @@ import axios from 'axios';
 import {API} from '../../config';
 
 const HomeCustomer = ({navigation}) => {
-  const [token, setToken] = useState('');
-
   const [dataProfile, setDataProfile] = useState({
     profile: '',
     name: '',
@@ -39,36 +39,15 @@ const HomeCustomer = ({navigation}) => {
   });
 
   useEffect(() => {
-    getData('token').then(res => {
-      setToken(res);
+    getData('userProfile').then(resProfile => {
+      // console.log(resProfile.data.data.token);
+      setDataProfile({
+        name: resProfile.profile.name,
+        role: resProfile.role_id,
+        profile: resProfile.profile.photo,
+      });
     });
-    getProfile();
   }, []);
-
-  console.log(token.value);
-
-  const getProfile = () => {
-    axios({
-      url: `${API}profile`,
-      method: 'get',
-      headers: {
-        Authorization: token.value,
-      },
-    })
-      .then(res => {
-        setDataProfile({
-          profile: res.data.data.profile.photo,
-          name: res.data.data.profile.name,
-          role: res.data.data.role_id,
-        });
-        storeData('userProfile', res.data);
-      })
-      .catch(e =>
-        showMessage({
-          message: e.message,
-        }),
-      );
-  };
 
   const Role = () => {
     if (dataProfile.role === 2) {
@@ -185,11 +164,9 @@ const HomeCustomer = ({navigation}) => {
       <View style={styles.page}>
         <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
         <HeaderHome
-          img={
-            dataProfile.profile === null
-              ? DummyUser
-              : {uri: `${dataProfile.profile}`}
-          }
+          img={{
+            uri: dataProfile.profile !== '' ? dataProfile.profile : null,
+          }}
           name={dataProfile.name}
         />
         <View style={styles.container}>
@@ -203,6 +180,40 @@ const HomeCustomer = ({navigation}) => {
             </View>
           </View>
         </View>
+        {/* {!loading ? (
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: mainColors.black,
+              opacity: 0.4,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <ActivityIndicator size="large" />
+          </View>
+        ) : (
+          <>
+            <HeaderHome
+              img={
+                dataProfile.profile === null
+                  ? DummyUser
+                  : {uri: `${dataProfile.profile}`}
+              }
+              name={dataProfile.name}
+            />
+            <View style={styles.container}>
+              <View style={styles.banner}>
+                <IconImage />
+              </View>
+              <View style={styles.content}>
+                <Text style={styles.title}>Fitur Kami</Text>
+                <View>
+                  <Role />
+                </View>
+              </View>
+            </View>
+          </>
+        )} */}
       </View>
     </ScrollView>
   );

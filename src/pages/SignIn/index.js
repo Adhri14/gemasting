@@ -17,7 +17,7 @@ import {
   Button,
   Link,
 } from '../../components';
-import {colors, fonts, mainColors, showMessage} from '../../utils';
+import {colors, fonts, mainColors, showMessage, storeData} from '../../utils';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import Axios from 'axios';
@@ -69,7 +69,8 @@ const SignIn = ({navigation}) => {
 
         Axios.post(`${API}customer/loginByGmail`, data)
           .then(res => {
-            console.log(res.data.data);
+            storeData('token', res.data.data.token);
+            storeData('userProfile', res.data.data);
             navigation.reset({
               index: 0,
               routes: [{name: 'MainApp'}],

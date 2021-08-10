@@ -55,7 +55,6 @@ const AppIntro = ({navigation}) => {
   const flatListRef = useRef(null);
 
   const handleSkip = () => {
-    // console.log('Tes press skip');
     flatListRef.current.scrollToEnd({animated: true});
   };
 
@@ -64,7 +63,6 @@ const AppIntro = ({navigation}) => {
       return false;
     }
     flatListRef.current.scrollToIndex({index: currentSlide - 1});
-    // console.log('Tes press');
   };
 
   const handleOnDone = () => {

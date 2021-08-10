@@ -90,21 +90,31 @@ const SignUpCustomer = ({navigation}) => {
 
     dispatch({type: 'SET_REGISTER_CUSTOMER', value: data});
 
-    console.log(data);
-    Axios.post(`${API}customer/register`, data)
-      .then(res => {
-        storeData('token', {value: `Bearer ${res.data.data.token}`});
-        navigation.navigate('OtpScreen');
-      })
-      .catch(e => {
-        console.log(e);
-        // showMessage({
-        //   message: e.data,
-        // });
-        // showMessage({
-        //   message: e.message,
-        // });
+    if (form.checked === false) {
+      showMessage({
+        message: 'Anda harus menyetujui syarat & ketentuan dari Gemasting APP',
       });
+      // return false;
+    } else {
+      Axios.post(`${API}customer/register`, data)
+        .then(res => {
+          if (res.data.meta.code === 500) {
+            showMessage({
+              message: res.data.meta.message,
+            });
+            return false;
+          } else if (res.data.meta.code === 200) {
+            storeData('token', {value: `Bearer ${res.data.data.token}`});
+            storeData('userProfile', res.data.data);
+            navigation.navigate('OtpScreen');
+          } else {
+            return true;
+          }
+        })
+        .catch(e => {
+          showMessage(e);
+        });
+    }
   };
 
   const onSubmitGoogle = async () => {

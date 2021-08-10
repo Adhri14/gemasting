@@ -17,7 +17,7 @@ import {
   Button,
   Link,
 } from '../../components';
-import {colors, fonts, mainColors} from '../../utils';
+import {colors, fonts, mainColors, storeData} from '../../utils';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import Axios from 'axios';
@@ -77,7 +77,8 @@ const SignInPakar = ({navigation}) => {
 
         Axios.post(`${API}pakar/loginByGmail`, data)
           .then(res => {
-            console.log(res.data.data);
+            storeData('token', {value: `Bearer ${res.data.data.token}`});
+            storeData('userProfile', res.data.data);
             navigation.reset({
               index: 0,
               routes: [{name: 'MainApp'}],

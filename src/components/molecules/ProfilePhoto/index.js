@@ -22,7 +22,7 @@ const ProfilePhoto = ({name, desc, type, onPress, img}) => {
   return (
     <View style={styles.container}>
       <View style={styles.borderProfile}>
-        <Image source={DummyUser} style={styles.avatar} />
+        <Image source={img} style={styles.avatar} />
         {type === 'camera' && (
           <TouchableOpacity
             activeOpacity={1}

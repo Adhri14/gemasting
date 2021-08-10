@@ -22,7 +22,7 @@ import {
   Radio,
   TextInput,
 } from '../../components';
-import {colors, fonts, mainColors, useForm} from '../../utils';
+import {colors, fonts, mainColors, showMessage, useForm} from '../../utils';
 import {useDispatch} from 'react-redux';
 import moment from 'moment';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -90,10 +90,9 @@ const SignUpPakar = ({navigation}) => {
     dispatch({type: 'SET_REGISTER_PAKAR', value: data});
     Axios.post(`${API}pakar/register`, data)
       .then(res => {
-        console.log(res.data.data);
         navigation.navigate('OtpScreen');
       })
-      .catch(e => console.log(e.message));
+      .catch(e => showMessage(e.message));
   };
 
   const onSubmitGoogle = async () => {
@@ -116,13 +115,12 @@ const SignUpPakar = ({navigation}) => {
 
         Axios.post(`${API}pakar/registerByGmail`, data)
           .then(res => {
-            console.log(res.data.data);
             navigation.reset({
               index: 0,
               routes: [{name: 'MainApp'}],
             });
           })
-          .catch(e => console.log(e.message));
+          .catch(e => showMessage(e.message));
       })
       .catch(e =>
         showMessage({

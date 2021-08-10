@@ -25,16 +25,13 @@ const ListProfile = () => {
     });
     getData('userProfile').then(resProfile => {
       setDataProfile({
-        profile: resProfile.data.photo,
-        role: resProfile.data.role_id,
-        name: resProfile.data.profile.name,
-        nik: resProfile.data.profile.nik,
+        profile: resProfile.profile.photo,
+        role: resProfile.role_id,
+        name: resProfile.profile.name,
+        nik: resProfile.profile.nik,
       });
     });
   }, []);
-
-  console.log(token);
-  console.log(dataProfile);
 
   const Role = () => {
     if (dataProfile.role === 2) {
@@ -43,12 +40,8 @@ const ListProfile = () => {
           <ProfilePhoto
             name={dataProfile.name}
             type="profile"
-            desc={dataProfile.nik}
-            img={
-              dataProfile.photo === undefined
-                ? DummyUser
-                : {uri: `${dataProfile.photo}`}
-            }
+            desc={dataProfile.nik === null ? 'NIK belum ada' : dataProfile.nik}
+            img={{uri: dataProfile.profile !== '' ? dataProfile.profile : null}}
           />
           <View style={styles.container}>
             <Gap height={30} />
@@ -78,9 +71,9 @@ const ListProfile = () => {
             type="profile"
             desc={dataProfile.nik}
             img={
-              dataProfile.photo === undefined
+              dataProfile.profile === null
                 ? DummyUser
-                : {uri: `${dataProfile.photo}`}
+                : {uri: `${dataProfile.profile}`}
             }
           />
           <View style={styles.container}>
@@ -111,9 +104,9 @@ const ListProfile = () => {
             type="profile"
             desc={dataProfile.nik}
             img={
-              dataProfile.photo === undefined
+              dataProfile.profile === null
                 ? DummyUser
-                : {uri: `${dataProfile.photo}`}
+                : {uri: `${dataProfile.profile}`}
             }
           />
           <View style={styles.container}>
@@ -144,9 +137,9 @@ const ListProfile = () => {
             type="profile"
             desc={dataProfile.nik}
             img={
-              dataProfile.photo === undefined
+              dataProfile.profile === null
                 ? DummyUser
-                : {uri: `${dataProfile.photo}`}
+                : {uri: `${dataProfile.profile}`}
             }
           />
           <View style={styles.container}>
