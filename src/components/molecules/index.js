@@ -16,6 +16,7 @@ import PakarInput from './PakarInput';
 import PosyanduInput from './PosyanduInput';
 import HomeBabySpaInput from './HomeBabySpaInput';
 import InfoStunting from './InfoStunting';
+import ActivityCard from './ActivityCard';
 
 export {
   InfoStunting,
@@ -36,4 +37,5 @@ export {
   PakarInput,
   PosyanduInput,
   HomeBabySpaInput,
+  ActivityCard,
 };
