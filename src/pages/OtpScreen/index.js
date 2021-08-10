@@ -27,7 +27,6 @@ const OtpScreen = ({navigation}) => {
     otp,
   };
 
-  console.log(data);
   useEffect(() => {
     textInput.focus();
   }, []);
@@ -36,7 +35,6 @@ const OtpScreen = ({navigation}) => {
     axios
       .put(`${API}otp-verification`, data)
       .then(res => {
-        console.log(res.data);
         if (res.data.meta.code === 200) {
           navigation.reset({
             index: 0,

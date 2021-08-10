@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text} from 'react-native';
 import ProfilePhoto from '../ProfilePhoto';
 import {Gap, TextInput, FileUpload, Button} from '../../atoms';
-import {getData} from '../../../utils';
+import {getData, showMessage} from '../../../utils';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import {API} from '../../../config';
@@ -42,7 +42,7 @@ const InputPosyandu = () => {
           address: res.data.data.profile.address,
         });
       })
-      .catch(e => console.log(e.message));
+      .catch(e => showMessage(e.message));
   };
   return (
     <View>

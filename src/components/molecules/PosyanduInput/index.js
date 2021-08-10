@@ -38,10 +38,11 @@ const PosyanduInput = () => {
     dispatch({type: 'SET_REGISTER_POSYANDU', value: form});
     Axios.post(`${API}posyandu/register`, form)
       .then(successPos => {
-        storeData('token', {value: `Bearer ${res.data.data.token}`});
+        storeData('token', {value: `Bearer ${successPos.data.data.token}`});
+        storeData('userProfile', successPos.data.data);
         navigation.navigate('OtpScreen');
       })
-      .catch(e => console.log(e.message));
+      .catch(e => showMessage(e.message));
   };
 
   const onSubmitGooglePosyandu = async () => {
@@ -64,13 +65,14 @@ const PosyanduInput = () => {
 
         Axios.post(`${API}posyandu/registerByGmail`, dataPos)
           .then(res => {
-            console.log(res.data.data);
+            storeData('token', {value: `Bearer ${res.data.data.token}`});
+            storeData('userProfile', res.data.data);
             navigation.reset({
               index: 0,
               routes: [{name: 'MainApp'}],
             });
           })
-          .catch(e => console.log(e.message));
+          .catch(e => showMessage(e.message));
       })
       .catch(e =>
         showMessage({

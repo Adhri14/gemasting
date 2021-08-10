@@ -86,11 +86,11 @@ const PakarInput = ({pakar}) => {
     dispatch({type: 'SET_REGISTER_PAKAR', value: data});
     Axios.post(`${API}pakar/register`, data)
       .then(res => {
-        console.log(res.data.data);
         storeData('token', {value: `Bearer ${res.data.data.token}`});
+        storeData('userProfile', res.data.data);
         navigation.navigate('OtpScreen');
       })
-      .catch(e => console.log(e.message));
+      .catch(e => showMessage(e.message));
   };
 
   const onSubmitGooglePakar = async () => {
@@ -113,13 +113,14 @@ const PakarInput = ({pakar}) => {
 
         Axios.post(`${API}pakar/registerByGmail`, data)
           .then(res => {
-            console.log(res.data.data);
             navigation.reset({
               index: 0,
               routes: [{name: 'MainApp'}],
             });
+            storeData('token', {value: `Bearer ${res.data.data.token}`});
+            storeData('userProfile', res.data.data);
           })
-          .catch(e => console.log(e.message));
+          .catch(e => showMessage(e.message));
       })
       .catch(e =>
         showMessage({
