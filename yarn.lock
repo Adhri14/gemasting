@@ -1155,11 +1155,6 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/viewpager/-/viewpager-2.0.2.tgz#622b190294b1310c4825c98daeaee1c8443f7124"
   integrity sha512-CKVhIZdX/Cmb80muog8sKpi5vM8npwFp4tx4Dj1IvTBidZweuO22+VH2rDOj7E0LzdV9IYRJ4FGBwcPBD2qUrQ==
 
-"@react-native-community/viewpager@^5.0.11":
-  version "5.0.11"
-  resolved "https://registry.yarnpkg.com/@react-native-community/viewpager/-/viewpager-5.0.11.tgz#dbeb2d1b2452607926407c99e4de59c7db9e3019"
-  integrity sha512-eboJwbDQjP1qJP3LFzVspgh88IGNF07S2qpU296j+4kL0inVuL+HXs81SuczMGtJmDZ4u19RNEBVq79of/h+jQ==
-
 "@react-native-firebase/app@^12.1.0":
   version "12.1.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-12.1.0.tgz#fa2c989af2bd876ed83f792c0152067184a7db27"
@@ -5826,6 +5821,11 @@ react-native-linear-gradient@^2.5.6:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
   integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
+
+react-native-pager-view@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-pager-view/-/react-native-pager-view-5.4.0.tgz#8e30a391a68da26e59f4ae724341b9208924b2ee"
+  integrity sha512-pYy3I8p5s6cPaymT1GibuDRHmicY3JdHHZyTH+Fra1S0wupaJhoZy33f2prrMJqQfk9kaqwCsb3pVmj4GuJTjA==
 
 react-native-paper@^4.9.1:
   version "4.9.2"
