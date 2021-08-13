@@ -1,22 +1,23 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {fonts, mainColors} from '../../../utils';
-import ScrollableTabView, {
-  DefaultTabBar,
-} from 'react-native-scrollable-tab-view';
+// import ScrollableTabView, {
+//   DefaultTabBar,
+// } from 'react-native-scrollable-tab-view';
 
 const AktivityCard = () => {
   return (
-    <ScrollableTabView
-      style={{marginTop: 20}}
-      initialPage={1}
-      renderTabBar={() => <DefaultTabBar />}>
-      <Text tabLabel="Tab #1">My</Text>
-      <Text tabLabel="Tab #2">favorite</Text>
-      <Text tabLabel="Tab #3">project</Text>
-      {/* <Text style={styles.title}>Hello</Text> */}
-      {/* <View style={styles.container}></View> */}
-    </ScrollableTabView>
+    // <ScrollableTabView
+    //   style={{marginTop: 20}}
+    //   initialPage={1}
+    //   renderTabBar={() => <DefaultTabBar />}>
+    //   <Text tabLabel="Tab #1">My</Text>
+    //   <Text tabLabel="Tab #2">favorite</Text>
+    //   <Text tabLabel="Tab #3">project</Text>
+    // </ScrollableTabView>
+    <View style={styles.container}>
+      <Text style={styles.title}>Hello</Text>
+    </View>
   );
 };
 

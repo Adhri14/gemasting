@@ -9,6 +9,7 @@ import {
   storeData,
   removeData,
 } from '../../utils';
+import auth from '@react-native-firebase/auth';
 
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
@@ -27,7 +28,25 @@ const SplashScreen = ({navigation}) => {
         }
       }, 3000);
     });
-  }, []);
+    const subscriber = auth().onAuthStateChanged(user => {
+      setTimeout(() => {
+        if (user) {
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'MainApp'}],
+          });
+        } else {
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'AppIntro'}],
+          });
+        }
+      }, 3000);
+    });
+
+    return () => subscriber();
+  }, [navigation]);
+
   return (
     <View style={styles.page}>
       <StatusBar barStyle="dark-content" backgroundColor={mainColors.white} />

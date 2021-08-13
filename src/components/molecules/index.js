@@ -17,6 +17,10 @@ import PosyanduInput from './PosyanduInput';
 import HomeBabySpaInput from './HomeBabySpaInput';
 import InfoStunting from './InfoStunting';
 import ActivityCard from './ActivityCard';
+import EmailViewPosyandu from './EmailViewPosyandu';
+import EmailViewHBS from './EmailViewHBS';
+import TelephoneViewPosyandu from './TelephoneViewPosyandu';
+import TelephoneViewHBS from './TelephoneViewHBS';
 
 export {
   InfoStunting,
@@ -38,4 +42,8 @@ export {
   PosyanduInput,
   HomeBabySpaInput,
   ActivityCard,
+  EmailViewHBS,
+  EmailViewPosyandu,
+  TelephoneViewPosyandu,
+  TelephoneViewHBS,
 };

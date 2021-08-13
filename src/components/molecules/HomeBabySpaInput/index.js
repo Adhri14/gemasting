@@ -35,14 +35,38 @@ const HomeBabySpaInput = () => {
   const dispatch = useDispatch();
 
   const onSubmitHbs = () => {
-    dispatch({type: 'SET_REGISTER_HBS', value: form});
-    Axios.post(`${API}hbs/register`, form)
-      .then(successPos => {
-        storeData('token', {value: `Bearer ${successPos.data.data.token}`});
-        storeData('userProfile', successPos.data.data);
-        navigation.navigate('OtpScreen');
-      })
-      .catch(e => showMessage(e.message));
+    dispatch({type: 'SET_LOADING', value: true});
+    if (form.checked === false) {
+      dispatch({type: 'SET_LOADING', value: false});
+      showMessage({
+        message: 'Anda harus menyetujui persyaratan dari Gemasting APP',
+      });
+    } else {
+      dispatch({type: 'SET_REGISTER_HBS', value: form});
+      Axios.post(`${API}hbs/register`, form)
+        .then(res => {
+          if (res.data.meta.code === 500) {
+            dispatch({type: 'SET_LOADING', value: false});
+            showMessage({
+              message: res.data.meta.message,
+            });
+          } else if (res.data.meta.code === 200) {
+            dispatch({type: 'SET_LOADING', value: false});
+            storeData('token', {value: `Bearer ${res.data.data.token}`});
+            storeData('userProfile', res.data.data);
+            navigation.navigate('OtpScreen');
+          } else {
+            dispatch({type: 'SET_LOADING', value: false});
+            return true;
+          }
+        })
+        .catch(e => {
+          dispatch({type: 'SET_LOADING', value: false});
+          showMessage({
+            message: e.message,
+          });
+        });
+    }
   };
 
   const onSubmitGoogleHbs = async () => {
@@ -53,32 +77,45 @@ const HomeBabySpaInput = () => {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
-    auth()
-      .signInWithCredential(googleCredential)
-      .then(res => {
-        const dataPos = {
-          name: res.user.displayName,
-          email: res.user.email,
-          phone_number: res.user.phoneNumber,
-          uid: res.user.uid,
-        };
+    try {
+      auth()
+        .signInWithCredential(googleCredential)
+        .then(res => {
+          const dataPos = {
+            name: res.user.displayName,
+            email: res.user.email,
+            address: 'masih kosong',
+          };
 
-        Axios.post(`${API}hbs/registerByGmail`, dataPos)
-          .then(res => {
-            storeData('userProfile', res.data.data);
-            storeData('token', {value: `Bearer ${res.data.data.token}`});
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'MainApp'}],
-            });
-          })
-          .catch(e => showMessage(e.message));
-      })
-      .catch(e =>
-        showMessage({
-          message: e,
-        }),
-      );
+          Axios.post(`${API}hbs/register-by-gmail`, dataPos)
+            .then(result => {
+              if (result.data.meta.code === 500) {
+                showMessage({
+                  message: result.data.meta.message,
+                });
+              } else if (result.data.meta.code === 200) {
+                storeData('token', res.data.data.token);
+                storeData('userProfile', res.data.data);
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: 'MainApp'}],
+                });
+              } else {
+                console.log(res.data.data);
+              }
+            })
+            .catch(e => showMessage(e.message));
+        })
+        .catch(e =>
+          showMessage({
+            message: e,
+          }),
+        );
+    } catch (error) {
+      showMessage({
+        message: error.message,
+      });
+    }
   };
   return (
     <>
@@ -158,7 +195,7 @@ const HomeBabySpaInput = () => {
       />
       <Gap height={20} />
       <Link
-        onPress={() => navigation.navigate('SignIn')}
+        onPress={() => navigation.navigate('SignInHBS')}
         title="Sudah punya akun?"
         action="Masuk"
         align="center"

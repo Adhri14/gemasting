@@ -18,17 +18,50 @@ import {
 } from '../../utils';
 import axios from 'axios';
 import {API} from '../../config';
+import auth from '@react-native-firebase/auth';
+import {useDispatch} from 'react-redux';
 
 const Profile = ({navigation}) => {
   const [token, setToken] = useState('');
+  const [provider, setProvider] = useState({});
 
   useEffect(() => {
     getData('token').then(res => {
       setToken(res);
     });
+    getData('provider').then(res => {
+      setProvider(res);
+    });
   }, []);
 
+  const dispatch = useDispatch();
+
   const onSignOut = () => {
+    // removeData('provider');
+    // removeData('userProfile');
+    // removeData('token');
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{name: 'AppIntro'}],
+    // });
+    dispatch({type: 'SET_LOADING', value: true});
+    if (provider.value === 'firebase') {
+      auth()
+        .signOut()
+        .then(() => {
+          dispatch({type: 'SET_LOADING', value: false});
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'AppIntro'}],
+          });
+          removeData('token');
+          removeData('userProfile');
+          removeData('provider');
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    }
     axios({
       url: `${API}logout`,
       method: 'post',
@@ -37,6 +70,7 @@ const Profile = ({navigation}) => {
       },
     })
       .then(() => {
+        dispatch({type: 'SET_LOADING', value: false});
         navigation.reset({
           index: 0,
           routes: [{name: 'AppIntro'}],
@@ -45,6 +79,7 @@ const Profile = ({navigation}) => {
         removeData('userProfile');
       })
       .catch(e => {
+        dispatch({type: 'SET_LOADING', value: false});
         showMessage({
           message: e.message,
         });

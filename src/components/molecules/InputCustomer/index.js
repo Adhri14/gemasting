@@ -1,20 +1,13 @@
-import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import ProfilePhoto from '../ProfilePhoto';
-import {Button, Gap, Radio, TextInput} from '../../atoms';
-import {
-  getData,
-  colors,
-  showMessage,
-  removeData,
-  storeData,
-} from '../../../utils';
-import {useEffect} from 'react';
-import axios from 'axios';
-import {API, URLPHOTO} from '../../../config';
 import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {useDispatch, useSelector} from 'react-redux';
+import {API} from '../../../config';
+import {getData, showMessage, storeData} from '../../../utils';
+import {Button, Gap, Radio, TextInput} from '../../atoms';
+import ProfilePhoto from '../ProfilePhoto';
 
 const InputCustomer = () => {
   const navigation = useNavigation();
@@ -60,7 +53,7 @@ const InputCustomer = () => {
   const addPhoto = () => {
     launchImageLibrary(
       {
-        quality: 0.5,
+        quality: 0.7,
         maxWidth: 200,
         maxHeight: 200,
       },

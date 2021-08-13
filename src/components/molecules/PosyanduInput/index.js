@@ -35,14 +35,38 @@ const PosyanduInput = () => {
   const dispatch = useDispatch();
 
   const onSubmitPosyandu = () => {
-    dispatch({type: 'SET_REGISTER_POSYANDU', value: form});
-    Axios.post(`${API}posyandu/register`, form)
-      .then(successPos => {
-        storeData('token', {value: `Bearer ${successPos.data.data.token}`});
-        storeData('userProfile', successPos.data.data);
-        navigation.navigate('OtpScreen');
-      })
-      .catch(e => showMessage(e.message));
+    dispatch({type: 'SET_LOADING', value: true});
+    if (form.checked === false) {
+      dispatch({type: 'SET_LOADING', value: false});
+      showMessage({
+        message: 'Anda harus menyetujui persyaratan dari Gemasting APP',
+      });
+    } else {
+      dispatch({type: 'SET_REGISTER_POSYANDU', value: form});
+      Axios.post(`${API}posyandu/register`, form)
+        .then(res => {
+          if (res.data.meta.code === 500) {
+            dispatch({type: 'SET_LOADING', value: false});
+            showMessage({
+              message: res.data.meta.message,
+            });
+          } else if (res.data.meta.code === 200) {
+            dispatch({type: 'SET_LOADING', value: false});
+            storeData('token', {value: `Bearer ${res.data.data.token}`});
+            storeData('userProfile', res.data.data);
+            navigation.navigate('OtpScreen');
+          } else {
+            dispatch({type: 'SET_LOADING', value: false});
+            return true;
+          }
+        })
+        .catch(e => {
+          dispatch({type: 'SET_LOADING', value: false});
+          showMessage({
+            message: e.message,
+          });
+        });
+    }
   };
 
   const onSubmitGooglePosyandu = async () => {
@@ -53,32 +77,47 @@ const PosyanduInput = () => {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
-    auth()
-      .signInWithCredential(googleCredential)
-      .then(res => {
-        const dataPos = {
-          name: res.user.displayName,
-          email: res.user.email,
-          phone_number: res.user.phoneNumber,
-          uid: res.user.uid,
-        };
+    try {
+      auth()
+        .signInWithCredential(googleCredential)
+        .then(res => {
+          const dataPos = {
+            email: res.user.email,
+            name: res.user.displayName,
+            phone_number: 'masih kosong',
+            photo: res.user.photoURL,
+            address: 'nama jalan masih kosong',
+          };
 
-        Axios.post(`${API}posyandu/registerByGmail`, dataPos)
-          .then(res => {
-            storeData('token', {value: `Bearer ${res.data.data.token}`});
-            storeData('userProfile', res.data.data);
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'MainApp'}],
-            });
-          })
-          .catch(e => showMessage(e.message));
-      })
-      .catch(e =>
-        showMessage({
-          message: e,
-        }),
-      );
+          Axios.post(`${API}posyandu/register-by-gmail`, dataPos)
+            .then(result => {
+              if (result.data.meta.code === 500) {
+                showMessage({
+                  message: result.data.meta.message,
+                });
+              } else if (result.data.meta.code === 200) {
+                storeData('token', {value: `Bearer ${result.data.data.token}`});
+                storeData('userProfile', result.data.data);
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: 'MainApp'}],
+                });
+              } else {
+                console.log(result.data.data);
+              }
+            })
+            .catch(e => showMessage(e.message));
+        })
+        .catch(e =>
+          showMessage({
+            message: e,
+          }),
+        );
+    } catch (error) {
+      showMessage({
+        message: error.message,
+      });
+    }
   };
   return (
     <>
@@ -158,7 +197,7 @@ const PosyanduInput = () => {
       />
       <Gap height={20} />
       <Link
-        onPress={() => navigation.navigate('SignIn')}
+        onPress={() => navigation.navigate('SignInPosyandu')}
         title="Sudah punya akun?"
         action="Masuk"
         align="center"

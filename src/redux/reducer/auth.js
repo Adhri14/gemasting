@@ -85,3 +85,21 @@ export const photoReducer = (state = initPhoto, action) => {
   }
   return state;
 };
+
+const initDocument = {
+  uri: '',
+  type: '',
+  name: '',
+};
+
+export const documentReducer = (state = initDocument, action) => {
+  if (action.type === 'SET_DOCUMENT') {
+    return {
+      ...state,
+      uri: action.value.uri,
+      type: action.value.type,
+      name: action.value.name,
+    };
+  }
+  return state;
+};
