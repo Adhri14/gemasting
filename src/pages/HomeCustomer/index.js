@@ -40,7 +40,6 @@ const HomeCustomer = ({navigation}) => {
 
   useEffect(() => {
     getData('userProfile').then(resProfile => {
-      // console.log(resProfile.data.data.token);
       setDataProfile({
         name: resProfile.profile.name,
         role: resProfile.role_id,

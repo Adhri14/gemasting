@@ -73,6 +73,7 @@ const PakarInput = ({pakar}) => {
   const dispatch = useDispatch();
 
   const onSubmitPakar = () => {
+    dispatch({type: 'SET_LOADING', value: true});
     const combine = {
       birth: `${birthPlace}, ${moment(date).format('DD MMMM YYYY')}`,
     };
@@ -84,13 +85,36 @@ const PakarInput = ({pakar}) => {
     };
 
     dispatch({type: 'SET_REGISTER_PAKAR', value: data});
-    Axios.post(`${API}pakar/register`, data)
-      .then(res => {
-        storeData('token', {value: `Bearer ${res.data.data.token}`});
-        storeData('userProfile', res.data.data);
-        navigation.navigate('OtpScreen');
-      })
-      .catch(e => showMessage(e.message));
+    if (form.checked === false) {
+      dispatch({type: 'SET_LOADING', value: false});
+      showMessage({
+        message: 'Anda harus menyetujui persyaratan dari Gemasting APP',
+      });
+    } else {
+      Axios.post(`${API}pakar/register`, data)
+        .then(res => {
+          if (res.data.meta.code === 500) {
+            dispatch({type: 'SET_LOADING', value: false});
+            showMessage({
+              message: res.data.meta.message,
+            });
+          } else if (res.data.meta.code === 200) {
+            dispatch({type: 'SET_LOADING', value: false});
+            storeData('token', {value: `Bearer ${res.data.data.token}`});
+            storeData('userProfile', res.data.data);
+            navigation.navigate('OtpScreen');
+          } else {
+            dispatch({type: 'SET_LOADING', value: false});
+            return true;
+          }
+        })
+        .catch(e => {
+          dispatch({type: 'SET_LOADING', value: false});
+          showMessage({
+            message: e.message,
+          });
+        });
+    }
   };
 
   const onSubmitGooglePakar = async () => {
@@ -101,32 +125,50 @@ const PakarInput = ({pakar}) => {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
-    auth()
-      .signInWithCredential(googleCredential)
-      .then(res => {
-        const data = {
-          name: res.user.displayName,
-          email: res.user.email,
-          phone_number: res.user.phoneNumber,
-          uid: res.user.uid,
-        };
+    try {
+      auth()
+        .signInWithCredential(googleCredential)
+        .then(res => {
+          const data = {
+            email: res.user.email,
+            name: res.user.displayName,
+            phone_number: 'masih kosong',
+            photo: res.user.photoURL,
+            address: 'nama jalan masih kosong',
+            gender: 'L',
+            birth: 'masih kosong',
+            pakar,
+          };
 
-        Axios.post(`${API}pakar/registerByGmail`, data)
-          .then(res => {
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'MainApp'}],
-            });
-            storeData('token', {value: `Bearer ${res.data.data.token}`});
-            storeData('userProfile', res.data.data);
-          })
-          .catch(e => showMessage(e.message));
-      })
-      .catch(e =>
-        showMessage({
-          message: e,
-        }),
-      );
+          Axios.post(`${API}pakar/register-by-gmail`, data)
+            .then(result => {
+              if (result.data.meta.code === 500) {
+                showMessage({
+                  message: result.data.meta.message,
+                });
+              } else if (result.data.meta.code === 200) {
+                storeData('token', res.data.data.token);
+                storeData('userProfile', res.data.data);
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: 'MainApp'}],
+                });
+              } else {
+                console.log(res.data.data);
+              }
+            })
+            .catch(e => showMessage(e.message));
+        })
+        .catch(e =>
+          showMessage({
+            message: e,
+          }),
+        );
+    } catch (error) {
+      showMessage({
+        message: error.message,
+      });
+    }
   };
 
   return (

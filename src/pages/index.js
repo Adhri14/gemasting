@@ -4,9 +4,9 @@ import GetStarted from './GetStarted';
 import OtpScreen from './OtpScreen';
 import SignIn from './SignIn';
 import SignInPakar from './SignInPakar';
-import SignInCustomer from './SignInCustomer';
+import SignInPosyandu from './SignInPosyandu';
+import SignInHBS from './SignInHBS';
 import SignUpCustomer from './SignUpCustomer';
-import SignUpPakar from './SignUpPakar';
 import SignUpPartner from './SignUpPartner';
 import HomeCustomer from './HomeCustomer';
 import Activity from './Activity';
@@ -29,9 +29,9 @@ export {
   GetStarted,
   SignUpCustomer,
   OtpScreen,
-  SignUpPakar,
+  SignInHBS,
   SignUpPartner,
-  SignInCustomer,
+  SignInPosyandu,
   HomeCustomer,
   Activity,
   Chat,

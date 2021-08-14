@@ -77,6 +77,7 @@ const SignUpCustomer = ({navigation}) => {
   const dispatch = useDispatch();
 
   const onSubmit = () => {
+    dispatch({type: 'SET_LOADING', value: true});
     // mengkombinasikan data variabel tempat lahir dan tanggal lahir menjadi sebuah objek
     const combine = {
       birth: `${birthPlace}, ${moment(date).format('DD MMMM YYYY')}`,
@@ -91,6 +92,7 @@ const SignUpCustomer = ({navigation}) => {
     dispatch({type: 'SET_REGISTER_CUSTOMER', value: data});
 
     if (form.checked === false) {
+      dispatch({type: 'SET_LOADING', value: false});
       showMessage({
         message: 'Anda harus menyetujui syarat & ketentuan dari Gemasting APP',
       });
@@ -99,19 +101,23 @@ const SignUpCustomer = ({navigation}) => {
       Axios.post(`${API}customer/register`, data)
         .then(res => {
           if (res.data.meta.code === 500) {
+            dispatch({type: 'SET_LOADING', value: false});
             showMessage({
               message: res.data.meta.message,
             });
             return false;
           } else if (res.data.meta.code === 200) {
+            dispatch({type: 'SET_LOADING', value: false});
             storeData('token', {value: `Bearer ${res.data.data.token}`});
             storeData('userProfile', res.data.data);
             navigation.navigate('OtpScreen');
           } else {
+            dispatch({type: 'SET_LOADING', value: false});
             return true;
           }
         })
         .catch(e => {
+          dispatch({type: 'SET_LOADING', value: false});
           showMessage(e);
         });
     }
@@ -125,35 +131,48 @@ const SignUpCustomer = ({navigation}) => {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
-    auth()
-      .signInWithCredential(googleCredential)
-      .then(res => {
-        const data = {
-          name: res.user.displayName,
-          email: res.user.email,
-          phone_number: res.user.phoneNumber,
-          uid: res.user.uid,
-          photo: res.user.photoURL,
-        };
-
-        Axios.post(`${API}customer/registerByGmail`, data)
-          .then(result => {
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'MainApp'}],
+    try {
+      auth()
+        .signInWithCredential(googleCredential)
+        .then(res => {
+          const data = {
+            email: res.user.email,
+            name: res.user.displayName,
+            gender: 'L',
+            address: null,
+            phone_number: null,
+            birth: null,
+            photo: res.user.photoURL,
+          };
+          Axios.post(`${API}customer/register-by-gmail`, data)
+            .then(result => {
+              if (result.data.meta.code === 500) {
+                showMessage({
+                  message: result.data.meta.message,
+                });
+              } else if (result.data.meta.code === 200) {
+                storeData('userProfile', result.data.data);
+                storeData('token', {value: result.data.data.token});
+                storeData('provider', {value: res.user.providerId});
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: 'MainApp'}],
+                });
+              } else {
+                console.log(result.data);
+              }
+            })
+            .catch(error => {
+              showMessage({
+                message: error.message,
+              });
             });
-          })
-          .catch(error => {
-            showMessage({
-              message: error.message,
-            });
-          });
-      })
-      .catch(e =>
-        showMessage({
-          message: e,
-        }),
-      );
+        });
+    } catch (error) {
+      showMessage({
+        message: error.message,
+      });
+    }
   };
 
   return (

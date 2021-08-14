@@ -17,7 +17,7 @@ import {
   Button,
   Link,
 } from '../../components';
-import {colors, fonts, mainColors, storeData} from '../../utils';
+import {colors, fonts, mainColors, showMessage, storeData} from '../../utils';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import Axios from 'axios';
@@ -68,33 +68,47 @@ const SignInPakar = ({navigation}) => {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
     // Sign-in the user with the credential
-    auth()
-      .signInWithCredential(googleCredential)
-      .then(res => {
-        const data = {
-          email: res.user.email,
-        };
+    try {
+      auth()
+        .signInWithCredential(googleCredential)
+        .then(res => {
+          const data = {
+            email: res.user.email,
+          };
 
-        Axios.post(`${API}pakar/loginByGmail`, data)
-          .then(res => {
-            storeData('token', {value: `Bearer ${res.data.data.token}`});
-            storeData('userProfile', res.data.data);
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'MainApp'}],
+          Axios.post(`${API}pakar/login-by-gmail`, data)
+            .then(result => {
+              if (result.data.meta.code === 500) {
+                showMessage({
+                  message: result.data.meta.message,
+                });
+              } else if (result.data.meta.code === 200) {
+                storeData('token', res.data.data.token);
+                storeData('userProfile', res.data.data);
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: 'MainApp'}],
+                });
+              } else {
+                console.log(res.data.data);
+              }
+            })
+            .catch(e => {
+              showMessage({
+                message: e.message,
+              });
             });
-          })
-          .catch(e => {
-            showMessage({
-              message: e.message,
-            });
-          });
-      })
-      .catch(e =>
-        showMessage({
-          message: e,
-        }),
-      );
+        })
+        .catch(e =>
+          showMessage({
+            message: e,
+          }),
+        );
+    } catch (error) {
+      showMessage({
+        message: error.message,
+      });
+    }
   };
 
   return (

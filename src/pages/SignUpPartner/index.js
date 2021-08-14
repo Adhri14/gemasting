@@ -65,7 +65,7 @@ const SignUpPartner = ({navigation}) => {
           <Text style={styles.title}>Daftar Akun</Text>
           <Gap height={15} />
           <Picker
-            label="Pilih hProfesi"
+            label="Pilih Profesi"
             value={pakar}
             onValueChange={val => setPakar(val)}
           />

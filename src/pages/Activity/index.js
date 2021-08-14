@@ -40,6 +40,24 @@ const Chat = () => {
         name="James Bond"
         desc="3578102110030001"
       />
+      <ListCard
+        colorHeader={mainColors.green}
+        colorsProgress={mainColors.white}
+        colorsTime={mainColors.white}
+        progress="Sedang Aktif"
+        time="15.00"
+        name="James Bond"
+        desc="3578102110030001"
+      />
+      <ListCard
+        colorHeader={mainColors.green}
+        colorsProgress={mainColors.white}
+        colorsTime={mainColors.white}
+        progress="Sedang Aktif"
+        time="15.00"
+        name="James Bond"
+        desc="3578102110030001"
+      />
     </View>
   );
 };

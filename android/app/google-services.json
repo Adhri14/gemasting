@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "320149601856-89gjh8fcp39sidspof1pm93kib6qse74.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gemasting",
+            "certificate_hash": "1474900971ce0df20234951ef5a5464ea791a20f"
+          }
+        },
+        {
           "client_id": "320149601856-9j3r796isgknt4psuj9kt36oigf80ah3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

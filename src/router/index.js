@@ -4,11 +4,11 @@ import {
   AppIntro,
   GetStarted,
   SignIn,
-  SignInCustomer,
   SignInPakar,
+  SignInPosyandu,
   SignUpCustomer,
   SignUpPartner,
-  SignUpPakar,
+  SignInHBS,
   SplashScreen,
   HomeCustomer,
   Activity,
@@ -46,6 +46,7 @@ const MainApp = () => {
 const Router = () => {
   return (
     <Stack.Navigator initialRouteName="Activity">
+      {/* Screen Utama */}
       <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
@@ -61,29 +62,22 @@ const Router = () => {
         component={GetStarted}
         options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="SignUpCustomer"
-        component={SignUpCustomer}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="SignUpPakar"
-        component={SignUpPakar}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="SignUpPartner"
-        component={SignUpPartner}
-        options={{headerShown: false}}
-      />
+      {/* Akhir */}
+
+      {/* SignIn -> 4 */}
       <Stack.Screen
         name="SignIn"
         component={SignIn}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="SignInCustomer"
-        component={SignInCustomer}
+        name="SignInPosyandu"
+        component={SignInPosyandu}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignInHBS"
+        component={SignInHBS}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -91,16 +85,34 @@ const Router = () => {
         component={SignInPakar}
         options={{headerShown: false}}
       />
+      {/* Akhir */}
+      {/* SignUp -> 2 */}
+      <Stack.Screen
+        name="SignUpCustomer"
+        component={SignUpCustomer}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignUpPartner"
+        component={SignUpPartner}
+        options={{headerShown: false}}
+      />
+      {/* Akhir */}
+      {/* OTP */}
       <Stack.Screen
         name="OtpScreen"
         component={OtpScreen}
         options={{headerShown: false}}
       />
+      {/* Akhir */}
+      {/* Dashboard */}
       <Stack.Screen
         name="MainApp"
         component={MainApp}
         options={{headerShown: false}}
       />
+      {/* Akhir */}
+      {/* Update Profile -> 4 */}
       <Stack.Screen
         name="UpdateProfileUser"
         component={UpdateProfileUser}
@@ -121,6 +133,8 @@ const Router = () => {
         component={UpdateProfileHomeBabySpa}
         options={{headerShown: false}}
       />
+      {/* Akhir */}
+      {/* KMS Online 3 */}
       <Stack.Screen
         name="KmsOnline"
         component={KmsOnline}
@@ -136,6 +150,8 @@ const Router = () => {
         component={AddFamily}
         options={{headerShown: false}}
       />
+      {/* Akhir */}
+      {/* Stunting 2 */}
       <Stack.Screen
         name="Stunting"
         component={Stunting}
@@ -146,6 +162,7 @@ const Router = () => {
         component={StuntingOutput}
         options={{headerShown: false}}
       />
+      {/* Akhir */}
     </Stack.Navigator>
   );
 };
