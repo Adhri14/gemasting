@@ -102,6 +102,7 @@ const PakarInput = ({pakar}) => {
             dispatch({type: 'SET_LOADING', value: false});
             storeData('token', {value: `Bearer ${res.data.data.token}`});
             storeData('userProfile', res.data.data);
+            storeData('provider', {value: 'api'});
             navigation.navigate('OtpScreen');
           } else {
             dispatch({type: 'SET_LOADING', value: false});
@@ -132,11 +133,11 @@ const PakarInput = ({pakar}) => {
           const data = {
             email: res.user.email,
             name: res.user.displayName,
-            phone_number: 'masih kosong',
+            phone_number: null,
             photo: res.user.photoURL,
-            address: 'nama jalan masih kosong',
-            gender: 'L',
-            birth: 'masih kosong',
+            address: null,
+            gender: null,
+            birth: null,
             pakar,
           };
 
@@ -149,6 +150,7 @@ const PakarInput = ({pakar}) => {
               } else if (result.data.meta.code === 200) {
                 storeData('token', res.data.data.token);
                 storeData('userProfile', res.data.data);
+                storeData('provider', {value: res.user.providerId});
                 navigation.reset({
                   index: 0,
                   routes: [{name: 'MainApp'}],

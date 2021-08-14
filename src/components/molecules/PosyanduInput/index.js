@@ -54,6 +54,7 @@ const PosyanduInput = () => {
             dispatch({type: 'SET_LOADING', value: false});
             storeData('token', {value: `Bearer ${res.data.data.token}`});
             storeData('userProfile', res.data.data);
+            storeData('provider', {value: 'api'});
             navigation.navigate('OtpScreen');
           } else {
             dispatch({type: 'SET_LOADING', value: false});
@@ -84,9 +85,8 @@ const PosyanduInput = () => {
           const dataPos = {
             email: res.user.email,
             name: res.user.displayName,
-            phone_number: 'masih kosong',
             photo: res.user.photoURL,
-            address: 'nama jalan masih kosong',
+            address: null,
           };
 
           Axios.post(`${API}posyandu/register-by-gmail`, dataPos)
@@ -98,6 +98,7 @@ const PosyanduInput = () => {
               } else if (result.data.meta.code === 200) {
                 storeData('token', {value: `Bearer ${result.data.data.token}`});
                 storeData('userProfile', result.data.data);
+                storeData('provider', {value: res.user.providerId});
                 navigation.reset({
                   index: 0,
                   routes: [{name: 'MainApp'}],

@@ -85,6 +85,7 @@ const SignInHBS = ({navigation}) => {
               } else if (result.data.meta.code === 200) {
                 storeData('token', res.data.data.token);
                 storeData('userProfile', res.data.data);
+                storeData('provider', {value: res.user.providerId});
                 navigation.reset({
                   index: 0,
                   routes: [{name: 'MainApp'}],

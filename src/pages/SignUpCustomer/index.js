@@ -110,6 +110,7 @@ const SignUpCustomer = ({navigation}) => {
             dispatch({type: 'SET_LOADING', value: false});
             storeData('token', {value: `Bearer ${res.data.data.token}`});
             storeData('userProfile', res.data.data);
+            storeData('provider', {value: 'api'});
             navigation.navigate('OtpScreen');
           } else {
             dispatch({type: 'SET_LOADING', value: false});

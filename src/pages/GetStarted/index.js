@@ -25,7 +25,7 @@ const GetStarted = ({navigation}) => {
         <Text style={styles.title}>Bergabung Sebagai</Text>
         <View style={styles.row}>
           <CardButton
-            label="User"
+            label="Pasien"
             type="card-big"
             onPress={() => navigation.navigate('SignUpCustomer')}>
             <IlPasien />
