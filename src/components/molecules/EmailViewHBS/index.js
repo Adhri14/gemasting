@@ -22,6 +22,7 @@ const EmailViewHBS = () => {
         if (res.data.meta.code === 200) {
           storeData('token', {value: `Bearer ${res.data.data.token}`});
           storeData('userProfile', res.data.data);
+          storeData('provider', {value: 'api'});
           navigation.reset({
             index: 0,
             routes: [{name: 'MainApp'}],

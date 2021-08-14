@@ -54,6 +54,7 @@ const HomeBabySpaInput = () => {
             dispatch({type: 'SET_LOADING', value: false});
             storeData('token', {value: `Bearer ${res.data.data.token}`});
             storeData('userProfile', res.data.data);
+            storeData('provider', {value: 'api'});
             navigation.navigate('OtpScreen');
           } else {
             dispatch({type: 'SET_LOADING', value: false});
@@ -84,7 +85,8 @@ const HomeBabySpaInput = () => {
           const dataPos = {
             name: res.user.displayName,
             email: res.user.email,
-            address: 'masih kosong',
+            photo: res.user.photoURL,
+            address: null,
           };
 
           Axios.post(`${API}hbs/register-by-gmail`, dataPos)
@@ -96,6 +98,7 @@ const HomeBabySpaInput = () => {
               } else if (result.data.meta.code === 200) {
                 storeData('token', res.data.data.token);
                 storeData('userProfile', res.data.data);
+                storeData('provider', {value: res.user.providerId});
                 navigation.reset({
                   index: 0,
                   routes: [{name: 'MainApp'}],
@@ -108,12 +111,12 @@ const HomeBabySpaInput = () => {
         })
         .catch(e =>
           showMessage({
-            message: e,
+            message: e.message,
           }),
         );
     } catch (error) {
       showMessage({
-        message: error.message,
+        message: error,
       });
     }
   };

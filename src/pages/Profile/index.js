@@ -30,6 +30,7 @@ const Profile = ({navigation}) => {
       setToken(res);
     });
     getData('provider').then(res => {
+      console.log(res);
       setProvider(res);
     });
   }, []);
@@ -46,8 +47,36 @@ const Profile = ({navigation}) => {
     // });
     dispatch({type: 'SET_LOADING', value: true});
     if (provider.value === 'firebase') {
-      auth()
-        .signOut()
+      try {
+        auth()
+          .signOut()
+          .then(() => {
+            dispatch({type: 'SET_LOADING', value: false});
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'AppIntro'}],
+            });
+            removeData('token');
+            removeData('userProfile');
+            removeData('provider');
+          })
+          .catch(err => {
+            dispatch({type: 'SET_LOADING', value: false});
+            console.log(err.message);
+          });
+      } catch (error) {
+        dispatch({type: 'SET_LOADING', value: false});
+        console.log(error);
+      }
+    }
+    if (provider.value === 'api') {
+      axios({
+        url: `${API}logout`,
+        method: 'post',
+        headers: {
+          Authorization: token.value,
+        },
+      })
         .then(() => {
           dispatch({type: 'SET_LOADING', value: false});
           navigation.reset({
@@ -58,32 +87,14 @@ const Profile = ({navigation}) => {
           removeData('userProfile');
           removeData('provider');
         })
-        .catch(err => {
-          console.log(err.message);
+        .catch(e => {
+          dispatch({type: 'SET_LOADING', value: false});
+          showMessage({
+            message: e.message,
+          });
+          // console.log(e.message);
         });
     }
-    axios({
-      url: `${API}logout`,
-      method: 'post',
-      headers: {
-        Authorization: token.value,
-      },
-    })
-      .then(() => {
-        dispatch({type: 'SET_LOADING', value: false});
-        navigation.reset({
-          index: 0,
-          routes: [{name: 'AppIntro'}],
-        });
-        removeData('token');
-        removeData('userProfile');
-      })
-      .catch(e => {
-        dispatch({type: 'SET_LOADING', value: false});
-        showMessage({
-          message: e.message,
-        });
-      });
   };
 
   return (
