@@ -22,6 +22,16 @@ import IconImage from './ic-image.svg';
 import IconProfileSecond from './ic-profile-second.svg';
 import IconClose from './close.svg';
 import IconDiscover from './Discovery.svg';
+import IconDarkActivity from './ic-dark-activity.svg';
+import IconDarkChat from './ic-dark-chat.svg';
+import IconDarkCheck from './ic-dark-check.svg';
+import IconDarkPromise from './ic-dark-promise.svg';
+import IconDarkRecord from './ic-dark-record.svg';
+import IconWhiteActivity from './ic-white-activity.svg';
+import IconWhiteChat from './ic-white-chat.svg';
+import IconWhiteCheck from './ic-white-check.svg';
+import IconWhitePromise from './ic-white-promise.svg';
+import IconWhiteRecord from './ic-white-record.svg';
 
 export {
   IconBackDark,
@@ -48,4 +58,14 @@ export {
   IconProfileSecond,
   IconClose,
   IconDiscover,
+  IconDarkActivity,
+  IconDarkChat,
+  IconDarkCheck,
+  IconDarkPromise,
+  IconDarkRecord,
+  IconWhiteActivity,
+  IconWhiteChat,
+  IconWhiteCheck,
+  IconWhitePromise,
+  IconWhiteRecord,
 };

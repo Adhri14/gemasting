@@ -21,6 +21,11 @@ import EmailViewPosyandu from './EmailViewPosyandu';
 import EmailViewHBS from './EmailViewHBS';
 import TelephoneViewPosyandu from './TelephoneViewPosyandu';
 import TelephoneViewHBS from './TelephoneViewHBS';
+import Chat from './Chat';
+import Janji from './Janji';
+import Rekam from './Rekam';
+import KMS from './KMS';
+import Stunting from './Stunting';
 
 export {
   InfoStunting,
@@ -46,4 +51,9 @@ export {
   EmailViewPosyandu,
   TelephoneViewPosyandu,
   TelephoneViewHBS,
+  Chat,
+  Janji,
+  Rekam,
+  KMS,
+  Stunting,
 };

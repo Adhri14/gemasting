@@ -7,7 +7,15 @@ import {
   ScrollView,
   useWindowDimensions,
 } from 'react-native';
-import {Gap, ListCard} from '../../components';
+import {
+  Gap,
+  ListCard,
+  Chat,
+  Janji,
+  Rekam,
+  KMS,
+  Stunting,
+} from '../../components';
 import {mainColors, fonts, colors} from '../../utils';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 
@@ -28,67 +36,22 @@ const renderTabBar = props => {
   );
 };
 
-const Chat = () => {
-  return (
-    <View style={{flex: 1}}>
-      <ListCard
-        colorHeader={mainColors.green}
-        colorsProgress={mainColors.white}
-        colorsTime={mainColors.white}
-        progress="Sedang Aktif"
-        time="15.00"
-        name="James Bond"
-        desc="3578102110030001"
-      />
-      <ListCard
-        colorHeader={mainColors.green}
-        colorsProgress={mainColors.white}
-        colorsTime={mainColors.white}
-        progress="Sedang Aktif"
-        time="15.00"
-        name="James Bond"
-        desc="3578102110030001"
-      />
-      <ListCard
-        colorHeader={mainColors.green}
-        colorsProgress={mainColors.white}
-        colorsTime={mainColors.white}
-        progress="Sedang Aktif"
-        time="15.00"
-        name="James Bond"
-        desc="3578102110030001"
-      />
-    </View>
-  );
-};
-const Janji = () => {
-  return (
-    <View style={{flex: 1}}>
-      <ListCard type="janji-medis" />
-    </View>
-  );
-};
-const Rekam = () => {
-  return (
-    <View style={{flex: 1}}>
-      <ListCard type="rekam-medis" />
-    </View>
-  );
-};
-const KMS = () => {
-  return (
-    <View style={{flex: 1}}>
-      <ListCard type="kms-online" />
-    </View>
-  );
-};
-const Stunting = () => {
-  return (
-    <View style={{flex: 1}}>
-      <ListCard type="stunting" />
-    </View>
-  );
-};
+// const Tab = () => {
+//   switch (focused) {
+//     case 'chat':
+//       return (
+//         <View>
+//           {focused ? <}
+//           <Text style={styles.textIndicator(focused)}>{route.title}</Text>
+//         </View>
+//       );
+//       break;
+
+//     default:
+//       break;
+//   }
+//   return <Text style={styles.textIndicator(focused)}>{route.title}</Text>;
+// };
 
 const Aktivity = () => {
   const layout = useWindowDimensions();
@@ -159,9 +122,10 @@ const styles = StyleSheet.create({
     width: '45%',
   },
   wrapper: {
-    backgroundColor: mainColors.smoke,
+    backgroundColor: mainColors.white,
     elevation: 0,
     marginHorizontal: 20,
+    marginBottom: 30,
     overflow: 'hidden',
     borderRadius: 15,
     resizeMode: 'cover',
