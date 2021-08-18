@@ -18,6 +18,18 @@ import {
 } from '../../components';
 import {mainColors, fonts, colors} from '../../utils';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
+import {
+  IconDarkActivity,
+  IconDarkChat,
+  IconDarkCheck,
+  IconDarkPromise,
+  IconDarkRecord,
+  IconWhiteActivity,
+  IconWhiteChat,
+  IconWhiteCheck,
+  IconWhitePromise,
+  IconWhiteRecord,
+} from '../../assets'; 
 
 const renderTabBar = props => {
   return (
@@ -29,29 +41,63 @@ const renderTabBar = props => {
         style={styles.wrapper}
         tabStyle={styles.tab}
         renderLabel={({route, focused}) => (
-          <Text style={styles.textIndicator(focused)}>{route.title}</Text>
+        <Tab key={route} route={route.title} focused={focused} />
+
         )}
       />
     </ScrollView>
   );
 };
 
-// const Tab = () => {
-//   switch (focused) {
-//     case 'chat':
-//       return (
-//         <View>
-//           {focused ? <}
-//           <Text style={styles.textIndicator(focused)}>{route.title}</Text>
-//         </View>
-//       );
-//       break;
+const Tab = ({focused, route}) => {
+  switch (route) {
+    case 'Chat':
+      return (
+        <View style={styles.button(focused)}>
+          {focused ? <IconWhiteChat/> : <IconDarkChat/>}
+          <Text style={styles.textIndicator(focused)}>{route}</Text>
+        </View>
+      );
+      case 'Janji':
+      return (
+        <View style={styles.button2(focused)}>
+          {focused ? <IconWhiteChat/> : <IconDarkChat/>}
+          <Text style={styles.textIndicator(focused)}>{route}</Text>
+        </View>
+      );
+      case 'Rekam':
+      return (
+        <View style={styles.button3(focused)}>
+          {focused ? <IconWhiteChat/> : <IconDarkChat/>}
+          <Text style={styles.textIndicator(focused)}>{route}</Text>
+        </View>
+      );
+      case 'KMS':
+      return (
+        <View style={styles.button4(focused)}>
+          {focused ? <IconWhiteChat/> : <IconDarkChat/>}
+          <Text style={styles.textIndicator(focused)}>{route}</Text>
+        </View>
+      );
+      case 'Stunting':
+      return (
+        <View style={styles.button5(focused)}>
+          {focused ? <IconWhiteChat/> : <IconDarkChat/>}
+          <Text style={styles.textIndicator(focused)}>{route}</Text>
+        </View>
+      );
 
-//     default:
-//       break;
-//   }
-//   return <Text style={styles.textIndicator(focused)}>{route.title}</Text>;
-// };
+    default:
+    return (
+        <View>
+          {focused ? <IconWhiteChat/> : <IconDarkChat/>}
+
+          <Text style={styles.textIndicator(focused)}>{route}</Text>
+        </View>
+      );
+     
+  }
+};
 
 const Aktivity = () => {
   const layout = useWindowDimensions();
@@ -124,20 +170,62 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: mainColors.white,
     elevation: 0,
-    marginHorizontal: 20,
+    // marginHorizontal: 20,
     marginBottom: 30,
     overflow: 'hidden',
     borderRadius: 15,
-    resizeMode: 'cover',
+    // resizeMode: 'cover',
     padding: 10,
     paddingHorizontal: 0,
     // alignItems: 'center',
     // justifyContent: 'center',
   },
   textIndicator: focused => ({
-    color: focused ? mainColors.black : colors.text.primary2,
+    color: focused ? mainColors.white : mainColors.black,
     fontSize: 16,
     fontFamily: fonts.primary.normal,
     textAlign: 'center',
+    marginTop: 3,
+    marginLeft: 10,
+  }),
+  button: focused => ({
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 15,
+    backgroundColor: focused ? mainColors.pink : mainColors.smoke,
+  }),
+  button2: focused => ({
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 15,
+    backgroundColor: focused ? mainColors.pink : mainColors.smoke,
+  }),
+  button3: focused => ({
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 15,
+    backgroundColor: focused ? mainColors.pink : mainColors.smoke,
+  }),
+  button4: focused => ({
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 15,
+    backgroundColor: focused ? mainColors.pink : mainColors.smoke,
+  }),
+  button5: focused => ({
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 15,
+    backgroundColor: focused ? mainColors.pink : mainColors.smoke,
   }),
 });

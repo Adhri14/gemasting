@@ -38,6 +38,13 @@ const Profile = ({navigation}) => {
   const dispatch = useDispatch();
 
   const onSignOut = async () => {
+    // removeData('token');
+    //         removeData('userProfile');
+    //         removeData('provider');
+    //         navigation.reset({
+    //           index: 0,
+    //           routes: [{name: 'AppIntro'}],
+    //         });
     dispatch({type: 'SET_LOADING', value: true});
     if (provider.value === 'firebase') {
       try {
