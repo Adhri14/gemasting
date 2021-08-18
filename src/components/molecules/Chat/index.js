@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import ListCard from '../ListCard';
 import {mainColors} from '../../../utils';
+import {Gap} from '../../../components'
 
 const Chat = () => {
   return (
@@ -15,6 +16,7 @@ const Chat = () => {
         name="James Bond"
         desc="3578102110030001"
       />
+      <Gap height={20}/>
       <ListCard
         colorHeader={mainColors.green}
         colorsProgress={mainColors.white}
@@ -24,6 +26,7 @@ const Chat = () => {
         name="James Bond"
         desc="3578102110030001"
       />
+       <Gap height={20}/>
       <ListCard
         colorHeader={mainColors.darkSmoke}
         colorsProgress={mainColors.grey}

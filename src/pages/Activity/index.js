@@ -58,31 +58,31 @@ const Tab = ({focused, route}) => {
           <Text style={styles.textIndicator(focused)}>{route}</Text>
         </View>
       );
-      case 'Janji':
+      case 'Janji Medis':
       return (
-        <View style={styles.button2(focused)}>
-          {focused ? <IconWhiteChat/> : <IconDarkChat/>}
+        <View style={styles.button(focused)}>
+          {focused ? <IconWhitePromise/> : <IconDarkPromise/>}
           <Text style={styles.textIndicator(focused)}>{route}</Text>
         </View>
       );
-      case 'Rekam':
+      case 'Rekam Medis':
       return (
-        <View style={styles.button3(focused)}>
-          {focused ? <IconWhiteChat/> : <IconDarkChat/>}
+        <View style={styles.button(focused)}>
+          {focused ? <IconWhiteRecord/> : <IconDarkRecord/>}
           <Text style={styles.textIndicator(focused)}>{route}</Text>
         </View>
       );
-      case 'KMS':
+      case 'KMS Online':
       return (
-        <View style={styles.button4(focused)}>
-          {focused ? <IconWhiteChat/> : <IconDarkChat/>}
+        <View style={styles.button(focused)}>
+          {focused ? <IconWhiteActivity/> : <IconDarkActivity/>}
           <Text style={styles.textIndicator(focused)}>{route}</Text>
         </View>
       );
-      case 'Stunting':
+      case 'Cek Stunting':
       return (
-        <View style={styles.button5(focused)}>
-          {focused ? <IconWhiteChat/> : <IconDarkChat/>}
+        <View style={styles.button(focused)}>
+          {focused ? <IconWhiteCheck/> : <IconDarkCheck/>}
           <Text style={styles.textIndicator(focused)}>{route}</Text>
         </View>
       );
@@ -121,8 +121,8 @@ const Aktivity = () => {
 
   return (
     <ScrollView>
-      <View style={styles.page}>
         <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
+      <View style={styles.page}>
         <Gap height={50} />
         <View style={styles.container}>
           <Text style={styles.title}>Aktifitas</Text>
@@ -133,7 +133,7 @@ const Aktivity = () => {
             renderScene={renderScene}
             onIndexChange={setIndex}
             initialLayout={{width: layout.width}}
-            // swipeEnabled={false}
+            swipeEnabled={false}
           />
         </View>
       </View>
@@ -186,46 +186,16 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.normal,
     textAlign: 'center',
     marginTop: 3,
-    marginLeft: 10,
+    marginLeft: 20,
   }),
   button: focused => ({
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
-    padding: 15,
+    width: 168,
+    height: 60,
     borderRadius: 15,
     backgroundColor: focused ? mainColors.pink : mainColors.smoke,
   }),
-  button2: focused => ({
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 15,
-    borderRadius: 15,
-    backgroundColor: focused ? mainColors.pink : mainColors.smoke,
-  }),
-  button3: focused => ({
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 15,
-    borderRadius: 15,
-    backgroundColor: focused ? mainColors.pink : mainColors.smoke,
-  }),
-  button4: focused => ({
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 15,
-    borderRadius: 15,
-    backgroundColor: focused ? mainColors.pink : mainColors.smoke,
-  }),
-  button5: focused => ({
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 15,
-    borderRadius: 15,
-    backgroundColor: focused ? mainColors.pink : mainColors.smoke,
-  }),
+
 });
