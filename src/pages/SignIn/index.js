@@ -53,21 +53,19 @@ const SignIn = ({navigation}) => {
   });
 
   const onSubmitGoogle = async () => {
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
     // Sign-in the user with the credential
     try {
+      // Get the users ID token
+      const {idToken} = await GoogleSignin.signIn();
+
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       auth()
         .signInWithCredential(googleCredential)
         .then(res => {
           const data = {
             email: res.user.email,
           };
-
           Axios.post(`${API}customer/login-by-gmail`, data)
             .then(result => {
               if (result.data.meta.code === 500) {
@@ -75,7 +73,7 @@ const SignIn = ({navigation}) => {
                   message: result.data.meta.message,
                 });
               } else if (result.data.meta.code === 200) {
-                storeData('token', result.data.data.token);
+                storeData('token', {value: `Bearer ${result.data.data.token}`});
                 storeData('userProfile', result.data.data);
                 storeData('provider', {value: res.user.providerId});
                 navigation.reset({
@@ -98,9 +96,11 @@ const SignIn = ({navigation}) => {
           }),
         );
     } catch (error) {
-      showMessage({
-        message: error.message,
-      });
+      if (error.message === 'Sign in action cancelled') {
+        showMessage({
+          message: 'Anda membatalkan pilihan akun',
+        });
+      }
     }
   };
 

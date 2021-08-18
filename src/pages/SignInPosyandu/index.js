@@ -53,14 +53,13 @@ const SignInHBS = ({navigation}) => {
   });
 
   const onSubmitGoogle = async () => {
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
     // Sign-in the user with the credential
     try {
+      // Get the users ID token
+      const {idToken} = await GoogleSignin.signIn();
+
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       auth()
         .signInWithCredential(googleCredential)
         .then(res => {
@@ -98,9 +97,11 @@ const SignInHBS = ({navigation}) => {
           }),
         );
     } catch (error) {
-      showMessage({
-        message: error.message,
-      });
+      if (error.message === 'Sign in action cancelled') {
+        showMessage({
+          message: 'Anda membatalkan pilihan akun',
+        });
+      }
     }
   };
 

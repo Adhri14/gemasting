@@ -3,44 +3,53 @@ import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {fonts, mainColors} from '../../../utils';
 import moment from 'moment';
-import {IconCalender} from '../../../assets';
+import {IconCalender, IconTime} from '../../../assets';
 
-const DatePicker = ({placeholder, label}) => {
-  const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
+const DatePicker = ({
+  placeholder,
+  label,
+  value,
+  type,
+  onValueChange,
+  show,
+  onPress,
+  mode,
+}) => {
+  // const [date, setDate] = useState(new Date());
+  // const [mode, setMode] = useState('date');
+  // const [show, setShow] = useState(false);
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currentDate);
-  };
+  // const onChange = (event, selectedDate) => {
+  //   const currentDate = selectedDate || date;
+  //   setShow(Platform.OS === 'ios');
+  //   setDate(currentDate);
+  // };
 
-  const showMode = currentMode => {
-    setShow(true);
-    setMode(currentMode);
-  };
+  // const showMode = currentMode => {
+  //   setShow(true);
+  //   setMode(currentMode);
+  // };
 
-  const showDatepicker = () => {
-    showMode('date');
-  };
+  // const showDatepicker = () => {
+  //   showMode('date');
+  // };
 
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
-      <TouchableOpacity style={styles.container} onPress={showDatepicker}>
+      <TouchableOpacity style={styles.container} onPress={onPress}>
         <View style={styles.row}>
-          <Text style={styles.placeholder}>
-            {moment(date).format('DD-MM-YYYY')}
-          </Text>
-          <IconCalender />
+          <Text style={styles.placeholder}>{placeholder}</Text>
+          {mode === 'date' && <IconCalender />}
+          {mode === 'time' && <IconTime />}
         </View>
         {show && (
           <DateTimePicker
-            value={date}
-            mode={mode}
+            value={value}
+            mode={type}
             display="default"
-            onChange={onChange}
+            is24Hour={false}
+            onChange={onValueChange}
           />
         )}
       </TouchableOpacity>

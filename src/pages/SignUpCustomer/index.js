@@ -18,6 +18,7 @@ import {
   Link,
   TextInput,
   Radio,
+  DatePicker,
 } from '../../components';
 import {
   colors,
@@ -48,9 +49,6 @@ const SignUpCustomer = ({navigation}) => {
   });
 
   // Pengelola data dari state tanggal lahir
-  const [birthPlace, setBirthPlace] = useState('');
-
-  // Pengelola data dari state tanggal lahir
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -60,7 +58,6 @@ const SignUpCustomer = ({navigation}) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
-    // setForm('birth', currentDate);
   };
 
   // Fungsi untuk merubah mode ui dan menculkan dan menghide popup
@@ -80,7 +77,7 @@ const SignUpCustomer = ({navigation}) => {
     dispatch({type: 'SET_LOADING', value: true});
     // mengkombinasikan data variabel tempat lahir dan tanggal lahir menjadi sebuah objek
     const combine = {
-      birth: `${birthPlace}, ${moment(date).format('DD MMMM YYYY')}`,
+      birth: `${moment(date).format('DD-MM-YYYY')}`,
     };
 
     // mengkombinasikan data objek dari variabel form dan combine
@@ -125,14 +122,13 @@ const SignUpCustomer = ({navigation}) => {
   };
 
   const onSubmitGoogle = async () => {
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
     // Sign-in the user with the credential
     try {
+      // Get the users ID token
+      const {idToken} = await GoogleSignin.signIn();
+
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       auth()
         .signInWithCredential(googleCredential)
         .then(res => {
@@ -170,9 +166,11 @@ const SignUpCustomer = ({navigation}) => {
             });
         });
     } catch (error) {
-      showMessage({
-        message: error.message,
-      });
+      if (error.message === 'Sign in action cancelled') {
+        showMessage({
+          message: 'Anda membatalkan pilihan akun',
+        });
+      }
     }
   };
 
@@ -223,37 +221,16 @@ const SignUpCustomer = ({navigation}) => {
             valueGroup={form.gender}
             onValueChange={val => setForm('gender', val)}
           />
-          <Gap height={10} />
-          <TextInput
-            placeholder="Tempat lahir"
-            keyboardType="default"
-            label="Tempat lahir"
-            value={birthPlace}
-            onChangeText={val => {
-              setBirthPlace(val);
-              // setForm('birth', val);
-            }}
+          <Gap height={20} />
+          <DatePicker
+            value={date}
+            onValueChange={onChange}
+            type={mode}
+            show={show}
+            mode="date"
+            placeholder={moment(date).format('DD-MM-YYYY')}
+            onPress={showDatepicker}
           />
-          <Gap height={25} />
-          <View>
-            <Text style={styles.name}>Tanggal Lahir</Text>
-            <TouchableOpacity style={styles.container} onPress={showDatepicker}>
-              <View style={styles.rowDate}>
-                <Text style={styles.placeholder}>
-                  {moment(date).format('DD-MM-YYYY')}
-                </Text>
-                <IconCalender />
-              </View>
-              {show && (
-                <DateTimePicker
-                  value={date}
-                  mode={mode}
-                  display="default"
-                  onChange={onChange}
-                />
-              )}
-            </TouchableOpacity>
-          </View>
           <Gap height={25} />
           <TextInput
             isTextArea

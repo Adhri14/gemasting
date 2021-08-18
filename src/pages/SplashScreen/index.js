@@ -1,50 +1,51 @@
-import React, {useEffect, useState} from 'react';
+import auth from '@react-native-firebase/auth';
+import React, {useEffect} from 'react';
 import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import {ILLogo} from '../../assets';
-import {
-  colors,
-  mainColors,
-  fonts,
-  getData,
-  storeData,
-  removeData,
-} from '../../utils';
-import auth from '@react-native-firebase/auth';
+import {colors, fonts, getData, mainColors} from '../../utils';
 
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
+    let unmounted = false;
     getData('token').then(res => {
-      setTimeout(() => {
-        if (res) {
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'MainApp'}],
-          });
-        } else {
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'AppIntro'}],
-          });
-        }
-      }, 3000);
+      if (!unmounted) {
+        setTimeout(() => {
+          if (res) {
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'MainApp'}],
+            });
+          } else {
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'AppIntro'}],
+            });
+          }
+        }, 3000);
+      }
     });
     const subscriber = auth().onAuthStateChanged(user => {
-      setTimeout(() => {
-        if (user) {
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'MainApp'}],
-          });
-        } else {
-          navigation.reset({
-            index: 0,
-            routes: [{name: 'AppIntro'}],
-          });
-        }
-      }, 3000);
+      if (!unmounted) {
+        setTimeout(() => {
+          if (user) {
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'MainApp'}],
+            });
+          } else {
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'AppIntro'}],
+            });
+          }
+        }, 3000);
+      }
     });
 
-    return () => subscriber();
+    return () => {
+      subscriber();
+      unmounted = true;
+    };
   }, [navigation]);
 
   return (

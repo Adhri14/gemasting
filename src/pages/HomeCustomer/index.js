@@ -1,25 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
-import {
-  fonts,
-  getData,
-  mainColors,
-  removeData,
-  showMessage,
-  storeData,
-  useForm,
-} from '../../utils';
-import {CardButton, Gap, HeaderHome} from '../../components';
-import {
-  DummyUser,
   IconImage,
   IlChatPakar,
   IlJanji,
@@ -28,8 +9,8 @@ import {
   IlRekamMedis,
   IlStunting,
 } from '../../assets';
-import axios from 'axios';
-import {API} from '../../config';
+import {CardButton, HeaderHome} from '../../components';
+import {fonts, getData, mainColors} from '../../utils';
 
 const HomeCustomer = ({navigation}) => {
   const [dataProfile, setDataProfile] = useState({
@@ -39,20 +20,28 @@ const HomeCustomer = ({navigation}) => {
   });
 
   useEffect(() => {
+    let unmounted = false;
     getData('userProfile').then(resProfile => {
-      setDataProfile({
-        name: resProfile.profile.name,
-        role: resProfile.role_id,
-        profile: resProfile.profile.photo,
-      });
+      if (!unmounted) {
+        setDataProfile({
+          name: resProfile.profile.name,
+          role: resProfile.role_id,
+          profile: resProfile.profile.photo,
+        });
+      }
     });
+    return () => {
+      unmounted = true;
+    };
   }, []);
 
   const Role = () => {
     if (dataProfile.role === 2) {
       return (
         <View style={styles.wrapper}>
-          <CardButton label="Chat Pakar">
+          <CardButton
+            label="Chat Pakar"
+            onPress={() => navigation.navigate('ChatPakar')}>
             <IlChatPakar />
           </CardButton>
           <CardButton label="Buat Janji">
@@ -65,7 +54,7 @@ const HomeCustomer = ({navigation}) => {
           </CardButton>
           <CardButton
             label="Cek Stunting"
-            onPress={() => navigation.navigate('Stunting')}>
+            onPress={() => navigation.navigate('Stunting', {...dataProfile})}>
             <IlStunting />
           </CardButton>
           <CardButton label="Rekam Medis">

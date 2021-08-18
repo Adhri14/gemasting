@@ -14,7 +14,19 @@ const Info = ({children, label}) => {
   );
 };
 
-const StuntingOutput = ({navigation}) => {
+const StuntingOutput = ({navigation, route}) => {
+  const status = route.params;
+
+  const infoStunting = () => {
+    if (status.status === 'Normal') {
+      return 'normal';
+    } else if (status.status === 'Stunting Parah') {
+      return 'stunting';
+    } else {
+      return null;
+    }
+  };
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -22,7 +34,7 @@ const StuntingOutput = ({navigation}) => {
       <StatusBar backgroundColor={mainColors.smoke} barStyle="dark-content" />
       <Header onPress={() => navigation.goBack()} title="Status Stunting" />
       <View style={styles.page}>
-        <InfoStunting type="normal" />
+        <InfoStunting type={infoStunting()} />
         <Info label="Imunisasi Bayi & Baduta">
           <IconInfo width={34} height={34} />
         </Info>

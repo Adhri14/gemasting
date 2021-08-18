@@ -20,6 +20,7 @@ import axios from 'axios';
 import {API} from '../../config';
 import auth from '@react-native-firebase/auth';
 import {useDispatch} from 'react-redux';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const Profile = ({navigation}) => {
   const [token, setToken] = useState('');
@@ -30,43 +31,33 @@ const Profile = ({navigation}) => {
       setToken(res);
     });
     getData('provider').then(res => {
-      console.log(res);
       setProvider(res);
     });
   }, []);
 
   const dispatch = useDispatch();
 
-  const onSignOut = () => {
-    // removeData('provider');
-    // removeData('userProfile');
-    // removeData('token');
-    // navigation.reset({
-    //   index: 0,
-    //   routes: [{name: 'AppIntro'}],
-    // });
+  const onSignOut = async () => {
     dispatch({type: 'SET_LOADING', value: true});
     if (provider.value === 'firebase') {
       try {
+        dispatch({type: 'SET_LOADING', value: false});
+        await GoogleSignin.revokeAccess();
+        await GoogleSignin.signOut();
         auth()
           .signOut()
           .then(() => {
-            dispatch({type: 'SET_LOADING', value: false});
+            removeData('token');
+            removeData('userProfile');
+            removeData('provider');
             navigation.reset({
               index: 0,
               routes: [{name: 'AppIntro'}],
             });
-            removeData('token');
-            removeData('userProfile');
-            removeData('provider');
-          })
-          .catch(err => {
-            dispatch({type: 'SET_LOADING', value: false});
-            console.log(err.message);
           });
       } catch (error) {
         dispatch({type: 'SET_LOADING', value: false});
-        console.log(error);
+        showMessage({message: error.message});
       }
     }
     if (provider.value === 'api') {
@@ -92,7 +83,6 @@ const Profile = ({navigation}) => {
           showMessage({
             message: e.message,
           });
-          // console.log(e.message);
         });
     }
   };

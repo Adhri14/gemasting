@@ -71,14 +71,13 @@ const HomeBabySpaInput = () => {
   };
 
   const onSubmitGoogleHbs = async () => {
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
     // Sign-in the user with the credential
     try {
+      // Get the users ID token
+      const {idToken} = await GoogleSignin.signIn();
+
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       auth()
         .signInWithCredential(googleCredential)
         .then(res => {
@@ -96,15 +95,15 @@ const HomeBabySpaInput = () => {
                   message: result.data.meta.message,
                 });
               } else if (result.data.meta.code === 200) {
-                storeData('token', res.data.data.token);
-                storeData('userProfile', res.data.data);
+                storeData('token', {value: `Bearer ${result.data.data.token}`});
+                storeData('userProfile', result.data.data);
                 storeData('provider', {value: res.user.providerId});
                 navigation.reset({
                   index: 0,
                   routes: [{name: 'MainApp'}],
                 });
               } else {
-                console.log(res.data.data);
+                console.log(result.data.data);
               }
             })
             .catch(e => showMessage(e.message));
@@ -115,9 +114,11 @@ const HomeBabySpaInput = () => {
           }),
         );
     } catch (error) {
-      showMessage({
-        message: error,
-      });
+      if (error.message === 'Sign in action cancelled') {
+        showMessage({
+          message: 'Anda membatalkan pilihan akun',
+        });
+      }
     }
   };
   return (
