@@ -17,6 +17,7 @@ const ListProfile = () => {
     name: '',
     role: 0,
     nik: '',
+    pakar: '',
   });
 
   useEffect(() => {
@@ -24,11 +25,28 @@ const ListProfile = () => {
       setToken(res);
     });
     getData('userProfile').then(resProfile => {
+      const pakar = () => {
+        switch (resProfile.sub_role_id) {
+          case 1:
+            return 'Ahli Gizi';
+          case 2:
+            return 'Dokter Umum';
+          case 3:
+            return 'Dokter Anak';
+          case 4:
+            return 'Dokter Kandungan';
+          case 5:
+            return 'Bidan Umum';
+          default:
+            return null;
+        }
+      };
       setDataProfile({
         profile: resProfile.profile.photo,
         role: resProfile.role_id,
         name: resProfile.profile.name,
         nik: resProfile.profile.nik,
+        pakar: pakar(),
       });
     });
   }, []);
@@ -69,12 +87,12 @@ const ListProfile = () => {
           <ProfilePhoto
             name={dataProfile.name}
             type="profile"
-            desc={dataProfile.nik}
             img={
               dataProfile.profile === null
                 ? DummyUser
                 : {uri: `${dataProfile.profile}`}
             }
+            desc={dataProfile.pakar}
           />
           <View style={styles.container}>
             <Gap height={30} />

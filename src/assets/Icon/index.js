@@ -32,8 +32,20 @@ import IconWhiteChat from './ic-white-chat.svg';
 import IconWhiteCheck from './ic-white-check.svg';
 import IconWhitePromise from './ic-white-promise.svg';
 import IconWhiteRecord from './ic-white-record.svg';
+import IconSearch from './Search.svg';
+import IconFilter from './Filter.svg';
+import IconLocation from './Location.svg';
+import IconStar from './Star.svg';
+import IconStarSecond from './StarSecond.svg';
+import IconTime from './time.svg';
 
 export {
+  IconTime,
+  IconStar,
+  IconStarSecond,
+  IconLocation,
+  IconSearch,
+  IconFilter,
   IconBackDark,
   IconGoogle,
   IconHome,

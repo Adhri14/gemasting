@@ -141,13 +141,24 @@ const InputCustomer = () => {
         label="NIK"
         value={profile.nik}
         keyboardType="number-pad"
-        onChangeText={val => changeText('nik', val)}
+        onChangeText={val => {
+          if (val.length >= 17) {
+            showMessage({
+              message: 'Batas maximal digit 16',
+            });
+            return false;
+          }
+          changeText('nik', val);
+        }}
+        placeholder="911XXXXXXXXX"
       />
       <Gap height={35} />
       <TextInput
         label="Tempat Tanggal Lahir"
         value={profile.birth}
         onChangeText={val => changeText('birth', val)}
+        keyboardType="number-pad"
+        placeholder="DD-MM-YYYY"
       />
       <Gap height={50} />
       <Button title="Simpan" onPress={updateProfile} />

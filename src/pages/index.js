@@ -21,8 +21,14 @@ import Stunting from './Stunting';
 import KmsOutput from './KmsOutput';
 import AddFamily from './AddFamily';
 import StuntingOutput from './StuntingOutput';
+import ChatPakar from './ChatPakar';
+import Transaction from './Transaction';
+import DetailTransaction from './DetailTransaction';
 
 export {
+  DetailTransaction,
+  Transaction,
+  ChatPakar,
   SplashScreen,
   AppIntro,
   SignIn,

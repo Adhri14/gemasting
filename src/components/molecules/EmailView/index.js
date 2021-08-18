@@ -29,7 +29,6 @@ const EmailView = () => {
             index: 0,
             routes: [{name: 'MainApp'}],
           });
-          console.log(res.data.meta.message);
           dispatch({type: 'SET_LOADING', value: false});
         } else if (res.data.meta.code === 500) {
           showMessage({

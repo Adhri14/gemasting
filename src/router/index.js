@@ -24,8 +24,11 @@ import {
   UpdateProfileHomeBabySpa,
   UpdateProfilePakar,
   StuntingOutput,
+  ChatPakar,
+  Transaction,
+  OtpScreen,
+  DetailTransaction,
 } from '../pages';
-import OtpScreen from '../pages/OtpScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
 
@@ -45,7 +48,7 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="Activity">
+    <Stack.Navigator>
       {/* Screen Utama */}
       <Stack.Screen
         name="SplashScreen"
@@ -161,6 +164,29 @@ const Router = () => {
         name="StuntingOutput"
         component={StuntingOutput}
         options={{headerShown: false}}
+      />
+      {/* Akhir */}
+      {/* ChatPakar */}
+      <Stack.Screen
+        name="ChatPakar"
+        component={ChatPakar}
+        options={{headerShown: false}}
+      />
+      {/* Akhir */}
+      {/* Transaction */}
+      <Stack.Screen
+        name="Transaction"
+        component={Transaction}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="DetailTransaction"
+        component={DetailTransaction}
+        options={{
+          headerShown: false,
+        }}
       />
       {/* Akhir */}
     </Stack.Navigator>

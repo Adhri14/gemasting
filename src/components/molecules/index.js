@@ -26,8 +26,10 @@ import Janji from './Janji';
 import Rekam from './Rekam';
 import KMS from './KMS';
 import Stunting from './Stunting';
+import ListPakar from './ListPakar';
 
 export {
+  ListPakar,
   InfoStunting,
   Header,
   EmailView,

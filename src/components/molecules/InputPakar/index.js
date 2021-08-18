@@ -63,9 +63,6 @@ const InputPakar = () => {
         type: res[0].type,
         name: res[0].name,
       };
-      console.log(dataDocument);
-      console.log({res});
-      // console.log(res);
       setFile({document: source});
       dispatch({type: 'SET_DOCUMENT', value: dataDocument});
     } catch (err) {
@@ -186,6 +183,8 @@ const InputPakar = () => {
         label="Tempat Tanggal Lahir"
         value={profile.birth}
         onChangeText={val => changeText('birth', val)}
+        keyboardType="number-pad"
+        placeholder="DD-MM-YYYY"
       />
       <Gap height={35} />
       <TextInput

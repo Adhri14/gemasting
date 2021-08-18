@@ -1,10 +1,65 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, ScrollView, StatusBar} from 'react-native';
 import {Header, TextInput, Gap, Button, ListName, Card} from '../../components';
-import {mainColors, fonts} from '../../utils';
+import {mainColors, fonts, getData, showMessage} from '../../utils';
 import {IconClose} from '../../assets';
+import axios from 'axios';
+import {API} from '../../config';
+import {useDispatch} from 'react-redux';
 
-const Stunting = ({navigation}) => {
+const Stunting = ({navigation, route}) => {
+  const profile = route.params;
+  const [height, setHeight] = useState('');
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    getData('token').then(res => setToken(res));
+  }, []);
+
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    dispatch({type: 'SET_LOADING', value: true});
+    axios
+      .post(
+        `${API}check-stunting/personal`,
+        {height},
+        {
+          headers: {
+            Authorization: token.value,
+          },
+        },
+      )
+      .then(res => {
+        dispatch({type: 'SET_LOADING', value: false});
+        setHeight('');
+        if (res.data.meta.code === 200) {
+          if (
+            res.data.meta.message ===
+            'Check Status Stunting Personal Successfull'
+          ) {
+            showMessage({
+              message: 'Cek stunting berhasil',
+              type: 'success',
+            });
+          }
+          navigation.navigate('StuntingOutput', {status: res.data.data.status});
+        } else if (res.data.meta.code === 500) {
+          showMessage({
+            message: res.data.meta.message,
+          });
+        } else {
+          console.log(res.data.data);
+        }
+      })
+      .catch(e => {
+        dispatch({type: 'SET_LOADING', value: false});
+        setHeight('');
+        showMessage({
+          message: e.message,
+        });
+      });
+  };
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
@@ -18,7 +73,7 @@ const Stunting = ({navigation}) => {
           <Card>
             <Text style={styles.title}>Pribadi</Text>
             <Gap height={32} />
-            <ListName name="Jhone Dae" />
+            <ListName name={profile.name} />
             <Gap height={40} />
             <Text style={styles.title}>Anggota Keluarga (0)</Text>
             <View style={styles.container}>
@@ -37,12 +92,14 @@ const Stunting = ({navigation}) => {
           <Gap height={40} />
           <Text style={styles.name}>Data Pasien</Text>
           <Gap height={20} />
-          <TextInput label="Panjang/Tinggi Badan (Cm)" />
-          <Gap height={60} />
-          <Button
-            title="Lihat Hasil"
-            onPress={() => navigation.navigate('StuntingOutput')}
+          <TextInput
+            label="Panjang/Tinggi Badan (Cm)"
+            value={height}
+            onChangeText={val => setHeight(val)}
+            keyboardType="number-pad"
           />
+          <Gap height={60} />
+          <Button title="Lihat Hasil" onPress={onSubmit} />
         </View>
       </View>
     </ScrollView>

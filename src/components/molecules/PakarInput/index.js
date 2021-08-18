@@ -9,6 +9,7 @@ import {
   Link,
   Line,
   Picker,
+  DatePicker,
 } from '../../atoms';
 import {
   useForm,
@@ -19,7 +20,10 @@ import {
 } from '../../../utils';
 import {useDispatch} from 'react-redux';
 import moment from 'moment';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Axios from 'axios';
@@ -44,7 +48,6 @@ const PakarInput = ({pakar}) => {
     checked: false,
   });
   // Pengelola data dari state tanggal lahir
-  const [birthPlace, setBirthPlace] = useState('');
 
   // Pengelola data dari state tanggal lahir
   const [date, setDate] = useState(new Date());
@@ -75,7 +78,7 @@ const PakarInput = ({pakar}) => {
   const onSubmitPakar = () => {
     dispatch({type: 'SET_LOADING', value: true});
     const combine = {
-      birth: `${birthPlace}, ${moment(date).format('DD MMMM YYYY')}`,
+      birth: `${moment(date).format('DD-MM-YYYY')}`,
     };
 
     // mengkombinasikan data objek dari variabel form dan combine
@@ -119,14 +122,13 @@ const PakarInput = ({pakar}) => {
   };
 
   const onSubmitGooglePakar = async () => {
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
     // Sign-in the user with the credential
     try {
+      // Get the users ID token
+      const {idToken} = await GoogleSignin.signIn();
+
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       auth()
         .signInWithCredential(googleCredential)
         .then(res => {
@@ -138,7 +140,7 @@ const PakarInput = ({pakar}) => {
             address: null,
             gender: null,
             birth: null,
-            pakar,
+            pakar: pakar,
           };
 
           Axios.post(`${API}pakar/register-by-gmail`, data)
@@ -148,28 +150,32 @@ const PakarInput = ({pakar}) => {
                   message: result.data.meta.message,
                 });
               } else if (result.data.meta.code === 200) {
-                storeData('token', res.data.data.token);
-                storeData('userProfile', res.data.data);
+                storeData('token', {value: `Bearer ${result.data.data.token}`});
+                storeData('userProfile', result.data.data);
                 storeData('provider', {value: res.user.providerId});
                 navigation.reset({
                   index: 0,
                   routes: [{name: 'MainApp'}],
                 });
               } else {
-                console.log(res.data.data);
+                console.log(result.data.data);
               }
             })
-            .catch(e => showMessage(e.message));
+            .catch(e => {
+              showMessage(e);
+            });
         })
-        .catch(e =>
+        .catch(e => {
           showMessage({
-            message: e,
-          }),
-        );
+            message: e.message,
+          });
+        });
     } catch (error) {
-      showMessage({
-        message: error.message,
-      });
+      if (error.message === 'Sign in action cancelled') {
+        showMessage({
+          message: 'Anda membatalkan pilihan akun',
+        });
+      }
     }
   };
 
@@ -213,34 +219,16 @@ const PakarInput = ({pakar}) => {
         valueGroup={form.gender}
         onValueChange={val => setForm('gender', val)}
       />
-      <Gap height={10} />
-      <TextInput
-        placeholder="Tempat lahir"
-        keyboardType="default"
-        label="Tempat lahir"
-        value={birthPlace}
-        onChangeText={val => setBirthPlace(val)}
-      />
       <Gap height={20} />
-      <View>
-        <Text style={styles.name}>Tanggal Lahir</Text>
-        <TouchableOpacity style={styles.container} onPress={showDatepicker}>
-          <View style={styles.rowDate}>
-            <Text style={styles.placeholder}>
-              {moment(date).format('DD-MM-YYYY')}
-            </Text>
-            <IconCalender />
-          </View>
-          {show && (
-            <DateTimePicker
-              value={date}
-              mode={mode}
-              display="default"
-              onChange={onChange}
-            />
-          )}
-        </TouchableOpacity>
-      </View>
+      <DatePicker
+        value={date}
+        onValueChange={onChange}
+        type={mode}
+        show={show}
+        mode="date"
+        placeholder={moment(date).format('DD-MM-YYYY')}
+        onPress={showDatepicker}
+      />
       <Gap height={20} />
       <TextInput
         placeholder="Pendidikan terakhir anda"
