@@ -50,7 +50,7 @@ const ChatPakar = ({navigation}) => {
   const bottomSheetModalRef = useRef(null);
 
   // variables
-  const snapPoints = useMemo(() => ['30%', '30%'], []);
+  const snapPoints = useMemo(() => ['32%', '38%'], []);
 
   // callbacks
   const handlePresentModalPress = useCallback(() => {
