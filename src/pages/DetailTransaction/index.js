@@ -1,26 +1,18 @@
-import React, {useState, useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Dimensions,
   FlatList,
+  Image as ImageBank,
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
-  TextInput,
-  Image as ImageBank,
 } from 'react-native';
-import {
-  BankBCA,
-  BankSyariah,
-  ImageIntro1,
-  ImageIntro2,
-  ImageIntro3,
-  ImageIntro4,
-  Success,
-} from '../../assets';
-import {Header, Gap, Button, ListPakar} from '../../components';
-import {mainColors, fonts, colors} from '../../utils';
+import {BankBCA, BankSyariah, Success} from '../../assets';
+import {Button, Gap, Header, ListPakar} from '../../components';
+import {colors, fonts, mainColors} from '../../utils';
 
 const Image = () => {
   return (
@@ -109,9 +101,10 @@ const Transfer = () => {
   return (
     <View>
       <Text style={styles.title}>Transfer Pembayaran</Text>
+      <Gap height={10} />
       <View>
-        <ImageBank source={BankSyariah} width={100} />
-        <Gap height={10} />
+        <ImageBank source={BankSyariah} style={{width: 101, height: 29}} />
+        <Gap height={15} />
         <Text
           style={{
             fontSize: 16,
@@ -129,7 +122,7 @@ const Transfer = () => {
           123456789
         </Text>
         <Gap height={20} />
-        <ImageBank source={BankBCA} width={100} />
+        <ImageBank source={BankBCA} style={{width: 90, height: 30}} />
         <Gap height={10} />
         <Text
           style={{
@@ -202,15 +195,25 @@ const DetailTransaction = ({navigation}) => {
     flatListRef.current.scrollToEnd({animated: true});
   };
 
-  const handlePrev = () => {
-    if (currentSlide === 0) {
-      return false;
+  const handleNext = () => {
+    if (currentSlide >= slides.length - 1) {
+      return;
     }
-    flatListRef.current.scrollToIndex({index: currentSlide - 1});
+    flatListRef.current.scrollToIndex({index: currentSlide + 1});
   };
 
   const handleOnDone = () => {
-    navigation.replace('GetStarted');
+    navigation.replace('ChatPakar');
+  };
+
+  const changeNameButton = () => {
+    if (currentSlide === 0) {
+      return 'Selanjutnya';
+    }
+    if (currentSlide === 1) {
+      return 'Konfirmasi Pembayaran';
+    }
+    return 'Button';
   };
   return (
     <>
@@ -237,7 +240,7 @@ const DetailTransaction = ({navigation}) => {
             data={slides}
             horizontal
             pagingEnabled
-            // scrollEnabled={false}
+            scrollEnabled={false}
             onViewableItemsChanged={onViewableItemsChanged}
             showsHorizontalScrollIndicator={false}
             keyExtractor={item => item.key.toString()}
@@ -255,6 +258,15 @@ const DetailTransaction = ({navigation}) => {
               </View>
             )}
           />
+          {currentSlide < slides.length - 1 ? (
+            <View style={{width: 340, marginHorizontal: 20, marginBottom: 20}}>
+              <Button onPress={handleNext} title={changeNameButton()} />
+            </View>
+          ) : (
+            <View style={{width: 340, marginHorizontal: 20, marginBottom: 20}}>
+              <Button onPress={handleOnDone} title="Chat Dokter" />
+            </View>
+          )}
         </View>
       </ScrollView>
     </>

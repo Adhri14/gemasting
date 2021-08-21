@@ -10,7 +10,7 @@ import {
   IlStunting,
 } from '../../assets';
 import {CardButton, HeaderHome} from '../../components';
-import {fonts, getData, mainColors} from '../../utils';
+import {fonts, getData, mainColors, removeData} from '../../utils';
 
 const HomeCustomer = ({navigation}) => {
   const [dataProfile, setDataProfile] = useState({
@@ -69,7 +69,9 @@ const HomeCustomer = ({navigation}) => {
     if (dataProfile.role === 3) {
       return (
         <View style={styles.wrapper}>
-          <CardButton label="Chat Pakar">
+          <CardButton
+            label="Chat Pakar"
+            onPress={() => navigation.navigate('ChatPakar')}>
             <IlChatPakar />
           </CardButton>
           <CardButton label="Buat Janji">
@@ -86,7 +88,9 @@ const HomeCustomer = ({navigation}) => {
     if (dataProfile.role === 4) {
       return (
         <View style={styles.wrapper}>
-          <CardButton label="Chat Pakar">
+          <CardButton
+            label="Chat Pakar"
+            onPress={() => navigation.navigate('ChatPakar')}>
             <IlChatPakar />
           </CardButton>
           <CardButton label="Buat Janji">
@@ -102,7 +106,9 @@ const HomeCustomer = ({navigation}) => {
     }
     if (dataProfile.role === 5) {
       return (
-        <View style={styles.wrapper}>
+        <View
+          style={styles.wrapper}
+          onPress={() => navigation.navigate('ChatPakar')}>
           <CardButton label="Chat Pakar">
             <IlChatPakar />
           </CardButton>
