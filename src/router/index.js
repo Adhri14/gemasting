@@ -18,7 +18,7 @@ import {
   KmsOnline,
   Stunting,
   KmsOutput,
-  AddFamily,
+  AddFamilyKMS,
   UpdateProfileUser,
   UpdateProfilePosyandu,
   UpdateProfileHomeBabySpa,
@@ -149,8 +149,8 @@ const Router = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AddFamily"
-        component={AddFamily}
+        name="AddFamilyKMS"
+        component={AddFamilyKMS}
         options={{headerShown: false}}
       />
       {/* Akhir */}

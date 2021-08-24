@@ -15,6 +15,7 @@ const TextInput = ({
   type,
   isTextArea,
   isPassword,
+  backgroundColor,
   ...props
 }) => {
   const [data, setData] = useState({
@@ -37,6 +38,8 @@ const TextInput = ({
           style={styles.textArea}
           multiline={true}
           placeholder={placeholder}
+          spellCheck={false}
+          autoCorrect={false}
         />
       </View>
     );
@@ -50,6 +53,8 @@ const TextInput = ({
             style={styles.password}
             secureTextEntry={data.secureTextEntry ? true : false}
             placeholder={placeholder}
+            spellCheck={false}
+            autoCorrect={false}
           />
           <TouchableOpacity onPress={showHide}>
             {data.secureTextEntry ? (
@@ -65,7 +70,13 @@ const TextInput = ({
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
-      <TextInputRN style={styles.input} {...props} placeholder={placeholder} />
+      <TextInputRN
+        style={styles.input(backgroundColor)}
+        {...props}
+        placeholder={placeholder}
+        spellCheck={false}
+        autoCorrect={false}
+      />
     </View>
   );
 };
@@ -73,14 +84,15 @@ const TextInput = ({
 export default TextInput;
 
 const styles = StyleSheet.create({
-  input: {
+  input: backgroundColor => ({
     borderRadius: 15,
     padding: 20,
-    backgroundColor: mainColors.smoke,
+    backgroundColor:
+      backgroundColor === 'white' ? mainColors.white : mainColors.smoke,
     color: colors.text.primary1,
     fontSize: 16,
     fontFamily: fonts.primary[400],
-  },
+  }),
   textArea: {
     textAlignVertical: 'top',
     borderRadius: 15,

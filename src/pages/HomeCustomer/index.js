@@ -9,7 +9,7 @@ import {
   IlRekamMedis,
   IlStunting,
 } from '../../assets';
-import {CardButton, HeaderHome} from '../../components';
+import {CardButton, Gap, HeaderHome} from '../../components';
 import {fonts, getData, mainColors, removeData} from '../../utils';
 
 const HomeCustomer = ({navigation}) => {
@@ -38,88 +38,142 @@ const HomeCustomer = ({navigation}) => {
   const Role = () => {
     if (dataProfile.role === 2) {
       return (
-        <View style={styles.wrapper}>
-          <CardButton
-            label="Chat Pakar"
-            onPress={() => navigation.navigate('ChatPakar')}>
-            <IlChatPakar />
-          </CardButton>
-          <CardButton label="Buat Janji">
-            <IlJanji />
-          </CardButton>
-          <CardButton
-            label="KMS Online"
-            onPress={() => navigation.navigate('KmsOnline')}>
-            <IlKMS />
-          </CardButton>
-          <CardButton
-            label="Cek Stunting"
-            onPress={() => navigation.navigate('Stunting', {...dataProfile})}>
-            <IlStunting />
-          </CardButton>
-          <CardButton label="Rekam Medis">
-            <IlRekamMedis />
-          </CardButton>
-          <CardButton label="Komunitas">
-            <IlKomunitas />
-          </CardButton>
+        <View style={styles.content}>
+          <Text style={styles.title}>Fitur Kami</Text>
+          <View style={styles.wrapper}>
+            <CardButton
+              label="Chat Pakar"
+              onPress={() => navigation.navigate('ChatPakar')}>
+              <IlChatPakar />
+            </CardButton>
+            <CardButton label="Buat Janji">
+              <IlJanji />
+            </CardButton>
+            <CardButton
+              label="KMS Online"
+              onPress={() => navigation.navigate('KmsOnline')}>
+              <IlKMS />
+            </CardButton>
+            <CardButton
+              label="Cek Stunting"
+              onPress={() => navigation.navigate('Stunting', {...dataProfile})}>
+              <IlStunting />
+            </CardButton>
+            <CardButton label="Rekam Medis">
+              <IlRekamMedis />
+            </CardButton>
+            <CardButton label="Komunitas">
+              <IlKomunitas />
+            </CardButton>
+          </View>
         </View>
       );
     }
     if (dataProfile.role === 3) {
       return (
-        <View style={styles.wrapper}>
-          <CardButton
-            label="Chat Pakar"
-            onPress={() => navigation.navigate('ChatPakar')}>
-            <IlChatPakar />
-          </CardButton>
-          <CardButton label="Buat Janji">
-            <IlJanji />
-          </CardButton>
-          <CardButton
-            label="KMS Online"
-            onPress={() => navigation.navigate('KmsOnline')}>
-            <IlKMS />
-          </CardButton>
+        <View style={styles.content}>
+          <Text style={styles.title}>Fitur Kami</Text>
+          <View style={styles.wrapper}>
+            <CardButton
+              label="Chat Pakar"
+              onPress={() => navigation.navigate('ChatPakar')}>
+              <IlChatPakar />
+            </CardButton>
+            <CardButton label="Buat Janji">
+              <IlJanji />
+            </CardButton>
+            <CardButton
+              label="KMS Online"
+              onPress={() => navigation.navigate('KmsOnline')}>
+              <IlKMS />
+            </CardButton>
+          </View>
+          <Gap height={30} />
+          <Text style={styles.title}>Dashboard Pakar</Text>
+          <View style={styles.wrapper}>
+            <CardButton
+              label="KMS Online"
+              type="card-big"
+              onPress={() => navigation.navigate('KmsOnline')}
+            />
+            <CardButton
+              label="KMS Online"
+              type="card-big"
+              onPress={() => navigation.navigate('KmsOnline')}
+            />
+          </View>
         </View>
       );
     }
     if (dataProfile.role === 4) {
       return (
-        <View style={styles.wrapper}>
-          <CardButton
-            label="Chat Pakar"
-            onPress={() => navigation.navigate('ChatPakar')}>
-            <IlChatPakar />
-          </CardButton>
-          <CardButton label="Buat Janji">
-            <IlJanji />
-          </CardButton>
-          <CardButton
-            label="KMS Online"
-            onPress={() => navigation.navigate('KmsOnline')}>
-            <IlKMS />
-          </CardButton>
+        <View style={styles.content}>
+          <Text style={styles.title}>Fitur Kami</Text>
+          <View style={styles.wrapper}>
+            <CardButton
+              label="Chat Pakar"
+              onPress={() => navigation.navigate('ChatPakar')}>
+              <IlChatPakar />
+            </CardButton>
+            <CardButton label="Buat Janji">
+              <IlJanji />
+            </CardButton>
+            <CardButton
+              label="KMS Online"
+              onPress={() => navigation.navigate('KmsOnline')}>
+              <IlKMS />
+            </CardButton>
+          </View>
+          <Gap height={30} />
+          <Text>Dashboard Posyandu</Text>
+          <View style={styles.wrapper}>
+            <CardButton
+              label="KMS Online"
+              type="card-big"
+              onPress={() => navigation.navigate('KmsOnline')}
+            />
+            <CardButton
+              label="KMS Online"
+              type="card-big"
+              onPress={() => navigation.navigate('KmsOnline')}
+            />
+          </View>
         </View>
       );
     }
     if (dataProfile.role === 5) {
       return (
-        <View
-          style={styles.wrapper}
-          onPress={() => navigation.navigate('ChatPakar')}>
-          <CardButton label="Chat Pakar">
-            <IlChatPakar />
-          </CardButton>
-          <CardButton label="Buat Janji">
-            <IlJanji />
-          </CardButton>
-          <CardButton
-            label="KMS Online"
-            onPress={() => navigation.navigate('KmsOnline')}>
-            <IlKMS />
-          </CardButton>
+        <View style={styles.content}>
+          <Text style={styles.title}>Fitur Kami</Text>
+          <View
+            style={styles.wrapper}
+            onPress={() => navigation.navigate('ChatPakar')}>
+            <CardButton label="Chat Pakar">
+              <IlChatPakar />
+            </CardButton>
+            <CardButton label="Buat Janji">
+              <IlJanji />
+            </CardButton>
+            <CardButton
+              label="KMS Online"
+              onPress={() => navigation.navigate('KmsOnline')}>
+              <IlKMS />
+            </CardButton>
+          </View>
+          <Gap height={30} />
+          <Text>Dashboard Home Baby Spa</Text>
+          <View style={styles.wrapper}>
+            <CardButton
+              label="KMS Online"
+              type="card-big"
+              onPress={() => navigation.navigate('KmsOnline')}
+            />
+            <CardButton
+              label="KMS Online"
+              type="card-big"
+              onPress={() => navigation.navigate('KmsOnline')}
+            />
+          </View>
         </View>
       );
     }
@@ -167,47 +221,12 @@ const HomeCustomer = ({navigation}) => {
           <View style={styles.banner}>
             <IconImage />
           </View>
-          <View style={styles.content}>
-            <Text style={styles.title}>Fitur Kami</Text>
-            <View>
-              <Role />
-            </View>
+          {/* <View style={styles.content}> */}
+          <View>
+            <Role />
           </View>
+          {/* </View> */}
         </View>
-        {/* {!loading ? (
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: mainColors.black,
-              opacity: 0.4,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <ActivityIndicator size="large" />
-          </View>
-        ) : (
-          <>
-            <HeaderHome
-              img={
-                dataProfile.profile === null
-                  ? DummyUser
-                  : {uri: `${dataProfile.profile}`}
-              }
-              name={dataProfile.name}
-            />
-            <View style={styles.container}>
-              <View style={styles.banner}>
-                <IconImage />
-              </View>
-              <View style={styles.content}>
-                <Text style={styles.title}>Fitur Kami</Text>
-                <View>
-                  <Role />
-                </View>
-              </View>
-            </View>
-          </>
-        )} */}
       </View>
     </ScrollView>
   );
@@ -218,7 +237,7 @@ export default HomeCustomer;
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: mainColors.lightSmoke,
+    backgroundColor: mainColors.white,
     paddingTop: 50,
     paddingHorizontal: 20,
     paddingBottom: 10,

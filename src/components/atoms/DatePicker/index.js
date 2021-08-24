@@ -14,6 +14,7 @@ const DatePicker = ({
   show,
   onPress,
   mode,
+  backgroundColor,
 }) => {
   // const [date, setDate] = useState(new Date());
   // const [mode, setMode] = useState('date');
@@ -37,7 +38,9 @@ const DatePicker = ({
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
-      <TouchableOpacity style={styles.container} onPress={onPress}>
+      <TouchableOpacity
+        style={styles.container(backgroundColor)}
+        onPress={onPress}>
         <View style={styles.row}>
           <Text style={styles.placeholder}>{placeholder}</Text>
           {mode === 'date' && <IconCalender />}
@@ -60,12 +63,13 @@ const DatePicker = ({
 export default DatePicker;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: mainColors.smoke,
+  container: backgroundColor => ({
+    backgroundColor:
+      backgroundColor === 'white' ? mainColors.white : mainColors.smoke,
     height: 65,
     borderRadius: 15,
     justifyContent: 'center',
-  },
+  }),
   label: {
     fontSize: 16,
     color: mainColors.black,
