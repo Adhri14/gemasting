@@ -4,6 +4,7 @@ import IconHome from './ic-home.svg';
 import IconHomeActive from './ic-home-active.svg';
 import IconInbox from './ic-inbox.svg';
 import IconChat from './ic-chat.svg';
+import IconChatActive from './ic-chat-active.svg';
 import IconProfile from './ic-profile.svg';
 import IconProfileActive from './ic-profile-active.svg';
 import IconNext from './ic-next.svg';
@@ -80,4 +81,5 @@ export {
   IconWhiteCheck,
   IconWhitePromise,
   IconWhiteRecord,
+  IconChatActive,
 };

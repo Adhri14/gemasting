@@ -33,7 +33,7 @@ const KmsOnline = ({navigation}) => {
                 <Button
                   type="button-no-outline"
                   title="+ Tambah Keluarga"
-                  onPress={() => navigation.navigate('AddFamily')}
+                  onPress={() => navigation.navigate('AddFamilyKMS')}
                 />
               </View>
             </View>

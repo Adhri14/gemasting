@@ -38,6 +38,19 @@ const Profile = ({navigation}) => {
   const dispatch = useDispatch();
 
   const onSignOut = async () => {
+    // await GoogleSignin.revokeAccess();
+    // await GoogleSignin.signOut();
+    // auth()
+    //   .signOut()
+    //   .then(() => {
+    //     removeData('token');
+    //     removeData('userProfile');
+    //     removeData('provider');
+    //     navigation.reset({
+    //       index: 0,
+    //       routes: [{name: 'AppIntro'}],
+    //     });
+    //   });
     // removeData('token');
     //         removeData('userProfile');
     //         removeData('provider');

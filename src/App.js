@@ -6,6 +6,7 @@ import store from './redux/store';
 import FlashMessage from 'react-native-flash-message';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {Loading} from './components';
+import * as Sentry from '@sentry/react-native';
 
 const MainApp = () => {
   const {loading} = useSelector(state => state.loadingReducer);
@@ -26,6 +27,12 @@ const App = () => {
         '320149601856-oqcnaank0c879lq65jeqen370dslpf04.apps.googleusercontent.com',
     });
   }, []);
+
+  Sentry.init({
+    dsn: 'https://c3960286c9164e339a47eb3a93a80a31@o968512.ingest.sentry.io/5919857',
+  });
+  // Sentry.nativeCrash();
+  // throw new Error('My first Sentry error!');
 
   return (
     <Provider store={store}>

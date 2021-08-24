@@ -19,7 +19,7 @@ import UpdateProfileHomeBabySpa from './UpdateProfileHomeBabySpa';
 import KmsOnline from './KmsOnline';
 import Stunting from './Stunting';
 import KmsOutput from './KmsOutput';
-import AddFamily from './AddFamily';
+import AddFamilyKMS from './AddFamilyKMS';
 import StuntingOutput from './StuntingOutput';
 import ChatPakar from './ChatPakar';
 import Transaction from './Transaction';
@@ -50,6 +50,6 @@ export {
   KmsOnline,
   Stunting,
   KmsOutput,
-  AddFamily,
+  AddFamilyKMS,
   StuntingOutput,
 };

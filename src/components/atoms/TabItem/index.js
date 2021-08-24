@@ -9,6 +9,7 @@ import {
   IconChat,
   IconActivity,
   IconActivityActive,
+  IconChatActive,
 } from '../../../assets';
 import {colors, fonts, mainColors} from '../../../utils';
 import * as Animatable from 'react-native-animatable';
@@ -22,7 +23,7 @@ const TabItem = ({title, active, onPress, onLongPress}) => {
       return active ? <IconActivityActive /> : <IconActivity />;
     }
     if (title === 'Chat') {
-      return <IconChat />;
+      return active ? <IconChatActive /> : <IconChat />;
     }
     if (title === 'Profile') {
       return active ? <IconProfileActive /> : <IconProfile />;
@@ -49,9 +50,10 @@ const styles = StyleSheet.create({
   container: {alignItems: 'center', flex: 1},
   text: active => ({
     fontSize: 11,
-    color: active ? colors.text.primary2 : '#b0b0b0',
-    fontFamily: fonts.primary[400],
+    color: active ? colors.text.primary2 : mainColors.darkSmoke,
+    fontFamily: active ? fonts.primary[600] : fonts.primary[400],
     marginTop: 4,
+    textAlign: 'center',
   }),
   line: {
     width: 30,
