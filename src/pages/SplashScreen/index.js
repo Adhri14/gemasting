@@ -9,7 +9,6 @@ const SplashScreen = ({navigation}) => {
   useEffect(() => {
     let unmounted = false;
     getData('token').then(res => {
-      console.log(res);
       if (!unmounted) {
         setTimeout(() => {
           if (res) {
