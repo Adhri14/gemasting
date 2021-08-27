@@ -3,6 +3,8 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {IconGoogle} from '../../../assets';
 import {colors, fonts, mainColors} from '../../../utils';
 import IconOnly from './IconOnly';
+import ButtonIconSend from './ButtonIconSend';
+import ButtonIconDoc from './ButtonIconDoc';
 
 const Button = ({
   type,
@@ -12,8 +14,16 @@ const Button = ({
   plus,
   icon,
   display,
+  disable,
   ...props
 }) => {
+  if (type === 'button-icon-send') {
+    return <ButtonIconSend disable={disable} />;
+  }
+  if (type === 'button-icon-doc') {
+    return <ButtonIconDoc disable={disable} />;
+  }
+
   if (type === 'icon-only') {
     return <IconOnly icon={icon} onPress={onPress} />;
   }

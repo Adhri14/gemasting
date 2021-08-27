@@ -1,8 +1,9 @@
 import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import React, {useEffect} from 'react';
 import {StatusBar, StyleSheet, Text, View} from 'react-native';
 import {ILLogo} from '../../assets';
-import {colors, fonts, getData, mainColors} from '../../utils';
+import {colors, fonts, getData, mainColors, removeData} from '../../utils';
 
 const SplashScreen = ({navigation}) => {
   useEffect(() => {

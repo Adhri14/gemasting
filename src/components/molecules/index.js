@@ -28,6 +28,8 @@ import KMS from './KMS';
 import Stunting from './Stunting';
 import ListPakar from './ListPakar';
 import EmptyFamily from './EmptyFamily';
+import ChatItem from './ChatItem';
+import InputChat from './InputChat';
 
 export {
   EmptyFamily,
@@ -60,4 +62,6 @@ export {
   Rekam,
   KMS,
   Stunting,
+  ChatItem,
+  InputChat,
 };

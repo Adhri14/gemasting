@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {DummyUser} from '../../../assets';
 import {colors, mainColors, fonts} from '../../../utils';
 
@@ -12,17 +12,20 @@ const ListCard = ({
   progress,
   time,
   type,
+  date,
+  category,
+  onPress,
 }) => {
   if (type === 'rekam-medis') {
     return (
       <View style={styles.container2}>
         <View style={styles.content}>
           <View>
-            <Text style={styles.profileName}>Dr. Stephen Strange</Text>
-            <Text style={styles.profileDesc}>Spesialis Anak</Text>
+            <Text style={styles.profileName}>{name}</Text>
+            <Text style={styles.profileDesc}>{category}</Text>
           </View>
           <View>
-            <Text style={styles.timeRecord}>06 Juli 2021</Text>
+            <Text style={styles.timeRecord}>{date}</Text>
           </View>
         </View>
         <View style={styles.descRecord}>
@@ -39,11 +42,11 @@ const ListCard = ({
       <View style={styles.container2}>
         <View style={styles.content}>
           <View>
-            <Text style={styles.profileName}>John Doe</Text>
-            <Text style={styles.profileDesc}>Pribadi</Text>
+            <Text style={styles.profileName}>{name}</Text>
+            <Text style={styles.profileDesc}>{category}</Text>
           </View>
           <View>
-            <Text style={styles.timeRecord}>06 Juli 2021</Text>
+            <Text style={styles.timeRecord}>{date}</Text>
           </View>
         </View>
         <View style={styles.descRecord}>
@@ -74,7 +77,7 @@ const ListCard = ({
     );
   }
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.header(colorHeader)}>
         <Text style={styles.progress(colorsProgress)}> {progress}</Text>
         <Text style={styles.time(colorsTime)}>{time}</Text>
@@ -88,7 +91,7 @@ const ListCard = ({
           <Text style={styles.desc}>{desc}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

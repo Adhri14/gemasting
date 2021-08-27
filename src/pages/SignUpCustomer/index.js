@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   StatusBar,
@@ -121,10 +121,20 @@ const SignUpCustomer = ({navigation}) => {
     }
   };
 
+  // useEffect(async () => {
+  //   removeData('token');
+  //   removeData('provider');
+  //   removeData('userProfile');
+
+  //   await GoogleSignin.signOut();
+  //   await GoogleSignin.revokeAccess();
+  // }, []);
+
   const onSubmitGoogle = async () => {
     // Sign-in the user with the credential
     try {
       // Get the users ID token
+
       const {idToken} = await GoogleSignin.signIn();
 
       // Create a Google credential with the token

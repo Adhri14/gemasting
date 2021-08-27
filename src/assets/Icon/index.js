@@ -39,6 +39,11 @@ import IconLocation from './Location.svg';
 import IconStar from './Star.svg';
 import IconStarSecond from './StarSecond.svg';
 import IconTime from './time.svg';
+import IconMore from './ic-more.svg';
+import IconDoc from './ic-doc.svg';
+import IconSend from './ic-send.svg';
+import IconSendDark from './ic-send-dark';
+import IconDocDark from './ic-doc-dark';
 
 export {
   IconTime,
@@ -82,4 +87,9 @@ export {
   IconWhitePromise,
   IconWhiteRecord,
   IconChatActive,
+  IconMore,
+  IconDoc,
+  IconSend,
+  IconSendDark,
+  IconDocDark,
 };

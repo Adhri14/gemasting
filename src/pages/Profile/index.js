@@ -52,16 +52,19 @@ const Profile = ({navigation}) => {
     //     });
     //   });
     // removeData('token');
-    //         removeData('userProfile');
-    //         removeData('provider');
-    //         navigation.reset({
-    //           index: 0,
-    //           routes: [{name: 'AppIntro'}],
-    //         });
+    // removeData('userProfile');
+    // removeData('provider');
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{name: 'AppIntro'}],
+    // });
+    // await GoogleSignin.revokeAccess();
+    // await GoogleSignin.signOut();
+
     dispatch({type: 'SET_LOADING', value: true});
     if (provider.value === 'firebase') {
       try {
-        dispatch({type: 'SET_LOADING', value: false});
+        dispatch({type: 'SET_LOADING', value: false}); //
         await GoogleSignin.revokeAccess();
         await GoogleSignin.signOut();
         auth()

@@ -13,6 +13,7 @@ import Line from './Line';
 import Card from './Card';
 import ListName from './ListName';
 import Loading from './Loading';
+import ActivityTab from './ActivityTab';
 
 export {
   Button,
@@ -30,4 +31,5 @@ export {
   Card,
   ListName,
   Loading,
+  ActivityTab,
 };
