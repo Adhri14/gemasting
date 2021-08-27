@@ -3,8 +3,10 @@ import {StyleSheet, Text, View} from 'react-native';
 import ListCard from '../ListCard';
 import {mainColors} from '../../../utils';
 import {Gap} from '../../../components';
+import {useNavigation} from '@react-navigation/native';
 
-const Chat = ({navigation}) => {
+const Chat = () => {
+  const navigation = useNavigation();
   return (
     <View style={{flex: 1, marginHorizontal: 20}}>
       <ListCard

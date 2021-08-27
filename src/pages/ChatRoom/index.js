@@ -3,6 +3,12 @@ import {StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {ChatItem, Header, InputChat} from '../../components';
 import {fonts, mainColors} from '../../utils';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
 
 const ChatRoom = () => {
   return (
@@ -15,7 +21,7 @@ const ChatRoom = () => {
             Halo John! Sekarang anda bisa konsultasi keluhan anda selama 30
             menit kedepan.
           </Text>
-          <ChatItem Other />
+          <ChatItem />
           <ChatItem isMe />
           <ChatItem Other />
           <ChatItem isMe />
@@ -23,6 +29,20 @@ const ChatRoom = () => {
           <ChatItem isMe />
           <ChatItem Other />
           <ChatItem isMe />
+          <Menu>
+            <MenuTrigger text="Select action" />
+            <MenuOptions>
+              <MenuOption onSelect={() => alert(`Save`)} text="Save" />
+              <MenuOption onSelect={() => alert(`Delete`)}>
+                <Text style={{color: 'red'}}>Delete</Text>
+              </MenuOption>
+              <MenuOption
+                onSelect={() => alert(`Not called`)}
+                disabled={true}
+                text="Disabled"
+              />
+            </MenuOptions>
+          </Menu>
         </View>
       </ScrollView>
       <InputChat />

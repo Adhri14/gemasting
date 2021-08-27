@@ -7,15 +7,18 @@ import FlashMessage from 'react-native-flash-message';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {Loading} from './components';
 import * as Sentry from '@sentry/react-native';
+import {MenuProvider} from 'react-native-popup-menu';
 
 const MainApp = () => {
   const {loading} = useSelector(state => state.loadingReducer);
   return (
-    <NavigationContainer>
-      <Router />
-      <FlashMessage position="top" />
-      {loading && <Loading />}
-    </NavigationContainer>
+    <MenuProvider>
+      <NavigationContainer>
+        <Router />
+        <FlashMessage position="top" />
+        {loading && <Loading />}
+      </NavigationContainer>
+    </MenuProvider>
   );
 };
 

@@ -203,7 +203,7 @@ const DetailTransaction = ({navigation}) => {
   };
 
   const handleOnDone = () => {
-    navigation.replace('ChatPakar');
+    navigation.replace('MainApp', {screen: 'Activity'});
   };
 
   const changeNameButton = () => {
