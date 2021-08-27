@@ -233,13 +233,14 @@ const SignUpCustomer = ({navigation}) => {
           />
           <Gap height={20} />
           <DatePicker
+            mode="date"
             value={date}
             onValueChange={onChange}
             type={mode}
             show={show}
-            mode="date"
             placeholder={moment(date).format('DD-MM-YYYY')}
             onPress={showDatepicker}
+            label="Tanggal Lahir"
           />
           <Gap height={25} />
           <TextInput

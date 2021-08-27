@@ -27,10 +27,12 @@ import Rekam from './Rekam';
 import KMS from './KMS';
 import Stunting from './Stunting';
 import ListPakar from './ListPakar';
+import EmptyFamily from './EmptyFamily';
 import ChatItem from './ChatItem';
 import InputChat from './InputChat';
 
 export {
+  EmptyFamily,
   ListPakar,
   InfoStunting,
   Header,

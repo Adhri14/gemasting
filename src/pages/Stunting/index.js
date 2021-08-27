@@ -1,22 +1,60 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, ScrollView, StatusBar} from 'react-native';
-import {Header, TextInput, Gap, Button, ListName, Card} from '../../components';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  StatusBar,
+  RefreshControl,
+} from 'react-native';
+import {
+  Header,
+  TextInput,
+  Gap,
+  Button,
+  ListName,
+  Card,
+  EmptyFamily,
+} from '../../components';
 import {mainColors, fonts, getData, showMessage} from '../../utils';
 import {IconClose} from '../../assets';
 import axios from 'axios';
 import {API} from '../../config';
 import {useDispatch} from 'react-redux';
 
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 const Stunting = ({navigation, route}) => {
   const profile = route.params;
+  const token = route.params;
   const [height, setHeight] = useState('');
-  const [token, setToken] = useState('');
+  const [refreshing, setRefreshing] = useState(false);
+  const [dataUser, setDataUser] = useState([]);
 
   useEffect(() => {
-    getData('token').then(res => setToken(res));
+    getUser();
   }, []);
 
   const dispatch = useDispatch();
+
+  const getUser = () => {
+    axios
+      .get(`${API}family/get-by-user-uuid?user_uuid=${profile.uuid}`, {
+        headers: {Authorization: token.value},
+      })
+      .then(res => {
+        console.log(res.data.data);
+        setDataUser(res.data.data);
+      })
+      .catch(e => console.log(e.message));
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  };
 
   const onSubmit = () => {
     dispatch({type: 'SET_LOADING', value: true});
@@ -62,6 +100,9 @@ const Stunting = ({navigation, route}) => {
   };
   return (
     <ScrollView
+      refreshControl={
+        <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+      }
       contentContainerStyle={{flexGrow: 1}}
       showsVerticalScrollIndicator={false}>
       <StatusBar barStyle="dark-content" backgroundColor={mainColors.smoke} />
@@ -75,17 +116,28 @@ const Stunting = ({navigation, route}) => {
             <Gap height={32} />
             <ListName name={profile.name} />
             <Gap height={40} />
-            <Text style={styles.title}>Anggota Keluarga (0)</Text>
+            <Text style={styles.title}>
+              Anggota Keluarga ({!dataUser.length ? '0' : dataUser.length})
+            </Text>
             <View style={styles.container}>
               <Gap height={20} />
-              <IconClose />
-              <Gap height={10} />
-              <Text style={styles.desc}>
-                Anda belum menambahkan daftar{'\n'}anggota keluarga
-              </Text>
+              {!dataUser.length || refreshing ? (
+                <EmptyFamily />
+              ) : (
+                dataUser.map((item, index) => (
+                  <View style={{width: '100%'}} key={item.uuid}>
+                    <ListName name={item.name} />
+                    <Gap height={20} />
+                  </View>
+                ))
+              )}
               <Gap height={20} />
               <View style={styles.button}>
-                <Button type="button-no-outline" title="+ Tambah Keluarga" />
+                <Button
+                  type="button-no-outline"
+                  title="+ Tambah Keluarga"
+                  onPress={() => navigation.navigate('AddFamilyStunting')}
+                />
               </View>
             </View>
           </Card>
