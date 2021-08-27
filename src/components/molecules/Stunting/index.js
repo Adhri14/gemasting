@@ -4,7 +4,7 @@ import ListCard from '../ListCard';
 
 const Stunting = () => {
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, marginHorizontal: 20}}>
       <ListCard type="stunting" />
     </View>
   );

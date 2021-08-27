@@ -24,6 +24,7 @@ import StuntingOutput from './StuntingOutput';
 import ChatPakar from './ChatPakar';
 import Transaction from './Transaction';
 import DetailTransaction from './DetailTransaction';
+import ChatRoom from './ChatRoom';
 
 export {
   DetailTransaction,
@@ -52,4 +53,5 @@ export {
   KmsOutput,
   AddFamilyKMS,
   StuntingOutput,
+  ChatRoom,
 };

@@ -27,6 +27,8 @@ import Rekam from './Rekam';
 import KMS from './KMS';
 import Stunting from './Stunting';
 import ListPakar from './ListPakar';
+import ChatItem from './ChatItem';
+import InputChat from './InputChat';
 
 export {
   ListPakar,
@@ -58,4 +60,6 @@ export {
   Rekam,
   KMS,
   Stunting,
+  ChatItem,
+  InputChat,
 };

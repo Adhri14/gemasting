@@ -28,6 +28,7 @@ import {
   Transaction,
   OtpScreen,
   DetailTransaction,
+  ChatRoom,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -48,7 +49,7 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="ChatRoom">
       {/* Screen Utama */}
       <Stack.Screen
         name="SplashScreen"
@@ -189,6 +190,13 @@ const Router = () => {
         }}
       />
       {/* Akhir */}
+      <Stack.Screen
+        name="ChatRoom"
+        component={ChatRoom}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };

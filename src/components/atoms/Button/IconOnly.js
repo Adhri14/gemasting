@@ -1,6 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {IconBackDark, IconBackPink} from '../../../assets';
+import {
+  IconBackDark,
+  IconBackPink,
+  IconDoc,
+  IconMore,
+  IconSend,
+} from '../../../assets';
 import {mainColors} from '../../../utils';
 
 const IconOnly = ({onPress, icon}) => {
@@ -10,6 +16,15 @@ const IconOnly = ({onPress, icon}) => {
     }
     if (icon === 'back-pink') {
       return <IconBackPink />;
+    }
+    if (icon === 'more') {
+      return <IconMore />;
+    }
+    if (icon === 'send') {
+      return <IconSend />;
+    }
+    if (icon === 'doc') {
+      return <IconDoc />;
     }
     return <IconBackDark />;
   };

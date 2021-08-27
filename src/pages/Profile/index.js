@@ -60,6 +60,7 @@ const Profile = ({navigation}) => {
     // });
     // await GoogleSignin.revokeAccess();
     // await GoogleSignin.signOut();
+
     dispatch({type: 'SET_LOADING', value: true});
     if (provider.value === 'firebase') {
       try {
