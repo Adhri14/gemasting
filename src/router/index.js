@@ -49,7 +49,7 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="ChatRoom">
+    <Stack.Navigator initialRouteName="Splashscreen">
       {/* Screen Utama */}
       <Stack.Screen
         name="SplashScreen"
