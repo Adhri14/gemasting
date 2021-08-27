@@ -30,6 +30,7 @@ import {
   DetailTransaction,
   AddFamilyStunting,
   ChatRoom,
+  ProfileDoctor,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -199,6 +200,13 @@ const Router = () => {
       <Stack.Screen
         name="ChatRoom"
         component={ChatRoom}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ProfileDoctor"
+        component={ProfileDoctor}
         options={{
           headerShown: false,
         }}

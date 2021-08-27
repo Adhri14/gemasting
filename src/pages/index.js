@@ -26,6 +26,7 @@ import Transaction from './Transaction';
 import DetailTransaction from './DetailTransaction';
 import AddFamilyStunting from './AddFamilyStunting';
 import ChatRoom from './ChatRoom';
+import ProfileDoctor from './ProfileDoctor';
 
 export {
   AddFamilyStunting,
@@ -56,4 +57,5 @@ export {
   AddFamilyKMS,
   StuntingOutput,
   ChatRoom,
+  ProfileDoctor,
 };

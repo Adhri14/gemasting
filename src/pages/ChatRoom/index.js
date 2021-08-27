@@ -10,7 +10,7 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 
-const ChatRoom = () => {
+const ChatRoom = ({navigation}) => {
   return (
     <View style={styles.page}>
       <Header title="Dr. John Doe" more />
@@ -32,7 +32,10 @@ const ChatRoom = () => {
           <Menu>
             <MenuTrigger text="Select action" />
             <MenuOptions>
-              <MenuOption onSelect={() => alert(`Save`)} text="Save" />
+              <MenuOption
+                onSelect={() => navigation.replace('ProfileDoctor')}
+                text="Profile"
+              />
               <MenuOption onSelect={() => alert(`Delete`)}>
                 <Text style={{color: 'red'}}>Delete</Text>
               </MenuOption>
