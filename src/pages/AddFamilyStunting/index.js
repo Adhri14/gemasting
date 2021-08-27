@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import moment from 'moment';
+import React, {useState, useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, View, StatusBar} from 'react-native';
 import {
   Button,
@@ -9,12 +10,11 @@ import {
   Radio,
   TextInput,
 } from '../../components';
-import {fonts, getData, mainColors, showMessage} from '../../utils';
-import moment from 'moment';
+import {fonts, mainColors, getData} from '../../utils';
 import axios from 'axios';
 import {API} from '../../config';
 
-const AddFamilyKMS = ({navigation}) => {
+const AddFamilyStunting = ({navigation}) => {
   const [form1, setForm1] = useState({
     name: '',
     gender: '',
@@ -24,14 +24,6 @@ const AddFamilyKMS = ({navigation}) => {
     gender: '',
   });
 
-  const [date1, setDate1] = useState(new Date());
-  const [mode1, setMode1] = useState('date');
-  const [show1, setShow1] = useState(false);
-
-  const [date2, setDate2] = useState(new Date());
-  const [mode2, setMode2] = useState('date');
-  const [show2, setShow2] = useState(false);
-
   const [token, setToken] = useState('');
 
   useEffect(() => {
@@ -39,6 +31,14 @@ const AddFamilyKMS = ({navigation}) => {
       setToken(res);
     });
   }, []);
+
+  const [date1, setDate1] = useState(new Date());
+  const [mode1, setMode1] = useState('date');
+  const [show1, setShow1] = useState(false);
+
+  const [date2, setDate2] = useState(new Date());
+  const [mode2, setMode2] = useState('date');
+  const [show2, setShow2] = useState(false);
 
   const onChange1 = (event, selectedDate) => {
     const currentDate = selectedDate || date1;
@@ -239,7 +239,7 @@ const AddFamilyKMS = ({navigation}) => {
   );
 };
 
-export default AddFamilyKMS;
+export default AddFamilyStunting;
 
 const styles = StyleSheet.create({
   page: {

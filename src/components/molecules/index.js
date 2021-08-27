@@ -27,8 +27,10 @@ import Rekam from './Rekam';
 import KMS from './KMS';
 import Stunting from './Stunting';
 import ListPakar from './ListPakar';
+import EmptyFamily from './EmptyFamily';
 
 export {
+  EmptyFamily,
   ListPakar,
   InfoStunting,
   Header,

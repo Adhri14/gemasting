@@ -17,7 +17,11 @@ const HomeCustomer = ({navigation}) => {
     profile: '',
     name: '',
     role: 0,
+    uuid: '',
   });
+
+  const [token, setToken] = useState('');
+  console.log(token);
 
   useEffect(() => {
     let unmounted = false;
@@ -27,7 +31,13 @@ const HomeCustomer = ({navigation}) => {
           name: resProfile.profile.name,
           role: resProfile.role_id,
           profile: resProfile.profile.photo,
+          uuid: resProfile.profile.user_uuid,
         });
+      }
+    });
+    getData('token').then(res => {
+      if (!unmounted) {
+        setToken(res);
       }
     });
     return () => {
@@ -51,12 +61,16 @@ const HomeCustomer = ({navigation}) => {
             </CardButton>
             <CardButton
               label="KMS Online"
-              onPress={() => navigation.navigate('KmsOnline')}>
+              onPress={() =>
+                navigation.navigate('KmsOnline', {...dataProfile, ...token})
+              }>
               <IlKMS />
             </CardButton>
             <CardButton
               label="Cek Stunting"
-              onPress={() => navigation.navigate('Stunting', {...dataProfile})}>
+              onPress={() =>
+                navigation.navigate('Stunting', {...dataProfile, ...token})
+              }>
               <IlStunting />
             </CardButton>
             <CardButton label="Rekam Medis">
@@ -84,7 +98,7 @@ const HomeCustomer = ({navigation}) => {
             </CardButton>
             <CardButton
               label="KMS Online"
-              onPress={() => navigation.navigate('KmsOnline')}>
+              onPress={() => navigation.navigate('KmsOnline', {...token})}>
               <IlKMS />
             </CardButton>
           </View>
@@ -120,7 +134,7 @@ const HomeCustomer = ({navigation}) => {
             </CardButton>
             <CardButton
               label="KMS Online"
-              onPress={() => navigation.navigate('KmsOnline')}>
+              onPress={(() => navigation.navigate('KmsOnline'), {...token})}>
               <IlKMS />
             </CardButton>
           </View>
@@ -156,7 +170,7 @@ const HomeCustomer = ({navigation}) => {
             </CardButton>
             <CardButton
               label="KMS Online"
-              onPress={() => navigation.navigate('KmsOnline')}>
+              onPress={(() => navigation.navigate('KmsOnline'), {...token})}>
               <IlKMS />
             </CardButton>
           </View>

@@ -28,6 +28,7 @@ import {
   Transaction,
   OtpScreen,
   DetailTransaction,
+  AddFamilyStunting,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -163,6 +164,11 @@ const Router = () => {
       <Stack.Screen
         name="StuntingOutput"
         component={StuntingOutput}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AddFamilyStunting"
+        component={AddFamilyStunting}
         options={{headerShown: false}}
       />
       {/* Akhir */}

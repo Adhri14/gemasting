@@ -24,8 +24,10 @@ import StuntingOutput from './StuntingOutput';
 import ChatPakar from './ChatPakar';
 import Transaction from './Transaction';
 import DetailTransaction from './DetailTransaction';
+import AddFamilyStunting from './AddFamilyStunting';
 
 export {
+  AddFamilyStunting,
   DetailTransaction,
   Transaction,
   ChatPakar,
