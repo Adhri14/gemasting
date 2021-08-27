@@ -6133,6 +6133,11 @@ react-native-document-picker@^6.0.2:
   dependencies:
     invariant "^2.2.4"
 
+react-native-enhanced-popup-menu@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/react-native-enhanced-popup-menu/-/react-native-enhanced-popup-menu-0.7.0.tgz#8eb2ab06ff39b031807308065361444fe254a68d"
+  integrity sha512-PEinhLrt0I7HvBpSAH0hO1jlg2KGAiIpxyD8M0c5kO4ds/HaRdW1nYhTR92uF+LJTESJH7KQLQYvP/NJe+zc0g==
+
 react-native-flash-message@^0.1.23:
   version "0.1.23"
   resolved "https://registry.yarnpkg.com/react-native-flash-message/-/react-native-flash-message-0.1.23.tgz#50a17201a2d9d6b22a2f174a97b22c30bff15638"
