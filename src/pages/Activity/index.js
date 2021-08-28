@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StatusBar,
   StyleSheet,
@@ -17,7 +17,7 @@ import {
   Stunting,
   ActivityTab,
 } from '../../components';
-import {mainColors, fonts, colors} from '../../utils';
+import {mainColors, fonts, getData} from '../../utils';
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
 
 const renderTabBar = props => {
@@ -39,6 +39,56 @@ const renderTabBar = props => {
 
 const Aktivity = () => {
   const layout = useWindowDimensions();
+  const [user, setUser] = useState({
+    role: '',
+  });
+  useEffect(() => {
+    // getRole();
+    getData('userProfile').then(res => {
+      console.log(res);
+      setUser({
+        role: res.role_id,
+      });
+    });
+  }, []);
+
+  // const getRole = routes => {
+  //   if (user.role === 2) {
+  //     const [routes] = React.useState([
+  //       {key: 'Chat', title: 'Chat Dokter'},
+  //       {key: 'Janji', title: 'Janji Medis'},
+  //       {key: 'Rekam', title: 'Rekam Medis'},
+  //       {key: 'KMS', title: 'KMS Online'},
+  //       {key: 'Stunting', title: 'Cek Stunting'},
+  //     ]);
+  //   }
+  //   if (user.role === 3) {
+  //     const [routes] = React.useState([
+  //       {key: 'Chat', title: 'Chat Pasien'},
+  //       {key: 'Janji', title: 'Janji Medis'},
+  //       {key: 'KMS', title: 'KMS Online'},
+  //       {key: 'Stunting', title: 'Cek Stunting'},
+  //     ]);
+  //   }
+  //   if (user.role === 4) {
+  //     const [routes] = React.useState([
+  //       {key: 'Janji', title: 'Janji Medis'},
+  //       {key: 'Rekam', title: 'Rekam Medis'},
+  //       {key: 'KMS', title: 'KMS Online'},
+  //       {key: 'Stunting', title: 'Cek Stunting'},
+  //     ]);
+  //   }
+  //   if (user.role === 5) {
+  //     const [routes] = React.useState([
+  //       {key: 'Chat', title: 'Chat'},
+  //       {key: 'Janji', title: 'Janji Medis'},
+  //       {key: 'Rekam', title: 'Rekam Medis'},
+  //       {key: 'KMS', title: 'KMS Online'},
+  //       {key: 'Stunting', title: 'Cek Stunting'},
+  //     ]);
+  //   }
+  //   return true;
+  // };
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([

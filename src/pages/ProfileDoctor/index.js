@@ -1,34 +1,79 @@
 import React from 'react';
-import {TabView, SceneMap} from 'react-native-tab-view';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {StyleSheet, Text, View, useWindowDimensions} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {DummyUser} from '../../assets';
-import {Gap, Header, ProfilePhoto} from '../../components';
-import {fonts, mainColors} from '../../utils';
+import {Gap, Header, ProfilePhoto, Button} from '../../components';
+import {colors, fonts, mainColors} from '../../utils';
 
 const FirstRoute = () => (
   <View style={{flex: 1}}>
+    <Gap height={30} />
     <Text style={styles.h1}>Biografi</Text>
     <Text style={styles.textNormal}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus
       sit amet luctus venenatis, lectus magna fringilla urna. Read more
     </Text>
+    <Gap height={30} />
     <Text style={styles.h1}>Pendidikan</Text>
+    <Gap height={10} />
+    <View style={styles.unorderlist}>
+      <View style={styles.wrapper} />
+      <Text style={styles.education}>S1 Kedokteran</Text>
+    </View>
+    <View style={styles.unorderlist}>
+      <View style={styles.wrapper} />
+      <Text style={styles.education}>
+        S3 Kedokteran di Universitas Indonesia
+      </Text>
+    </View>
+    <View style={styles.unorderlist}>
+      <View style={styles.wrapper} />
+      <Text style={styles.education}>
+        S2 Kedokteran di Universitas Indonesia
+      </Text>
+    </View>
   </View>
 );
 
 const SecondRoute = () => (
   <View style={{flex: 1}}>
+    <Gap height={30} />
     <Text style={styles.h1}>Alamat</Text>
     <Text style={styles.textNormal}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus
       sit amet luctus venenatis, lectus magna fringilla urna. Read more
     </Text>
+    <Gap height={30} />
+    <Text style={styles.h1}>Maps</Text>
+    <Gap height={20} />
+    <Button title="Buka di Maps" />
+  </View>
+);
+
+const ThirdRoute = () => (
+  <View style={{flex: 1}}>
+    <Gap height={30} />
+    <Text style={styles.h1}>Alamat</Text>
+    <Text style={styles.textNormal}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus
+      sit amet luctus venenatis, lectus magna fringilla urna. Read more
+    </Text>
+    <Gap height={30} />
     <Text style={styles.h1}>Maps</Text>
   </View>
 );
 
-const ThirdRoute = () => <View style={{flex: 1}} />;
+const renderTabBar = props => (
+  <TabBar
+    {...props}
+    indicatorStyle={styles.indicator}
+    style={styles.tabBar}
+    renderLabel={({route, focused}) => (
+      <Text style={styles.titleTab(focused)}>{route.title}</Text>
+    )}
+  />
+);
 
 const renderScene = SceneMap({
   first: FirstRoute,
@@ -77,11 +122,13 @@ const ProfileDoctor = () => {
               <Text style={styles.desc}>TAHUN</Text>
             </View>
           </View>
+          <Gap height={30} />
           <TabView
             navigationState={{index, routes}}
             renderScene={renderScene}
             onIndexChange={setIndex}
             initialLayout={{width: layout.width}}
+            renderTabBar={renderTabBar}
           />
         </View>
       </ScrollView>
@@ -92,6 +139,34 @@ const ProfileDoctor = () => {
 export default ProfileDoctor;
 
 const styles = StyleSheet.create({
+  titleTab: focused => ({
+    fontSize: 16,
+    fontFamily: fonts.primary[600],
+    color: focused ? mainColors.pink : mainColors.darkSmoke,
+  }),
+  indicator: {
+    backgroundColor: mainColors.pink,
+  },
+  tabBar: {
+    backgroundColor: 'transparent',
+    elevation: 0,
+  },
+  unorderlist: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  wrapper: {
+    width: 8,
+    height: 8,
+    borderRadius: 8,
+    marginRight: 10,
+    backgroundColor: mainColors.pink,
+  },
+  education: {
+    fontSize: 16,
+    fontFamily: fonts.primary[400],
+    color: mainColors.black,
+  },
   page: {
     flex: 1,
     backgroundColor: mainColors.lightSmoke,
@@ -118,7 +193,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   desc: {
-    fontFamily: fonts.primary[500],
+    fontFamily: fonts.primary[600],
     fontSize: 14,
     color: mainColors.pink,
     textAlign: 'center',
@@ -133,7 +208,7 @@ const styles = StyleSheet.create({
   },
   textNormal: {
     fontSize: 16,
-    fontFamily: fonts.primary[300],
+    fontFamily: fonts.primary[400],
     color: mainColors.black,
   },
 });
