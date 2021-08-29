@@ -7,6 +7,7 @@ const ListName = ({name}) => {
     backgroundColor: mainColors.pink,
     color: mainColors.white,
   });
+
   return (
     <TouchableOpacity activeOpacity={1} style={styles.container}>
       <Text style={styles.name}>{name}</Text>
