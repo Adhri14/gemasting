@@ -15,6 +15,7 @@ const ListCard = ({
   date,
   category,
   onPress,
+  weight,
 }) => {
   if (type === 'rekam-medis') {
     return (
@@ -50,9 +51,9 @@ const ListCard = ({
           </View>
         </View>
         <View style={styles.descRecord}>
-          <Text style={styles.kmsweight}>Resiko Berat Badan Berlebih </Text>
+          <Text style={styles.kmsweight}>{weight}</Text>
           <Text style={styles.kmshight}>
-            Penanganan : Istirahat & Obat Paracetamol{' '}
+            Penanganan : Tetap harus di jaga pola makannya
           </Text>
         </View>
       </View>

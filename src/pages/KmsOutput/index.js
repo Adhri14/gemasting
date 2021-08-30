@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {Button, Card, Gap, Header, InfoStunting} from '../../components';
-import {colors, fonts, mainColors} from '../../utils';
+import {colors, fonts, mainColors, showMessage, storeData} from '../../utils';
 import {LineChart} from 'react-native-chart-kit';
 import {IconDiscover, IconInfo, IconShield} from '../../assets';
 
@@ -51,7 +51,31 @@ const ListName = ({title, name, info, type}) => {
   );
 };
 
-const KmsOutput = ({navigation}) => {
+const KmsOutput = ({navigation, route}) => {
+  const {result} = route.params;
+  const ageForMonth = result.age;
+
+  console.log('hasil lemparan result : ', result);
+
+  let ageNew = ageForMonth.split(' ').map(n => parseFloat(n));
+
+  const convertAge = age => {
+    const year = Math.floor(age[0] / 12);
+    return `${year} tahun`;
+  };
+
+  const onSave = () => {
+    showMessage({
+      message: 'Data KMS Online berhasil disimpan',
+      type: 'success',
+    });
+    const data = {
+      ...result,
+      date: new Date(),
+    };
+    storeData('kmsOnline', data);
+    navigation.replace('MainApp', {screen: 'Activity'});
+  };
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
@@ -63,29 +87,36 @@ const KmsOutput = ({navigation}) => {
         <View style={styles.content}>
           <Text style={styles.name}>Profile Pasien</Text>
           <Card>
-            <ListName title="Nama" name="Jhone Dae" />
+            <ListName title="Nama" name={result.profile.name} />
             <Gap height={20} />
-            <ListName title="Jenis Kelamin" name="Laki-laki" />
+            <ListName
+              title="Jenis Kelamin"
+              name={result.profile.gender === 'L' ? 'Laki-laki' : 'Perempuan'}
+            />
             <Gap height={20} />
             <ListName
               title="Umur"
-              name="30 Bulan"
-              info="(2 Tahun 5 Bulan 28 Hari)"
+              name={result.age}
+              info={`(${convertAge(ageNew)})`}
               type="secondary"
             />
             <Gap height={20} />
             <ListName
               title="Berat Badan"
-              name="15 Kg"
-              info="(Resiko Berat Berlebih)"
-              type="danger"
+              name={result.weight_status.weight}
+              info={`(${result.weight_status.status})`}
+              type={
+                result.weight_status.status === 'Normal' ? 'success' : 'danger'
+              }
             />
             <Gap height={20} />
             <ListName
               title="Tinggi Badan"
-              name="Jhone Dae"
-              info="(Normal)"
-              type="success"
+              name={result.height_status.height}
+              info={`(${result.height_status.status})`}
+              type={
+                result.height_status.status === 'Normal' ? 'success' : 'danger'
+              }
             />
           </Card>
           <Gap height={40} />
@@ -211,7 +242,7 @@ const KmsOutput = ({navigation}) => {
             <Text style={styles.label}>4. Ajari coret-coret di kertas.</Text>
             <Text style={styles.label}>5. Bacakan cerita anak.</Text>
           </View>
-          <Button title="Simpan Hasil KMS" />
+          <Button title="Simpan Hasil KMS" onPress={onSave} />
         </View>
       </View>
     </ScrollView>

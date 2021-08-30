@@ -23,11 +23,11 @@ const ChatRoom = ({navigation}) => {
           </Text>
           <ChatItem />
           <ChatItem isMe />
-          <ChatItem Other />
+          <ChatItem />
           <ChatItem isMe />
-          <ChatItem Other />
+          <ChatItem />
           <ChatItem isMe />
-          <ChatItem Other />
+          <ChatItem />
           <ChatItem isMe />
           <Menu>
             <MenuTrigger text="Select action" />
