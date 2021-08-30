@@ -1,19 +1,48 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import {ChatItem, Header, InputChat} from '../../components';
-import {fonts, mainColors} from '../../utils';
+import React, {useState} from 'react';
 import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from 'react-native-popup-menu';
+  StyleSheet,
+  Text,
+  View,
+  Modal,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
+import {ChatItem, Header, InputChat, Button} from '../../components';
+import {fonts, mainColors} from '../../utils';
 
 const ChatRoom = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={styles.page}>
-      <Header title="Dr. John Doe" more />
+      <Modal
+        // animationType="slide"
+        statusBarTranslucent
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => setModalVisible(!modalVisible)}
+          style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Profile Dokter</Text>
+            <Text style={styles.modalText}>Cari Pesan</Text>
+            <Text style={styles.modalText}>Butuh Bantuan</Text>
+            <Button title="Akhiri Konsultasi" />
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      <Header
+        title="Dr. John Doe"
+        more
+        onPressMore={() => setModalVisible()}
+        onPress={() => navigation.goBack()}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
           <Text style={styles.welcome}>Selamat Berkonsultasi!</Text>
@@ -29,23 +58,6 @@ const ChatRoom = ({navigation}) => {
           <ChatItem isMe />
           <ChatItem />
           <ChatItem isMe />
-          <Menu>
-            <MenuTrigger text="Select action" />
-            <MenuOptions>
-              <MenuOption
-                onSelect={() => navigation.replace('ProfileDoctor')}
-                text="Profile"
-              />
-              <MenuOption onSelect={() => alert(`Delete`)}>
-                <Text style={{color: 'red'}}>Delete</Text>
-              </MenuOption>
-              <MenuOption
-                onSelect={() => alert(`Not called`)}
-                disabled={true}
-                text="Disabled"
-              />
-            </MenuOptions>
-          </Menu>
         </View>
       </ScrollView>
       <InputChat />
@@ -77,5 +89,51 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+  },
+  centeredView: {
+    flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    marginTop: 22,
+    backgroundColor: 'rgba(0,0,0,.3)',
+    // opacity: 0.3,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });
