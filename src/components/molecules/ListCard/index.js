@@ -16,6 +16,7 @@ const ListCard = ({
   category,
   onPress,
   weight,
+  status,
 }) => {
   if (type === 'rekam-medis') {
     return (
@@ -64,15 +65,15 @@ const ListCard = ({
       <View style={styles.container2}>
         <View style={styles.content}>
           <View>
-            <Text style={styles.profileName}>John Doe</Text>
+            <Text style={styles.profileName}>{name}</Text>
             <Text style={styles.profileDesc}>Pribadi</Text>
           </View>
           <View>
-            <Text style={styles.timeRecord}>06 Juli 2021</Text>
+            <Text style={styles.timeRecord}>{date}</Text>
           </View>
         </View>
         <View style={styles.descRecord}>
-          <Text style={styles.kmsweight}>Indikasi Stunting Parah </Text>
+          <Text style={styles.kmsweight}>{status}</Text>
         </View>
       </View>
     );
