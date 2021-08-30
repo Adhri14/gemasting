@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {IconInfo, IconShield} from '../../assets';
 import {Button, Gap, Header, InfoStunting} from '../../components';
-import {colors, fonts, mainColors} from '../../utils';
+import {colors, fonts, mainColors, storeData} from '../../utils';
 
 const Info = ({children, label}) => {
   return (
@@ -15,16 +15,26 @@ const Info = ({children, label}) => {
 };
 
 const StuntingOutput = ({navigation, route}) => {
-  const status = route.params;
+  const {data} = route.params;
+  console.log(data);
 
   const infoStunting = () => {
-    if (status.status === 'Normal') {
+    if (data.status === 'Normal') {
       return 'normal';
-    } else if (status.status === 'Stunting Parah') {
+    } else if (data.status === 'Stunting Parah') {
       return 'stunting';
     } else {
       return null;
     }
+  };
+
+  const onSave = () => {
+    const stunting = {
+      ...data,
+      date: new Date(),
+    };
+    storeData('cekStunting', stunting);
+    navigation.replace('MainApp', {screen: 'Activity'});
   };
 
   return (
@@ -56,7 +66,7 @@ const StuntingOutput = ({navigation, route}) => {
         </View>
       </View>
       <View style={styles.button}>
-        <Button title="Simpan Hasil Cek Stunting" />
+        <Button title="Simpan Hasil Cek Stunting" onPress={onSave} />
       </View>
     </ScrollView>
   );
