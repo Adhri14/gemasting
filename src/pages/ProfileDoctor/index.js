@@ -54,7 +54,7 @@ const SecondRoute = () => (
 const ThirdRoute = () => (
   <View style={{flex: 1}}>
     <Gap height={30} />
-    <Text style={styles.h1}>Alamat</Text>
+    <Text style={styles.h1}>Ulasan</Text>
     <Text style={styles.textNormal}>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus
       sit amet luctus venenatis, lectus magna fringilla urna. Read more

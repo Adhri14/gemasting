@@ -30,6 +30,7 @@ import ListPakar from './ListPakar';
 import EmptyFamily from './EmptyFamily';
 import ChatItem from './ChatItem';
 import InputChat from './InputChat';
+import HealthCard from './HealthCard';
 
 export {
   EmptyFamily,
@@ -64,4 +65,5 @@ export {
   Stunting,
   ChatItem,
   InputChat,
+  HealthCard,
 };

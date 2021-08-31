@@ -31,6 +31,7 @@ import {
   AddFamilyStunting,
   ChatRoom,
   ProfileDoctor,
+  Appointment,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -178,6 +179,11 @@ const Router = () => {
       <Stack.Screen
         name="ChatPakar"
         component={ChatPakar}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Appointment"
+        component={Appointment}
         options={{headerShown: false}}
       />
       {/* Akhir */}
