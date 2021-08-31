@@ -81,7 +81,7 @@ const renderScene = SceneMap({
   third: ThirdRoute,
 });
 
-const ProfileDoctor = () => {
+const ProfileDoctor = ({navigation}) => {
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
@@ -93,7 +93,7 @@ const ProfileDoctor = () => {
   return (
     <>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <Header />
+        <Header onPress={() => navigation.goBack()} />
 
         <View style={styles.page}>
           <Text style={styles.profile}>Profile</Text>

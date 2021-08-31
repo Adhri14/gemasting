@@ -49,6 +49,18 @@ const Button = ({
       </TouchableOpacity>
     );
   }
+
+  if (type === 'button-small') {
+    return (
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={styles.containerSmall(type, display)}
+        onPress={onPress}
+        {...props}>
+        <Text style={styles.textSmall(type)}>{title}</Text>
+      </TouchableOpacity>
+    );
+  }
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -78,6 +90,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+  }),
+  containerSmall: (type, display) => ({
+    backgroundColor:
+      type === 'secondary'
+        ? colors.button.secondary.background
+        : colors.button.primary.background,
+    borderWidth: type === 'secondary' ? 1 : 0,
+    borderColor: colors.button.primary.border,
+    paddingVertical: 7,
+    borderRadius: 8,
+    display,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: '100%',
+  }),
+  textSmall: type => ({
+    fontSize: 12,
+    color:
+      type === 'secondary'
+        ? colors.button.secondary.text
+        : colors.button.primary.text,
+    fontFamily: fonts.primary[600],
   }),
   text: type => ({
     fontSize: 16,
