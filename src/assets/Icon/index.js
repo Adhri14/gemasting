@@ -44,8 +44,14 @@ import IconDoc from './ic-doc.svg';
 import IconSend from './ic-send.svg';
 import IconSendDark from './ic-send-dark';
 import IconDocDark from './ic-doc-dark';
+import IconInfoCircle from './info-circle.svg';
+import IconProfileDark from './profile-dark.svg';
+import IconSearchNormal from './search-normal.svg';
 
 export {
+  IconInfoCircle,
+  IconProfileDark,
+  IconSearchNormal,
   IconTime,
   IconStar,
   IconStarSecond,

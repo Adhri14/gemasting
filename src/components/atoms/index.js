@@ -14,6 +14,7 @@ import Card from './Card';
 import ListName from './ListName';
 import Loading from './Loading';
 import ActivityTab from './ActivityTab';
+import Menu from './Menu';
 
 export {
   Button,
@@ -32,4 +33,5 @@ export {
   ListName,
   Loading,
   ActivityTab,
+  Menu,
 };

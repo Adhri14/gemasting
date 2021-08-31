@@ -8,41 +8,47 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {ChatItem, Header, InputChat, Button} from '../../components';
+import {ChatItem, Header, InputChat, Button, Gap, Menu} from '../../components';
+import {MenuItem} from '../../components/atoms/Menu';
 import {fonts, mainColors} from '../../utils';
+import {IconProfileDark, IconSearchNormal, IconInfoCircle} from '../../assets';
+
+// const TabIcon = () => {
+//   ret
+// }
 
 const ChatRoom = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.page}>
-      <Modal
-        // animationType="slide"
-        statusBarTranslucent
-        transparent={true}
+      <Menu
         visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={() => setModalVisible(!modalVisible)}
-          style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Profile Dokter</Text>
-            <Text style={styles.modalText}>Cari Pesan</Text>
-            <Text style={styles.modalText}>Butuh Bantuan</Text>
-            <Button title="Akhiri Konsultasi" />
-          </View>
-        </TouchableOpacity>
-      </Modal>
+        onRequestClose={() => setModalVisible(!modalVisible)}
+        onPress={() => setModalVisible(!modalVisible)}>
+        <MenuItem
+          title="Profile Pakar"
+          icon={<IconProfileDark />}
+          onPress={() => {
+            setModalVisible(!modalVisible);
+            navigation.navigate('ProfileDoctor');
+          }}
+        />
+        <Gap height={20} />
+        <MenuItem title="Cari Pesan" icon={<IconSearchNormal />} />
+        <Gap height={20} />
+        <MenuItem title="Butuh Bantuan?" icon={<IconInfoCircle />} />
+        <Gap height={30} />
+        <Button type="button-small" title="Akhiri Konsultasi" />
+      </Menu>
 
       <Header
         title="Dr. John Doe"
         more
-        onPressMore={() => setModalVisible()}
+        onPressMore={() => setModalVisible(true)}
         onPress={() => navigation.goBack()}
       />
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
           <Text style={styles.welcome}>Selamat Berkonsultasi!</Text>
@@ -101,20 +107,14 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 20,
     backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
+    borderRadius: 10,
+    padding: 20,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
     position: 'absolute',
     top: 0,
     right: 0,
+    width: 190,
+    height: 214,
   },
   button: {
     borderRadius: 20,
