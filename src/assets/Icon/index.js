@@ -47,8 +47,10 @@ import IconDocDark from './ic-doc-dark';
 import IconInfoCircle from './info-circle.svg';
 import IconProfileDark from './profile-dark.svg';
 import IconSearchNormal from './search-normal.svg';
+import IconEdit from './edit.svg';
 
 export {
+  IconEdit,
   IconInfoCircle,
   IconProfileDark,
   IconSearchNormal,

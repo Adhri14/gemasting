@@ -21,17 +21,19 @@ const Stunting = () => {
     getData('userProfile').then(res => {
       setUuid(res.profile.user_uuid);
     });
-    getData('cekStunting').then(res => {
-      setCheckStunting({
-        date: res.date,
-        profile: {
-          name: res.profile.name,
-          uuid: res.profile.user_uuid,
-        },
-        status: res.status,
-        stunting: res.stunting,
-      });
-    });
+    getData('cekStunting')
+      .then(res => {
+        setCheckStunting({
+          date: res.date,
+          profile: {
+            name: res.profile.name,
+            uuid: res.profile.user_uuid,
+          },
+          status: res.status,
+          stunting: res.stunting,
+        });
+      })
+      .catch(err => console.log(err.message));
   }, []);
   return (
     <View style={{flex: 1, marginHorizontal: 20}}>

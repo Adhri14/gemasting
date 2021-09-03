@@ -60,8 +60,10 @@ const KmsOutput = ({navigation, route}) => {
   let ageNew = ageForMonth.split(' ').map(n => parseFloat(n));
 
   const convertAge = age => {
-    const year = Math.floor(age[0] / 12);
-    return `${year} tahun`;
+    // const year = ;
+    const month = age[0] % 12;
+    const year = (age[0] - month) / 12;
+    return `${year} Tahun ${month} Bulan`;
   };
 
   const onSave = () => {
@@ -128,17 +130,16 @@ const KmsOutput = ({navigation, route}) => {
                   labels: [0, 10, 20, 30, 40, 50, 60],
                   datasets: [
                     {
-                      data: [20, 45, 28, 80, 99, 43],
+                      data: [0, 5, 10, 15, 20, 25, 30],
                     },
                   ],
                 }}
                 width={354} // from react-native
                 height={220}
-                yAxisInterval={1} // optional, defaults to 1
                 chartConfig={{
                   backgroundGradientFrom: 'white',
                   backgroundGradientTo: 'white',
-                  decimalPlaces: 2, // optional, defaults to 2dp
+                  decimalPlaces: 0, // optional, defaults to 2dp
                   color: (opacity = 1) => `rgba(236, 78, 146, 0.2)`,
                   labelColor: (opacity = 1) => `black`,
                   style: {
@@ -168,7 +169,7 @@ const KmsOutput = ({navigation, route}) => {
                   labels: [0, 10, 20, 30, 40, 50, 60],
                   datasets: [
                     {
-                      data: [20, 45, 28, 80, 99, 43],
+                      data: [25, 50, 75, 85, 95, 100, 125],
                     },
                   ],
                 }}
@@ -178,7 +179,7 @@ const KmsOutput = ({navigation, route}) => {
                 chartConfig={{
                   backgroundGradientFrom: 'white',
                   backgroundGradientTo: 'white',
-                  decimalPlaces: 2, // optional, defaults to 2dp
+                  decimalPlaces: 0, // optional, defaults to 2dp
                   color: (opacity = 1) => `rgba(236, 78, 146, 0.2)`,
                   labelColor: (opacity = 1) => `black`,
                   style: {

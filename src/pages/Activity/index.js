@@ -1,111 +1,35 @@
 import React, {useEffect, useState} from 'react';
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  useWindowDimensions,
-} from 'react-native';
-import {
-  Gap,
-  ListCard,
-  Chat,
-  Janji,
-  Rekam,
-  KMS,
-  Stunting,
-  ActivityTab,
-} from '../../components';
-import {mainColors, fonts, getData} from '../../utils';
-import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
-
-const renderTabBar = props => {
-  return (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-      <TabBar
-        {...props}
-        indicatorStyle={styles.indicator}
-        indicatorContainerStyle={styles.container}
-        style={styles.wrapper}
-        tabStyle={styles.tab}
-        renderLabel={({route, focused}) => (
-          <ActivityTab key={route} route={route.title} focused={focused} />
-        )}
-      />
-    </ScrollView>
-  );
-};
+import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {ActivityCustomer, ActivityPakar, Gap} from '../../components';
+import {fonts, getData, mainColors} from '../../utils';
 
 const Aktivity = () => {
-  const layout = useWindowDimensions();
   const [user, setUser] = useState({
     role: '',
   });
   useEffect(() => {
-    // getRole();
+    let unmounted = false;
     getData('userProfile').then(res => {
-      console.log(res);
-      setUser({
-        role: res.role_id,
-      });
+      if (!unmounted) {
+        setUser({
+          role: res.role_id,
+        });
+      }
     });
+    return () => {
+      unmounted = true;
+    };
   }, []);
 
-  // const getRole = routes => {
-  //   if (user.role === 2) {
-  //     const [routes] = React.useState([
-  //       {key: 'Chat', title: 'Chat Dokter'},
-  //       {key: 'Janji', title: 'Janji Medis'},
-  //       {key: 'Rekam', title: 'Rekam Medis'},
-  //       {key: 'KMS', title: 'KMS Online'},
-  //       {key: 'Stunting', title: 'Cek Stunting'},
-  //     ]);
-  //   }
-  //   if (user.role === 3) {
-  //     const [routes] = React.useState([
-  //       {key: 'Chat', title: 'Chat Pasien'},
-  //       {key: 'Janji', title: 'Janji Medis'},
-  //       {key: 'KMS', title: 'KMS Online'},
-  //       {key: 'Stunting', title: 'Cek Stunting'},
-  //     ]);
-  //   }
-  //   if (user.role === 4) {
-  //     const [routes] = React.useState([
-  //       {key: 'Janji', title: 'Janji Medis'},
-  //       {key: 'Rekam', title: 'Rekam Medis'},
-  //       {key: 'KMS', title: 'KMS Online'},
-  //       {key: 'Stunting', title: 'Cek Stunting'},
-  //     ]);
-  //   }
-  //   if (user.role === 5) {
-  //     const [routes] = React.useState([
-  //       {key: 'Chat', title: 'Chat'},
-  //       {key: 'Janji', title: 'Janji Medis'},
-  //       {key: 'Rekam', title: 'Rekam Medis'},
-  //       {key: 'KMS', title: 'KMS Online'},
-  //       {key: 'Stunting', title: 'Cek Stunting'},
-  //     ]);
-  //   }
-  //   return true;
-  // };
-
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    {key: 'Chat', title: 'Chat'},
-    {key: 'Janji', title: 'Janji Medis'},
-    {key: 'Rekam', title: 'Rekam Medis'},
-    {key: 'KMS', title: 'KMS Online'},
-    {key: 'Stunting', title: 'Cek Stunting'},
-  ]);
-
-  const renderScene = SceneMap({
-    Chat: Chat,
-    Janji: Janji,
-    Rekam: Rekam,
-    KMS: KMS,
-    Stunting: Stunting,
-  });
+  const Role = () => {
+    if (user.role === 2) {
+      return <ActivityCustomer />;
+    }
+    if (user.role === 3) {
+      return <ActivityPakar />;
+    }
+    return <ActivityPakar />;
+  };
 
   return (
     <>
@@ -114,14 +38,7 @@ const Aktivity = () => {
         <View style={styles.page}>
           <Gap height={50} />
           <Text style={styles.title}>Aktifitas</Text>
-          <TabView
-            renderTabBar={renderTabBar}
-            navigationState={{index, routes}}
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            initialLayout={{width: layout.width}}
-            swipeEnabled={false}
-          />
+          <Role />
         </View>
       </ScrollView>
     </>

@@ -73,24 +73,15 @@ const styles = StyleSheet.create({
   shadowContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: 0,
+    bottom: 10,
     width: '100%',
     position: 'absolute',
     backgroundColor: 'transparent',
-    // // shadowColor: 'rgba(0, 0, 0, 0.5)',
-    // // shadowOffset: {
-    // //   width: 20,
-    // //   height: 20,
-    // // },
-    // // shadowOpacity: 0.58,
-    // // shadowRadius: 16.0,
-    // // elevation: 22,
-    // // transform: [{rotateX: '90deg'}],
   },
   shadow: {
     backgroundColor: 'blue',
     borderRadius: 30,
-    width: '90%',
+    width: '100%',
     height: 110,
     shadowColor: 'rgba(0, 0, 0, 0.5)',
     shadowOffset: {
@@ -98,8 +89,8 @@ const styles = StyleSheet.create({
       height: 20,
     },
     shadowOpacity: 0.58,
-    shadowRadius: 16.0,
-    elevation: 22,
+    shadowRadius: 10,
+    elevation: 20,
     transform: [{rotateX: '90deg'}],
   },
 });

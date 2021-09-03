@@ -32,6 +32,12 @@ const KmsOnline = ({navigation, route}) => {
 
   const [dataUser, setDataUser] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [selectedList, setSelectedList] = useState({
+    index: 0,
+    uuid: '',
+  });
+
+  const [selectedListPersonal, setSelectedListPersonal] = useState(0);
 
   const [data, setData] = useState({
     weight: '',
@@ -45,6 +51,7 @@ const KmsOnline = ({navigation, route}) => {
 
   useEffect(() => {
     getUser();
+    // dispatch({type: 'SET_LOADING', value: false});
   }, []);
 
   const dispatch = useDispatch();
@@ -71,47 +78,94 @@ const KmsOnline = ({navigation, route}) => {
 
   const onSubmit = () => {
     dispatch({type: 'SET_LOADING', value: true});
-    axios
-      .post(`${API}kms-online/personal`, data, {
-        headers: {Authorization: token.value},
-      })
-      .then(res => {
-        setData({});
-        if (res.data.meta.code === 500) {
-          showMessage({
-            message: res.data.meta.message,
-          });
-          dispatch({type: 'SET_LOADING', value: false});
-        } else if (res.data.meta.code === 200) {
-          const result = {
-            age: res.data.data.age,
-            height_status: {
-              height: res.data.data.height_status.height,
-              status: res.data.data.height_status.status,
-            },
-            weight_status: {
-              bmi: res.data.data.weight_status.bmi,
-              status: res.data.data.weight_status.status,
-              weight: res.data.data.weight_status.weight,
-            },
-            profile: {
-              name: res.data.data.profile.name,
-              gender: res.data.data.profile.gender,
-              user_uid: res.data.data.profile.user_uuid,
-            },
-          };
-          dispatch({type: 'SET_LOADING', value: false});
-          console.log(res.data.data);
-          navigation.navigate('KmsOutput', {result});
-        } else {
-          console.log(res.data.data);
-          dispatch({type: 'SET_LOADING', value: false});
-        }
-      })
-      .catch(
-        err => console.log(err.message),
-        dispatch({type: 'SET_LOADING', value: false}),
-      );
+    if (selectedList.uuid) {
+      axios
+        .post(
+          `${API}kms-online/family`,
+          {...data, family_uuid: selectedList.uuid},
+          {
+            headers: {Authorization: token.value},
+          },
+        )
+        .then(res => {
+          setData({});
+          if (res.data.meta.code === 500) {
+            dispatch({type: 'SET_LOADING', value: false});
+            showMessage({
+              message: res.data.meta.message,
+            });
+          } else if (res.data.meta.code === 200) {
+            dispatch({type: 'SET_LOADING', value: false});
+            const result = {
+              age: res.data.data.age,
+              height_status: {
+                height: res.data.data.height_status.height,
+                status: res.data.data.height_status.status,
+              },
+              weight_status: {
+                bmi: res.data.data.weight_status.bmi,
+                status: res.data.data.weight_status.status,
+                weight: res.data.data.weight_status.weight,
+              },
+              profile: {
+                name: res.data.data.profile.name,
+                gender: res.data.data.profile.gender,
+                user_uid: res.data.data.profile.user_uuid,
+              },
+            };
+            navigation.navigate('KmsOutput', {result});
+          } else {
+            console.log(res.data.data);
+            dispatch({type: 'SET_LOADING', value: false});
+          }
+        })
+        .catch(
+          err => console.log(err.message),
+          dispatch({type: 'SET_LOADING', value: false}),
+        );
+    } else {
+      axios
+        .post(`${API}kms-online/personal`, data, {
+          headers: {Authorization: token.value},
+        })
+        .then(res => {
+          setData({});
+          if (res.data.meta.code === 500) {
+            dispatch({type: 'SET_LOADING', value: false});
+            showMessage({
+              message: res.data.meta.message,
+            });
+          } else if (res.data.meta.code === 200) {
+            dispatch({type: 'SET_LOADING', value: false});
+            const result = {
+              age: res.data.data.age,
+              height_status: {
+                height: res.data.data.height_status.height,
+                status: res.data.data.height_status.status,
+              },
+              weight_status: {
+                bmi: res.data.data.weight_status.bmi,
+                status: res.data.data.weight_status.status,
+                weight: res.data.data.weight_status.weight,
+              },
+              profile: {
+                name: res.data.data.profile.name,
+                gender: res.data.data.profile.gender,
+                user_uid: res.data.data.profile.user_uuid,
+              },
+            };
+
+            navigation.navigate('KmsOutput', {result});
+          } else {
+            console.log(res.data.data);
+            dispatch({type: 'SET_LOADING', value: false});
+          }
+        })
+        .catch(
+          err => console.log(err.message),
+          dispatch({type: 'SET_LOADING', value: false}),
+        );
+    }
   };
   return (
     <ScrollView
@@ -126,10 +180,26 @@ const KmsOnline = ({navigation, route}) => {
         <Gap height={30} />
         <View style={styles.content}>
           <Text style={styles.name}>Pilih Pasien</Text>
-          <Card>
+          <Card
+            onPress={() => {
+              setSelectedListPersonal(-1);
+              setSelectedList({
+                ...selectedList,
+                index: -1,
+              });
+            }}>
             <Text style={styles.title}>Pribadi</Text>
             <Gap height={32} />
-            <ListName name={name} />
+            <ListName
+              name={name}
+              onPress={() => setSelectedListPersonal(0)}
+              backgroundColor={
+                selectedListPersonal === 0 ? mainColors.pink : 'transparent'
+              }
+              color={
+                selectedListPersonal === 0 ? mainColors.white : mainColors.pink
+              }
+            />
             <Gap height={40} />
             <Text style={styles.title}>
               Anggota Keluarga ({!dataUser.length ? '0' : dataUser.length})
@@ -140,12 +210,34 @@ const KmsOnline = ({navigation, route}) => {
                 <EmptyFamily />
               ) : (
                 <View style={{width: '100%'}}>
-                  {dataUser.map((item, index) => (
-                    <View key={item.uuid}>
-                      <ListName name={item.name} />
-                      <Gap height={10} />
-                    </View>
-                  ))}
+                  {dataUser.map((item, index) => {
+                    return (
+                      <View key={item.uuid}>
+                        <ListName
+                          edit={selectedList.index === index ? true : false}
+                          name={item.name}
+                          onPress={() =>
+                            setSelectedList({
+                              ...selectedList,
+                              index,
+                              uuid: item.uuid,
+                            })
+                          }
+                          backgroundColor={
+                            selectedList.index === index
+                              ? mainColors.pink
+                              : 'transparent'
+                          }
+                          color={
+                            selectedList.index === index
+                              ? mainColors.white
+                              : mainColors.pink
+                          }
+                        />
+                        <Gap height={10} />
+                      </View>
+                    );
+                  })}
                 </View>
               )}
               <Gap height={20} />
@@ -153,7 +245,7 @@ const KmsOnline = ({navigation, route}) => {
                 <Button
                   type="button-no-outline"
                   title="+ Tambah Keluarga"
-                  onPress={() => navigation.navigate('AddFamilyKMS')}
+                  onPress={() => navigation.navigate('AddFamily')}
                 />
               </View>
             </View>
@@ -163,14 +255,32 @@ const KmsOnline = ({navigation, route}) => {
           <TextInput
             label="Berat Badan Saat Ini (Kg)"
             value={data.weight}
-            onChangeText={val => setData({...data, weight: val})}
+            onChangeText={val => {
+              if (val > 30) {
+                showMessage({
+                  message: 'Berat hanya maksimal 30Kg',
+                });
+                setData({});
+              } else {
+                setData({...data, weight: val});
+              }
+            }}
             keyboardType="number-pad"
           />
           <Gap height={20} />
           <TextInput
             label="Panjang / Tinggi Badan Saat Ini (Cm)"
             value={data.height}
-            onChangeText={val => setData({...data, height: val})}
+            onChangeText={val => {
+              if (val > 125) {
+                showMessage({
+                  message: 'Tinggi badan hanya maksimal 125 Cm',
+                });
+                setData({});
+              } else {
+                setData({...data, height: val});
+              }
+            }}
             keyboardType="number-pad"
           />
           <Gap height={50} />

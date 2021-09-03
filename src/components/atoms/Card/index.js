@@ -1,16 +1,23 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {mainColors} from '../../../utils';
 
-const Card = ({children}) => {
-  return <View style={styles.container}>{children}</View>;
+const Card = ({children, onPress}) => {
+  return (
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={onPress}
+      style={styles.container}>
+      {children}
+    </TouchableOpacity>
+  );
 };
 
 export default Card;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: mainColors.smoke,
+    backgroundColor: '#EDEDED',
     borderRadius: 15,
     padding: 20,
   },

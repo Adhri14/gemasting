@@ -30,8 +30,12 @@ import ListPakar from './ListPakar';
 import EmptyFamily from './EmptyFamily';
 import ChatItem from './ChatItem';
 import InputChat from './InputChat';
+import ActivityPakar from './ActivityPakar';
+import ActivityCustomer from './ActivityCustomer';
 
 export {
+  ActivityCustomer,
+  ActivityPakar,
   EmptyFamily,
   ListPakar,
   InfoStunting,
