@@ -26,25 +26,27 @@ const KMS = () => {
     getData('userProfile').then(res => {
       setUuid(res.profile.user_uuid);
     });
-    getData('kmsOnline').then(res => {
-      console.log(res);
-      setData({
-        age: res.age,
-        date: res.date,
-        height_status: {
-          height: res.height_status.height,
-          status: res.height_status.status,
-        },
-        weight_status: {
-          weight: res.weight_status.weight,
-          status: res.weight_status.status,
-        },
-        profile: {
-          name: res.profile.name,
-          uuid: res.profile.user_uid,
-        },
-      });
-    });
+    getData('kmsOnline')
+      .then(res => {
+        console.log(res);
+        setData({
+          age: res.age,
+          date: res.date,
+          height_status: {
+            height: res.height_status.height,
+            status: res.height_status.status,
+          },
+          weight_status: {
+            weight: res.weight_status.weight,
+            status: res.weight_status.status,
+          },
+          profile: {
+            name: res.profile.name,
+            uuid: res.profile.user_uid,
+          },
+        });
+      })
+      .catch(err => console.log(err.message));
   }, []);
 
   return (
@@ -56,6 +58,9 @@ const KMS = () => {
           category="Pribadi"
           date={moment(data.date).format('DD MMMM YYYY')}
           weight={data.weight_status.status}
+          statusColor={
+            data.weight_status.status === 'Normal' ? 'success' : 'danger'
+          }
         />
       ) : (
         <ListCard

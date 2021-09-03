@@ -16,7 +16,14 @@ import {
 
 const ActivityTab = ({focused, route}) => {
   switch (route) {
-    case 'Chat':
+    case 'Chat Pasien':
+      return (
+        <View style={styles.button(focused)}>
+          {focused ? <IconWhiteChat /> : <IconDarkChat />}
+          <Text style={styles.textIndicator(focused)}>{route}</Text>
+        </View>
+      );
+    case 'Chat Dokter':
       return (
         <View style={styles.button(focused)}>
           {focused ? <IconWhiteChat /> : <IconDarkChat />}

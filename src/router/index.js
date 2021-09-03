@@ -18,7 +18,7 @@ import {
   KmsOnline,
   Stunting,
   KmsOutput,
-  AddFamilyKMS,
+  AddFamily,
   UpdateProfileUser,
   UpdateProfilePosyandu,
   UpdateProfileHomeBabySpa,
@@ -28,9 +28,9 @@ import {
   Transaction,
   OtpScreen,
   DetailTransaction,
-  AddFamilyStunting,
   ChatRoom,
   ProfileDoctor,
+  UpdateFamily,
   Appointment,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -153,8 +153,8 @@ const Router = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="AddFamilyKMS"
-        component={AddFamilyKMS}
+        name="AddFamily"
+        component={AddFamily}
         options={{headerShown: false}}
       />
       {/* Akhir */}
@@ -167,11 +167,6 @@ const Router = () => {
       <Stack.Screen
         name="StuntingOutput"
         component={StuntingOutput}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="AddFamilyStunting"
-        component={AddFamilyStunting}
         options={{headerShown: false}}
       />
       {/* Akhir */}
@@ -216,6 +211,11 @@ const Router = () => {
         options={{
           headerShown: false,
         }}
+      />
+      <Stack.Screen
+        name="UpdateFamily"
+        component={UpdateFamily}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

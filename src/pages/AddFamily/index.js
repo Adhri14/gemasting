@@ -1,5 +1,4 @@
-import moment from 'moment';
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View, StatusBar} from 'react-native';
 import {
   Button,
@@ -10,11 +9,12 @@ import {
   Radio,
   TextInput,
 } from '../../components';
-import {fonts, mainColors, getData} from '../../utils';
+import {fonts, getData, mainColors, showMessage} from '../../utils';
+import moment from 'moment';
 import axios from 'axios';
 import {API} from '../../config';
 
-const AddFamilyStunting = ({navigation}) => {
+const AddFamily = ({navigation}) => {
   const [form1, setForm1] = useState({
     name: '',
     gender: '',
@@ -24,14 +24,6 @@ const AddFamilyStunting = ({navigation}) => {
     gender: '',
   });
 
-  const [token, setToken] = useState('');
-
-  useEffect(() => {
-    getData('token').then(res => {
-      setToken(res);
-    });
-  }, []);
-
   const [date1, setDate1] = useState(new Date());
   const [mode1, setMode1] = useState('date');
   const [show1, setShow1] = useState(false);
@@ -39,6 +31,14 @@ const AddFamilyStunting = ({navigation}) => {
   const [date2, setDate2] = useState(new Date());
   const [mode2, setMode2] = useState('date');
   const [show2, setShow2] = useState(false);
+
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    getData('token').then(res => {
+      setToken(res);
+    });
+  }, []);
 
   const onChange1 = (event, selectedDate) => {
     const currentDate = selectedDate || date1;
@@ -239,7 +239,7 @@ const AddFamilyStunting = ({navigation}) => {
   );
 };
 
-export default AddFamilyStunting;
+export default AddFamily;
 
 const styles = StyleSheet.create({
   page: {

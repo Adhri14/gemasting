@@ -17,6 +17,7 @@ const ListCard = ({
   onPress,
   weight,
   status,
+  statusColor,
 }) => {
   if (type === 'rekam-medis') {
     return (
@@ -52,7 +53,7 @@ const ListCard = ({
           </View>
         </View>
         <View style={styles.descRecord}>
-          <Text style={styles.kmsweight}>{weight}</Text>
+          <Text style={styles.kmsweight(statusColor)}>{weight}</Text>
           <Text style={styles.kmshight}>
             Penanganan : Tetap harus di jaga pola makannya
           </Text>
@@ -189,11 +190,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: mainColors.grey,
   },
-  kmsweight: {
+  kmsweight: statusColor => ({
     fontFamily: fonts.primary[500],
     fontSize: 12,
-    color: mainColors.salmon,
-  },
+    color: statusColor === 'success' ? mainColors.green : mainColors.pink,
+  }),
   kmshight: {
     fontFamily: fonts.primary[500],
     fontSize: 12,

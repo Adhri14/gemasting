@@ -32,6 +32,11 @@ const Stunting = ({navigation, route}) => {
   const [height, setHeight] = useState('');
   const [refreshing, setRefreshing] = useState(false);
   const [dataUser, setDataUser] = useState([]);
+  const [selectedList, setSelectedList] = useState({
+    index: 0,
+    uuid: '',
+  });
+  const [selectedListPersonal, setSelectedListPersonal] = useState(0);
 
   useEffect(() => {
     getUser();
@@ -58,47 +63,91 @@ const Stunting = ({navigation, route}) => {
 
   const onSubmit = () => {
     dispatch({type: 'SET_LOADING', value: true});
-    axios
-      .post(
-        `${API}check-stunting/personal`,
-        {height},
-        {
-          headers: {
-            Authorization: token.value,
+    if (selectedList.uuid) {
+      axios
+        .post(
+          `${API}check-stunting/family`,
+          {height, family_uuid: selectedList.uuid},
+          {
+            headers: {
+              Authorization: token.value,
+            },
           },
-        },
-      )
-      .then(res => {
-        dispatch({type: 'SET_LOADING', value: false});
-        setHeight('');
-        if (res.data.meta.code === 200) {
-          if (
-            res.data.meta.message ===
-            'Check Status Stunting Personal Successfull'
-          ) {
+        )
+        .then(res => {
+          dispatch({type: 'SET_LOADING', value: false});
+          setHeight('');
+          if (res.data.meta.code === 200) {
+            if (
+              res.data.meta.message ===
+              'Check Status Stunting Personal Successfull'
+            ) {
+              showMessage({
+                message: 'Cek stunting berhasil',
+                type: 'success',
+              });
+            }
+            const data = res.data.data;
+            navigation.navigate('StuntingOutput', {data});
+            console.log(res.data.data);
+          } else if (res.data.meta.code === 500) {
             showMessage({
-              message: 'Cek stunting berhasil',
-              type: 'success',
+              message: res.data.meta.message,
             });
+          } else {
+            console.log(res.data.data);
           }
-          const data = res.data.data;
-          navigation.navigate('StuntingOutput', {data});
-          console.log(res.data.data);
-        } else if (res.data.meta.code === 500) {
+        })
+        .catch(e => {
+          dispatch({type: 'SET_LOADING', value: false});
+          setHeight('');
           showMessage({
-            message: res.data.meta.message,
+            message: e.message,
           });
-        } else {
-          console.log(res.data.data);
-        }
-      })
-      .catch(e => {
-        dispatch({type: 'SET_LOADING', value: false});
-        setHeight('');
-        showMessage({
-          message: e.message,
         });
-      });
+    } else {
+      axios
+        .post(
+          `${API}check-stunting/personal`,
+          {height},
+          {
+            headers: {
+              Authorization: token.value,
+            },
+          },
+        )
+        .then(res => {
+          dispatch({type: 'SET_LOADING', value: false});
+          setHeight('');
+          if (res.data.meta.code === 200) {
+            if (
+              res.data.meta.message ===
+              'Check Status Stunting Personal Successfull'
+            ) {
+              showMessage({
+                message: 'Cek stunting berhasil',
+                type: 'success',
+              });
+            }
+            const data = res.data.data;
+            navigation.navigate('StuntingOutput', {data});
+            console.log(res.data.data);
+          } else if (res.data.meta.code === 500) {
+            showMessage({
+              message: res.data.meta.message,
+            });
+          } else {
+            console.log(res.data.data);
+          }
+        })
+        .catch(e => {
+          dispatch({type: 'SET_LOADING', value: false});
+          setHeight('');
+          showMessage({
+            message: e.message,
+          });
+        });
+    }
   };
   return (
     <ScrollView
@@ -113,10 +162,26 @@ const Stunting = ({navigation, route}) => {
         <Gap height={30} />
         <View style={styles.content}>
           <Text style={styles.name}>Pilih Pasien</Text>
-          <Card>
+          <Card
+            onPress={() => {
+              setSelectedListPersonal(-1);
+              setSelectedList({
+                ...selectedList,
+                index: -1,
+              });
+            }}>
             <Text style={styles.title}>Pribadi</Text>
             <Gap height={32} />
-            <ListName name={profile.name} />
+            <ListName
+              name={profile.name}
+              onPress={() => setSelectedListPersonal(0)}
+              backgroundColor={
+                selectedListPersonal === 0 ? mainColors.pink : 'transparent'
+              }
+              color={
+                selectedListPersonal === 0 ? mainColors.white : mainColors.pink
+              }
+            />
             <Gap height={40} />
             <Text style={styles.title}>
               Anggota Keluarga ({!dataUser.length ? '0' : dataUser.length})
@@ -126,19 +191,44 @@ const Stunting = ({navigation, route}) => {
               {!dataUser.length || refreshing ? (
                 <EmptyFamily />
               ) : (
-                dataUser.map((item, index) => (
-                  <View style={{width: '100%'}} key={item.uuid}>
-                    <ListName name={item.name} />
-                    <Gap height={20} />
-                  </View>
-                ))
+                <View style={{width: '100%'}}>
+                  {dataUser.map((item, index) => {
+                    return (
+                      <View key={item.uuid}>
+                        <ListName
+                          onEdit={() => navigation.navigate('UpdateFamily')}
+                          edit={selectedList.index === index ? true : false}
+                          name={item.name}
+                          onPress={() =>
+                            setSelectedList({
+                              ...selectedList,
+                              index,
+                              uuid: item.uuid,
+                            })
+                          }
+                          backgroundColor={
+                            selectedList.index === index
+                              ? mainColors.pink
+                              : 'transparent'
+                          }
+                          color={
+                            selectedList.index === index
+                              ? mainColors.white
+                              : mainColors.pink
+                          }
+                        />
+                        <Gap height={10} />
+                      </View>
+                    );
+                  })}
+                </View>
               )}
               <Gap height={20} />
               <View style={styles.button}>
                 <Button
                   type="button-no-outline"
                   title="+ Tambah Keluarga"
-                  onPress={() => navigation.navigate('AddFamilyStunting')}
+                  onPress={() => navigation.navigate('AddFamily')}
                 />
               </View>
             </View>
