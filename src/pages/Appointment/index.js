@@ -79,7 +79,7 @@ const Appointment = ({navigation}) => {
             <Gap height={30} />
 
             <Title label="Faskes Terdekat" />
-            <ScrollView horizontal>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={styles.healthCardContainer}>
                 <HealthCard />
                 <HealthCard />

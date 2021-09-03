@@ -26,7 +26,7 @@ const renderTabBar = props => {
   );
 };
 
-const ActivityPakar = () => {
+const ActivityHBS = () => {
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
@@ -57,7 +57,7 @@ const ActivityPakar = () => {
   );
 };
 
-export default ActivityPakar;
+export default ActivityHBS;
 
 const styles = StyleSheet.create({
   container: {

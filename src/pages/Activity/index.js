@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
-import {ActivityCustomer, ActivityPakar, Gap} from '../../components';
+import {
+  ActivityCustomer,
+  ActivityPakar,
+  ActivityPosyandu,
+  ActivityHBS,
+  Gap,
+} from '../../components';
 import {fonts, getData, mainColors} from '../../utils';
 
 const Aktivity = () => {
@@ -27,6 +33,12 @@ const Aktivity = () => {
     }
     if (user.role === 3) {
       return <ActivityPakar />;
+    }
+    if (user.role === 4) {
+      return <ActivityPosyandu />;
+    }
+    if (user.role === 5) {
+      return <ActivityHBS />;
     }
     return <ActivityPakar />;
   };

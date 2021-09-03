@@ -26,12 +26,11 @@ const renderTabBar = props => {
   );
 };
 
-const ActivityPakar = () => {
+const ActivityPosyandu = () => {
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'Chat', title: 'Chat Pasien'},
     {key: 'Janji', title: 'Janji Medis'},
     {key: 'Rekam', title: 'Rekam Medis'},
     {key: 'KMS', title: 'KMS Online'},
@@ -39,7 +38,6 @@ const ActivityPakar = () => {
   ]);
 
   const renderScene = SceneMap({
-    Chat,
     Janji,
     Rekam,
     KMS,
@@ -57,7 +55,7 @@ const ActivityPakar = () => {
   );
 };
 
-export default ActivityPakar;
+export default ActivityPosyandu;
 
 const styles = StyleSheet.create({
   container: {

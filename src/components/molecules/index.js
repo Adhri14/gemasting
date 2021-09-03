@@ -32,11 +32,14 @@ import ChatItem from './ChatItem';
 import InputChat from './InputChat';
 import ActivityPakar from './ActivityPakar';
 import ActivityCustomer from './ActivityCustomer';
+import ActivityPosyandu from './ActivityPosyandu';
+import ActivityHBS from './ActivityHBS';
 import HealthCard from './HealthCard';
 
 export {
   ActivityCustomer,
   ActivityPakar,
+  ActivityPosyandu,
   EmptyFamily,
   ListPakar,
   InfoStunting,
@@ -70,4 +73,5 @@ export {
   ChatItem,
   InputChat,
   HealthCard,
+  ActivityHBS,
 };

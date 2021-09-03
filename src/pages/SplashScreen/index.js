@@ -22,7 +22,7 @@ const SplashScreen = ({navigation}) => {
               routes: [{name: 'AppIntro'}],
             });
           }
-        }, 3000);
+        }, 4000);
       }
     });
     const subscriber = auth().onAuthStateChanged(user => {
@@ -39,7 +39,7 @@ const SplashScreen = ({navigation}) => {
               routes: [{name: 'AppIntro'}],
             });
           }
-        }, 3000);
+        }, 4000);
       }
     });
 

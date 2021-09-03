@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     elevation: 14,
     overflow: 'hidden',
     marginRight: 10,
+    padding: 10,
   },
   content: {
     paddingTop: 10,
