@@ -1,10 +1,17 @@
 import React from 'react';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import {StyleSheet, Text, View, useWindowDimensions} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+  Dimensions,
+} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {DummyUser} from '../../assets';
+import {DummyUser, IconStarOff, IconStarOn} from '../../assets';
 import {Gap, Header, ProfilePhoto, Button} from '../../components';
 import {colors, fonts, mainColors} from '../../utils';
+import {ProgressBar, Colors} from 'react-native-paper';
 
 const FirstRoute = () => (
   <View style={{flex: 1}}>
@@ -54,13 +61,78 @@ const SecondRoute = () => (
 const ThirdRoute = () => (
   <View style={{flex: 1}}>
     <Gap height={30} />
-    <Text style={styles.h1}>Alamat</Text>
-    <Text style={styles.textNormal}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus
-      sit amet luctus venenatis, lectus magna fringilla urna. Read more
-    </Text>
+    <View style={styles.mainReview}>
+      <View style={styles.review}>
+        <Text style={styles.reviewNumber}>4.7</Text>
+        <View style={styles.starContainer}>
+          <IconStarOn />
+          <IconStarOn />
+          <IconStarOn />
+          <IconStarOn />
+          <IconStarOff />
+        </View>
+      </View>
+      <View style={styles.reviewProgress}>
+        <View style={styles.progress}>
+          <Text style={styles.rating}>5</Text>
+          <View style={styles.progressBar}>
+            <ProgressBar progress={0.5} color={mainColors.yellow} />
+          </View>
+        </View>
+        <View style={styles.progress}>
+          <Text style={styles.rating}>4</Text>
+          <View style={styles.progressBar}>
+            <ProgressBar progress={0.4} color={mainColors.yellow} />
+          </View>
+        </View>
+        <View style={styles.progress}>
+          <Text style={styles.rating}>3</Text>
+          <View style={styles.progressBar}>
+            <ProgressBar progress={0.3} color={mainColors.yellow} />
+          </View>
+        </View>
+        <View style={styles.progress}>
+          <Text style={styles.rating}>2</Text>
+          <View style={styles.progressBar}>
+            <ProgressBar progress={0.2} color={mainColors.yellow} />
+          </View>
+        </View>
+        <View style={styles.progress}>
+          <Text style={styles.rating}>1</Text>
+          <View style={styles.progressBar}>
+            <ProgressBar progress={0.1} color={mainColors.yellow} />
+          </View>
+        </View>
+      </View>
+    </View>
+
     <Gap height={30} />
-    <Text style={styles.h1}>Maps</Text>
+    <Text style={styles.h1review}>Ulasan</Text>
+    <Gap height={10} />
+    <View style={styles.reviewContainer}>
+      <Text style={styles.textNormal}>Pelayanan yang sangat baik</Text>
+      <Gap height={10} />
+      <View style={styles.starContainer}>
+        <IconStarOn />
+        <IconStarOn />
+        <IconStarOn />
+        <IconStarOn />
+        <IconStarOn />
+      </View>
+    </View>
+    <Gap height={40} />
+    <View style={styles.reviewContainer}>
+      <Text style={styles.textNormal}>Dokter sangat ahli dalam bidangnya</Text>
+      <Gap height={10} />
+      <View style={styles.starContainer}>
+        <IconStarOn />
+        <IconStarOn />
+        <IconStarOn />
+        <IconStarOn />
+        <IconStarOn />
+      </View>
+    </View>
+    <Gap height={30} />
   </View>
 );
 
@@ -201,14 +273,52 @@ const styles = StyleSheet.create({
   info: {
     flex: 1,
   },
+  mainReview: {
+    flexDirection: 'row',
+  },
+  review: {
+    paddingHorizontal: 30,
+  },
+  reviewNumber: {
+    fontFamily: fonts.primary[700],
+    fontSize: 45,
+  },
   h1: {
     fontFamily: fonts.primary[600],
     fontSize: 18,
     color: mainColors.black,
   },
+  h1review: {
+    fontFamily: fonts.primary[600],
+    fontSize: 18,
+    color: mainColors.pink,
+  },
   textNormal: {
     fontSize: 16,
     fontFamily: fonts.primary[400],
     color: mainColors.black,
+  },
+  rating: {
+    fontSize: 12,
+    fontFamily: fonts.primary[600],
+  },
+  reviewContainer: {
+    paddingHorizontal: 25,
+  },
+  reviewProgress: {
+    paddingHorizontal: 30,
+    paddingRight: 20,
+  },
+  starContainer: {
+    flexDirection: 'row',
+  },
+  progress: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  progressBar: {
+    width: Dimensions.get('window').width,
+    marginTop: -2,
+    marginLeft: 10,
   },
 });

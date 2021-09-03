@@ -32,6 +32,7 @@ import ChatItem from './ChatItem';
 import InputChat from './InputChat';
 import ActivityPakar from './ActivityPakar';
 import ActivityCustomer from './ActivityCustomer';
+import HealthCard from './HealthCard';
 
 export {
   ActivityCustomer,
@@ -68,4 +69,5 @@ export {
   Stunting,
   ChatItem,
   InputChat,
+  HealthCard,
 };

@@ -47,7 +47,12 @@ import IconDocDark from './ic-doc-dark';
 import IconInfoCircle from './info-circle.svg';
 import IconProfileDark from './profile-dark.svg';
 import IconSearchNormal from './search-normal.svg';
+<<<<<<< HEAD
 import IconEdit from './edit.svg';
+=======
+import IconStarOn from './ic-star-on.svg';
+import IconStarOff from './ic-star-off.svg';
+>>>>>>> irfan/main
 
 export {
   IconEdit,
@@ -100,4 +105,6 @@ export {
   IconSend,
   IconSendDark,
   IconDocDark,
+  IconStarOn,
+  IconStarOff,
 };

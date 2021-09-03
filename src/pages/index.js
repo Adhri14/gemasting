@@ -27,6 +27,7 @@ import DetailTransaction from './DetailTransaction';
 import ChatRoom from './ChatRoom';
 import ProfileDoctor from './ProfileDoctor';
 import UpdateFamily from './UpdateFamily';
+import Appointment from './Appointment';
 
 export {
   UpdateFamily,
@@ -58,4 +59,5 @@ export {
   ChatRoom,
   ProfileDoctor,
   AddFamily,
+  Appointment,
 };

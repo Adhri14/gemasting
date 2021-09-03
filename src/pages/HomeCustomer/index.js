@@ -56,7 +56,9 @@ const HomeCustomer = ({navigation}) => {
               onPress={() => navigation.navigate('ChatPakar')}>
               <IlChatPakar />
             </CardButton>
-            <CardButton label="Buat Janji">
+            <CardButton
+              label="Buat Janji"
+              onPress={() => navigation.navigate('Appointment')}>
               <IlJanji />
             </CardButton>
             <CardButton
