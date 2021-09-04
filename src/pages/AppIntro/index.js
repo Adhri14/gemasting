@@ -23,25 +23,45 @@ const slides = [
     key: 1,
     title: 'Selamat Datang di \nGEMASTING',
     text: 'Geser ke kiri untuk mengenal\nkami lebih lanjut',
-    image: <ImageIntro1 width="100%" height="100%" />,
+    image: (
+      <ImageIntro1
+        width={width <= 360 ? '80%' : '100%'}
+        height={width <= 360 ? '80%' : '100%'}
+      />
+    ),
   },
   {
     key: 2,
     title: 'Gerakan Masyarakat \nSadar Stunting',
     text: 'Aplikasi yang dikembangkan untuk\npermasalahan stunting',
-    image: <ImageIntro2 width="100%" height="100%" />,
+    image: (
+      <ImageIntro2
+        width={width <= 360 ? '80%' : '100%'}
+        height={width <= 360 ? '80%' : '100%'}
+      />
+    ),
   },
   {
     key: 3,
     title: 'Konsultasi Masalah\nKesehatan Anda',
     text: 'Konsultasi kesehatan anda\ndengan pakar kami yang terverifikasi',
-    image: <ImageIntro3 width="100%" height="100%" />,
+    image: (
+      <ImageIntro3
+        width={width <= 360 ? '80%' : '100%'}
+        height={width <= 360 ? '80%' : '100%'}
+      />
+    ),
   },
   {
     key: 4,
     title: 'Berbagi dan Terhubung\nDengan Pengguna Lain',
     text: 'Platform dengan komunitas pengguna\ndari seluruh Indonesia',
-    image: <ImageIntro4 width="100%" height="100%" />,
+    image: (
+      <ImageIntro4
+        width={width <= 360 ? '80%' : '100%'}
+        height={width <= 360 ? '80%' : '100%'}
+      />
+    ),
   },
 ];
 const AppIntro = ({navigation}) => {
@@ -194,14 +214,14 @@ const styles = StyleSheet.create({
     color: mainColors.pink,
   },
   title: {
-    fontSize: 25,
+    fontSize: width <= 360 ? 18 : 25,
     fontFamily: fonts.primary[600],
     textAlign: 'center',
     color: colors.text.primary1,
     marginTop: -40,
   },
   text: {
-    fontSize: 18,
+    fontSize: width <= 360 ? 14 : 18,
     fontFamily: fonts.primary[500],
     textAlign: 'center',
     color: colors.text.secondary2,

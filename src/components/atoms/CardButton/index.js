@@ -1,5 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {IlPartner, IlPasien} from '../../../assets';
 import {colors, fonts, mainColors} from '../../../utils';
 import Gap from '../Gap';
@@ -35,6 +41,10 @@ const CardButton = ({label, onPress, type, children}) => {
 
 export default CardButton;
 
+const {width, height} = Dimensions.get('window');
+
+console.log(width);
+
 const styles = StyleSheet.create({
   container: {justifyContent: 'center', alignItems: 'center', marginBottom: 20},
   button: {
@@ -46,15 +56,15 @@ const styles = StyleSheet.create({
     backgroundColor: mainColors.lightPink,
   },
   buttonBig: {
-    width: 150,
+    width: width <= 360 ? 150 : 168,
     height: 150,
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: mainColors.smoke,
+    backgroundColor: '#F4F4F4',
   },
   textButton: {
-    fontSize: 16,
+    fontSize: width <= 360 ? 14 : 16,
     fontFamily: fonts.primary[500],
     color: colors.text.primary1,
   },

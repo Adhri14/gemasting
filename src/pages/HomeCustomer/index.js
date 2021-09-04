@@ -9,7 +9,7 @@ import {
   IlRekamMedis,
   IlStunting,
 } from '../../assets';
-import {CardButton, Gap, HeaderHome} from '../../components';
+import {CardButton, Gap, HeaderHome, Skeleton} from '../../components';
 import {fonts, getData, mainColors, removeData} from '../../utils';
 
 const HomeCustomer = ({navigation}) => {
@@ -21,25 +21,26 @@ const HomeCustomer = ({navigation}) => {
   });
 
   const [token, setToken] = useState('');
-  console.log(token);
 
   useEffect(() => {
     let unmounted = false;
-    getData('userProfile').then(resProfile => {
-      if (!unmounted) {
-        setDataProfile({
-          name: resProfile.profile.name,
-          role: resProfile.role_id,
-          profile: resProfile.profile.photo,
-          uuid: resProfile.profile.user_uuid,
-        });
-      }
-    });
     getData('token').then(res => {
       if (!unmounted) {
         setToken(res);
       }
     });
+    setTimeout(() => {
+      getData('userProfile').then(resProfile => {
+        if (!unmounted) {
+          setDataProfile({
+            name: resProfile.profile.name,
+            role: resProfile.role_id,
+            profile: resProfile.profile.photo,
+            uuid: resProfile.profile.user_uuid,
+          });
+        }
+      });
+    }, 2000);
     return () => {
       unmounted = true;
     };
@@ -195,29 +196,8 @@ const HomeCustomer = ({navigation}) => {
     }
 
     return (
-      <View style={styles.wrapper}>
-        <CardButton label="Chat Pakar">
-          <IlChatPakar />
-        </CardButton>
-        <CardButton label="Buat Janji">
-          <IlJanji />
-        </CardButton>
-        <CardButton
-          label="KMS Online"
-          onPress={() => navigation.navigate('KmsOnline')}>
-          <IlKMS />
-        </CardButton>
-        <CardButton
-          label="Cek Stunting"
-          onPress={() => navigation.navigate('Stunting')}>
-          <IlStunting />
-        </CardButton>
-        <CardButton label="Rekam Medis">
-          <IlRekamMedis />
-        </CardButton>
-        <CardButton label="Komunitas">
-          <IlKomunitas />
-        </CardButton>
+      <View>
+        <Skeleton type="home" />
       </View>
     );
   };
@@ -237,11 +217,9 @@ const HomeCustomer = ({navigation}) => {
           <View style={styles.banner}>
             <IconImage />
           </View>
-          {/* <View style={styles.content}> */}
           <View>
             <Role />
           </View>
-          {/* </View> */}
         </View>
       </View>
     </ScrollView>
