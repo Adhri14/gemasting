@@ -5,7 +5,7 @@ export const mainColors = {
   ocean: '#D9F4FF',
   grey: '#999999',
   darkSmoke: '#DFDFDF',
-  smoke: '#F3F3F3',
+  smoke: '#FAFAFA',
   lightSmoke: '#FEFEFF',
   white: '#FFFFFF',
   black: '#404040',

@@ -15,13 +15,15 @@ const Aktivity = () => {
   });
   useEffect(() => {
     let unmounted = false;
-    getData('userProfile').then(res => {
-      if (!unmounted) {
-        setUser({
-          role: res.role_id,
-        });
-      }
-    });
+    setTimeout(() => {
+      getData('userProfile').then(resProfile => {
+        if (!unmounted) {
+          setUser({
+            role: resProfile.role_id,
+          });
+        }
+      });
+    }, 2000);
     return () => {
       unmounted = true;
     };
