@@ -18,6 +18,7 @@ const ListCard = ({
   weight,
   status,
   statusColor,
+  height,
 }) => {
   if (type === 'rekam-medis') {
     return (
@@ -54,9 +55,7 @@ const ListCard = ({
         </View>
         <View style={styles.descRecord}>
           <Text style={styles.kmsweight(statusColor)}>{weight}</Text>
-          <Text style={styles.kmshight}>
-            Penanganan : Tetap harus di jaga pola makannya
-          </Text>
+          <Text style={styles.kmshight}>{height}</Text>
         </View>
       </View>
     );
@@ -67,7 +66,7 @@ const ListCard = ({
         <View style={styles.content}>
           <View>
             <Text style={styles.profileName}>{name}</Text>
-            <Text style={styles.profileDesc}>Pribadi</Text>
+            <Text style={styles.profileDesc}>{category}</Text>
           </View>
           <View>
             <Text style={styles.timeRecord}>{date}</Text>

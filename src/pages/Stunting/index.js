@@ -89,7 +89,6 @@ const Stunting = ({navigation, route}) => {
             }
             const data = res.data.data;
             navigation.navigate('StuntingOutput', {data});
-            console.log(res.data.data);
           } else if (res.data.meta.code === 500) {
             showMessage({
               message: res.data.meta.message,

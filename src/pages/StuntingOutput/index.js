@@ -29,11 +29,6 @@ const StuntingOutput = ({navigation, route}) => {
   };
 
   const onSave = () => {
-    const stunting = {
-      ...data,
-      date: new Date(),
-    };
-    storeData('cekStunting', stunting);
     navigation.replace('MainApp', {screen: 'Activity'});
   };
 

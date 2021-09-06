@@ -1,75 +1,60 @@
+import axios from 'axios';
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {API} from '../../../config';
 import {getData} from '../../../utils';
 import ListCard from '../ListCard';
+import {Gap} from '../../atoms';
+import {useSelector} from 'react-redux';
 
 const KMS = () => {
-  const [uuid, setUuid] = useState('');
-  const [data, setData] = useState({
-    age: '',
-    data: '',
-    height_status: {
-      height: '',
-      status: '',
-    },
-    weight_status: {
-      weight: '',
-      status: '',
-    },
-    profile: {
-      name: '',
-      uuid: '',
-    },
-  });
+  const [data, setData] = useState([]);
+  const authorization = useSelector(state => state.authorization);
+
   useEffect(() => {
-    getData('userProfile').then(res => {
-      setUuid(res.profile.user_uuid);
-    });
-    getData('kmsOnline')
+    getKMS();
+  }, []);
+
+  const getKMS = () => {
+    axios
+      .get(`${API}medical-records/kms?user_uuid=${authorization.uuid}`, {
+        headers: {Authorization: authorization.token},
+      })
       .then(res => {
-        console.log(res);
-        setData({
-          age: res.age,
-          date: res.date,
-          height_status: {
-            height: res.height_status.height,
-            status: res.height_status.status,
-          },
-          weight_status: {
-            weight: res.weight_status.weight,
-            status: res.weight_status.status,
-          },
-          profile: {
-            name: res.profile.name,
-            uuid: res.profile.user_uid,
-          },
-        });
+        setData(res.data.data);
       })
       .catch(err => console.log(err.message));
-  }, []);
+  };
+
+  console.log('ini data uuid dari redux ', authorization.uuid);
 
   return (
     <View style={{flex: 1, marginHorizontal: 20}}>
-      {uuid === data.profile.uuid ? (
-        <ListCard
-          type="kms-online"
-          name={data.profile.name}
-          category="Pribadi"
-          date={moment(data.date).format('DD MMMM YYYY')}
-          weight={data.weight_status.status}
-          statusColor={
-            data.weight_status.status === 'Normal' ? 'success' : 'danger'
-          }
-        />
-      ) : (
-        <ListCard
-          type="kms-online"
-          name="John Doe"
-          category="Pribadi"
-          date=" 17 Agustus 2021"
-        />
-      )}
+      {data.map((item, index) => {
+        console.log(item.user.uuid);
+        return (
+          <View key={index}>
+            <ListCard
+              type="kms-online"
+              name={
+                item.family_uuid === null ? item.user.email : item.family.name
+              }
+              category={
+                item.family_uuid === null ? 'Pribadi' : 'Anggota Keluarga'
+              }
+              date={moment(item.created_at).format('DD MMMM YYYY')}
+              weight={item.weight_status.status}
+              height={item.height_status.status}
+              status={item.height_status.status}
+              statusColor={
+                item.weight_status.status === 'Normal' ? 'success' : 'danger'
+              }
+            />
+            <Gap height={20} />
+          </View>
+        );
+      })}
     </View>
   );
 };
