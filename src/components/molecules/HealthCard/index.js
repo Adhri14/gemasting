@@ -3,13 +3,15 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import {HospitalDummy1} from '../../../assets';
 import {fonts, mainColors} from '../../../utils';
 
-const HealthCard = () => {
+const HealthCard = ({image, name, address}) => {
   return (
     <View style={styles.container}>
-      <Image source={HospitalDummy1} />
+      <View style={styles.image}>
+        <Image source={image} style={styles.img} />
+      </View>
       <View style={styles.content}>
-        <Text style={styles.title}>RS Siti Fatimah</Text>
-        <Text style={styles.desc}>Jl. Kol Burlian</Text>
+        <Text style={styles.title}>{name}</Text>
+        <Text style={styles.desc}>{address}</Text>
       </View>
     </View>
   );
@@ -19,16 +21,14 @@ export default HealthCard;
 
 const styles = StyleSheet.create({
   container: {
-    width: 120,
     backgroundColor: mainColors.white,
     borderRadius: 8,
     shadowColor: mainColors.black,
     shadowOffset: {width: 0, height: 7},
     shadowOpacity: 0.5,
     shadowRadius: 10,
-    elevation: 14,
+    elevation: 4,
     overflow: 'hidden',
-    marginRight: 10,
     padding: 10,
   },
   content: {
@@ -44,5 +44,14 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary[400],
     fontSize: 14,
     color: mainColors.grey,
+  },
+  image: {
+    width: 120,
+    height: 110,
+    borderRadius: 15,
+    overflow: 'hidden',
+  },
+  img: {
+    resizeMode: 'cover',
   },
 });

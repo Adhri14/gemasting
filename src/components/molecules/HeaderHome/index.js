@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
 import {DummyUser} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
@@ -19,6 +19,8 @@ const HeaderHome = ({img, name}) => {
 
 export default HeaderHome;
 
+const {width} = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -26,12 +28,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 25,
+    fontSize: width <= 360 ? 18 : 25,
     fontFamily: fonts.primary[600],
     color: colors.text.primary1,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: width <= 360 ? 14 : 16,
     fontFamily: fonts.primary[400],
     color: colors.text.secondary2,
     marginTop: -6,

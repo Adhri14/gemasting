@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {colors, fonts} from '../../../utils';
 import {Button, Gap} from '../../atoms';
 
@@ -19,6 +19,8 @@ const Header = ({onPress, title, more, onPressMore}) => {
 
 export default Header;
 
+const {width} = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     padding: 20,
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     flex: 1,
-    fontSize: 25,
+    fontSize: width <= 360 ? 18 : 25,
     fontFamily: fonts.primary[600],
     color: colors.text.primary,
   },

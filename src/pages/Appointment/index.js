@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Dimensions,
 } from 'react-native';
 import {
   BottomSheetModal,
@@ -13,7 +14,16 @@ import {
   BottomSheetBackdrop,
 } from '@gorhom/bottom-sheet';
 
-import {IconFilter, IconSearch} from '../../assets';
+import {
+  HospitalDummy1,
+  HospitalDummy2,
+  HospitalDummy3,
+  HospitalDummy4,
+  IconEditPink,
+  IconFilter,
+  IconLocation,
+  IconSearch,
+} from '../../assets';
 import {fonts, mainColors} from '../../utils';
 import {
   Button,
@@ -70,58 +80,137 @@ const Appointment = ({navigation}) => {
     <BottomSheetModalProvider>
       <View style={[styles.page, {}]}>
         <Header onPress={() => navigation.goBack()} title="Appointment" />
+        <Gap height={20} />
+
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{flexGrow: 1}}>
           <View style={styles.content}>
+            <View style={styles.row}>
+              <View style={styles.location}>
+                <IconLocation />
+                <Text style={styles.textLocation}>Palembang, Indonesia</Text>
+              </View>
+              <View>
+                <IconEditPink />
+              </View>
+            </View>
             <Gap height={20} />
             <Filter onPressFilter={handlePresentModalPress} />
             <Gap height={30} />
 
             <Title label="Faskes Terdekat" />
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <View style={styles.healthCardContainer}>
-                <HealthCard />
-                <HealthCard />
-                <HealthCard />
-                <HealthCard />
-                <HealthCard />
-              </View>
-            </ScrollView>
+            <Gap height={20} />
+            <View>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                <View style={styles.healthCardContainer}>
+                  <Gap width={20} />
+                  <HealthCard
+                    image={HospitalDummy1}
+                    name="RS. Siti Fatimah"
+                    address="Jalan Kolpurlian"
+                  />
+                  <Gap width={10} />
+                  <HealthCard
+                    image={HospitalDummy2}
+                    name="RS. Siti Fatimah"
+                    address="Jalan Kolpurlian"
+                  />
+                  <Gap width={10} />
+                  <HealthCard
+                    image={HospitalDummy3}
+                    name="RS. Siti Fatimah"
+                    address="Jalan Kolpurlian"
+                  />
+                  <Gap width={10} />
+                  <HealthCard
+                    image={HospitalDummy4}
+                    name="RS. Siti Fatimah"
+                    address="Jalan Kolpurlian"
+                  />
+                  <Gap width={10} />
+                  <HealthCard
+                    image={HospitalDummy1}
+                    name="RS. Siti Fatimah"
+                    address="Jalan Kolpurlian"
+                  />
+                  <Gap width={20} />
+                </View>
+              </ScrollView>
+            </View>
 
             <Gap height={30} />
 
             <Title label="Layanan Kesehatan" />
+            <Gap height={20} />
             <View>
-              <HealthCard />
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                <View style={styles.healthCardContainer}>
+                  <Gap width={20} />
+                  <HealthCard
+                    image={HospitalDummy1}
+                    name="RS. Siti Fatimah"
+                    address="Jalan Kolpurlian"
+                  />
+                  <Gap width={10} />
+                  <HealthCard
+                    image={HospitalDummy2}
+                    name="RS. Siti Fatimah"
+                    address="Jalan Kolpurlian"
+                  />
+                  <Gap width={10} />
+                  <HealthCard
+                    image={HospitalDummy3}
+                    name="RS. Siti Fatimah"
+                    address="Jalan Kolpurlian"
+                  />
+                  <Gap width={10} />
+                  <HealthCard
+                    image={HospitalDummy1}
+                    name="RS. Siti Fatimah"
+                    address="Jalan Kolpurlian"
+                  />
+                  <Gap width={10} />
+                  <HealthCard
+                    image={HospitalDummy4}
+                    name="RS. Siti Fatimah"
+                    address="Jalan Kolpurlian"
+                  />
+                  <Gap width={20} />
+                </View>
+              </ScrollView>
             </View>
+
             <Gap height={30} />
             <Title label="Rekomendasi Dokter" />
             <Gap height={30} />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Dokter Umum"
-              name="Dr. Muh. Nasrul Fattah"
-              address="RSUD Jakarta"
-            />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Dokter Anak"
-              name="Dr. Muh. Nasrul Qarib"
-              address="RSUD Jakarta"
-            />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Ahli Gizi"
-              name="Dr. Azis Iqbal"
-              address="RSUD Jakarta"
-            />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Dokter Umum"
-              name="Dr. Ade Suhada"
-              address="RSUD Jakarta"
-            />
+            <View style={{paddingHorizontal: 20}}>
+              <ListPakar
+                onPress={() => navigation.navigate('Transaction')}
+                pakar="Dokter Umum"
+                name="Dr. Muh. Nasrul Fattah"
+                address="RSUD Jakarta"
+              />
+              <ListPakar
+                onPress={() => navigation.navigate('Transaction')}
+                pakar="Dokter Anak"
+                name="Dr. Muh. Nasrul Qarib"
+                address="RSUD Jakarta"
+              />
+              <ListPakar
+                onPress={() => navigation.navigate('Transaction')}
+                pakar="Ahli Gizi"
+                name="Dr. Azis Iqbal"
+                address="RSUD Jakarta"
+              />
+              <ListPakar
+                onPress={() => navigation.navigate('Transaction')}
+                pakar="Dokter Umum"
+                name="Dr. Ade Suhada"
+                address="RSUD Jakarta"
+              />
+            </View>
+
             <Gap height={20} />
           </View>
         </ScrollView>
@@ -152,6 +241,8 @@ const Appointment = ({navigation}) => {
 
 export default Appointment;
 
+const {width} = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   page: {
     flex: 1,
@@ -161,9 +252,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingHorizontal: 20,
+  },
+  location: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  textLocation: {
+    fontFamily: fonts.primary[500],
+    fontSize: 14,
+    color: mainColors.black,
+    marginLeft: 8,
   },
   title: {
-    fontSize: 20,
+    fontSize: width <= 360 ? 18 : 20,
     fontFamily: fonts.primary[600],
     color: mainColors.pink,
   },
@@ -174,7 +276,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   textButton: {
-    fontSize: 14,
+    fontSize: width <= 360 ? 12 : 14,
     fontFamily: fonts.primary[500],
     color: mainColors.pink,
   },
@@ -188,7 +290,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   textInput: {
-    fontSize: 14,
+    fontSize: width <= 360 ? 12 : 14,
     fontFamily: fonts.primary[400],
     flex: 1,
     marginLeft: 10,
@@ -200,10 +302,11 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     borderRadius: 10,
   },
-  content: {
-    padding: 20,
-  },
+  // content: {
+  //   padding: 20,
+  // },
   healthCardContainer: {
     flexDirection: 'row',
+    marginVertical: 20,
   },
 });

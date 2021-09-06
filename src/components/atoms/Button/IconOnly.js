@@ -1,5 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Dimensions,
+} from 'react-native';
 import {
   IconBackDark,
   IconBackPink,
@@ -39,6 +45,8 @@ const IconOnly = ({onPress, icon}) => {
 };
 
 export default IconOnly;
+
+const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   button: {

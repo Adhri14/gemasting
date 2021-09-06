@@ -50,6 +50,7 @@ import IconSearchNormal from './search-normal.svg';
 import IconEdit from './edit.svg';
 import IconStarOn from './ic-star-on.svg';
 import IconStarOff from './ic-star-off.svg';
+import IconEditPink from './ic-edit-pink.svg';
 
 export {
   IconEdit,
@@ -104,4 +105,5 @@ export {
   IconDocDark,
   IconStarOn,
   IconStarOff,
+  IconEditPink,
 };

@@ -1,5 +1,6 @@
 import React, {useRef, useMemo, useCallback, useState} from 'react';
 import {
+  Dimensions,
   ScrollView,
   StyleSheet,
   Text,
@@ -157,6 +158,8 @@ const ChatPakar = ({navigation}) => {
 
 export default ChatPakar;
 
+const {width} = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   page: {
     flex: 1,
@@ -168,7 +171,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 20,
+    fontSize: width <= 360 ? 18 : 20,
     fontFamily: fonts.primary[600],
     color: mainColors.pink,
   },
@@ -179,7 +182,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   textButton: {
-    fontSize: 14,
+    fontSize: width <= 360 ? 12 : 14,
     fontFamily: fonts.primary[500],
     color: mainColors.pink,
   },
@@ -193,7 +196,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   textInput: {
-    fontSize: 14,
+    fontSize: width <= 360 ? 12 : 14,
     fontFamily: fonts.primary[400],
     flex: 1,
     marginLeft: 10,

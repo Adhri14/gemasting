@@ -1,5 +1,12 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {DummyUser, IconLocation, IconStar} from '../../../assets';
 import {fonts, mainColors} from '../../../utils';
 import {Gap} from '../../atoms';
@@ -42,6 +49,8 @@ const ListPakar = ({name, pakar, address, onPress, detail}) => {
 
 export default ListPakar;
 
+const {width} = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -60,13 +69,13 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    width: 100,
-    height: 100,
+    width: width <= 360 ? 75 : 100,
+    height: width <= 360 ? 75 : 100,
     overflow: 'hidden',
   },
   profile: {
-    width: 100,
-    height: 100,
+    width: width <= 360 ? 75 : 100,
+    height: width <= 360 ? 75 : 100,
   },
   wrapper: {
     flexDirection: 'row',
@@ -77,12 +86,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   name: {
-    fontSize: 20,
+    fontSize: width <= 360 ? 16 : 20,
     fontFamily: fonts.primary[600],
     color: mainColors.black,
   },
   pakar: {
-    fontSize: 14,
+    fontSize: width <= 360 ? 13 : 14,
     fontFamily: fonts.primary[600],
     color: mainColors.grey,
     marginBottom: 10,

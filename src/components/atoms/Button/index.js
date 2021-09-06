@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, Dimensions} from 'react-native';
 import {IconGoogle} from '../../../assets';
 import {colors, fonts, mainColors} from '../../../utils';
 import IconOnly from './IconOnly';
