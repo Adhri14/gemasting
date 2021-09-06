@@ -11,16 +11,26 @@ import {
 } from '../../assets';
 import {CardButton, Gap, HeaderHome, Skeleton} from '../../components';
 import {fonts, getData, mainColors, removeData} from '../../utils';
+import {useDispatch} from 'react-redux';
 
 const HomeCustomer = ({navigation}) => {
+  const dispatch = useDispatch();
   const [dataProfile, setDataProfile] = useState({
     profile: '',
     name: '',
     role: 0,
     uuid: '',
+    uid: '',
   });
 
   const [token, setToken] = useState('');
+
+  const data = {
+    token: token.value,
+    uuid: dataProfile.uuid,
+  };
+
+  dispatch({type: 'SET_AUTHORIZATION', value: data});
 
   useEffect(() => {
     let unmounted = false;
@@ -37,6 +47,7 @@ const HomeCustomer = ({navigation}) => {
             role: resProfile.role_id,
             profile: resProfile.profile.photo,
             uuid: resProfile.profile.user_uuid,
+            uid: resProfile.profile.uuid,
           });
         }
       });

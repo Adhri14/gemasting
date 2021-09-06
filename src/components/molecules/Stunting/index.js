@@ -4,53 +4,54 @@ import {StyleSheet, Text, View} from 'react-native';
 import {getData} from '../../../utils';
 import EmptyFamily from '../EmptyFamily';
 import ListCard from '../ListCard';
+import {useSelector} from 'react-redux';
+import axios from 'axios';
+import {API} from '../../../config';
+import {Gap} from '../../atoms';
 
 const Stunting = () => {
-  const [checkStunting, setCheckStunting] = useState({
-    date: '',
-    profile: {
-      name: '',
-      uuid: '',
-    },
-    status: '',
-    stunting: false,
-  });
+  const [data, setData] = useState([]);
+  const authorization = useSelector(state => state.authorization);
 
-  const [uuid, setUuid] = useState('');
   useEffect(() => {
-    getData('userProfile').then(res => {
-      setUuid(res.profile.user_uuid);
-    });
-    getData('cekStunting')
+    getInfoStunting();
+  }, []);
+
+  const getInfoStunting = () => {
+    axios
+      .get(
+        `${API}medical-records/check-stunting?user_uuid=${authorization.uuid}`,
+        {
+          headers: {Authorization: authorization.token},
+        },
+      )
       .then(res => {
-        setCheckStunting({
-          date: res.date,
-          profile: {
-            name: res.profile.name,
-            uuid: res.profile.user_uuid,
-          },
-          status: res.status,
-          stunting: res.stunting,
-        });
+        setData(res.data.data);
       })
       .catch(err => console.log(err.message));
-  }, []);
+  };
+
+  console.log('ini data uuid dari redux ', authorization.uuid);
   return (
     <View style={{flex: 1, marginHorizontal: 20}}>
-      {checkStunting.profile.uuid === uuid ? (
-        <ListCard
-          type="stunting"
-          date={moment(checkStunting.date).format('DD MMMM YYYY')}
-          name={checkStunting.profile.name}
-          status={
-            checkStunting === 'Normal'
-              ? `Kondisi ${checkStunting.status}`
-              : `Indikasi ${checkStunting.status}`
-          }
-        />
-      ) : (
-        <EmptyFamily />
-      )}
+      {data.map((item, index) => {
+        return (
+          <View key={index}>
+            <ListCard
+              type="stunting"
+              name={
+                item.family_uuid === null ? item.user.email : item.family.name
+              }
+              category={
+                item.family_uuid === null ? 'Pribadi' : 'Anggota Keluarga'
+              }
+              date={moment(item.created_at).format('DD MMMM YYYY')}
+              status={item.user.email}
+            />
+            <Gap height={20} />
+          </View>
+        );
+      })}
     </View>
   );
 };

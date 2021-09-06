@@ -88,14 +88,13 @@ const KmsOnline = ({navigation, route}) => {
           },
         )
         .then(res => {
+          dispatch({type: 'SET_LOADING', value: false});
           setData({});
           if (res.data.meta.code === 500) {
-            dispatch({type: 'SET_LOADING', value: false});
             showMessage({
               message: res.data.meta.message,
             });
           } else if (res.data.meta.code === 200) {
-            dispatch({type: 'SET_LOADING', value: false});
             const result = {
               age: res.data.data.age,
               height_status: {
@@ -116,27 +115,26 @@ const KmsOnline = ({navigation, route}) => {
             navigation.navigate('KmsOutput', {result});
           } else {
             console.log(res.data.data);
-            dispatch({type: 'SET_LOADING', value: false});
           }
         })
-        .catch(
-          err => console.log(err.message),
-          dispatch({type: 'SET_LOADING', value: false}),
-        );
+        .catch(err => {
+          showMessage(err.message);
+          dispatch({type: 'SET_LOADING', value: false});
+          setData({});
+        });
     } else {
       axios
         .post(`${API}kms-online/personal`, data, {
           headers: {Authorization: token.value},
         })
         .then(res => {
+          dispatch({type: 'SET_LOADING', value: false});
           setData({});
           if (res.data.meta.code === 500) {
-            dispatch({type: 'SET_LOADING', value: false});
             showMessage({
               message: res.data.meta.message,
             });
           } else if (res.data.meta.code === 200) {
-            dispatch({type: 'SET_LOADING', value: false});
             const result = {
               age: res.data.data.age,
               height_status: {
@@ -154,17 +152,16 @@ const KmsOnline = ({navigation, route}) => {
                 user_uid: res.data.data.profile.user_uuid,
               },
             };
-
             navigation.navigate('KmsOutput', {result});
           } else {
             console.log(res.data.data);
-            dispatch({type: 'SET_LOADING', value: false});
           }
         })
-        .catch(
-          err => console.log(err.message),
-          dispatch({type: 'SET_LOADING', value: false}),
-        );
+        .catch(err => {
+          showMessage({message: err.message});
+          dispatch({type: 'SET_LOADING', value: false});
+          setData({});
+        });
     }
   };
   return (

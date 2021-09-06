@@ -67,15 +67,6 @@ const KmsOutput = ({navigation, route}) => {
   };
 
   const onSave = () => {
-    showMessage({
-      message: 'Data KMS Online berhasil disimpan',
-      type: 'success',
-    });
-    const data = {
-      ...result,
-      date: new Date(),
-    };
-    storeData('kmsOnline', data);
     navigation.replace('MainApp', {screen: 'Activity'});
   };
   return (
