@@ -10,13 +10,14 @@ import * as Sentry from '@sentry/react-native';
 import {MenuProvider} from 'react-native-popup-menu';
 
 const MainApp = () => {
-  const {loading} = useSelector(state => state.loadingReducer);
+  const {loading, loadingMain} = useSelector(state => state.loadingReducer);
   return (
     <MenuProvider>
       <NavigationContainer>
         <Router />
         <FlashMessage position="top" />
         {loading && <Loading />}
+        {loadingMain && <Loading type="loading-main" />}
       </NavigationContainer>
     </MenuProvider>
   );

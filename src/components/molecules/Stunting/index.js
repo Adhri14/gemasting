@@ -12,9 +12,11 @@ import {Gap} from '../../atoms';
 const Stunting = () => {
   const [data, setData] = useState([]);
   const authorization = useSelector(state => state.authorization);
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     getInfoStunting();
+    getData('userProfile').then(res => setUserName(res.profile.name));
   }, []);
 
   const getInfoStunting = () => {
@@ -31,7 +33,6 @@ const Stunting = () => {
       .catch(err => console.log(err.message));
   };
 
-  console.log('ini data uuid dari redux ', authorization.uuid);
   return (
     <View style={{flex: 1, marginHorizontal: 20}}>
       {data.map((item, index) => {
@@ -39,9 +40,7 @@ const Stunting = () => {
           <View key={index}>
             <ListCard
               type="stunting"
-              name={
-                item.family_uuid === null ? item.user.email : item.family.name
-              }
+              name={item.family_uuid === null ? userName : item.family.name}
               category={
                 item.family_uuid === null ? 'Pribadi' : 'Anggota Keluarga'
               }

@@ -29,26 +29,26 @@ const SplashScreen = ({navigation}) => {
         }, 4000);
       }
     });
-    const subscriber = auth().onAuthStateChanged(user => {
-      if (!unmounted) {
-        setTimeout(() => {
-          if (user) {
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'MainApp'}],
-            });
-          } else {
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'AppIntro'}],
-            });
-          }
-        }, 4000);
-      }
-    });
+    // const subscriber = auth().onAuthStateChanged(user => {
+    //   if (!unmounted) {
+    //     setTimeout(() => {
+    //       if (user) {
+    //         navigation.reset({
+    //           index: 0,
+    //           routes: [{name: 'MainApp'}],
+    //         });
+    //       } else {
+    //         navigation.reset({
+    //           index: 0,
+    //           routes: [{name: 'AppIntro'}],
+    //         });
+    //       }
+    //     }, 4000);
+    //   }
+    // });
 
     return () => {
-      subscriber();
+      // subscriber();
       unmounted = true;
     };
   }, [navigation]);

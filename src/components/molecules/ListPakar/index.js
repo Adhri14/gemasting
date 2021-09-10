@@ -11,12 +11,12 @@ import {DummyUser, IconLocation, IconStar} from '../../../assets';
 import {fonts, mainColors} from '../../../utils';
 import {Gap} from '../../atoms';
 
-const ListPakar = ({name, pakar, address, onPress, detail}) => {
+const ListPakar = ({name, pakar, address, onPress, detail, img}) => {
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={1}>
       <View style={detail ? styles.container2 : styles.container}>
         <View style={styles.bgProfile}>
-          <Image source={DummyUser} style={styles.profile} />
+          <Image source={img} style={styles.profile} />
         </View>
         <Gap width={20} />
         <View style={styles.content}>

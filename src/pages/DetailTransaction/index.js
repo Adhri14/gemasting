@@ -14,10 +14,10 @@ import {BankBCA, BankSyariah, Success} from '../../assets';
 import {Button, Gap, Header, ListPakar} from '../../components';
 import {colors, fonts, mainColors} from '../../utils';
 
-const Image = () => {
+const Image = ({img, name, pakar}) => {
   return (
     <View>
-      <ListPakar detail name="Dr. Adhri" pakar="Dokter Umum" />
+      <ListPakar detail name={name} pakar={pakar} img={img} />
       <View style={styles.row}>
         <View style={styles.search}>
           <TextInput
@@ -163,12 +163,19 @@ const IconSuccess = () => {
   );
 };
 
-const DetailTransaction = ({navigation}) => {
+const DetailTransaction = ({navigation, route}) => {
+  const {item} = route.params;
   const slides = [
     {
       key: 1,
       title: <Invoice />,
-      image: <Image />,
+      image: (
+        <Image
+          img={{uri: item.profile.photo}}
+          name={item.profile.name}
+          pakar={item.pakar.name}
+        />
+      ),
     },
     {
       key: 2,

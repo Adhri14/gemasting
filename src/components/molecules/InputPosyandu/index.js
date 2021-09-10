@@ -108,53 +108,76 @@ const InputPosyandu = () => {
     dispatch({type: 'SET_LOADING', value: true});
     const photoForUpload = new FormData();
     photoForUpload.append('file', photoReducer);
-    axios
-      .post(`${API}iofile/upload-photo-profile`, photoForUpload, {
-        headers: {
-          Authorization: token.value,
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then(resUpload => {
-        const documentForUpload = new FormData();
-        documentForUpload.append('file', documentReducer);
-        axios
-          .post(`${API}iofile/upload-document-institution`, documentForUpload, {
-            headers: {
-              Authorization: token.value,
-              'Content-Type': 'multipart/form-data',
-            },
-          })
-          .then(resFile => {
-            const data = {
-              ...profile,
-              photo: resUpload.data.data.file,
-              document: resFile.data.data.file,
-            };
-            axios
-              .put(`${API}posyandu/update-profile`, data, {
-                headers: {Authorization: token.value},
-              })
-              .then(res => {
-                storeData('userProfile', res.data.data);
-                navigation.reset({
-                  index: 0,
-                  routes: [{name: 'MainApp'}],
-                });
-                dispatch({type: 'SET_LOADING', value: false});
-              })
-              .catch(e => {
-                showMessage(e);
-                dispatch({type: 'SET_LOADING', value: false});
-              });
+    if (photoReducer.name === '' && documentReducer.name === '') {
+      axios
+        .put(`${API}posyandu/update-profile`, profile, {
+          headers: {Authorization: token.value},
+        })
+        .then(res => {
+          storeData('userProfile', res.data.data);
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'MainApp'}],
           });
-      })
-      .catch(err => {
-        showMessage({
-          message: 'Anda harus upload foto',
+          dispatch({type: 'SET_LOADING', value: false});
+        })
+        .catch(e => {
+          showMessage(e);
+          dispatch({type: 'SET_LOADING', value: false});
         });
-        dispatch({type: 'SET_LOADING', value: false});
-      });
+    } else {
+      axios
+        .post(`${API}iofile/upload-photo-profile`, photoForUpload, {
+          headers: {
+            Authorization: token.value,
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then(resUpload => {
+          const documentForUpload = new FormData();
+          documentForUpload.append('file', documentReducer);
+          axios
+            .post(
+              `${API}iofile/upload-document-institution`,
+              documentForUpload,
+              {
+                headers: {
+                  Authorization: token.value,
+                  'Content-Type': 'multipart/form-data',
+                },
+              },
+            )
+            .then(resFile => {
+              const data = {
+                ...profile,
+                photo: resUpload.data.data.file,
+                document: resFile.data.data.file,
+              };
+              axios
+                .put(`${API}posyandu/update-profile`, data, {
+                  headers: {Authorization: token.value},
+                })
+                .then(res => {
+                  storeData('userProfile', res.data.data);
+                  navigation.reset({
+                    index: 0,
+                    routes: [{name: 'MainApp'}],
+                  });
+                  dispatch({type: 'SET_LOADING', value: false});
+                })
+                .catch(e => {
+                  showMessage(e);
+                  dispatch({type: 'SET_LOADING', value: false});
+                });
+            });
+        })
+        .catch(err => {
+          showMessage({
+            message: 'Anda harus upload foto',
+          });
+          dispatch({type: 'SET_LOADING', value: false});
+        });
+    }
   };
   return (
     <View>
