@@ -142,7 +142,7 @@ const InputPakar = () => {
       axios
         .put(
           `${API}pakar/update-profile`,
-          {...profile, photo: picture, document: file},
+          {...profile, photo: picture.photo, document: file.document},
           {
             headers: {Authorization: token.value},
           },
