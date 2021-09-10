@@ -208,6 +208,7 @@ const KmsOnline = ({navigation, route}) => {
               ) : (
                 <View style={{width: '100%'}}>
                   {dataUser.map((item, index) => {
+                    // dispatch({type: 'SET_LOADING_MAIN', value: false});
                     return (
                       <View key={item.uuid}>
                         <ListName

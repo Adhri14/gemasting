@@ -77,14 +77,11 @@ const PakarInput = ({pakar}) => {
 
   const onSubmitPakar = () => {
     dispatch({type: 'SET_LOADING', value: true});
-    const combine = {
-      birth: `${moment(date).format('DD-MM-YYYY')}`,
-    };
 
     // mengkombinasikan data objek dari variabel form dan combine
     const data = {
       ...form,
-      ...combine,
+      birth: date,
     };
 
     dispatch({type: 'SET_REGISTER_PAKAR', value: data});

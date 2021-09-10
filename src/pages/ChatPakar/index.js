@@ -1,4 +1,4 @@
-import React, {useRef, useMemo, useCallback, useState} from 'react';
+import React, {useRef, useMemo, useCallback, useState, useEffect} from 'react';
 import {
   Dimensions,
   ScrollView,
@@ -16,6 +16,9 @@ import {
   BottomSheetModalProvider,
   BottomSheetBackdrop,
 } from '@gorhom/bottom-sheet';
+import {useSelector, useDispatch} from 'react-redux';
+import axios from 'axios';
+import {API} from '../../config';
 
 const Title = ({label}) => {
   return (
@@ -60,6 +63,29 @@ const ChatPakar = ({navigation}) => {
   const handleSheetChanges = useCallback(index => {
     console.log('handleSheetChanges', index);
   }, []);
+
+  const authorization = useSelector(state => state.authorization);
+  const dispatch = useDispatch();
+  const [dataPakar, setDataPakar] = useState([]);
+
+  useEffect(() => {
+    getPakar();
+  }, []);
+
+  const getPakar = () => {
+    axios
+      .get(`${API}pakar/get-all`, {
+        headers: {Authorization: authorization.token},
+      })
+      .then(res => {
+        dispatch({type: 'SET_LOADING_MAIN', value: false});
+        setDataPakar(res.data.data);
+      })
+      .catch(err => console.log(err.message));
+  };
+
+  console.log(dataPakar);
+
   return (
     <BottomSheetModalProvider>
       <View style={[styles.page, {}]}>
@@ -73,62 +99,32 @@ const ChatPakar = ({navigation}) => {
             <Gap height={40} />
             <Title label="Rekomendasi Pakar" />
             <Gap height={30} />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Dokter Umum"
-              name="Dr. Muh. Nasrul Fattah"
-              address="RSUD Jakarta"
-            />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Dokter Anak"
-              name="Dr. Muh. Nasrul Qarib"
-              address="RSUD Jakarta"
-            />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Ahli Gizi"
-              name="Dr. Azis Iqbal"
-              address="RSUD Jakarta"
-            />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Dokter Umum"
-              name="Dr. Ade Suhada"
-              address="RSUD Jakarta"
-            />
+            {dataPakar.map((item, index) => {
+              return (
+                <ListPakar
+                  img={{uri: item.profile.photo}}
+                  key={index}
+                  onPress={() => {
+                    navigation.navigate('Transaction', {item});
+                  }}
+                  pakar={item.pakar.name}
+                  name={item.profile.name}
+                  address={item.profile.address}
+                />
+              );
+            })}
             <Gap height={20} />
             <Title label="Pakar Terdekat" />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Dokter Anak"
-              name="Dr. Adhri"
-              address="RSUD Lamaddukelleng"
-            />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Dokter Kandungan"
-              name="Dr. Arya Rizky"
-              address="RSUD Jakarta"
-            />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Ahli Gizi"
-              name="Dr. Jhordan"
-              address="Jakarta"
-            />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Dokter Kandungan"
-              name="Dr. Agus Salim"
-              address="RSUD Palembang"
-            />
-            <ListPakar
-              onPress={() => navigation.navigate('Transaction')}
-              pakar="Ahli Gizi"
-              name="Dr. Muh. Irfanzidni"
-              address="RSUD Jakarta"
-            />
+            {dataPakar.map((item, index) => (
+              <ListPakar
+                key={index}
+                onPress={() => navigation.navigate('Transaction', {item})}
+                pakar={item.pakar.name}
+                name={item.profile.name}
+                address={item.profile.address}
+                img={{uri: item.profile.photo}}
+              />
+            ))}
           </View>
         </ScrollView>
       </View>

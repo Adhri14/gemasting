@@ -76,14 +76,11 @@ const SignUpCustomer = ({navigation}) => {
   const onSubmit = () => {
     dispatch({type: 'SET_LOADING', value: true});
     // mengkombinasikan data variabel tempat lahir dan tanggal lahir menjadi sebuah objek
-    const combine = {
-      birth: `${moment(date).format('DD-MM-YYYY')}`,
-    };
 
     // mengkombinasikan data objek dari variabel form dan combine
     const data = {
       ...form,
-      ...combine,
+      birth: date,
     };
 
     dispatch({type: 'SET_REGISTER_CUSTOMER', value: data});
@@ -159,7 +156,7 @@ const SignUpCustomer = ({navigation}) => {
                 });
               } else if (result.data.meta.code === 200) {
                 storeData('userProfile', result.data.data);
-                storeData('token', {value: result.data.data.token});
+                storeData('token', {value: `Bearer ${result.data.data.token}`});
                 storeData('provider', {value: res.user.providerId});
                 navigation.reset({
                   index: 0,

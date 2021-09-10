@@ -11,7 +11,9 @@ import {
 } from '../../components';
 import {fonts, mainColors} from '../../utils';
 
-const Transaction = ({navigation}) => {
+const Transaction = ({navigation, route}) => {
+  const {item} = route.params;
+  console.log(item);
   // Pengelola data dari state tanggal lahir
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
@@ -64,7 +66,7 @@ const Transaction = ({navigation}) => {
 
   const onSubmit = () => {
     console.log('Data', data);
-    navigation.replace('DetailTransaction');
+    navigation.replace('DetailTransaction', {item});
   };
   return (
     <>
@@ -76,9 +78,10 @@ const Transaction = ({navigation}) => {
         <View style={styles.page}>
           <Gap height={10} />
           <ListPakar
-            name="Dr. Adhri"
-            pakar="Dokter Umum"
-            address="RSUD Lamaddukelleng"
+            name={item.profile.name}
+            pakar={item.pakar.name}
+            address={item.profile.address}
+            img={{uri: item.profile.photo}}
           />
           <Gap height={30} />
           <View>

@@ -12,8 +12,10 @@ import IlStuntingBig from './ilstunting.svg';
 import IlNormal from './normal.svg';
 import IlDanger from './parah.svg';
 import IlMax from './tinggi.svg';
+import IlFileUpload from './file-upload.png';
 
 export {
+  IlFileUpload,
   ILLogo,
   ILGetStarted,
   IlPartner,

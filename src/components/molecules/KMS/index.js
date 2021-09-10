@@ -11,9 +11,11 @@ import {useSelector} from 'react-redux';
 const KMS = () => {
   const [data, setData] = useState([]);
   const authorization = useSelector(state => state.authorization);
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     getKMS();
+    getData('userProfile').then(res => setUserName(res.profile.name));
   }, []);
 
   const getKMS = () => {
@@ -27,8 +29,6 @@ const KMS = () => {
       .catch(err => console.log(err.message));
   };
 
-  console.log('ini data uuid dari redux ', authorization.uuid);
-
   return (
     <View style={{flex: 1, marginHorizontal: 20}}>
       {data.map((item, index) => {
@@ -37,9 +37,7 @@ const KMS = () => {
           <View key={index}>
             <ListCard
               type="kms-online"
-              name={
-                item.family_uuid === null ? item.user.email : item.family.name
-              }
+              name={item.family_uuid === null ? userName : item.family.name}
               category={
                 item.family_uuid === null ? 'Pribadi' : 'Anggota Keluarga'
               }

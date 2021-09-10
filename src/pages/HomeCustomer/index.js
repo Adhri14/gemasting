@@ -39,19 +39,20 @@ const HomeCustomer = ({navigation}) => {
         setToken(res);
       }
     });
-    setTimeout(() => {
-      getData('userProfile').then(resProfile => {
-        if (!unmounted) {
-          setDataProfile({
-            name: resProfile.profile.name,
-            role: resProfile.role_id,
-            profile: resProfile.profile.photo,
-            uuid: resProfile.profile.user_uuid,
-            uid: resProfile.profile.uuid,
-          });
-        }
-      });
-    }, 2000);
+    // setTimeout(() => {
+
+    // }, 2000);
+    getData('userProfile').then(resProfile => {
+      if (!unmounted) {
+        setDataProfile({
+          name: resProfile.profile.name,
+          role: resProfile.role_id,
+          profile: resProfile.profile.photo,
+          uuid: resProfile.profile.user_uuid,
+          uid: resProfile.profile.uuid,
+        });
+      }
+    });
     return () => {
       unmounted = true;
     };
@@ -65,7 +66,10 @@ const HomeCustomer = ({navigation}) => {
           <View style={styles.wrapper}>
             <CardButton
               label="Chat Pakar"
-              onPress={() => navigation.navigate('ChatPakar')}>
+              onPress={() => {
+                dispatch({type: 'SET_LOADING', value: true});
+                navigation.navigate('ChatPakar');
+              }}>
               <IlChatPakar />
             </CardButton>
             <CardButton
@@ -104,7 +108,10 @@ const HomeCustomer = ({navigation}) => {
           <View style={styles.wrapper}>
             <CardButton
               label="Chat Pakar"
-              onPress={() => navigation.navigate('ChatPakar')}>
+              onPress={() => {
+                dispatch({type: 'SET_LOADING_MAIN', value: true});
+                navigation.navigate('ChatPakar');
+              }}>
               <IlChatPakar />
             </CardButton>
             <CardButton label="Buat Janji">
@@ -112,7 +119,10 @@ const HomeCustomer = ({navigation}) => {
             </CardButton>
             <CardButton
               label="KMS Online"
-              onPress={() => navigation.navigate('KmsOnline', {...token})}>
+              onPress={() => {
+                // dispatch({type: 'SET_LOADING_MAIN', value: true});
+                navigation.navigate('KmsOnline', {...dataProfile, ...token});
+              }}>
               <IlKMS />
             </CardButton>
           </View>
@@ -148,7 +158,10 @@ const HomeCustomer = ({navigation}) => {
             </CardButton>
             <CardButton
               label="KMS Online"
-              onPress={(() => navigation.navigate('KmsOnline'), {...token})}>
+              onPress={
+                (() => navigation.navigate('KmsOnline'),
+                {...dataProfile, ...token})
+              }>
               <IlKMS />
             </CardButton>
           </View>
@@ -184,7 +197,10 @@ const HomeCustomer = ({navigation}) => {
             </CardButton>
             <CardButton
               label="KMS Online"
-              onPress={(() => navigation.navigate('KmsOnline'), {...token})}>
+              onPress={
+                (() => navigation.navigate('KmsOnline'),
+                {...dataProfile, ...token})
+              }>
               <IlKMS />
             </CardButton>
           </View>

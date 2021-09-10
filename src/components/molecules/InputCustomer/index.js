@@ -6,8 +6,9 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {useDispatch, useSelector} from 'react-redux';
 import {API} from '../../../config';
 import {getData, showMessage, storeData} from '../../../utils';
-import {Button, Gap, Radio, TextInput} from '../../atoms';
+import {Button, Gap, Radio, TextInput, DatePicker} from '../../atoms';
 import ProfilePhoto from '../ProfilePhoto';
+import moment from 'moment';
 
 const InputCustomer = () => {
   const navigation = useNavigation();
@@ -23,6 +24,28 @@ const InputCustomer = () => {
   const [picture, setPicture] = useState({
     photo: '',
   });
+
+  // Pengelola data dari state tanggal lahir
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  // Fungsi untuk merubah value lama menjadi value baru
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || new Date(profile.birth);
+    setShow(Platform.OS === 'ios');
+    changeText('birth', currentDate);
+  };
+
+  // Fungsi untuk merubah mode ui dan menculkan dan menghide popup
+  const showMode = currentMode => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  // Fungsi untuk memunculkan mode ui berupa tanggal
+  const showDatepicker = () => {
+    showMode('date');
+  };
 
   const dispatch = useDispatch();
   const {photoReducer} = useSelector(state => state);
@@ -77,44 +100,72 @@ const InputCustomer = () => {
   };
 
   const updateProfile = () => {
+    console.log(profile);
     dispatch({type: 'SET_LOADING', value: true});
-    const photoForUpload = new FormData();
+    let photoForUpload = new FormData();
     photoForUpload.append('file', photoReducer);
-    axios
-      .post(`${API}iofile/upload-photo-profile`, photoForUpload, {
-        headers: {
-          Authorization: token.value,
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then(resUpload => {
-        const data = {
-          ...profile,
-          photo: resUpload.data.data.file,
-        };
-        axios
-          .put(`${API}customer/update-profile`, data, {
+    if (
+      photoReducer.name === '' ||
+      photoReducer.type === '' ||
+      photoReducer.uri === ''
+    ) {
+      axios
+        .put(
+          `${API}customer/update-profile`,
+          {...profile, photo: picture},
+          {
             headers: {Authorization: token.value},
-          })
-          .then(res => {
-            storeData('userProfile', res.data.data);
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'MainApp'}],
-            });
-            dispatch({type: 'SET_LOADING', value: false});
-          })
-          .catch(e => {
-            showMessage(e);
-            dispatch({type: 'SET_LOADING', value: false});
+          },
+        )
+        .then(res => {
+          storeData('userProfile', res.data.data);
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'MainApp'}],
           });
-      })
-      .catch(err => {
-        showMessage({
-          message: 'Anda harus upload foto',
+          dispatch({type: 'SET_LOADING', value: false});
+        })
+        .catch(e => {
+          showMessage(e);
+          dispatch({type: 'SET_LOADING', value: false});
         });
-        dispatch({type: 'SET_LOADING', value: false});
-      });
+    } else {
+      axios
+        .post(`${API}iofile/upload-photo-profile`, photoForUpload, {
+          headers: {
+            Authorization: token.value,
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then(resUpload => {
+          const data = {
+            ...profile,
+            photo: resUpload.data.data.file,
+          };
+          axios
+            .put(`${API}customer/update-profile`, data, {
+              headers: {Authorization: token.value},
+            })
+            .then(res => {
+              storeData('userProfile', res.data.data);
+              navigation.reset({
+                index: 0,
+                routes: [{name: 'MainApp'}],
+              });
+              dispatch({type: 'SET_LOADING', value: false});
+            })
+            .catch(e => {
+              showMessage(e);
+              dispatch({type: 'SET_LOADING', value: false});
+            });
+        })
+        .catch(err => {
+          showMessage({
+            message: 'Anda harus upload foto',
+          });
+          dispatch({type: 'SET_LOADING', value: false});
+        });
+    }
   };
 
   return (
@@ -153,12 +204,24 @@ const InputCustomer = () => {
         placeholder="911XXXXXXXXX"
       />
       <Gap height={35} />
+      <DatePicker
+        mode="date"
+        value={new Date(profile.birth)}
+        onValueChange={onChange}
+        type={mode}
+        show={show}
+        placeholder={moment(new Date(profile.birth)).format('DD-MM-YYYY')}
+        onPress={showDatepicker}
+        label="Tanggal Lahir"
+      />
+      <Gap height={35} />
       <TextInput
-        label="Tempat Tanggal Lahir"
-        value={profile.birth}
-        onChangeText={val => changeText('birth', val)}
-        keyboardType="number-pad"
-        placeholder="DD-MM-YYYY"
+        label="Alamat"
+        value={profile.address}
+        onChangeText={val => changeText('address', val)}
+        keyboardType="default"
+        placeholder="Alamat"
+        isTextArea
       />
       <Gap height={50} />
       <Button title="Simpan" onPress={updateProfile} />
